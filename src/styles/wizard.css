@@ -65,8 +65,11 @@
 }
 
 .aqg-wizard__step.is-done .aqg-wizard__step-num {
-  background: var(--aqg-success);
-  color: var(--sl-color-white);
+  /* Use the theme-stable success fill so white stays at AA in both
+   * themes; --aqg-success itself is theme-aware (light green on dark,
+   * dark green on light) and would not hold white text. */
+  background: var(--aqg-success-fill);
+  color: #fff;
 }
 
 .aqg-wizard__step:disabled {

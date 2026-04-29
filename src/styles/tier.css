@@ -69,7 +69,8 @@
   padding: 0.15rem 0.5rem;
   border-radius: 0.3rem;
   background: var(--sl-color-accent);
-  color: var(--sl-color-white);
+  /* Literal white — same reasoning as the readiness Q1 badge. */
+  color: var(--aqg-text-on-accent);
   vertical-align: middle;
   line-height: 1.2;
 }
@@ -120,17 +121,25 @@
   border-left: 4px solid currentColor;
 }
 
+/* Each variant pairs a text-color (used for the heading and the left
+ * border via currentColor) with a fill color (used by the tier badge,
+ * exposed as --aqg-result-fill so the badge can pick it up regardless
+ * of which variant wraps it). */
+
 .aqg-tier__result--t1 {
+  --aqg-result-fill: var(--aqg-success-fill);
   background: color-mix(in srgb, var(--aqg-success) 14%, transparent);
   color: var(--aqg-success);
 }
 
 .aqg-tier__result--t2 {
+  --aqg-result-fill: var(--aqg-warn-fill);
   background: color-mix(in srgb, var(--aqg-warn) 16%, transparent);
   color: var(--aqg-warn);
 }
 
 .aqg-tier__result--t3 {
+  --aqg-result-fill: var(--aqg-error-fill);
   background: color-mix(in srgb, var(--aqg-error-strong) 16%, transparent);
   color: var(--aqg-error-strong);
 }
@@ -152,8 +161,11 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  background: currentColor;
-  color: white !important;
+  /* Solid theme-stable fill from the parent variant (--aqg-result-fill)
+   * with literal white text — both --aqg-{state}-fill values are dark
+   * enough to keep white above 5:1 in either theme. */
+  background: var(--aqg-result-fill, var(--sl-color-accent));
+  color: #fff !important;
   margin-bottom: 0.5rem;
 }
 

@@ -68,7 +68,9 @@
   padding: 0.15rem 0.5rem;
   border-radius: 0.3rem;
   background: var(--sl-color-accent);
-  color: var(--sl-color-white);
+  /* Literal white — the badge sits on the navy accent (same in both
+   * themes), so we want fixed white text, not a token that inverts. */
+  color: var(--aqg-text-on-accent);
   vertical-align: middle;
   line-height: 1.2;
 }

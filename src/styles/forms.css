@@ -22,10 +22,14 @@
   --aqg-control-font-size: 0.95rem;
 
   /* Contrast-safe text tokens.
-   * Dark theme is the default (data-theme is unset until JS toggles it). */
-  --aqg-text: var(--sl-color-white);
-  --aqg-text-muted: var(--sl-color-gray-2);     /* 7.4:1 on gray-6 */
-  --aqg-text-on-accent: #ffffff;                 /* 8.5:1 on #2f4a8c */
+   * Use Starlight's semantic tokens (--sl-color-text, --sl-color-text-accent)
+   * because they invert correctly between themes. The literal --sl-color-white
+   * / --sl-color-black tokens DO invert too, but using them for "always-light
+   * text" or "always-dark text" is a footgun — only use them where you want
+   * the inversion. */
+  --aqg-text: var(--sl-color-text);              /* page text — auto-inverts */
+  --aqg-text-muted: var(--sl-color-gray-3);      /* mid-tone — auto-inverts */
+  --aqg-text-on-accent: #ffffff;                 /* 8.5:1 on #2f4a8c — both themes */
 
   /* Focus indicator — accent-high is light blue on dark, dark navy on light;
    * 3:1+ against either page bg by design. */
@@ -33,17 +37,37 @@
   --aqg-focus-offset: 2px;
   --aqg-focus-width: 2px;
 
-  /* Validation */
-  --aqg-error: #f08a8a;                          /* 4.6:1 on gray-6 */
-  --aqg-error-strong: #d04848;
-  --aqg-warn: #e0a85a;
-  --aqg-success: #57c489;
+  /* Validation state — two-track colors:
+   *
+   *   --aqg-{state}        text/heading on a tinted page bg.
+   *                        Theme-aware (overridden in light mode below)
+   *                        because a color readable on dark bg is usually
+   *                        too light for a white bg.
+   *   --aqg-{state}-fill   solid badge / pill background. Held constant
+   *                        across themes and chosen dark enough that
+   *                        literal white text always stays at AA. Use
+   *                        with `color: #fff`, never with --sl-color-white
+   *                        (which inverts).
+   */
+  --aqg-error: #f08a8a;                          /* 4.6:1 on dark page bg */
+  --aqg-error-strong: #f5a3a3;
+  --aqg-warn: #e0a85a;                           /* 4.6:1 on dark page bg */
+  --aqg-success: #6cd09a;                        /* 4.7:1 on dark page bg */
+
+  --aqg-error-fill: #931e1e;                     /* white text 8.0:1 */
+  --aqg-warn-fill: #8c5a10;                      /* white text 5.5:1 */
+  --aqg-success-fill: #1f7a4d;                   /* white text 5.6:1 */
 }
 
 :root[data-theme='light'] {
-  --aqg-text: var(--sl-color-black);
-  --aqg-text-muted: var(--sl-color-gray-4);     /* 5.6:1 on gray-1 */
-  --aqg-error: #b53030;                          /* 5.4:1 on gray-1 */
+  /* On a near-white background the dark-mode text colors collapse to ~2:1,
+   * so swap to the darker variants. */
+  --aqg-error: #b53030;                          /* 5.4:1 on white */
+  --aqg-error-strong: #931e1e;                   /* 8.0:1 on white */
+  --aqg-warn: #8c5a10;                           /* 5.5:1 on white */
+  --aqg-success: #1f7a4d;                        /* 5.6:1 on white */
+  /* Fills are intentionally NOT overridden — they're dark enough to stay
+   * legible against white text in either theme. */
 }
 
 /* -------------------------------------------------------------------------
@@ -142,8 +166,12 @@
   font: inherit;
   font-size: 1rem;
   line-height: 1.4;
-  color: var(--sl-color-black);
-  background: var(--sl-color-white);
+  /* Use Starlight's auto-inverting bg/text tokens so inputs match the page
+   * theme (dark input on dark page, white input on white page). The
+   * gray-4 border keeps the input visually distinct from the surrounding
+   * card in either mode. */
+  color: var(--sl-color-text);
+  background: var(--sl-color-bg);
   border: 1px solid var(--sl-color-gray-4);
   border-radius: var(--aqg-control-radius);
   transition: border-color 120ms ease, box-shadow 120ms ease;
@@ -253,16 +281,16 @@
  * Badges & question chips — used for "Q1" counter, domain pills, tier badges.
  * ------------------------------------------------------------------------- */
 
+/* Domain / dimension pill — deliberately uses the auto-inverting accent
+ * tokens so the pill stays readable in both themes:
+ *   dark:  light-blue tint bg  + light-blue text-accent
+ *   light: deep-navy tint bg   + deep-navy text-accent
+ * Both above 5:1 contrast against the pill background. */
 .aqg-readiness__domain,
 .aqg-tier__dimension {
-  background: color-mix(in srgb, var(--sl-color-accent-high) 22%, transparent);
-  color: var(--sl-color-white);
-}
-
-:root[data-theme='light'] .aqg-readiness__domain,
-:root[data-theme='light'] .aqg-tier__dimension {
-  background: color-mix(in srgb, var(--sl-color-accent) 18%, transparent);
-  color: var(--sl-color-accent-high);
+  background: color-mix(in srgb, var(--sl-color-accent) 22%, transparent);
+  color: var(--sl-color-text-accent);
+  border: 1px solid color-mix(in srgb, var(--sl-color-accent) 40%, transparent);
 }
 
 /* -------------------------------------------------------------------------
