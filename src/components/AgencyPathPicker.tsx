@@ -36,14 +36,16 @@ export default function AgencyPathPicker() {
             class={`aqg-pathpicker__card${isActive ? " is-active" : ""}`}
             onClick={() => setAgencySize(size)}
           >
+            {isActive && (
+              <span class="aqg-pathpicker__pill" aria-hidden="true">
+                ✓ Selected
+              </span>
+            )}
             <span class="aqg-pathpicker__title">
               {AGENCY_SIZE_LABELS[size]}
             </span>
             <span class="aqg-pathpicker__blurb">
               {AGENCY_SIZE_BLURBS[size]}
-            </span>
-            <span class="aqg-pathpicker__cta" aria-hidden="true">
-              {isActive ? "✓ Selected" : "Choose this path"}
             </span>
           </button>
         );

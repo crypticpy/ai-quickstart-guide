@@ -98,6 +98,7 @@
 }
 
 .aqg-pathpicker__card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
@@ -109,13 +110,11 @@
   cursor: pointer;
   font: inherit;
   color: var(--sl-color-text);
-  transition: border-color 120ms ease, background 120ms ease,
-    transform 80ms ease;
+  transition: border-color 120ms ease, background 120ms ease;
 }
 
 .aqg-pathpicker__card:hover {
   border-color: var(--sl-color-accent);
-  background: color-mix(in srgb, var(--sl-color-accent) 8%, var(--sl-color-gray-6));
 }
 
 .aqg-pathpicker__card:focus-visible {
@@ -125,8 +124,9 @@
 
 .aqg-pathpicker__card.is-active {
   border-color: var(--sl-color-accent);
-  background: color-mix(in srgb, var(--sl-color-accent) 14%, var(--sl-color-gray-6));
-  box-shadow: 0 0 0 2px var(--sl-color-accent);
+  border-width: 2px;
+  /* compensate the +1px border so the card doesn't shift when activating */
+  padding: calc(1.1rem - 1px) calc(1.2rem - 1px) calc(1.25rem - 1px);
 }
 
 .aqg-pathpicker__title {
@@ -142,14 +142,16 @@
   color: var(--sl-color-text);
 }
 
-.aqg-pathpicker__cta {
-  margin-top: auto;
-  font-size: 0.85rem;
+.aqg-pathpicker__pill {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  color: var(--sl-color-text-accent);
-  letter-spacing: 0.02em;
-}
-
-.aqg-pathpicker__card.is-active .aqg-pathpicker__cta {
-  color: var(--sl-color-accent);
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: var(--sl-color-accent);
+  color: var(--sl-color-white);
+  line-height: 1.4;
 }
