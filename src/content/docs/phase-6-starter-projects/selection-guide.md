@@ -1,0 +1,234 @@
+---
+title: Selection Guide
+description: How to pick the starter project — readiness checks, scoring rubric, and a decision tree across the five archetypes.
+sidebar:
+  order: 2
+---
+
+The right starter project is rarely the most exciting one. It is the one whose audience is identifiable, whose data is in shape, whose stakeholders care about the outcome, and whose failure modes the agency can absorb without harm. This page is the selection process — the readiness checks the candidate goes through, the scoring rubric across the [five archetypes](/phase-6-starter-projects/), and the decision tree that points to a default choice when the team can't decide.
+
+The selection conversation typically lives over a 2–3 week discovery period in Month 7. The output is one chosen archetype with a one-page selection memo signed by the AI program lead and the affected business owner.
+
+## The five readiness checks
+
+Each candidate project passes — or fails — five tests. A candidate that fails any one of these is not ready; pick a different one or invest in fixing the gap.
+
+### 1. Audience readiness
+
+There are real users who can articulate what they want and who will use the thing within a month of launch.
+
+- **Pass:** A specific named team or audience exists and has been interviewed. They have a workflow problem the system addresses. They've agreed to be the test cohort.
+- **Fail:** The audience is "all staff" or "the public." Nobody has been asked. Adoption is hoped-for, not committed.
+
+The single most common starter-project failure is shipping to nobody in particular. A real audience is non-negotiable.
+
+### 2. Data readiness
+
+The data the AI needs already exists, can be accessed, and is in good enough shape to be useful.
+
+- **Pass:** The corpus / database / transcripts / records exist. Sample data has been examined. Quality is acceptable or has a known cleanup plan. Data classification is known. Retention rules are known.
+- **Fail:** The data lives in someone's email; the database hasn't been ETL'd in three years; the corpus is allegedly somewhere on a SharePoint nobody has access to.
+
+For a RAG project, "no clean corpus" is fatal. For a workflow project, "no historical examples" is fatal. Data readiness is the constraint that defines what's possible.
+
+### 3. Governance readiness
+
+The classification tier, AUP rules, and risk-classification framework all apply. The candidate has been classified before discovery starts.
+
+- **Pass:** Tier known (most starters are Tier-1 or Tier-2). The required controls per tier are mapped to the platform's existing capabilities. No fresh procurement is needed.
+- **Fail:** "We'll figure out the classification later." Or the candidate is Tier-3 and the platform doesn't have the Tier-3 controls operating yet.
+
+Tier-3 starter projects are not a good idea. The agency's first production AI deployment should not also be the first time the agency operates at Tier-3.
+
+### 4. Stakeholder readiness
+
+A senior stakeholder cares about the outcome and is available to make decisions when needed.
+
+- **Pass:** The business owner has signed up. They will attend the steering check-ins. They will make the go/no-go call at production readiness. Their boss agrees the project matters.
+- **Fail:** The business owner is "TBD." Or they're listed but didn't show up to the kickoff. Or they're junior enough that escalations stall.
+
+Starter projects without a clear business owner drift. The stakeholder isn't a deployment dependency on day one — they're the source of the questions that shape every subsequent decision.
+
+### 5. Failure tolerance
+
+If the system produces a wrong answer once, what happens? The agency can absorb the failure mode without harm to a person, an outcome, or a regulatory obligation.
+
+- **Pass:** Wrong outputs are observable, recoverable, and don't carry through to a binding decision. A user can dismiss a bad summary; a wrong chatbot answer is corrected by a human follow-up; a misclassified intake is reclassified.
+- **Fail:** Wrong outputs flow into a binding decision (eligibility, enforcement, benefit award) without a human checkpoint. Or the system's failure mode is hard to detect.
+
+A starter project's failure mode must be observable and recoverable. The agency builds the muscle for higher-stakes deployments later, not in the starter.
+
+## The scoring rubric
+
+Score each candidate across five dimensions, 1 (poor fit) to 5 (excellent fit). Total out of 25.
+
+| Dimension               | What it measures                                                          |
+| ----------------------- | ------------------------------------------------------------------------- |
+| **User pull**           | Strength of demand from the named audience. 5 = "we'd use it tomorrow."   |
+| **Module exercise**     | How many platform modules the project meaningfully exercises. 5 = most.   |
+| **Reversibility**       | How recoverable a wrong output is. 5 = trivially recoverable.             |
+| **Time-to-first-value** | How quickly users can experience benefit. 5 = within weeks of launch.     |
+| **Visibility**          | How visible success will be to the wider agency. 5 = obvious to everyone. |
+
+A score above 18 means strong candidate. 13–17 means viable with caveats. Below 13 means pick something else.
+
+The rubric is a tie-breaker, not the decision. Use it when the team is split between candidates.
+
+## The decision tree
+
+When the team is genuinely indecisive, this default decision tree points somewhere defensible.
+
+```
+Q1: Does the agency have a clean, queryable document corpus
+    (policies, FAQs, regs, procedures) that staff or public ask
+    questions about regularly?
+  ├─ YES → RAG Chatbot or Document Intelligence
+  │   ├─ Audience is staff/public asking simple questions → RAG Chatbot
+  │   └─ Audience is staff doing research/synthesis → Document Intelligence
+  └─ NO → continue
+
+Q2: Is "people sit through too many meetings" a real
+    pain point with executive sponsorship?
+  ├─ YES → Meeting Transcriber
+  └─ NO → continue
+
+Q3: Is there a high-volume intake stream (forms, applications,
+    tickets) that's bottlenecked on routing/classification?
+  ├─ YES → Workflow Automation
+  └─ NO → continue
+
+Q4: Do leaders complain that they "can't get answers from
+    the data" — and does that data live in queryable systems?
+  ├─ YES → NL Data Dashboard
+  └─ NO → revisit the readiness checks; the agency may not have
+           a starter-ready candidate yet
+
+```
+
+The tree biases toward the easier archetypes earlier. RAG chatbot is the most-traveled path; meeting transcriber is the second-most. Workflow automation and NL dashboard are higher-impact but harder; pick them only if the easier options don't fit.
+
+## What good archetype-fit looks like
+
+Archetype-by-archetype patterns of "this is the right starter for this agency."
+
+### RAG Chatbot fits when
+
+- Staff routinely answer the same handful of questions ("what's the policy on X?", "how do I file Y?").
+- The answers exist in known documents.
+- Users are tolerant of "I don't know" answers (the system is allowed to refuse).
+- The audience can be small at first (one program area's staff before public rollout).
+
+### Meeting Transcriber fits when
+
+- Many staff sit through meetings whose outputs are mostly "summary + action items."
+- Recordings are already happening (Teams, Zoom, Google Meet) or can be enabled.
+- The cost of a missed action item is "we forget for two weeks," not "we miss a deadline that triggers a lawsuit."
+- The agency has clear policy on meeting recording and consent.
+
+### Document Intelligence fits when
+
+- A document corpus exists (>1,000 documents) and is too large for staff to read end-to-end.
+- Staff currently spend hours hunting through documents to answer specific questions.
+- Citations matter — users need to be able to verify the answer against the source.
+- A wrong answer with a wrong citation is more damaging than a "couldn't find" answer.
+
+### Workflow Automation fits when
+
+- An intake stream has high volume and tedious classification or routing decisions.
+- Historical examples of "how a human classified this" exist for training / eval.
+- The classification has a human-in-the-loop step (suggest, don't decide).
+- Misclassification is observable and reversible (a misrouted ticket finds its way back).
+
+### NL Data Dashboard fits when
+
+- Data lives in queryable systems (data warehouse, operational DB).
+- The questions are mostly aggregations / filters / comparisons, not free-form analysis.
+- A wrong answer is recoverable because the user can verify against the underlying data.
+- An information-security path exists for "this user can see these tables."
+
+## What a bad starter project looks like
+
+Counterexamples — patterns to refuse:
+
+- **AI that makes a binding determination.** First-time eligibility decisions, first-time benefit calculations, first-time enforcement actions. Too high stakes. Wait until the agency has run a starter and a second project.
+- **The "AI version of the existing app."** Replacing a known workflow with an AI version is a complex migration with unclear improvement. The starter should add capability, not replace it.
+- **The CIO's friend's idea.** A use case generated outside the candidate-readiness process, sponsored personally rather than by the program area. These are politically costly and rarely deliver.
+- **The infinite-scope project.** "AI for the agency" with no specific audience and no specific data. Cannot pass the readiness checks; nothing gets built.
+- **The project nobody asked for.** A use case proposed by IT to demonstrate AI, with no business-owner pull. Adoption fails post-launch.
+
+## The selection memo
+
+The output of the discovery period is a one-page memo. Template:
+
+```markdown
+# Starter Project Selection Memo
+
+**Date:** YYYY-MM-DD
+**Selected archetype:** <one of the five>
+**Business owner:** <name, role>
+**Platform team lead:** <name>
+**Tier classification:** <tier-1 / tier-2>
+
+## The audience
+
+Who will use this? How many? When?
+
+## The use case
+
+What is the workflow today? What does the system change?
+
+## Why this archetype
+
+Score across the rubric. Why not the alternatives?
+
+## Readiness check status
+
+- Audience: <pass / pass-with-condition / fail>
+- Data: <...>
+- Governance: <...>
+- Stakeholder: <...>
+- Failure tolerance: <...>
+
+## Risks and mitigations
+
+Top 3 risks. Mitigation owner per risk.
+
+## Success metrics
+
+What numbers will tell us this worked? Both delivery (shipped) and impact (used)?
+
+## Decision
+
+<go / pause / no-go>
+
+## Signatures
+
+- Business owner: ****\_\_****
+- AI program lead: ****\_\_****
+```
+
+The memo is short on purpose. A 20-page selection document means the team is rationalizing a decision rather than making one.
+
+## Common selection failures
+
+- **Choosing for the demo.** The starter is picked for how flashy a demo it makes, not for who will use it. The launch is impressive; the adoption isn't.
+- **Choosing for the platform.** The team picks the archetype that exercises the most modules, regardless of whether anyone wants the feature. The platform team learns; users don't get value.
+- **Skipping discovery.** "We know what to build" — but actually, the team knows what they want to build, not what users want. Discovery surfaces the difference.
+- **Picking too big.** A six-month starter that covers three program areas, two languages, and four user types. Cut scope; ship to one program area first.
+- **Picking too small.** A weekend hackathon-sized project shipped as a starter teaches little about production AI.
+- **Carrying old commitments.** A project that was committed before the platform was ready and is now being shoehorned into Phase 6. Either reset it or pick a different starter.
+
+## Plain-English Guide to Selection Terms
+
+- **Archetype.** A category of AI application with known shape and known module exercise. The agency picks one as the starter.
+- **Readiness check.** A pass/fail criterion that must be met before a candidate is selected (audience, data, governance, stakeholder, failure tolerance).
+- **Selection rubric.** A 1-5 scoring across user pull, module exercise, reversibility, time-to-value, and visibility. Used to compare candidates.
+- **Selection memo.** The one-page document that records the chosen archetype, audience, business owner, and rationale.
+
+## Related
+
+- [Phase 6 overview](/phase-6-starter-projects/) — the five archetypes and the months 7–12 sequence
+- [RAG Chatbot](/phase-6-starter-projects/archetype-rag-chatbot/) — the most common starter path
+- [Meeting Transcriber](/phase-6-starter-projects/archetype-meeting-transcriber/) — the second-most-common path
+- [Production Readiness Checklist](/phase-6-starter-projects/production-readiness/) — what "ready to launch" means at the end
+- [Phase 1 — Risk Classification](/phase-1-governance/risk-classification/) — the framework that classifies the chosen project
