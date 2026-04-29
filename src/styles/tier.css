@@ -232,6 +232,25 @@
   margin: 0;
 }
 
+.aqg-tier__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+}
+
+.aqg-tier__field--error input[type='text'],
+.aqg-tier__field--error textarea {
+  border-color: #d04848;
+  background: color-mix(in srgb, #d04848 6%, transparent);
+}
+
+.aqg-tier__options.aqg-tier__field--error {
+  border: 1px solid #d04848;
+  border-radius: 0.3rem;
+  padding: 0.35rem;
+  background: color-mix(in srgb, #d04848 6%, transparent);
+}
+
 @media print {
   .no-print { display: none !important; }
   .aqg-tier { background: white; border: 1px solid #999; }
