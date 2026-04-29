@@ -5,7 +5,7 @@ sidebar:
   order: 10
 ---
 
-> **What this page is.** A consolidated view of the timeline, the gates that prove progress, and the hard dependencies you cannot skip. Everything here is summarized from the source authoring document. The [Mermaid Gantt source](#mermaid-source) at the bottom of this page can be pasted into any Mermaid renderer (e.g., [mermaid.live](https://mermaid.live)) to produce a rendered chart for slide decks or printed playbooks.
+> **What this page is.** A consolidated view of the timeline, the gates that prove progress, and the hard dependencies you cannot skip. The Gantt at the bottom of this page renders directly from Mermaid source — copy it into any Mermaid renderer (e.g., [mermaid.live](https://mermaid.live)) for slide decks or printed playbooks.
 
 ## The 12-month picture
 
@@ -94,9 +94,9 @@ Empirically — across all three [case studies](/resources/case-studies/) and th
 4. **G-12 (All Core Modules Complete)** — slips when the team tries to perfect each module instead of shipping a thin v1 of all seven. The medium-city case study shipped a thin v1 of two modules and deferred five; the large state case study shipped four with the rest in v0.5. Either is fine. _Perfect_ on a few is the failure mode.
 5. **G-14 (First AI App in Production)** — slips when the contestation pathway, public notice, or eval harness is treated as a launch-blocking dependency that no one started on. Start them in Q2.
 
-## Mermaid source
+## 12-month timeline
 
-The Gantt source below renders as a usable timeline in [mermaid.live](https://mermaid.live), in any Mermaid-enabled markdown renderer, or in slide decks. It is the authoring source for the printed playbook's static PNG fallback.
+The diagram below is rendered from Mermaid source at page load and follows the site's light/dark theme. The same source can be pasted into [mermaid.live](https://mermaid.live) or any Mermaid-aware tool for slide decks or printed playbooks.
 
 ```mermaid
 gantt
