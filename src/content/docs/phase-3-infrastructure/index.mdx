@@ -47,6 +47,18 @@ Stand up a secure, isolated development environment — sandbox, staging, and pr
 </TabItem>
 </Tabs>
 
+## Path guide
+
+| Path | Do now | Use / simplify | Defer |
+| --- | --- | --- | --- |
+| Small | SSO, native secret vault, one managed runtime, one cost dashboard | Managed AI APIs and managed containers | SLSA, custom landing zone, full OTel pipeline |
+| Standard | Sandbox, staging, CI/CD, secrets, observability, security baseline | Existing cloud landing zone and managed services | Advanced confidential computing |
+| Large | Multi-environment substrate and production hardening | Dedicated platform/SRE team owns the substrate | Nothing core; defer only experimental hardening |
+
+## Minimum viable infrastructure in plain English
+
+For a small agency, Phase 3 can mean: staff sign in with the identity system they already use; secrets live in the cloud vault; one managed container service runs the first app; logs and costs are visible in the cloud console; and sensitive data cannot be pasted into unapproved AI tools. The full standards stack comes later when the agency has more than one production AI workload.
+
 ## Cloud-agnostic posture
 
 Most agencies already have a primary cloud — typically the one with their existing identity tenant, data warehouse, or contact-center stack. The default of this guide is to **build on whichever cloud you are already on**, not to migrate. The architecture should treat the cloud as a substrate (compute, storage, identity, network) and isolate cloud-specific surfaces behind narrow adapters. The result is an agency that can pick the best AI service for the workload — AWS Bedrock, Azure OpenAI, Vertex AI, or a third-party API — without rebuilding the platform.

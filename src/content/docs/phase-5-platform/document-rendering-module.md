@@ -206,7 +206,7 @@ Generated documents are reproducible: `template@version + data` produces the sam
 The module:
 
 - Records `template_id`, `template_version`, `data_hash`, `rendered_at` for every document.
-- Stores the input data alongside the rendered output (with PII handling per [classification](/phase-1-governance/risk-classification-policy/)).
+- Stores the input data alongside the rendered output (with PII handling per [classification](/phase-1-governance/risk-classification/)).
 - Supports re-render: take the recorded inputs, run the same template version, and verify the output matches.
 
 PDFs include their template version and document ID in the footer (a short hash) so a paper copy can be matched back to the rendering record.
@@ -302,5 +302,5 @@ For per-record rendering at scale, the batch path is mandatory — a sync reques
 
 - [API Framework](/phase-5-platform/api-framework-module/) — the HTTP surface that exposes rendering to apps
 - [RBAC Module](/phase-5-platform/rbac-module/) — guards which templates an app can render
-- [Risk Classification Policy](/phase-1-governance/risk-classification-policy/) — informs template classification and storage policy
+- [Risk Classification Policy](/phase-1-governance/risk-classification/) — informs template classification and storage policy
 - [Module Taxonomy](/phase-5-platform/module-taxonomy/) — the hexagonal pattern this module follows

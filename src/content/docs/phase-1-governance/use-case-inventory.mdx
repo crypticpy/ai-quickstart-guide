@@ -1,0 +1,35 @@
+---
+title: AI Use Case Inventory
+description: OMB-aligned local register for AI ideas, tiers, review status, and next review dates.
+sidebar:
+  order: 5
+---
+
+import UseCaseInventory from '../../../components/UseCaseInventory.tsx';
+
+The intake form captures one idea. The inventory is the register that survives the review meeting. It records what the agency knows about each AI use case: who owns it, which department it affects, its current tier, its status, and when it needs review again.
+
+This page provides a lightweight browser-only inventory for agencies that do not yet have a portfolio tool. It is intentionally simple: add reviewed ideas, export CSV or Markdown, and move the export into the agency system of record.
+
+<UseCaseInventory client:load />
+
+## Minimum fields
+
+| Field | Why it matters |
+| --- | --- |
+| Use case | Human-readable name used in meeting minutes and reports |
+| Sponsor | Person accountable for the workflow and follow-up |
+| Department | Where the idea originated and who will pilot it |
+| Tier | Current risk classification from the Review Committee |
+| Status | Submitted, approved, deferred, retired, or needs refinement |
+| Next review | Date the committee rechecks status, controls, or law changes |
+
+## Operating rule
+
+The inventory is updated only after committee review. Staff should submit ideas through the [AI Use Case Intake Form](/phase-2-education/use-case-intake/); the program lead then copies approved or deferred ideas into the inventory after the tier is confirmed.
+
+## Related
+
+- [Risk Classification Matrix](/phase-1-governance/risk-classification/)
+- [AI Use Case Intake Form](/phase-2-education/use-case-intake/)
+- [Review Committee Charter](/phase-1-governance/review-committee/)

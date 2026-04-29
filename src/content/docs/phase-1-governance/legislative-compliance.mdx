@@ -5,7 +5,9 @@ sidebar:
   order: 6
 ---
 
-State AI law is moving faster than federal AI law and is what most agencies will be audited against in the next 24 months. This page catalogs the U.S. federal and state laws most likely to apply to a state or local government AI deployment as of {{Last Updated: 2026-04-29}}, what each requires, and which Phase 1 artifact maps to compliance.
+import ComplianceMatrix from '../../../components/ComplianceMatrix.tsx';
+
+State AI law is moving faster than federal AI law and is what most agencies will be audited against in the next 24 months. This page catalogs the U.S. federal and state laws most likely to apply to a state or local government AI deployment as of `Last Updated: 2026-04-29`, what each requires, and which Phase 1 artifact maps to compliance.
 
 > **Verify before relying.** Statutes are amended, rules are issued, court interpretations shift. Treat this page as a starting map. Confirm current status with your legal counsel and update locally as your jurisdiction's law evolves.
 
@@ -38,7 +40,11 @@ The states below are highlighted because they have AI-specific public-sector or 
 | **Utah**          | SB 149 (AI Policy Act)                              | In force           | Generative AI deployers in regulated occupations                             | Disclosure; liability framework                                                                                                            | [AUP](/phase-1-governance/acceptable-use-policy/) — disclosure clauses                                                     |
 | **Washington**    | HB 1493 (deepfakes), SB 5152 (state AI)             | In force           | Public-sector AI; election communications                                    | Public-sector inventory; deepfake disclosure                                                                                               | Use Case Inventory                                                                                                         |
 
-> The interactive `<ComplianceMatrix />` (Phase 2 deliverable) will let you filter this table by jurisdiction, effective date, and Phase 1 artifact. The tabular text above is canonical until that component ships.
+## Interactive filter
+
+Use this browser-only filter during a governance working session. It is not a legal source of truth; it is a maintenance aid for deciding which local rows need counsel review.
+
+<ComplianceMatrix client:load />
 
 ## Local
 

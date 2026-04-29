@@ -21,7 +21,7 @@ A specific Phase 6 starter project is named, with a sponsor, an approximate budg
 
 - Decision memos from Briefings 2.1–2.3.
 - The current intake-form submissions (top 5–8 candidates from Track 1 cohorts so far).
-- The four [Phase 6 starter project archetypes](/phase-6-starter-projects/) with their architecture briefs.
+- The five [Phase 6 starter project archetypes](/phase-6-starter-projects/) with their architecture briefs.
 
 ## 30-minute substance
 
@@ -51,7 +51,7 @@ Each milestone is a check-in, not just a status report. If a milestone slips, th
 
 ### Topic 3 — Choosing the first starter project (10 min)
 
-The four archetypes from [Phase 6](/phase-6-starter-projects/):
+The five archetypes from [Phase 6](/phase-6-starter-projects/):
 
 1. **Document Intelligence.** RAG-style search across an agency corpus, plus document rendering and extraction. High ROI, well-understood pattern, broadly applicable.
 2. **Conversational AI.** Role-based chatbot or assistant with tool use. Higher Tier risk; appropriate for some agencies, premature for most.
@@ -65,7 +65,7 @@ The decision is informed by the intake submissions: pick the archetype that addr
 ## 20-minute structured discussion
 
 1. **Walk the milestones.** For each quarter, the room confirms feasibility against staff capacity, holiday schedules, election cycles, and the budget calendar.
-2. **Pick the starter project.** Discuss the four archetypes, weighted against the intake-pipeline data. Make the decision.
+2. **Pick the starter project.** Discuss the five archetypes, weighted against the intake-pipeline data. Make the decision.
 3. **Name the sponsors.** Each Phase needs a sponsor — typically a director, occasionally a deputy. Naming them now gives the AI program lead someone to call when a phase hits a blocker.
 
 ## 10-minute decision close

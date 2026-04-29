@@ -46,6 +46,14 @@ Select (or validate) the agency's development stack and establish the coding sta
 </TabItem>
 </Tabs>
 
+## Path guide
+
+| Path | Do now | Use / simplify | Defer |
+| --- | --- | --- | --- |
+| Small | Pick one stack, adopt standards, configure AI coding tools safely | One ADR that ratifies defaults | Formal API registry and multi-stack review |
+| Standard | Run stack selection, standards, testing, API, ADR, and AI-dev workflows | Use the reference implementation as the standard example | Secondary-stack support |
+| Large | Add architecture council, RFCs, and DevEx ownership | Support a second stack only if already real | New stack experiments without a business owner |
+
 ## Why this phase, why now
 
 Most agencies under-invest in this phase. The pull is to skip from "we have infrastructure" to "build the thing." Skipping produces predictable pathology: each team picks a different stack, each PR review is litigated from scratch, AI tooling is configured ad hoc with policy drift between teams, and the platform ends up unmaintainable because nothing is shared. Phase 4 is two months of writing things down to save twelve months of cleanup.

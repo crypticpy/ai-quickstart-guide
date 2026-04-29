@@ -11,7 +11,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint:links": "lychee --config lychee.toml './dist/**/*.html'"
+    "check": "tsc --noEmit --strict --skipLibCheck --jsx react-jsx --jsxImportSource preact --moduleResolution bundler --module ESNext --target ES2022 --allowImportingTsExtensions src/components/*.tsx src/lib/*.ts",
+    "lint:links": "node scripts/check-links.mjs",
+    "export:playbook": "node scripts/build-playbook.mjs"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   },
   "dependencies": {
     "@astrojs/preact": "^5.0.0",

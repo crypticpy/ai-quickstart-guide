@@ -169,7 +169,7 @@ This is the archetype that needs the most attention to fairness:
 - **Reviewer override patterns.** When reviewers consistently override suggestions for one demographic group, that's a signal — investigate.
 - **External review.** For starters with high consequence, an external fairness review (academic partner, civil-rights office) before launch.
 
-The agency's [risk classification policy](/phase-1-governance/risk-classification-policy/) and [review committee](/phase-1-governance/review-committee/) own these checks. Workflow automation is where Phase 1's machinery is exercised hardest.
+The agency's [risk classification policy](/phase-1-governance/risk-classification/) and [review committee](/phase-1-governance/review-committee/) own these checks. Workflow automation is where Phase 1's machinery is exercised hardest.
 
 ## Reviewer experience
 
@@ -254,6 +254,6 @@ For starters: target ≤ 10% of the comparable human-review cost. If the system 
 
 - [Phase 6 overview](/phase-6-starter-projects/) — the five archetypes
 - [Selection Guide](/phase-6-starter-projects/selection-guide/) — when to pick this archetype
-- [Risk Classification Policy (Phase 1)](/phase-1-governance/risk-classification-policy/) — informs the classification tier
+- [Risk Classification Policy (Phase 1)](/phase-1-governance/risk-classification/) — informs the classification tier
 - [Review Committee (Phase 1)](/phase-1-governance/review-committee/) — reviews this archetype's bias probes and launch
 - [AI Orchestration Module](/phase-5-platform/ai-orchestration-module/) — provides the classification pipeline and eval

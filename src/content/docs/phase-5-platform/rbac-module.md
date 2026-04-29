@@ -210,7 +210,7 @@ Every authorization decision is an audit event:
 }
 ```
 
-These events feed the [admin dashboard](/phase-5-platform/admin-dashboard-module/) audit view and are retained per the [data classification](/phase-1-governance/risk-classification-policy/) policy. Tier-2/3 actions are retained for the regulatory minimum; Tier-1 reads can be sampled to control volume.
+These events feed the [admin dashboard](/phase-5-platform/admin-dashboard-module/) audit view and are retained per the [data classification](/phase-1-governance/risk-classification/) policy. Tier-2/3 actions are retained for the regulatory minimum; Tier-1 reads can be sampled to control volume.
 
 ## Common authorization mistakes
 
@@ -262,5 +262,5 @@ The policy evaluator is the dominant cost. CEL evaluation is fast (microseconds)
 
 - [Auth Module](/phase-5-platform/auth-module/) — provides the user identity RBAC operates on
 - [API Framework](/phase-5-platform/api-framework-module/) — applies the `@requires` decorator that wires RBAC into HTTP
-- [Risk Classification Policy](/phase-1-governance/risk-classification-policy/) — informs which actions need tier-3 ABAC rules
+- [Risk Classification Policy](/phase-1-governance/risk-classification/) — informs which actions need tier-3 ABAC rules
 - [Admin Dashboard](/phase-5-platform/admin-dashboard-module/) — surfaces role assignments and audit events to operators

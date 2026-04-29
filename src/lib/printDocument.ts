@@ -52,7 +52,7 @@ export function printDocument(doc: PrintableDoc): void {
   const win = window.open(
     "",
     "_blank",
-    "noopener,noreferrer,width=900,height=1200",
+    "width=900,height=1200",
   );
 
   if (!win) {
@@ -65,6 +65,7 @@ export function printDocument(doc: PrintableDoc): void {
   win.document.open();
   win.document.write(html);
   win.document.close();
+  win.opener = null;
 
   const trigger = () => {
     try {

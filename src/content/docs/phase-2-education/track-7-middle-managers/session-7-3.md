@@ -134,4 +134,4 @@ The feedback loop matters. Managers who submit and then hear nothing stop submit
 - [AI Use Case Intake Form](/phase-2-education/use-case-intake/) — the actual intake form
 - [Risk Classification](/phase-1-governance/risk-classification/) — provisional tier reference
 - [Track 5 — AI Champions Network](/phase-2-education/track-5-champions/) — where pilot sponsors are recruited
-- [Phase 6 — Starter Project](/phase-6-starter-project/) — what the prioritized intake submissions feed into
+- [Phase 6 — Starter Project](/phase-6-starter-projects/) — what the prioritized intake submissions feed into

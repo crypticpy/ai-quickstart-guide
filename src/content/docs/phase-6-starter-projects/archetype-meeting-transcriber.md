@@ -307,4 +307,4 @@ At 100 meetings/day across a pilot agency: $50/day, ~$15K/year. Manageable. The 
 - [Selection Guide](/phase-6-starter-projects/selection-guide/) — when to pick this archetype
 - [AI Orchestration Module](/phase-5-platform/ai-orchestration-module/) — STT adapters and summarization
 - [Document Rendering Module](/phase-5-platform/document-rendering-module/) — PDF / DOCX export of summaries
-- [Risk Classification Policy (Phase 1)](/phase-1-governance/risk-classification-policy/) — informs the meeting tier and retention
+- [Risk Classification Policy (Phase 1)](/phase-1-governance/risk-classification/) — informs the meeting tier and retention

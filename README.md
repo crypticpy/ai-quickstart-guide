@@ -12,9 +12,10 @@ This repository is the source of an interactive microsite that any government ag
 | -------------------- | ----------------------------------------------------------------------------------------- |
 | `src/content/docs/`  | All written content — phase guides, session materials, templates, references              |
 | `src/components/`    | Interactive widgets (Readiness Assessment, AUP wizard, ROI calculator, etc.)              |
-| `templates/`         | Generated DOCX/PDF artifacts produced at build time from markdown sources                 |
-| `diagrams/`          | Mermaid sources + PNG exports                                                             |
-| `code-samples/`      | Reference code (RAG pipeline, API template, auth, CI/CD). Linked to the RAD platform repo |
+| `src/assets/`        | Logos, diagrams, and static assets imported by pages                                      |
+| `templates/`         | Reserved for generated DOCX/PDF artifacts; currently a scaffold, not authored source      |
+| `diagrams/`          | Reserved for standalone Mermaid exports; current diagrams live with authored content/assets |
+| `code-samples/`      | Reserved placeholders for expanded reference code; current samples are embedded in guide pages or linked to the RAD platform repo |
 | `.github/workflows/` | CI: build & deploy site, link-check, generate DOCX/PDF on release                         |
 
 The full design is documented in three planning documents in the parent directory: `AI_Quickstart_PRD.md`, `AI_Quickstart_Curriculum_Map.md`, `AI_Quickstart_Gantt_Dependencies.md`.
@@ -36,7 +37,7 @@ For agencies whose IT blocks GitHub Pages, the site can also be deployed to Clou
 
 ## Run locally
 
-You need Node.js 20+ and one of npm / pnpm / yarn.
+You need Node.js 22.12+ and one of npm / pnpm / yarn.
 
 ```bash
 git clone https://github.com/crypticpy/ai-quickstart-guide.git
@@ -47,7 +48,7 @@ npm run dev
 
 The dev server runs at `http://localhost:4321/ai-quickstart-guide/`.
 
-To build a static copy you can serve from any web host (or open from disk):
+To build a static copy you can serve from any web host or preview with a local static server:
 
 ```bash
 npm run build

@@ -84,11 +84,31 @@
  * Hero picker (3 cards on home + pick-your-path)
  * ------------------------------------------------------------------------- */
 
+.aqg-pathpicker-wrap {
+  margin: 1.5rem 0 2rem;
+}
+
+.aqg-pathpicker-wrap__header {
+  margin-bottom: 0.9rem;
+}
+
+.aqg-pathpicker-wrap__header h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+}
+
+.aqg-pathpicker-wrap__header p {
+  margin: 0;
+  color: var(--sl-color-gray-3);
+  line-height: 1.5;
+}
+
 .aqg-pathpicker {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  align-items: stretch;
   gap: 1rem;
-  margin: 1.5rem 0 2rem;
 }
 
 @media (max-width: 50rem) {
@@ -98,11 +118,12 @@
 }
 
 .aqg-pathpicker__card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: minmax(3.1rem, auto) 1fr 2.25rem;
   gap: 0.55rem;
-  padding: 1.1rem 1.2rem 1.25rem;
+  height: 100%;
+  min-height: 100%;
+  padding: 1rem 1rem 1.05rem;
   border-radius: 0.5rem;
   border: 1px solid var(--sl-color-gray-5);
   background: var(--sl-color-gray-6);
@@ -110,11 +131,13 @@
   cursor: pointer;
   font: inherit;
   color: var(--sl-color-text);
-  transition: border-color 120ms ease, background 120ms ease;
+  transition: border-color 120ms ease, background 120ms ease, transform 80ms ease;
 }
 
 .aqg-pathpicker__card:hover {
   border-color: var(--sl-color-accent);
+  background: color-mix(in srgb, var(--sl-color-accent) 8%, var(--sl-color-gray-6));
+  transform: translateY(-1px);
 }
 
 .aqg-pathpicker__card:focus-visible {
@@ -125,15 +148,39 @@
 .aqg-pathpicker__card.is-active {
   border-color: var(--sl-color-accent);
   border-width: 2px;
-  /* compensate the +1px border so the card doesn't shift when activating */
-  padding: calc(1.1rem - 1px) calc(1.2rem - 1px) calc(1.25rem - 1px);
+  background: color-mix(in srgb, var(--sl-color-accent) 13%, var(--sl-color-gray-6));
+  padding: calc(1rem - 1px) calc(1rem - 1px) calc(1.05rem - 1px);
+}
+
+.aqg-pathpicker__topline {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: start;
+  min-height: 3.1rem;
+}
+
+.aqg-pathpicker__radio {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.13rem;
+  border-radius: 999px;
+  border: 2px solid var(--sl-color-gray-3);
+  background: var(--sl-color-bg);
+  box-shadow: inset 0 0 0 3px var(--sl-color-bg);
+}
+
+.aqg-pathpicker__card.is-active .aqg-pathpicker__radio {
+  border-color: var(--sl-color-accent);
+  background: var(--sl-color-accent);
 }
 
 .aqg-pathpicker__title {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--sl-color-white);
-  letter-spacing: 0.01em;
+  color: var(--sl-color-text);
+  letter-spacing: 0;
+  line-height: 1.25;
 }
 
 .aqg-pathpicker__blurb {
@@ -142,16 +189,253 @@
   color: var(--sl-color-text);
 }
 
-.aqg-pathpicker__pill {
-  position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  font-size: 0.7rem;
+.aqg-pathpicker__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 2rem;
+  align-self: end;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--sl-color-gray-4);
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
+  letter-spacing: 0;
+  color: var(--sl-color-text);
+}
+
+.aqg-pathpicker__card:hover .aqg-pathpicker__cta {
+  border-color: var(--sl-color-accent);
+  color: var(--sl-color-text-accent);
+}
+
+.aqg-pathpicker__card.is-active .aqg-pathpicker__cta {
   background: var(--sl-color-accent);
-  color: var(--sl-color-white);
-  line-height: 1.4;
+  border-color: var(--sl-color-accent);
+  color: var(--aqg-text-on-accent, #fff);
+}
+
+/* -------------------------------------------------------------------------
+ * Homepage route chooser (path + role + one continue button)
+ * ------------------------------------------------------------------------- */
+
+.aqg-routechooser {
+  margin: 2rem 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--sl-color-gray-5);
+}
+
+.aqg-routechooser__intro {
+  margin-bottom: 1.35rem;
+}
+
+.aqg-routechooser__intro h2 {
+  margin: 0 0 0.35rem;
+}
+
+.aqg-routechooser__intro p,
+.aqg-routechooser__stepheader p {
+  margin: 0;
+  color: var(--sl-color-gray-3);
+  line-height: 1.5;
+}
+
+.aqg-routechooser__step {
+  margin: 1.4rem 0 0;
+}
+
+.aqg-routechooser__stepheader {
+  margin-bottom: 0.85rem;
+}
+
+.aqg-routechooser__stepheader h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.05rem;
+}
+
+.aqg-optiongrid {
+  display: grid;
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.aqg-optiongrid--paths {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aqg-optiongrid--roles {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aqg-optioncard {
+  display: grid;
+  grid-template-rows: 3.25rem 1fr 2.25rem;
+  gap: 0.55rem;
+  height: 100%;
+  min-height: 100%;
+  padding: 1rem 1rem 1.05rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--sl-color-gray-5);
+  background: var(--sl-color-gray-6);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: var(--sl-color-text);
+  transition: border-color 120ms ease, background 120ms ease, transform 80ms ease;
+}
+
+.aqg-optioncard:hover {
+  border-color: var(--sl-color-accent);
+  background: color-mix(in srgb, var(--sl-color-accent) 8%, var(--sl-color-gray-6));
+  transform: translateY(-1px);
+}
+
+.aqg-optioncard:focus-visible {
+  outline: 2px solid var(--sl-color-accent-high);
+  outline-offset: 2px;
+}
+
+.aqg-optioncard.is-active {
+  border-color: var(--sl-color-accent);
+  border-width: 2px;
+  background: color-mix(in srgb, var(--sl-color-accent) 13%, var(--sl-color-gray-6));
+  padding: calc(1rem - 1px) calc(1rem - 1px) calc(1.05rem - 1px);
+}
+
+.aqg-optioncard__topline {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: start;
+  min-height: 3.25rem;
+}
+
+.aqg-optioncard__radio {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.13rem;
+  border-radius: 999px;
+  border: 2px solid var(--sl-color-gray-3);
+  background: var(--sl-color-bg);
+  box-shadow: inset 0 0 0 3px var(--sl-color-bg);
+}
+
+.aqg-optioncard.is-active .aqg-optioncard__radio {
+  border-color: var(--sl-color-accent);
+  background: var(--sl-color-accent);
+}
+
+.aqg-optioncard__title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: var(--sl-color-text);
+  max-width: 14rem;
+}
+
+.aqg-optioncard__blurb {
+  font-size: 0.93rem;
+  line-height: 1.5;
+  color: var(--sl-color-text);
+}
+
+.aqg-optioncard__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 2rem;
+  align-self: end;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--sl-color-gray-4);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--sl-color-text);
+}
+
+.aqg-optioncard:hover .aqg-optioncard__cta {
+  border-color: var(--sl-color-accent);
+  color: var(--sl-color-text-accent);
+}
+
+.aqg-optioncard.is-active .aqg-optioncard__cta {
+  background: var(--sl-color-accent);
+  border-color: var(--sl-color-accent);
+  color: var(--aqg-text-on-accent, #fff);
+}
+
+.aqg-routechooser__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1rem;
+  margin-top: 1.35rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--sl-color-gray-5);
+}
+
+.aqg-routechooser__continue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--sl-color-accent);
+  border-radius: 0.4rem;
+  background: var(--sl-color-accent);
+  color: var(--aqg-text-on-accent, #fff);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.aqg-routechooser__continue:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.aqg-routechooser__continue:focus-visible {
+  outline: 2px solid var(--sl-color-accent-high);
+  outline-offset: 2px;
+}
+
+.aqg-routechooser__continue:disabled {
+  border-color: var(--sl-color-gray-5);
+  background: var(--sl-color-gray-6);
+  color: var(--sl-color-gray-3);
+  cursor: not-allowed;
+}
+
+.aqg-routechooser__skip {
+  font-weight: 600;
+}
+
+@media (max-width: 62rem) {
+  .aqg-optiongrid--roles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 50rem) {
+  .aqg-optiongrid--paths,
+  .aqg-optiongrid--roles {
+    grid-template-columns: 1fr;
+  }
+
+  .aqg-routechooser__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .aqg-routechooser__continue,
+  .aqg-routechooser__skip {
+    width: 100%;
+  }
 }

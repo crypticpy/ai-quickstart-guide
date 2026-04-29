@@ -20,33 +20,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended
 
-      - name: Concatenate markdown sources in reading order
-        run: |
-          mkdir -p exports
-          # Order matters: getting-started → phases 1-6 → resources
-          ORDER=(
-            "src/content/docs/index.mdx"
-            "src/content/docs/getting-started"
-            "src/content/docs/phase-1-governance"
-            "src/content/docs/phase-2-education"
-            "src/content/docs/phase-3-infrastructure"
-            "src/content/docs/phase-4-dev-stack"
-            "src/content/docs/phase-5-platform"
-            "src/content/docs/phase-6-starter-projects"
-            "src/content/docs/resources"
-          )
-          : > exports/playbook.md
-          for path in "${ORDER[@]}"; do
-            if [ -f "$path" ]; then
-              cat "$path" >> exports/playbook.md
-              printf '\n\n' >> exports/playbook.md
-            elif [ -d "$path" ]; then
-              find "$path" -type f \( -name '*.md' -o -name '*.mdx' \) | sort | while read -r f; do
-                cat "$f" >> exports/playbook.md
-                printf '\n\n' >> exports/playbook.md
-              done
-            fi
-          done
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.12
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build print-safe markdown source
+        run: npm run export:playbook
 
       - name: Build PDF
         run: |
@@ -64,6 +46,13 @@ jobs:
             --metadata title='AI Quickstart Guide' \
             -o exports/ai-quickstart-guide.docx
 
+      - name: Build offline pack
+        run: |
+          zip -j exports/ai-quickstart-offline-pack.zip \
+            exports/playbook.md \
+            exports/ai-quickstart-guide.pdf \
+            exports/ai-quickstart-guide.docx
+
       - name: Attach to release
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
@@ -71,10 +60,13 @@ jobs:
           files: |
             exports/ai-quickstart-guide.pdf
             exports/ai-quickstart-guide.docx
+            exports/ai-quickstart-offline-pack.zip
 
       - name: Upload as workflow artifact
         if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
           name: playbook
-          path: exports/ai-quickstart-guide.*
+          path: |
+            exports/ai-quickstart-guide.*
+            exports/ai-quickstart-offline-pack.zip

@@ -48,6 +48,18 @@ Build seven core modules — independently testable, documented, versioned — w
 </TabItem>
 </Tabs>
 
+## Path guide
+
+| Path | Do now | Use / simplify | Defer |
+| --- | --- | --- | --- |
+| Small | Auth wrapper, API conventions, and a small AI orchestration layer | Hosted admin, library data grid, role claims instead of ABAC | IDP, module registry, full seven-module build |
+| Standard | Build seven core modules and a registry across six months | Modular monolith, not microservices | Advanced modules until the first app ships |
+| Large | Seven modules plus inner-source contribution model | Dedicated platform and DevEx teams | Only low-demand modules |
+
+## Minimum viable platform in plain English
+
+For a small agency, "platform" does not mean a separate product team and seven custom frameworks. It can mean three reusable pieces that keep the first AI app from being a one-off: one sign-in wrapper, one API pattern, and one AI orchestration wrapper that handles prompts, cost, retrieval, and guardrails consistently. Build the rest only when the second and third apps prove the need.
+
 ## The pattern: modular monolith with hexagonal seams
 
 The platform is a **modular monolith**, not a microservice constellation. Modules live in one repo (or a small number) and ship as one deployable unit. Inside, each module is internally coherent and externally minimal: it exposes a small interface and depends on a small set of others. The seams use [hexagonal architecture / ports-and-adapters](/phase-5-platform/module-taxonomy/) so a module's domain logic does not depend on any specific cloud, database, or vendor.

@@ -429,7 +429,7 @@ Tier-3 features wait until v2 lands.
 ## Related
 
 - [Procurement Guardrails (Phase 1)](/phase-1-governance/procurement-guardrails/) — the contract terms that make this module's vendor-neutrality real
-- [Risk Classification Policy (Phase 1)](/phase-1-governance/risk-classification-policy/) — informs which prompts get which guardrails
+- [Risk Classification Policy (Phase 1)](/phase-1-governance/risk-classification/) — informs which prompts get which guardrails
 - [Reference Implementation (Phase 4)](/phase-4-dev-stack/reference-implementation/) — first concrete consumer of this module
 - [Module Taxonomy](/phase-5-platform/module-taxonomy/) — the hexagonal pattern this module exemplifies most fully
 - [API Framework](/phase-5-platform/api-framework-module/) — exposes streaming endpoints over the orchestration module

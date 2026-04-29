@@ -54,7 +54,7 @@ Track 4 produces _shipped code_, not slides:
 
 - Each developer commits at least one merged PR per lab to the platform repo or to an agency project.
 - The capstone week ends with a working pilot deployed to ≥1 named user.
-- Track 4 graduates form the initial maintainer pool for the [Modular Platform](/phase-5-modular-platform/) and the technical reviewers for the [Champions Network](/phase-2-education/track-5-champions/).
+- Track 4 graduates form the initial maintainer pool for the [Modular Platform](/phase-5-platform/) and the technical reviewers for the [Champions Network](/phase-2-education/track-5-champions/).
 
 ## Evaluation
 
@@ -87,7 +87,7 @@ The async path takes ~50% longer in calendar time and is reserved for genuine sc
 
 ## Related
 
-- [Phase 4 — Developer Stack](/phase-4-developer-stack/) — the toolchain Track 4 teaches against
-- [Phase 5 — Modular Platform](/phase-5-modular-platform/) — what Track 4 graduates extend
-- [Phase 6 — Starter Project](/phase-6-starter-project/) — the capstone often becomes the starter project's first feature
+- [Phase 4 — Developer Stack](/phase-4-dev-stack/) — the toolchain Track 4 teaches against
+- [Phase 5 — Modular Platform](/phase-5-platform/) — what Track 4 graduates extend
+- [Phase 6 — Starter Project](/phase-6-starter-projects/) — the capstone often becomes the starter project's first feature
 - [Track 5 — Champions Network](/phase-2-education/track-5-champions/) — the network Track 4 graduates technically support
