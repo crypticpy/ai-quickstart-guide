@@ -1,26 +1,81 @@
 ---
 title: Phase 3 — Infrastructure & Security
-description: Stand up a secure, isolated development environment. Months 2–5.
+description: Stand up a secure, isolated, cloud-agnostic environment where teams can build AI workloads without risking production. Months 2–5.
 sidebar:
   order: 1
 ---
 
-> **Status:** Placeholder. Scheduled for Sprint 3.
+Phase 3 is where the agency builds the infrastructure that lets developers ship AI features without becoming a security incident. The hard part is not standing up servers — it is doing so on whichever cloud the agency is already on, with the same level of safety, observability, and reproducibility, while preserving the option to move later. This phase is deliberately cloud-agnostic. The reference patterns work on AWS, Azure, and Google Cloud; the decision pages call out what to pick on each.
 
 ## Objective
 
-Stand up a secure, isolated development environment where teams can experiment with AI without risking production systems or exposing sensitive data.
+Stand up a secure, isolated development environment — sandbox, staging, and production tiers — where teams can experiment with AI workloads without risking production systems or exposing sensitive data, and where the platform that gets built in Phase 5 has somewhere to live.
+
+## Cloud-agnostic posture
+
+Most agencies already have a primary cloud — typically the one with their existing identity tenant, data warehouse, or contact-center stack. The default of this guide is to **build on whichever cloud you are already on**, not to migrate. The architecture should treat the cloud as a substrate (compute, storage, identity, network) and isolate cloud-specific surfaces behind narrow adapters. The result is an agency that can pick the best AI service for the workload — AWS Bedrock, Azure OpenAI, Vertex AI, or a third-party API — without rebuilding the platform.
+
+Three principles for staying cloud-agnostic:
+
+1. **Pick managed services for commodities, code adapters for specifics.** Identity, secrets, container orchestration, logging, and metrics should be the cloud's managed offering. The integration with each is an adapter behind the platform's interfaces. When a workload moves clouds, the adapters change; the platform code does not.
+2. **Use OpenTelemetry, OCI containers, OpenAPI, and SPIFFE-style workload identity.** Each is a widely-supported standard with conformant implementations on all three clouds. They form the seams along which the platform can be re-hosted later.
+3. **Avoid serverless lock-in for the orchestration layer.** Lambda / Functions / Cloud Functions are excellent for thin glue, but the AI orchestration layer (prompt management, retrieval, eval gates) belongs in a portable container. Keep the long-lived logic on a runtime that exists everywhere.
+
+The guidance throughout Phase 3 is structured: pick the principle, then the per-cloud implementation. Where managed services diverge meaningfully (e.g., Azure Container Apps vs. AWS App Runner vs. Cloud Run), each cloud's section names the recommended option.
 
 ## Deliverables
 
-- Cloud sandbox provisioning guide (Azure primary; AWS / GCP alternatives)
-- Identity & access management (Entra ID / Okta / Auth0)
-- CI/CD pipeline (GitHub Actions, trunk-based, SBOM, SLSA Level 2)
-- Secrets management (Key Vault / Secrets Manager / Vault)
-- Container orchestration (Azure Container Apps / Kubernetes)
-- Security baseline (DLP, network segmentation, data classification)
-- Observability foundation (OpenTelemetry, centralized logging, basic SLOs)
+- **[Cloud sandbox provisioning guide](/phase-3-infrastructure/cloud-sandbox/)** — sandbox / staging / production tier definitions and the per-cloud landing zone pattern.
+- **[Identity & access](/phase-3-infrastructure/identity-access/)** — SSO via Entra ID, Okta, or Auth0; workload identity (managed identity / IAM roles / workload identity); RBAC scope design.
+- **[CI/CD pipeline](/phase-3-infrastructure/cicd-pipeline/)** — trunk-based development, automated tests, SBOM generation, artifact signing, SLSA Level 2 attestations.
+- **[Secrets management](/phase-3-infrastructure/secrets-management/)** — Key Vault / Secrets Manager / Secret Manager patterns; HashiCorp Vault as cross-cloud option; secret-zero handling.
+- **[Container orchestration](/phase-3-infrastructure/container-orchestration/)** — Container Apps / App Runner / Cloud Run for managed; AKS / EKS / GKE for full Kubernetes; staging vs. production separation.
+- **[Security baseline](/phase-3-infrastructure/security-baseline/)** — DLP for AI workloads, data classification labels, network segmentation, egress control, encryption-in-use options.
+- **[Observability foundation](/phase-3-infrastructure/observability/)** — OpenTelemetry instrumentation, centralized logging, prompt/response capture, SLO definitions, AI-specific metrics.
 
-## Hard dependency
+## Sequencing within Phase 3
 
-Phase 3 cannot start before Phase 1 governance is complete. Cloud provisioning requests need governance approval; security policies must exist before infrastructure is configured.
+| Weeks | Focus                                                               | Gate                                                   |
+| ----- | ------------------------------------------------------------------- | ------------------------------------------------------ |
+| 1–2   | Sandbox request submitted; landing zone pattern decided             | Cloud account provisioned; baseline IAM in place       |
+| 3–4   | SSO and workload identity configured; secrets management stood up   | Devs can sign in to non-prod with SSO                  |
+| 5–6   | CI/CD pipeline operational with tests, SBOM, signing                | First end-to-end build/deploy of a sample app          |
+| 7–8   | Container orchestration + staging environment ready                 | Sample app running in staging behind WAF               |
+| 9–10  | Security baseline (DLP, segmentation, data classification) enforced | Tier-1/2 workloads deployable with auto-applied policy |
+| 11–12 | Observability foundation deployed; first SLOs                       | Prompt/response capture and cost dashboards live       |
+
+## Hard dependencies
+
+- **Phase 1 (Governance) must be complete.** Cloud provisioning requests need governance approval; the AUP defines what data can flow where; the procurement addendum defines what vendor terms apply.
+- **Risk classification must exist.** Tier-2 and Tier-3 workloads need different network posture, logging retention, and contestation pathway than Tier-1. The security baseline maps tier to enforced policy.
+- **Identity provider chosen.** Phase 1's procurement work should have selected (or confirmed) the SSO provider. Phase 3 wires it in; it does not relitigate the choice.
+
+## What Phase 3 does NOT cover
+
+- Application code or architecture (that's Phase 4–5).
+- Specific model selection (Claude, GPT, Gemini, open weights) — that decision happens in Phase 5 against the platform's AI orchestration adapter.
+- Data warehouse and analytics infrastructure — these are upstream of AI workloads, but agencies typically already have them; integration patterns are referenced where relevant rather than rebuilt.
+- Production deployment of starter projects — Phase 6 handles that against the infrastructure Phase 3 produces.
+
+## Off-Ramp — Sandbox-only
+
+Agencies that complete the sandbox tier (cloud account + SSO + minimal CI/CD + secrets + a single sandbox environment) have enough to run Track 4 developer labs and Tier-1 pilots. The full staging/production stack can be deferred to Year 2 if budget or staffing requires. This is a real off-ramp — many agencies will pause at sandbox-only for 6–12 months while culture work catches up. Document the deferred items so they re-enter the roadmap when appropriate.
+
+## Plain-English Guide to Phase 3 Terms
+
+- **Landing zone.** The pre-built scaffold of accounts, networks, and policies that any new workload lands into. Saves teams from configuring security from scratch each time.
+- **Workload identity.** A way for software (not people) to prove who it is to other services without storing passwords. AWS calls it IAM roles; Azure calls it managed identity; Google calls it workload identity.
+- **SBOM (Software Bill of Materials).** A list of every ingredient (library, dependency, version) in a piece of software, so you can answer "are we affected by the new vulnerability?" in minutes instead of weeks.
+- **SLSA (Supply Chain Levels for Software Artifacts).** A graded checklist that proves your build wasn't tampered with. Level 2 means automated build with provenance; Level 3 adds hardening; the agency target for Phase 3 is Level 2.
+- **Egress control.** Restricting outbound network traffic so a compromised workload cannot dial home to an attacker's server. Critical for AI workloads that often want to call external APIs.
+- **Confidential computing.** Encryption that protects data not just at rest and in transit, but during processing. Available on all three major clouds; relevant for Tier-3 workloads.
+
+## Research basis
+
+NIST SP 800-204D (software supply chain security), CNCF OpenTelemetry, SLSA v1.1, NIST SP 800-207 (zero trust), CISA Secure Cloud Business Applications (SCuBA) baselines, Cloud Native Computing Foundation reference architectures.
+
+## Related
+
+- [Phase 1 — Governance](/phase-1-governance/) — the policy substrate Phase 3 enforces in code
+- [Phase 4 — Developer Stack](/phase-4-dev-stack/) — the development practices that run on this infrastructure
+- [Phase 5 — Modular Platform](/phase-5-platform/) — the platform built on top of Phase 3
