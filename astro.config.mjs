@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import preact from '@astrojs/preact';
+import remarkBaseLinks from './src/plugins/remark-base-links.mjs';
 
 const SITE = process.env.SITE_URL ?? 'https://crypticpy.github.io';
 const BASE = process.env.BASE_PATH ?? '/ai-quickstart-guide';
@@ -9,6 +10,9 @@ const BASE = process.env.BASE_PATH ?? '/ai-quickstart-guide';
 export default defineConfig({
   site: SITE,
   base: BASE,
+  markdown: {
+    remarkPlugins: [[remarkBaseLinks, { base: BASE }]],
+  },
   integrations: [
     preact(),
     starlight({
