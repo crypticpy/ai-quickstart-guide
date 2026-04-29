@@ -166,12 +166,21 @@
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .aqg-readiness__actions button {
-  padding: 0.55rem 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 2.5rem;
+  padding: 0 1rem;
+  margin: 0;
+  font-family: inherit;
   font-size: 0.95rem;
   font-weight: 500;
+  line-height: 1;
   border-radius: 0.35rem;
   border: 1px solid var(--sl-color-accent);
   background: var(--sl-color-accent);
