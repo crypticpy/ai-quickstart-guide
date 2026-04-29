@@ -16,6 +16,7 @@ hero:
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import AgencyPathPicker from '../../components/AgencyPathPicker.tsx';
 
 ## What this is
 
@@ -48,13 +49,11 @@ It is built from Austin Public Health's real-world experience and perspective.
 
 ## Pick your path
 
-Different agency sizes need different timelines and depth.
+Different agency sizes need different timelines and depth. Choose one — your selection is saved in your browser and shown in the **Path** dropdown at the top of every page, and the per-phase pages will surface the variant that matches.
 
-| If your IT team is | Use the | Realistic timeline |
-|---|---|---|
-| 1–4 people | Small Agency Variant | 18–24 months |
-| 5–15 people | Default 12-month timeline | 12 months |
-| 15+ people | Compressed parallel tracks | 9–12 months |
+<AgencyPathPicker client:load />
+
+See the [Pick Your Path](/getting-started/pick-your-path/) page for the full variant comparison and the month-by-month Small-Agency walkthrough.
 
 > **Off-ramps are real.** Agencies can stop after Phase 1 (governance only), Phase 2 (governance + education), or Phase 5 (platform without starter project) and still have a complete, valuable deliverable. The roadmap is designed so partial completion still beats no completion.
 

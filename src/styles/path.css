@@ -1,0 +1,155 @@
+/* Agency-size path picker — both the 3-button hero (AgencyPathPicker.tsx)
+ * and the header dropdown (AgencyPathDropdown.astro). All colors come
+ * from Starlight's auto-inverting tokens so the picker tracks the
+ * active theme. */
+
+/* -------------------------------------------------------------------------
+ * Header dropdown
+ * ------------------------------------------------------------------------- */
+
+.aqg-header-extras {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+/* The default Starlight search button is the second child; let it grow. */
+.aqg-header-extras > :last-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.aqg-pathdropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--sl-color-text);
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.aqg-pathdropdown__label {
+  color: var(--sl-color-text-accent);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.aqg-pathdropdown__select {
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--sl-color-gray-4);
+  background: var(--sl-color-bg);
+  color: var(--sl-color-text);
+  cursor: pointer;
+  min-width: 9rem;
+}
+
+.aqg-pathdropdown__select:hover {
+  border-color: var(--sl-color-accent);
+}
+
+.aqg-pathdropdown__select:focus-visible {
+  outline: 2px solid var(--sl-color-accent-high);
+  outline-offset: 1px;
+  border-color: var(--sl-color-accent);
+}
+
+/* On narrower viewports Starlight's search shrinks to a magnifier button.
+ * The dropdown takes too much room in that case — collapse the label and
+ * tighten the select. */
+@media (max-width: 50rem) {
+  .aqg-pathdropdown__label {
+    display: none;
+  }
+  .aqg-pathdropdown__select {
+    min-width: 7.5rem;
+    padding: 0.3rem 0.4rem;
+  }
+}
+
+@media (max-width: 36rem) {
+  /* Below ~575px there's no room for both dropdown and search. Hide the
+   * dropdown — readers on phone-width can still set a path via the hero
+   * picker on the home or pick-your-path doc. */
+  .aqg-pathdropdown {
+    display: none;
+  }
+}
+
+/* -------------------------------------------------------------------------
+ * Hero picker (3 cards on home + pick-your-path)
+ * ------------------------------------------------------------------------- */
+
+.aqg-pathpicker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+@media (max-width: 50rem) {
+  .aqg-pathpicker {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aqg-pathpicker__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.1rem 1.2rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--sl-color-gray-5);
+  background: var(--sl-color-gray-6);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: var(--sl-color-text);
+  transition: border-color 120ms ease, background 120ms ease,
+    transform 80ms ease;
+}
+
+.aqg-pathpicker__card:hover {
+  border-color: var(--sl-color-accent);
+  background: color-mix(in srgb, var(--sl-color-accent) 8%, var(--sl-color-gray-6));
+}
+
+.aqg-pathpicker__card:focus-visible {
+  outline: 2px solid var(--sl-color-accent-high);
+  outline-offset: 2px;
+}
+
+.aqg-pathpicker__card.is-active {
+  border-color: var(--sl-color-accent);
+  background: color-mix(in srgb, var(--sl-color-accent) 14%, var(--sl-color-gray-6));
+  box-shadow: 0 0 0 2px var(--sl-color-accent);
+}
+
+.aqg-pathpicker__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--sl-color-white);
+  letter-spacing: 0.01em;
+}
+
+.aqg-pathpicker__blurb {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--sl-color-text);
+}
+
+.aqg-pathpicker__cta {
+  margin-top: auto;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sl-color-text-accent);
+  letter-spacing: 0.02em;
+}
+
+.aqg-pathpicker__card.is-active .aqg-pathpicker__cta {
+  color: var(--sl-color-accent);
+}

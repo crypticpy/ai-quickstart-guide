@@ -1,0 +1,67 @@
+---
+title: Pick Your Path
+description: Choose the agency-size variant — Small, Standard, or Large — that fits your team. The guide adapts timelines, budgets, and per-phase scope to match.
+sidebar:
+  order: 2
+---
+
+import AgencyPathPicker from '../../../components/AgencyPathPicker.tsx';
+
+The guide ships with three calibrated paths so it works for a 2-person IT shop and a 50-person enterprise team without forcing either to wade through advice meant for the other. Pick a path here and the per-phase pages will surface the variant that matches.
+
+<AgencyPathPicker client:load />
+
+Your selection is saved in your browser and shown in the **Path** dropdown at the top of every page. Change it any time — the per-phase tabs follow along.
+
+## How the variants compare
+
+| Dimension        | Small (1–4 IT staff)                | Standard (5–15 IT staff)   | Large (15+ IT staff)               |
+| ---------------- | ----------------------------------- | -------------------------- | ---------------------------------- |
+| Timeline         | 18–24 months                        | 12 months                  | 9–12 months (compressed)           |
+| Phases           | 3–4 sequential                      | 6 overlapping              | 6 overlapping + parallel tracks    |
+| Education tracks | Tracks 1 + 5 only                   | All 6 tracks               | All 6 + custom domain labs         |
+| Governance       | 2-day sprint with external counsel  | 5 working sessions         | Full sessions + standing committee |
+| Infrastructure   | Managed cloud services (SaaS-first) | Cloud sandbox (full guide) | Multi-env with staging/prod        |
+| Modules built    | 1–3 core (use pre-built frameworks) | 5–7 core modules           | 7+ with inner-source contributions |
+| Starter project  | 1 archetype, simplified             | 1 archetype, full build    | 1–2 archetypes in parallel         |
+| Staffing need    | 0.5 FTE + contract engineers        | 1 FTE dedicated + team     | 2+ FTEs + cross-functional team    |
+| Year-1 budget    | $50K–$150K                          | $150K–$400K                | $400K–$1M+                         |
+
+## Small agency path — month-by-month
+
+For agencies with very small IT teams the full 6-phase, 12-month plan is not realistic. The Small path focuses on what delivers value fastest and treats each milestone as a complete, defensible deliverable on its own.
+
+- **Months 1–3 — Governance sprint + AI foundations.** Hire external counsel for a 2-day governance intensive ($3–5K) that produces the AUP, risk matrix, and committee charter. Run Track 1 for all staff in parallel. This alone is a complete outcome that satisfies most legislative AI policy requirements.
+- **Months 4–6 — Champions network + vendor evaluation.** Launch monthly champions meetups. Instead of building infrastructure from scratch, evaluate managed AI services (Azure AI Services, AWS Bedrock, Google Vertex) using the vendor evaluation framework in the guide.
+- **Months 7–12 — Managed platform + simplified starter project.** Use cloud-managed services instead of custom modules. Build 1–3 lightweight modules (Auth, API wrapper, AI orchestration) on top of managed infrastructure. Deploy one starter project using pre-built frameworks (LangChain, Semantic Kernel, etc.).
+- **Months 13–18 — Iterate and expand.** With the first app in production, iterate based on real usage. Add modules as needed. Consider hiring 1–2 contract engineers for month 13+ to build out the platform further.
+
+> **Off-Ramp: Governance only.** Agencies that complete only the Governance Sprint (Months 1–3) still walk away with an adopted AI policy, risk classification, and review committee. That is a complete, standalone deliverable that satisfies legislative requirements and positions the agency for future phases when budget and staffing allow.
+
+## Budget by phase
+
+Year-1 ranges, with the Small column showing what's achievable using managed services and external counsel instead of in-house build-out.
+
+| Phase              | Primary costs                                | Standard   | Small               |
+| ------------------ | -------------------------------------------- | ---------- | ------------------- |
+| 1. Governance      | Staff time, external legal review            | $5K–$25K   | $3K–$8K (sprint)    |
+| 2. Education       | Facilitator time, materials, optional LMS    | $10K–$50K  | $5K–$15K            |
+| 3. Infrastructure  | Cloud compute, licenses, security tools      | $30K–$100K | $10K–$30K (managed) |
+| 4. Dev Stack       | Staff time, tooling licenses (IDE, AI tools) | $15K–$40K  | $5K–$15K            |
+| 5. Platform        | Developer time (largest cost), testing infra | $50K–$150K | $20K–$50K (pre-built) |
+| 6. Starter Project | Dev time, user testing, deployment           | $30K–$80K  | $15K–$40K           |
+
+> **Procurement reality check.** Government procurement cycles typically require 12–18 months of lead time. Agencies reading this today are likely budgeting for FY2027 or FY2028. Use the free/low-cost Phase 1 governance resources immediately while you position for budget requests.
+
+## Where to go next
+
+Once you've picked a path, jump to the phase that fits your current state — your selection follows you:
+
+- [Phase 1 — Governance](/phase-1-governance/) — every agency starts here.
+- [Phase 2 — Culture & Education](/phase-2-education/) — Tracks 1 + 5 are the small-agency minimum.
+- [Phase 3 — Infrastructure](/phase-3-infrastructure/) — Small path leans on managed services; Standard/Large run the full sandbox.
+- [Phase 4 — Dev Stack](/phase-4-dev-stack/) — coding standards and AI-assisted development.
+- [Phase 5 — Platform](/phase-5-platform/) — Small path uses 1–3 lightweight modules on managed infra.
+- [Phase 6 — Starter Project](/phase-6-starter-projects/) — pick a low-stakes archetype and ship.
+
+If you haven't taken the [Readiness Assessment](/getting-started/readiness-assessment/) yet, do that first — its score is the input to choosing where in your path to focus.

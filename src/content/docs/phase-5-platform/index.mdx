@@ -5,6 +5,8 @@ sidebar:
   order: 1
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 Phase 5 is where the agency stops paying integration tax. The platform is not a product; it is a small library of well-bounded modules that every future application will compose. When the next intake submission becomes a project, 70% of the answer should already exist as code in the platform — auth, RBAC, data access, API plumbing, document rendering, AI orchestration. The team building the new application writes the 30% that is genuinely about the use case.
 
 This is the longest phase (six months) and the most consequential. A platform that ships works for a decade. A platform that doesn't gets quietly abandoned and each team rebuilds the same things forever.
@@ -12,6 +14,39 @@ This is the longest phase (six months) and the most consequential. A platform th
 ## Objective
 
 Build seven core modules — independently testable, documented, versioned — with a coherent module taxonomy, an inner-source contribution model, a registry for discoverability, and an Internal Developer Platform (IDP) that exposes the platform's capabilities through self-service paths.
+
+## How this phase scales for your agency
+
+<Tabs syncKey="agency-size">
+<TabItem label="Small">
+
+**1–3 lightweight modules on managed infrastructure.** Don't try to build seven modules from scratch with two engineers. Pick the three that give the most leverage on your starter project, and lean heavily on pre-built frameworks (LangChain, Semantic Kernel, FastAPI extensions, off-the-shelf admin dashboards).
+
+- **Build only:** Auth (a thin wrapper around your IdP), API Framework (conventions on top of your web framework), AI Orchestration (the highest-leverage module, even small — wrap one LLM adapter and one retrieval path).
+- **Skip / use pre-built:** Data Grid (use a library), Admin Dashboard (use a hosted solution or skip), Document Rendering (call a service), RBAC (start with role-based JWT claims, defer attribute-based until needed).
+- **Skip:** Inner-source contribution model, IDP / module registry, full hexagonal architecture for non-AI modules.
+- **Budget:** $20K–$50K Year 1 (engineering time on three light modules).
+
+</TabItem>
+<TabItem label="Standard">
+
+**Build the seven modules across six months per the standard sequencing.** Run the modular monolith pattern with hexagonal seams, ship the inner-source guide, and stand up the module registry/IDP. The 6-month sequence below is calibrated for a 3–6 engineer platform team.
+
+- **Cadence:** Follow the month-by-month schedule. Auth + RBAC first; AI Orchestration v1 in Month 4 so Phase 6 can start using it.
+- **Pattern:** Modular monolith, hexagonal architecture, OpenAPI everywhere.
+- **Budget:** $50K–$150K Year 1 (developer time is the largest cost; testing infra; module registry).
+
+</TabItem>
+<TabItem label="Large">
+
+**Seven modules plus inner-source contribution from consumer teams.** Run the standard build with a dedicated platform team, then layer on a formal inner-source program: consumer teams contribute fixes and feature modules back, with a maintainership rotation. Add advanced modules (workflow engine, eligibility rules engine, Forms Builder) once the core is stable.
+
+- **Add:** Inner-source program with maintainership rotation, formal RFC for new modules, dedicated DevEx + platform-engineering function, advanced modules (workflow, rules engine, low-code Forms Builder).
+- **Cadence:** Months 1–6 build the core; Months 7–12 onboard consumer teams and harvest contributions back.
+- **Budget:** Skews well past $150K with dedicated platform staffing of 6–10+ engineers.
+
+</TabItem>
+</Tabs>
 
 ## The pattern: modular monolith with hexagonal seams
 
@@ -54,7 +89,7 @@ Six months of work, sequenced so blocking dependencies resolve early.
 | 3     | Admin Dashboard + Document Rendering                              | An app can be operated and its outputs delivered                   |
 | 4     | AI Orchestration v1 (LLM adapter + retrieval)                     | A prompt+retrieval feature can be added to any app via the module  |
 | 5     | AI Orchestration v2 (eval, cost, guardrails) + Inner-Source guide | The platform becomes safe for Tier-2 deployments                   |
-| 6     | Module Registry + IDP self-service paths + hardening              | Any developer can scaffold a new app in <1 hour                    |
+| 6     | Module Registry + IDP self-service paths + hardening              | Any developer can scaffold a new app in under 1 hour               |
 
 The sequence assumes a small platform team (3–6 engineers). Larger teams can parallelize months 2–3.
 

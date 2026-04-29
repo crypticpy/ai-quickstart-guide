@@ -5,11 +5,46 @@ sidebar:
   order: 1
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 Phase 3 is where the agency builds the infrastructure that lets developers ship AI features without becoming a security incident. The hard part is not standing up servers — it is doing so on whichever cloud the agency is already on, with the same level of safety, observability, and reproducibility, while preserving the option to move later. This phase is deliberately cloud-agnostic. The reference patterns work on AWS, Azure, and Google Cloud; the decision pages call out what to pick on each.
 
 ## Objective
 
 Stand up a secure, isolated development environment — sandbox, staging, and production tiers — where teams can experiment with AI workloads without risking production systems or exposing sensitive data, and where the platform that gets built in Phase 5 has somewhere to live.
+
+## How this phase scales for your agency
+
+<Tabs syncKey="agency-size">
+<TabItem label="Small">
+
+**Managed cloud services, SaaS-first.** Don't try to build a full sandbox/staging/prod stack from scratch. Use the managed offerings your existing cloud already provides and skip the infrastructure-as-code investment until you have at least one engineer dedicated to platform work.
+
+- **Use:** Azure AI Services / AWS Bedrock / Google Vertex AI directly behind your AUP. SSO through the identity provider you already have. A single managed container service (Container Apps, App Runner, or Cloud Run). Native key vault.
+- **Skip for now:** SLSA Level 2 attestations, OpenTelemetry pipeline, multi-environment promotion, custom landing zone. These are maturity adds, not prerequisites.
+- **Budget:** $10K–$30K Year 1 (managed-services consumption + minimal licensing).
+- **Off-ramp:** Sandbox-only is real — many small agencies pause here for 6–12 months while Phase 2 catches up. Document deferred items so they re-enter the roadmap when appropriate.
+
+</TabItem>
+<TabItem label="Standard">
+
+**Cloud sandbox following the full guide.** Build the sandbox + staging tier per the deliverables below, with one production environment ready when Phase 6 ships its first app. Use the per-cloud landing zone pattern, OpenTelemetry instrumentation, and SLSA Level 2 in CI/CD.
+
+- **Sequencing:** Follow the 12-week schedule in this phase end-to-end.
+- **Cloud posture:** Build on whichever cloud you're already on; keep adapters narrow so the platform can re-host later.
+- **Budget:** $30K–$100K Year 1 (cloud compute + licenses + security tooling).
+
+</TabItem>
+<TabItem label="Large">
+
+**Multi-environment with full staging/prod separation.** Same architecture as Standard, but with environment-per-team or environment-per-archetype, dedicated production tooling (WAF, DDoS protection, dedicated egress controls), and a platform-engineering function that owns the substrate.
+
+- **Add:** Multi-tenant landing zones, dedicated SRE/platform team, advanced confidential computing for Tier-3 workloads, internal developer portal (Backstage or equivalent).
+- **Sequencing:** Run two parallel tracks — one builds sandbox/staging, the other hardens production-grade controls.
+- **Budget:** Skews well past $100K and into the $250K+ range with dedicated platform staffing.
+
+</TabItem>
+</Tabs>
 
 ## Cloud-agnostic posture
 

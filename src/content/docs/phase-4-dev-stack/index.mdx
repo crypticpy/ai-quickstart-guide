@@ -5,11 +5,46 @@ sidebar:
   order: 1
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 Phase 4 is where the agency decides _how_ it builds software. Phase 3 stood up the substrate; Phase 5 will produce the platform. In between, the agency picks a stack (or confirms the one it already has), writes down the standards that every team will follow, and establishes the AI-assisted workflows that will dominate developer time for the next decade. The goal is not to chase fashion. The goal is to make a small number of durable choices that the agency can defend in five years.
 
 ## Objective
 
 Select (or validate) the agency's development stack and establish the coding standards, testing practices, AI-assisted workflows, and architectural records that will govern all platform and application development.
+
+## How this phase scales for your agency
+
+<Tabs syncKey="agency-size">
+<TabItem label="Small">
+
+**Pick one stack, adopt the templates, get out of the way.** Small teams should not invent their own coding standards — adopt the reference standards from this guide, ratify them in a single ADR, and move on. The biggest leverage in Phase 4 for small agencies is configuring AI-assisted development tools well so each engineer ships like a small team.
+
+- **Adopt as-is:** Coding standards, testing pyramid, API-first design, ADR template.
+- **Configure carefully:** Claude Code / Copilot / Cursor with the AI-assisted dev guardrails. This is where small teams gain the most leverage.
+- **Skip for now:** Deep contract-testing infrastructure, formal OpenAPI registry, multi-stack debate. One stack only.
+- **Budget:** $5K–$15K (tooling licenses; staff time absorbed into existing roles).
+
+</TabItem>
+<TabItem label="Standard">
+
+**Full deliverable list across Months 4–7.** Run the stack selection workshop, draft and adopt all standards, stand up the OpenAPI registry, and seed the ADR backlog. Sequence Track 4 (Developer Upskilling) to start mid-phase using the standards as they ratify.
+
+- **Cadence:** Follow the 12-week sequencing schedule below.
+- **Reviewer training:** Pair Track 4 cohorts with the AI-assisted dev policy rollout — reviewers need explicit calibration.
+- **Budget:** $15K–$40K (tooling licenses + facilitator time + cohort training).
+
+</TabItem>
+<TabItem label="Large">
+
+**Full deliverable list plus inner-source contribution standards and stack-secondary support.** Add a formal RFC process for stack additions, a cross-team architecture council that reviews ADRs, and inner-source contribution guidelines for module changes. Run two parallel reference implementations if the agency genuinely supports two stacks.
+
+- **Add:** Architecture council (monthly), inner-source contribution guide, cross-team ADR review, dedicated developer experience (DevEx) function.
+- **Cadence:** All Standard items, plus DevEx team stands up parallel to the standards work.
+- **Budget:** Skews well past $40K with dedicated DevEx staffing and tooling.
+
+</TabItem>
+</Tabs>
 
 ## Why this phase, why now
 

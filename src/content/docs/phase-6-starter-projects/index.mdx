@@ -5,9 +5,45 @@ sidebar:
   order: 1
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 Phase 6 is where the platform meets reality. After five phases of governance, training, infrastructure, dev stack, and modular platform work, the agency picks one application and ships it to real users. Not as a pilot, not as a demo — as a production deployment that gets used on a Tuesday morning by someone who has a job to do.
 
 The choice of application is the agency's, not the guide's. This page describes the candidate archetypes and what each one teaches the team, but the right starter project is the one whose users are ready, whose data is in shape, and whose stakeholders care about the outcome.
+
+## How this phase scales for your agency
+
+<Tabs syncKey="agency-size">
+<TabItem label="Small">
+
+**One archetype, simplified, built on pre-built frameworks.** Pick the archetype with the lowest production risk and the warmest user audience — usually a RAG Chatbot or Meeting Transcriber for an internal team that already wants the tool. Use LangChain / Semantic Kernel rather than building orchestration from scratch.
+
+- **Pick:** RAG Chatbot or Meeting Transcriber. Both are well-bounded, low-stakes, and have strong reference implementations.
+- **Skip:** Workflow Automation (too much governance scrutiny for a small first project), NL Data Dashboard (too much SQL guardrail work).
+- **Approach:** Buy or borrow rather than build — pre-built frameworks for orchestration, a hosted vector store, off-the-shelf transcription APIs.
+- **Budget:** $15K–$40K (engineering time + APIs + light user testing).
+
+</TabItem>
+<TabItem label="Standard">
+
+**One archetype, full build, sequenced across Months 7–12.** Run the discovery → build → harden → ship → operate sequence. The archetype composes Phase 5's modules; the bug list is fed back to the platform team.
+
+- **Pick:** Whatever archetype best fits user readiness and stakeholder appetite. The selection guide in this phase walks through the criteria.
+- **Cadence:** Follow the month-by-month schedule below.
+- **Production readiness:** All eight readiness criteria met before launch.
+- **Budget:** $30K–$80K (development + UAT + deployment).
+
+</TabItem>
+<TabItem label="Large">
+
+**1–2 archetypes in parallel.** With multiple platform-engineering teams, run two starter projects simultaneously — one customer-facing (chatbot or document intelligence), one operational (workflow automation or data dashboard). The cross-project learnings stress-test the platform from two angles.
+
+- **Add:** Cross-project retrospective at Month 12 that compares platform gaps surfaced by each archetype, formal external-stakeholder rollout for at least one archetype, dedicated SRE rotation for both projects.
+- **Cadence:** Same 6-month cadence per project; coordinate launches so on-call isn't doubly stressed.
+- **Budget:** Skews well past $80K with two parallel project teams.
+
+</TabItem>
+</Tabs>
 
 ## Two equal goals
 

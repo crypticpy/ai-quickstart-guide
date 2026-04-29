@@ -1,0 +1,14 @@
+---
+/**
+ * Override for Starlight's `Search` component slot. We render the
+ * default Search bar verbatim and inline the agency-size dropdown next
+ * to it so the picker is visible on every page.
+ */
+import Default from '@astrojs/starlight/components/Search.astro';
+import AgencyPathDropdown from './AgencyPathDropdown.astro';
+---
+
+<div class="aqg-header-extras">
+  <AgencyPathDropdown />
+  <Default {...Astro.props}><slot /></Default>
+</div>

@@ -1,0 +1,57 @@
+---
+/**
+ * Compact agency-size dropdown that lives in the site header next to
+ * the search bar. Reads/writes the same localStorage key as
+ * AgencyPathPicker (the hero buttons) and any in-page <Tabs syncKey="agency-size">
+ * blocks, so picking a path anywhere syncs everywhere.
+ */
+---
+
+<label class="aqg-pathdropdown" aria-label="Active agency-size path">
+  <span class="aqg-pathdropdown__label" aria-hidden="true">Path:</span>
+  <select class="aqg-pathdropdown__select" data-aqg-pathdropdown>
+    <option value="">Not set</option>
+    <option value="Small">Small (1–4)</option>
+    <option value="Standard">Standard (5–15)</option>
+    <option value="Large">Large (15+)</option>
+  </select>
+</label>
+
+<script>
+  import {
+    onAgencySizeChange,
+    readAgencySize,
+    setAgencySize,
+    type AgencySize,
+  } from '../lib/agencySize';
+
+  function init(select: HTMLSelectElement) {
+    if (select.dataset.aqgInit === '1') return;
+    select.dataset.aqgInit = '1';
+
+    const restore = () => {
+      const v = readAgencySize();
+      select.value = v ?? '';
+    };
+    restore();
+
+    select.addEventListener('change', () => {
+      const v = select.value;
+      if (v === 'Small' || v === 'Standard' || v === 'Large') {
+        setAgencySize(v as AgencySize);
+      }
+    });
+
+    onAgencySizeChange(restore);
+  }
+
+  const wire = () => {
+    document
+      .querySelectorAll<HTMLSelectElement>('select[data-aqg-pathdropdown]')
+      .forEach(init);
+  };
+
+  wire();
+  // Starlight uses View Transitions / client-side nav; re-wire after page swaps.
+  document.addEventListener('astro:page-load', wire);
+</script>

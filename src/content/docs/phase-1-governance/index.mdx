@@ -5,9 +5,44 @@ sidebar:
   order: 1
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 ## Objective
 
 Establish the guardrails that enable everything else. Without governance, infrastructure requests stall, vendors can't be evaluated, and any public-facing AI deployment carries unmanaged political risk.
+
+## How this phase scales for your agency
+
+<Tabs syncKey="agency-size">
+<TabItem label="Small">
+
+**2-day governance sprint with external counsel.** Hire a contract attorney with public-sector AI experience for a focused two-day intensive that produces the AUP, the 3-tier risk classification, and the committee charter. Adopt the templates as-is rather than redrafting from scratch.
+
+- **Deliverables:** AUP (adopted), risk classification (adopted), committee charter (signed), procurement addendum (attached to standard contract template).
+- **Skip for now:** Standing review committee meetings (run ad-hoc instead), legislative compliance matrix (refer to the published one rather than maintaining your own).
+- **Budget:** $3K–$8K (single sprint engagement).
+- **Off-ramp:** This is itself a complete deliverable — most legislative requirements are satisfied by what comes out of the sprint.
+
+</TabItem>
+<TabItem label="Standard">
+
+**Five working sessions across Months 1–3.** Convene a 6–8 person Review Committee (tech lead, legal, security, ethics, business sponsor, public representative) and run them through the full deliverable list using the templates in this phase.
+
+- **Deliverables:** Everything listed below — 3-tier risk classification, AUP, committee charter, procurement guardrails, legislative compliance matrix, use case inventory.
+- **Cadence:** Committee meets every other week through the launch period, monthly thereafter.
+- **Budget:** $5K–$25K (staff time + external legal review).
+
+</TabItem>
+<TabItem label="Large">
+
+**Full sessions plus standing committee with sub-groups.** Run the same five working sessions, but split the committee into two working groups (policy + procurement) that meet in parallel. Add a quarterly compliance review and an annual policy refresh.
+
+- **Deliverables:** Everything in the Standard path, plus jurisdiction-specific procurement guardrails, multi-jurisdiction compliance matrix (if you operate across states), and an annual policy refresh process.
+- **Cadence:** Standing committee meets monthly; sub-groups meet weekly during launch.
+- **Budget:** Skews toward the high end of $25K and into the dedicated policy-counsel range.
+
+</TabItem>
+</Tabs>
 
 ## Deliverables
 

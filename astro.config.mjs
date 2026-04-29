@@ -49,6 +49,12 @@ export default defineConfig({
     }),
     preact(),
     starlight({
+      components: {
+        // Override the Search slot to inline our agency-size dropdown
+        // alongside it. The wrapper renders Starlight's default Search
+        // verbatim plus the dropdown next to it.
+        Search: './src/components/HeaderWithPicker.astro',
+      },
       title: 'AI Quickstart Guide',
       description:
         'A 12-month playbook for government agencies to build a modular AI platform and deploy their first production AI application.',
@@ -72,6 +78,7 @@ export default defineConfig({
         './src/styles/readiness.css',
         './src/styles/wizard.css',
         './src/styles/tier.css',
+        './src/styles/path.css',
       ],
       sidebar: [
         {
@@ -79,6 +86,7 @@ export default defineConfig({
           items: [
             { label: 'Welcome', link: '/' },
             { label: 'Readiness Assessment', link: '/getting-started/readiness-assessment/' },
+            { label: 'Pick Your Path', link: '/getting-started/pick-your-path/' },
             { label: '90-Day Quickstart', link: '/getting-started/quickstart-checklist/' },
             { label: 'Maturity Model', link: '/getting-started/maturity-model/' },
             { label: 'Glossary', link: '/getting-started/glossary/' },
