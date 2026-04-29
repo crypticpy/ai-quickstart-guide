@@ -33,6 +33,7 @@ export default defineConfig({
         './src/styles/theme.css',
         './src/styles/readiness.css',
         './src/styles/wizard.css',
+        './src/styles/tier.css',
       ],
       sidebar: [
         {

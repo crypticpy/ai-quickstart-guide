@@ -5,9 +5,18 @@ sidebar:
   order: 2
 ---
 
+import RiskTierPicker from '../../../components/RiskTierPicker.tsx';
+
 Every AI use case in your agency must be classified into a risk tier _before_ development starts. Tier determines what governance applies: who reviews it, what evidence is required, what disclosures are mandatory, and whether it can ship at all.
 
 This page defines the three tiers, gives you 15 government-specific examples, and walks you through the classification workflow your AI Review Committee will adopt in writing.
+
+## Classify a use case
+
+Answer the five dimension questions below to receive a recommended tier and the governance that applies. The picker is a starting point — your Review Committee makes the final call and may adjust based on local context.
+
+<RiskTierPicker client:load />
+
 
 ## Why three tiers (not five, not seven)
 
