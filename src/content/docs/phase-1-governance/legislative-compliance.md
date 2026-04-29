@@ -1,0 +1,96 @@
+---
+title: Legislative Compliance Matrix
+description: A snapshot of U.S. federal and state AI laws affecting public-sector deployments, with what each requires of your agency.
+sidebar:
+  order: 6
+---
+
+State AI law is moving faster than federal AI law and is what most agencies will be audited against in the next 24 months. This page catalogs the U.S. federal and state laws most likely to apply to a state or local government AI deployment as of {{Last Updated: 2026-04-29}}, what each requires, and which Phase 1 artifact maps to compliance.
+
+> **Verify before relying.** Statutes are amended, rules are issued, court interpretations shift. Treat this page as a starting map. Confirm current status with your legal counsel and update locally as your jurisdiction's law evolves.
+
+## Federal
+
+| Law / framework                              | Status                              | Applies to                                                                     | What it requires of agencies                                                                            | Maps to                                                                               |
+| -------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **OMB M-24-10** — Governance, Innovation, RM | In force                            | Federal agencies; flowed-down to federally-funded state and local programs     | Designate AI official; maintain AI use-case inventory; impact assessment for rights/safety-impacting AI | [Risk Classification](/phase-1-governance/risk-classification/), Use Case Inventory   |
+| **OMB M-25-22** — AI Acquisition             | In force                            | Federal AI procurement; pass-through to federally-funded acquisitions          | Specific contract clauses (data non-use, model disclosure, decision logs, foreign-adversary exclusion)  | [Procurement Guardrails](/phase-1-governance/procurement-guardrails/)                 |
+| **NIST AI RMF 1.0** + **NIST-AI-600-1**      | Voluntary; widely adopted           | Any U.S. agency deploying AI                                                   | Govern, Map, Measure, Manage functions; generative-AI specific risks (NIST-AI-600-1)                    | All Phase 1 artifacts                                                                 |
+| **Title VI / Title VII / ADA / FHA**         | Long-standing civil rights statutes | Any program receiving federal funds; employment; housing; public accommodation | Disparate-impact liability applies to AI-driven decisions in covered programs                           | [Risk Classification](/phase-1-governance/risk-classification/) — Tier 3 controls     |
+| **HIPAA**                                    | In force                            | Covered entities and business associates                                       | PHI cannot be processed by AI vendors without a BAA; data non-use during model training                 | [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — Section A + B |
+| **CJIS Security Policy**                     | In force                            | Any system processing criminal-justice information                             | CJIS-aligned hosting and personnel screening; AI vendors must meet CJIS or be excluded                  | [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — Section A     |
+| **FERPA**                                    | In force                            | Education agencies and institutions                                            | Education records may not be disclosed to AI vendors without consent or a school-official designation   | [AUP](/phase-1-governance/acceptable-use-policy/) — Section 6                         |
+
+## State
+
+The states below are highlighted because they have AI-specific public-sector or consumer-facing statutes in force or scheduled to take effect. Many other states have proposed legislation; the matrix is updated as bills become law.
+
+| State             | Statute                                             | Effective          | Applies to                                                                   | Key requirements                                                                                                                           | Maps to                                                                                                                    |
+| ----------------- | --------------------------------------------------- | ------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| **California**    | SB 942 (AI Transparency Act)                        | Phased; in force   | Generative AI providers and deployers operating in CA                        | Provenance disclosure for AI-generated content; consumer-facing detection tools                                                            | [AUP](/phase-1-governance/acceptable-use-policy/) — Section 7 (disclosure)                                                 |
+| **California**    | AB 2013 (Generative AI training data)               | Effective 2026     | Generative AI developers                                                     | Public summary of training datasets                                                                                                        | [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — vendor questionnaire                               |
+| **Colorado**      | SB24-205 (Colorado AI Act)                          | Effective Feb 2026 | Developers and deployers of "high-risk AI systems" (including public sector) | Risk management program; impact assessments; consumer notice; right to appeal automated decisions; reporting of algorithmic discrimination | [Risk Classification](/phase-1-governance/risk-classification/), [Review Committee](/phase-1-governance/review-committee/) |
+| **Texas**         | TRAIGA (HB 149)                                     | Effective Jan 2026 | State agencies and certain private deployers; consumer interactions          | Disclosure when consumer is interacting with AI; prohibitions on certain biometric and social-scoring uses; AI Council establishment       | [AUP](/phase-1-governance/acceptable-use-policy/), [Risk Classification](/phase-1-governance/risk-classification/)         |
+| **Illinois**      | AI Video Interview Act + HB 3773 (AI in employment) | In force           | Employers using AI in hiring                                                 | Notice and consent for AI-screened video interviews; bias auditing                                                                         | [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — Tier-3 bias testing                                |
+| **New York City** | Local Law 144 (Automated Employment Decision Tools) | In force           | NYC employers using AEDTs                                                    | Bias audit; candidate notice; results published                                                                                            | [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — Tier-3 bias testing                                |
+| **Maryland**      | HB 1271 (state AI inventory)                        | In force           | Maryland state agencies                                                      | AI inventory and impact-assessment requirements                                                                                            | Use Case Inventory                                                                                                         |
+| **Connecticut**   | SB 1103 (state agency AI)                           | In force           | CT state agencies                                                            | Agency AI inventory; risk assessments; legislative reporting                                                                               | Use Case Inventory                                                                                                         |
+| **Utah**          | SB 149 (AI Policy Act)                              | In force           | Generative AI deployers in regulated occupations                             | Disclosure; liability framework                                                                                                            | [AUP](/phase-1-governance/acceptable-use-policy/) — disclosure clauses                                                     |
+| **Washington**    | HB 1493 (deepfakes), SB 5152 (state AI)             | In force           | Public-sector AI; election communications                                    | Public-sector inventory; deepfake disclosure                                                                                               | Use Case Inventory                                                                                                         |
+
+> The interactive `<ComplianceMatrix />` (Phase 2 deliverable) will let you filter this table by jurisdiction, effective date, and Phase 1 artifact. The tabular text above is canonical until that component ships.
+
+## Local
+
+Many cities have passed surveillance technology ordinances that apply to AI even when state law has not. The most cited:
+
+- **Seattle, San Francisco, Oakland, Berkeley, Cambridge MA** — surveillance-technology ordinances (CCOPS-style) requiring council approval and a public-impact report before adopting AI-bearing surveillance technologies.
+- **New York City** — Local Law 35 (algorithmic tools transparency) and the AEDT requirements above.
+- **Boston, San Jose, Tempe** — published city AI guidelines that apply to staff use even where state law is silent.
+- **Austin** — TRUST Act-style surveillance review for facial recognition and similar technologies.
+
+If your jurisdiction has a surveillance ordinance or CCOPS-style review, AI use cases that involve face matching, license-plate recognition, gunshot detection, or similar capabilities trigger that ordinance _in addition to_ this Phase 1 governance.
+
+## Cross-cutting requirements
+
+Several themes recur across federal and state law. Phase 1 artifacts are designed so that satisfying these themes once satisfies multiple statutes.
+
+| Theme                                   | Recurs in                                                                           | Phase 1 artifact that satisfies it                                                                |
+| --------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Use-case inventory**                  | OMB M-24-10, Maryland HB 1271, Connecticut SB 1103, Washington SB 5152              | Use Case Inventory (this phase)                                                                   |
+| **Impact / risk assessment**            | OMB M-24-10, Colorado AI Act, Connecticut SB 1103                                   | [Risk Classification Matrix](/phase-1-governance/risk-classification/) + Tier-3 impact assessment |
+| **Consumer / public notice**            | Texas TRAIGA, California SB 942, Colorado AI Act, Utah SB 149                       | [AUP](/phase-1-governance/acceptable-use-policy/) — Section 7                                     |
+| **Right to contest / appeal**           | Colorado AI Act                                                                     | [Risk Classification](/phase-1-governance/risk-classification/) — Tier-3 contestation pathway     |
+| **Bias / disparate-impact testing**     | Colorado AI Act, NYC Local Law 144, Illinois HB 3773, federal civil rights statutes | [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — Section C, Tier-3         |
+| **Vendor and sub-processor disclosure** | OMB M-25-22, federal foreign-adversary entity lists                                 | [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — Section A + B             |
+| **Decision logging / explainability**   | OMB M-25-22, Colorado AI Act, NIST AI RMF                                           | [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — Section B + C             |
+
+## How to use this page
+
+1. **Identify your jurisdiction.** Federal statutes apply universally; the state row(s) for your jurisdiction are mandatory; local ordinances apply if you operate within a covered city.
+2. **Cross-reference each applicable law to its Phase 1 artifact.** Where a Phase 1 artifact already satisfies a requirement, no additional work is needed beyond adoption.
+3. **Identify gaps.** Where an applicable law has a requirement no Phase 1 artifact addresses (e.g., a state-specific public-notice template), document the gap and assign an owner before deployment of any AI use case affected.
+4. **Update your AUP.** Section 4(5) of the AUP cites "applicable state AI law" — replace `{{Applicable State AI Law}}` with the controlling statute(s) for your jurisdiction.
+5. **Schedule a quarterly review.** The Review Committee should re-check this matrix once per quarter and update the local copy of the page as new bills become law.
+
+## What you ship from this page
+
+- A localized version of this matrix with your jurisdiction's rows highlighted and any local ordinances added
+- Your AUP's `{{Applicable State AI Law}}` placeholder replaced with the controlling statute(s)
+- A documented quarterly-review owner (the Review Committee Chair, typically)
+- Gaps identified and assigned to an owner
+
+## Related
+
+- [Risk Classification Matrix](/phase-1-governance/risk-classification/)
+- [AI Acceptable Use Policy](/phase-1-governance/acceptable-use-policy/)
+- [Review Committee Charter](/phase-1-governance/review-committee/)
+- [Procurement Guardrails](/phase-1-governance/procurement-guardrails/)
+
+## References
+
+- OMB M-24-10, OMB M-25-22
+- NIST AI RMF 1.0; NIST AI 600-1 (Generative AI Profile)
+- Colorado AI Act (SB24-205); Texas TRAIGA (HB 149); California SB 942; California AB 2013
+- NCSL AI Legislation Tracker; Brennan Center AI in Government Tracker
+- Local CCOPS / surveillance ordinance text for any city in scope

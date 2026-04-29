@@ -1,0 +1,193 @@
+---
+title: AI Review Committee Charter
+description: Composition, authority, cadence, and decision rules for the body that owns AI governance day-to-day in your agency.
+sidebar:
+  order: 4
+---
+
+The AI Review Committee is the operational owner of AI governance in your agency. Without it, your AUP and risk classification matrix are documents nobody enforces. With it, every AI use case has a known approval path, every vendor has a known reviewer, and every staff member has a known place to bring concerns.
+
+This page provides the charter you can adopt. The fields in `{{ braces }}` are placeholders; the rest is the model text.
+
+## Why a committee, not a single owner
+
+Single-owner governance ("the CIO decides") fails three ways:
+
+1. **It centralizes risk** in one person, who is then politically exposed when an AI use case becomes controversial.
+2. **It misses domain context.** The CIO can evaluate technical risk; only the program owner can evaluate operational risk; only legal can evaluate legal risk. Each AI use case touches all three.
+3. **It doesn't scale.** Once your agency has 10+ AI use cases, the single owner becomes the bottleneck, and shadow AI grows around them.
+
+A committee with 6–8 members across IT, legal, a frontline program owner, HR, equity, and (for high-tier cases) external community input distributes both the work and the legitimacy.
+
+## Recommended size and composition
+
+| Seat                                      | Rationale                                                                   | Typical role                                         |
+| ----------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **Chair** — AI Program Lead               | Single accountable owner; sets agenda, signs minutes                        | CIO designee, RAD lead, or named AI Program Lead     |
+| **CIO or designee**                       | Technical authority on infrastructure, security, identity                   | CIO, Deputy CIO, or CISO                             |
+| **CISO or security lead**                 | Data-handling, vendor-security, incident response                           | CISO or Information Security Officer                 |
+| **Legal counsel**                         | Statutory compliance, contracts, public-records implications                | City Attorney's office or General Counsel            |
+| **Program / business owner (rotating)**   | Real-world feasibility and operational impact for the use case under review | Health, Public Works, Library, Police, etc.          |
+| **HR representative**                     | Employment-related AI uses, training, AUP enforcement                       | HR Director or designee                              |
+| **Equity / civil rights officer**         | Disparate-impact assessment, public trust, community engagement             | Equity Officer or Civil Rights Officer               |
+| **Community / external advisor (Tier 3)** | Resident voice for high-impact, public-facing use cases                     | Resident representative or domain expert (non-staff) |
+
+For agencies under 200 staff, the chair, CIO, legal, HR, and one rotating program owner (5 seats) is a workable minimum. Equity and community advisors join when a Tier-3 use case is on the agenda.
+
+## Authority
+
+The committee:
+
+- **Approves or denies** Tier-2 and Tier-3 AI use cases. Tier-1 cases are batch-noted, not individually voted.
+- **Maintains the Approved AI Tools List** referenced by the AUP.
+- **Sets policy** for AI training, disclosure, and use-case intake.
+- **Reviews vendor AI offerings** before procurement signs a contract.
+- **Conducts the annual AUP review** and recommends amendments to the {{Approving Body}}.
+- **Investigates** reports of AI policy violations and recommends action.
+
+The committee does not:
+
+- Replace existing review bodies (records management, ethics, security review). It coordinates with them; it does not absorb them.
+- Approve technical architecture. That stays with IT / engineering. The committee approves the _use case_, not how it's built.
+- Approve individual queries or drafts. It governs at the use-case level.
+
+## Cadence
+
+| Meeting type         | Frequency                                   | Quorum                            | Output                                                            |
+| -------------------- | ------------------------------------------- | --------------------------------- | ----------------------------------------------------------------- |
+| Standing             | Bi-weekly (60 min)                          | 4 of 7 voting                     | Minutes; intake decisions; tier classifications                   |
+| Tier-3 deep-dive     | Ad-hoc when a Tier-3 use case is queued     | 5 of 7 voting + community advisor | Approval / denial with written rationale; impact assessment notes |
+| Annual policy review | Once per fiscal year                        | All voting                        | AUP and risk-matrix revisions for {{Approving Body}}              |
+| Incident response    | Within 5 business days of reported incident | 3 of 7 voting                     | Investigation notes; recommended action                           |
+
+Meetings are documented. Minutes include who proposed each use case, what tier was assigned, who voted how, and the rationale for any disagreement. Minutes are retained per the agency's records schedule.
+
+## Decision rules
+
+- **Default rule:** simple majority of voting members present, given quorum.
+- **Tier-3 supermajority:** Tier-3 approvals require two-thirds of voting members present, including legal and the equity officer.
+- **Sponsor recusal:** the staff member who proposed the use case (the "sponsor") attends as a non-voting presenter and recuses from the vote on their own use case.
+- **Tie-break:** the chair breaks ties on Tier-1 and Tier-2 votes; Tier-3 ties default to _not approved_ and the use case is sent back for additional review.
+- **Veto:** legal counsel may veto on grounds of statutory non-compliance only. The veto must be in writing and cite the controlling law. The committee may revise the use case and re-present.
+- **Conflict of interest:** any member with a personal or financial interest in a vendor under review must disclose and recuse.
+
+## How to draft a charter quickly
+
+This page is the model. Copy it into a working document, fill the `{{ braces }}`, and present to the {{Approving Body}} for adoption. Most agencies can move from "no charter" to "adopted charter" in two committee meetings:
+
+1. **Meeting 1 (charter draft):** review and edit this template. Identify candidate members; secure their willingness to serve.
+2. **Meeting 2 (charter approval):** vote to adopt; chair signs; transmit to {{Approving Body}}.
+
+You do not need the AUP to be adopted before the charter — you need the charter to _enforce_ the AUP. Charter first; AUP within 60 days.
+
+---
+
+### {{Agency Name}} AI Review Committee Charter
+
+**Effective:** {{Adoption Date}}
+**Chair:** {{AI Program Lead}}
+**Approved by:** {{Approving Body}} on {{Approval Date}}
+**Review Cadence:** Annual
+
+#### 1. Purpose
+
+The {{Agency Name}} AI Review Committee (the "Committee") is established to govern the responsible adoption of artificial intelligence (AI) systems in the conduct of agency business, consistent with the {{Agency Name}} AI Acceptable Use Policy and applicable federal, state, and local law.
+
+#### 2. Authority
+
+The Committee derives its authority from {{Approving Body}} and is empowered to:
+
+- Approve or deny Tier-2 and Tier-3 AI use cases as defined by the {{Agency Name}} Risk Classification Matrix
+- Maintain the Approved AI Tools List
+- Recommend amendments to the AI Acceptable Use Policy and Risk Classification Matrix
+- Review vendor AI offerings prior to contract execution
+- Investigate reported violations of AI policy and recommend remedial action
+
+#### 3. Composition
+
+The Committee shall consist of the following voting members:
+
+- Chair: {{AI Program Lead}}
+- {{CIO or designee}}
+- {{CISO or security lead}}
+- Legal counsel: {{General Counsel or designee}}
+- HR representative: {{HR Director or designee}}
+- Equity / civil rights officer: {{Equity Officer}}
+- Rotating program owner: appointed by the Chair on a per-use-case basis
+
+For Tier-3 use cases, the Committee shall include one non-staff community or external subject-matter advisor identified by the Chair.
+
+#### 4. Cadence
+
+- Standing meetings: bi-weekly, 60 minutes
+- Tier-3 deep-dive: ad-hoc as queued
+- Annual policy review: once per fiscal year
+- Incident response: within 5 business days of report
+
+Quorum is four of seven voting members for standing meetings; five of seven, including legal and the equity officer, for Tier-3 deep-dives.
+
+#### 5. Decision Rules
+
+- Simple majority of voting members present, given quorum, for Tier-1 and Tier-2 matters
+- Two-thirds of voting members present for Tier-3 approvals
+- Sponsor recusal on their own use case
+- Chair tie-break on Tier-1 and Tier-2; Tier-3 ties default to non-approval
+- Legal veto on grounds of statutory non-compliance only, with written rationale
+
+#### 6. Recordkeeping
+
+The Committee shall maintain minutes of each meeting, including use cases reviewed, tier classifications, votes, and rationales. Minutes are retained per the {{Agency Records Schedule}} and are subject to applicable open-records law.
+
+#### 7. Reporting
+
+The Committee shall report annually to the {{Approving Body}}, summarizing:
+
+- Number and tier of use cases reviewed
+- Approvals, denials, and pending matters
+- Policy amendments proposed and adopted
+- Reported incidents and resolution
+
+#### 8. Conflict of Interest
+
+Members with a personal or financial interest in any vendor or use case under review shall disclose the interest and recuse from the relevant vote. Disclosures are recorded in the meeting minutes.
+
+#### 9. Amendment
+
+This Charter may be amended by a two-thirds vote of the Committee, with subsequent approval by the {{Approving Body}}.
+
+---
+
+#### Signatures
+
+Chair: ****************\_\_\_**************** Date: ****\_\_\_\_****
+
+{{Approving Body Officer}}: ****************\_\_\_**************** Date: ****\_\_\_\_****
+
+---
+
+## Pitfalls to avoid
+
+- **Don't make the committee 12+ members.** Decisions slow, attendance drops, and the meetings become information-sharing sessions instead of decision-making sessions. Six to eight is the sweet spot.
+- **Don't let the committee become a technical-review body.** That work belongs in engineering. The committee approves _whether_ a use case proceeds, not _how_ it's built.
+- **Don't skip minutes.** "We discussed it informally" is not a record. Open-records requests will eventually arrive; you want minutes.
+- **Don't let one seat dominate.** If the CIO chairs and IT controls the agenda, the committee becomes IT governance theater. Rotate the program-owner seat; give legal and equity real votes.
+
+## What you ship from this page
+
+- An adopted Charter signed by the Chair and {{Approving Body Officer}}
+- Named members for each seat with backups identified
+- A standing meeting on the calendar, with the first three agendas drafted
+- A minutes template and records-retention schedule referenced
+
+## Related
+
+- [Risk Classification Matrix](/phase-1-governance/risk-classification/)
+- [AI Acceptable Use Policy](/phase-1-governance/acceptable-use-policy/)
+- [Procurement Guardrails](/phase-1-governance/procurement-guardrails/)
+
+## References
+
+- ISACA AI Governance Toolkit
+- NIST AI RMF 1.0 — Govern function
+- GovEx AI for City Government — Governance Patterns
+- New York City AI Plan, Boston AI Guidelines, San Jose AI Policy (peer-city references)

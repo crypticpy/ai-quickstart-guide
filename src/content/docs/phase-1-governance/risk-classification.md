@@ -1,0 +1,130 @@
+---
+title: 3-Tier AI Risk Classification
+description: A defensible, auditable framework for classifying AI use cases by risk before any technical work begins.
+sidebar:
+  order: 2
+---
+
+Every AI use case in your agency must be classified into a risk tier _before_ development starts. Tier determines what governance applies: who reviews it, what evidence is required, what disclosures are mandatory, and whether it can ship at all.
+
+This page defines the three tiers, gives you 15 government-specific examples, and walks you through the classification workflow your AI Review Committee will adopt in writing.
+
+## Why three tiers (not five, not seven)
+
+Federal frameworks (NIST AI RMF, OMB M-24-10) and state laws (Colorado AI Act, Texas TRAIGA) converge on a small number of risk levels — typically 2–4. Three is the minimum that distinguishes:
+
+- **Low** — internal productivity, decisions reversible, no public-facing impact
+- **Medium** — staff-facing decision support, partial automation, public visibility but no rights determinations
+- **High** — automates or materially shapes a decision affecting a person's rights, benefits, employment, safety, or liberty
+
+Five-tier and seven-tier matrices look more rigorous but tend to collapse in practice — reviewers debate which sub-tier applies instead of approving the work. Three is enough to drive different governance, and few enough that tier assignment is rarely contested.
+
+## The matrix
+
+| Dimension                         | **Low (Tier 1)**                 | **Medium (Tier 2)**                      | **High (Tier 3)**                                                            |
+| --------------------------------- | -------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------- |
+| Affects rights, benefits, safety? | No                               | Indirectly (informs a human decision)    | Directly (drives or strongly shapes the decision)                            |
+| Reversibility of harm             | Trivially reversible             | Reversible with effort                   | Hard to reverse / irreversible                                               |
+| Data sensitivity                  | Public or non-sensitive internal | Internal sensitive (HR, operational)     | PII, PHI, criminal-justice, financial, immigration, child welfare            |
+| Audience                          | Internal staff only              | Internal staff + limited public          | General public, beneficiaries, applicants                                    |
+| Automation level                  | Suggests; human always acts      | Recommends; human approves before action | Decides or filters; human review is post-hoc, optional, or absent            |
+| Required review                   | Manager approval                 | AI Review Committee approval             | AI Review Committee + legal + (where applicable) elected oversight           |
+| Required disclosures              | None                             | Note in workflow doc; staff training     | Public notice, plain-language explanation, contestation pathway              |
+| Required evaluation               | Spot-check before launch         | Pre-launch evaluation + quarterly review | Pre-launch + bias/impact assessment + ongoing monitoring + annual audit      |
+| Vendor / model constraints        | Any approved vendor              | Approved vendor with data non-use clause | Approved vendor + explainability + audit access; no foreign-adversary models |
+| Procurement clauses (Phase 1)     | Standard                         | AI Addendum (data non-use, exit)         | AI Addendum + bias testing + decision logs + government data sovereignty     |
+| OMB M-24-10 reporting             | Track in inventory               | Track + impact summary                   | Track + impact summary + designated agency AI official sign-off              |
+
+> **Rule of thumb.** If a real person can lose a benefit, a job, custody, housing, freedom, or money because of the AI's output — or even because a staff member followed an AI recommendation without independent verification — it's High. When in doubt, it's High.
+
+## Example use cases (15 across tiers)
+
+These are real or near-real government use cases, classified to give you a starting reference. Your committee may classify a similar use case differently based on local context (population served, scale, existing controls). That's expected. Document the reason.
+
+### Low (Tier 1)
+
+| Use case                                                      | Why Low                                                    |
+| ------------------------------------------------------------- | ---------------------------------------------------------- |
+| Drafting first-pass meeting minutes from a recording          | Staff edits before circulation; no decision is made        |
+| Translating a public flyer into Spanish for human review      | A bilingual staff member reviews before publishing         |
+| Summarizing internal policy documents for a new hire          | Reference summary; original is canonical                   |
+| Generating boilerplate responses to FAQ-style email templates | Staff reviews and edits each reply                         |
+| Auto-generating alt text for internal SharePoint images       | Reviewed when accessibility matters; trivially correctable |
+
+### Medium (Tier 2)
+
+| Use case                                                                           | Why Medium                                                                             |
+| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Triaging 311 service requests by category for routing to a department              | Wrong routing delays service; not a benefits or rights determination                   |
+| RAG-powered search over the agency's permitting code for inspector field reference | Inspector still applies code; AI answer is advisory                                    |
+| Summarizing public comments for a council briefing                                 | Distortion of the public record could mislead policymakers; staff verifies the summary |
+| Classifying procurement RFP responses for staff reviewer prioritization            | Misclassification slows review; final scoring is human                                 |
+| Drafting a first-cut grant award narrative for staff to edit                       | Staff is the decision-maker; AI accelerates a draft                                    |
+
+### High (Tier 3)
+
+| Use case                                                                   | Why High                                                                                                    |
+| -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Eligibility scoring for an emergency rental assistance program             | Directly drives a benefits determination; reversibility is partial at best                                  |
+| Predictive policing or risk scoring for parole / pretrial release          | Drives liberty decisions; bias risk is well-documented in the literature                                    |
+| Child welfare risk scoring used by caseworkers                             | Even as "decision support," it reliably anchors caseworker judgment; affects custody                        |
+| Resume screening for hiring                                                | Affects employment rights; subject to EEOC scrutiny and state AI-in-employment laws                         |
+| Facial recognition matched against a watchlist for a public-facing service | Affects liberty; high false-positive rates in real deployments; subject to TRUST Act / CCOPS in some cities |
+| Automated denial / approval of public-records requests                     | Affects a right (access to public records); appealable but the default matters                              |
+
+## How to classify a new use case
+
+The classification flow is the same whether the request comes from IT, a department head, or a vendor pitching a tool.
+
+1. **Use case sponsor fills the intake form** (Phase 2 deliverable). The form asks five plain-language questions including who is affected, what decision is involved, and what data is touched.
+2. **Initial tier proposed** by the AI program lead based on the intake answers and this matrix.
+3. **Review Committee confirms or escalates** at the next standing meeting. Tier-1 use cases can be batch-approved on consent; Tier-2 require discussion; Tier-3 require a full impact assessment before approval.
+4. **Tier is recorded in the AI use case inventory** along with the classifying meeting minutes. Any future change in scope (new data, new audience, new decision automated) re-triggers classification.
+
+> **Tip — write down dissent.** If two committee members disagree on the tier, record both views and the reason for the final call. This is your audit trail when a use case later draws scrutiny.
+
+## What changes by tier
+
+| Action                                   | Low      | Medium       | High                                         |
+| ---------------------------------------- | -------- | ------------ | -------------------------------------------- |
+| Manager sign-off                         | ✓        | ✓            | ✓                                            |
+| AI Review Committee approval             |          | ✓            | ✓                                            |
+| Legal / counsel review                   |          |              | ✓                                            |
+| Public notice and disclosure             |          |              | ✓                                            |
+| Plain-language explanation provided      |          | ✓ (internal) | ✓ (public)                                   |
+| Pre-launch bias / impact assessment      |          |              | ✓                                            |
+| Ongoing monitoring + annual audit        |          | ✓ (light)    | ✓ (full)                                     |
+| Contestation / appeal pathway            |          |              | ✓                                            |
+| Decision-log retention                   | 30 days  | 1 year       | 7 years (or per applicable records schedule) |
+| Vendor must sign AI Procurement Addendum | Optional | ✓            | ✓ + bias-testing rider                       |
+
+## Pitfalls to avoid
+
+- **"It's just decision support" is not a tier-1 argument.** Studies consistently show that staff anchor on AI scores. If the AI's output reliably shifts the human decision, the use case is at least Medium.
+- **A Tier-1 chatbot becomes Tier-3 when scope expands.** A FAQ chatbot that someone wires to "answer benefits eligibility questions" is now driving a benefits decision. Re-classify when scope changes.
+- **Tier is per use case, not per tool.** The same vendor LLM can host a Tier-1 meeting summarizer and a Tier-3 eligibility tool — they are governed differently because the _use_ differs.
+- **Don't let a vendor classify their own product.** Vendors will frame any AI as "decision support." Classification is your committee's job, not theirs.
+
+## What you ship from this page
+
+- Adopted 3-tier classification matrix (this page, edited for your agency's context)
+- 15+ classified example use cases (above, plus your own additions)
+- Documented classification workflow (intake → propose → committee → record)
+- Tier-by-tier governance requirements (the table above, ratified)
+
+The AUP, Review Committee charter, procurement guardrails, and intake form all reference these tiers — adopting this matrix first unblocks the rest of Phase 1.
+
+## Related
+
+- [AI Acceptable Use Policy](/phase-1-governance/acceptable-use-policy/) — references these tiers
+- [Review Committee Charter](/phase-1-governance/review-committee/) — sets approval authority by tier
+- [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — clauses by tier
+- [Legislative Compliance](/phase-1-governance/legislative-compliance/) — which laws map to which tier
+
+## References
+
+- NIST AI Risk Management Framework (AI RMF 1.0), Generative AI Profile (NIST-AI-600-1)
+- OMB M-24-10: Advancing Governance, Innovation, and Risk Management for Agency Use of Artificial Intelligence
+- OMB M-25-22: Driving Efficient Acquisition of Artificial Intelligence
+- Colorado AI Act (SB24-205), Texas TRAIGA, California SB 942
+- ISACA AI Audit Toolkit, Mississippi State AI Acceptable Use Policy (reference templates)
