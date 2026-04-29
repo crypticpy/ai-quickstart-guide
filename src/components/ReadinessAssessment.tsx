@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
 import { useEffect, useMemo, useState } from "preact/hooks";
+import { printDocument, type Block } from "../lib/printDocument";
 
 type Domain =
   | "governance"
@@ -204,6 +205,41 @@ function levelFor(total: number) {
   );
 }
 
+function nextStepsForLevel(level: number): string[] {
+  switch (level) {
+    case 1:
+      return [
+        "Stand up Phase 1 governance: adopt the AI Acceptable Use Policy and risk classification matrix.",
+        "Begin AI Foundations training for all staff (Phase 2, Track 1).",
+        "Identify an executive sponsor and a named AI Program Lead.",
+        "Inventory candidate AI use cases and route them through a simple intake.",
+      ];
+    case 2:
+      return [
+        "Charter the AI Review Committee and run its first standing meetings.",
+        "Provision a developer sandbox with SSO and CI/CD (Phase 3).",
+        "Select the agency dev stack and document the coding standard (Phase 4).",
+        "Run two or three Tier-1 use cases end-to-end through the intake-to-deploy pipeline.",
+      ];
+    case 3:
+      return [
+        "Begin building the modular platform: auth, RBAC, API framework, AI orchestration (Phase 5).",
+        "Pick the first starter project archetype and start the selection memo (Phase 6).",
+        "Tighten observability and cost dashboards before the first production launch.",
+        "Run a tabletop incident-response exercise.",
+      ];
+    case 4:
+      return [
+        "Open the platform to inner-source contributions; publish module scorecards.",
+        "Pick the second starter project; rotate sponsorship to a different department.",
+        "Track adoption and impact metrics; feed lessons learned into the platform roadmap.",
+        "Mentor adjacent agencies — your maturity is now a regional asset.",
+      ];
+    default:
+      return [];
+  }
+}
+
 function loadState(): SavedState {
   if (typeof window === "undefined") return { answers: {}, agencyName: "" };
   try {
@@ -317,7 +353,83 @@ export default function ReadinessAssessment() {
   };
 
   const printPdf = () => {
-    if (typeof window !== "undefined") window.print();
+    const agency = agencyName.trim() || "Agency";
+    const title = "AI Readiness Assessment";
+
+    const meta: { label: string; value: string }[] = [
+      { label: "Agency", value: agency },
+      { label: "Score", value: `${total} of ${maxScore}` },
+      {
+        label: "Maturity level",
+        value: `Level ${level.level} — ${level.name}`,
+      },
+      {
+        label: "Questions answered",
+        value: `${answered} of ${QUESTIONS.length}`,
+      },
+    ];
+
+    const domainRows = (Object.keys(DOMAIN_LABEL) as Domain[]).map((d) => [
+      DOMAIN_LABEL[d],
+      `${byDomain[d].total} / ${byDomain[d].max}`,
+    ]);
+
+    const answersByDomain = (Object.keys(DOMAIN_LABEL) as Domain[])
+      .map((d) => {
+        const qs = QUESTIONS.filter((q) => q.domain === d);
+        const items = qs.map((q) => {
+          const v = answers[q.id];
+          const choice =
+            typeof v === "number"
+              ? (q.options.find((o) => o.score === v)?.label ?? "Not answered")
+              : "Not answered";
+          const score = typeof v === "number" ? ` (${v}/3)` : "";
+          return `**${q.prompt}** — ${choice}${score}`;
+        });
+        return { label: DOMAIN_LABEL[d], items };
+      })
+      .filter((d) => d.items.length > 0);
+
+    const blocks: Block[] = [
+      { kind: "heading", level: 2, text: "Summary" },
+      {
+        kind: "lead",
+        text: `${agency} scored ${total} of ${maxScore} across ${QUESTIONS.length} readiness questions, placing the agency at Level ${level.level} (${level.name}).`,
+      },
+      { kind: "paragraph", text: level.summary },
+      { kind: "heading", level: 2, text: "Score by domain" },
+      {
+        kind: "table",
+        headers: ["Domain", "Score"],
+        rows: domainRows,
+      },
+      { kind: "heading", level: 2, text: "Recommended next steps" },
+      {
+        kind: "list",
+        items: nextStepsForLevel(level.level),
+      },
+      { kind: "heading", level: 2, text: "Detailed responses" },
+    ];
+
+    for (const dom of answersByDomain) {
+      blocks.push({ kind: "heading", level: 3, text: dom.label });
+      blocks.push({ kind: "list", items: dom.items });
+    }
+
+    blocks.push({ kind: "rule" });
+    blocks.push({
+      kind: "callout",
+      tone: "info",
+      title: "How to read this report",
+      text: "Scores are self-reported snapshots. Re-run the assessment quarterly during build phases and annually after launch to track progress. The maturity levels (Crawl / Walk / Run / Fly) align with the six phases of the AI Quickstart Guide.",
+    });
+
+    printDocument({
+      title,
+      subtitle: agency,
+      meta,
+      blocks,
+    });
   };
 
   return (

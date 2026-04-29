@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
 import { useEffect, useMemo, useState } from "preact/hooks";
+import { printDocument } from "../lib/printDocument";
 
 interface FormState {
   agencyName: string;
@@ -363,7 +364,53 @@ export default function CharterWizard() {
   };
 
   const printPdf = () => {
-    if (typeof window !== "undefined") window.print();
+    const agency = state.agencyName.trim() || "Agency";
+    const title = `${agency} AI Review Committee Charter`;
+    const meta: { label: string; value: string }[] = [
+      { label: "Effective", value: state.effectiveDate || "—" },
+      { label: "Chair", value: state.chair.trim() || "—" },
+      {
+        label: "Approved by",
+        value:
+          state.approvingBody.trim() && state.approvalDate
+            ? `${state.approvingBody.trim()} on ${state.approvalDate}`
+            : state.approvingBody.trim() || "—",
+      },
+      { label: "Review cadence", value: "Annual" },
+    ];
+
+    // Strip the markdown title and meta block (already on the cover) and the
+    // free-form signature lines (replaced by a structured signature block).
+    const md = renderCharterMarkdown(state)
+      .replace(/^# .*\n+/, "")
+      .replace(
+        /(\*\*Effective:\*\*[^\n]*\n)(\*\*Chair:\*\*[^\n]*\n)(\*\*Approved by:\*\*[^\n]*\n)(\*\*Review Cadence:\*\*[^\n]*\n)/,
+        "",
+      )
+      .replace(/\n+## Signatures[\s\S]*$/, "")
+      .trim();
+
+    const chair = state.chair.trim() || "Chair";
+    const officer = state.approvingBodyOfficer.trim() || "Officer";
+    const approvingBody = state.approvingBody.trim() || "Approving Body";
+
+    printDocument({
+      title,
+      subtitle: agency === "Agency" ? undefined : agency,
+      meta,
+      blocks: [
+        { kind: "markdown", source: md },
+        { kind: "rule" },
+        { kind: "heading", level: 2, text: "Signatures" },
+        {
+          kind: "signature",
+          lines: [
+            { label: `Chair (${chair})` },
+            { label: `${officer} (${approvingBody})` },
+          ],
+        },
+      ],
+    });
   };
 
   const previewMd = useMemo(() => renderCharterMarkdown(state), [state]);

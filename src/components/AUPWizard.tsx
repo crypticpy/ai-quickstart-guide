@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
 import { useEffect, useMemo, useState } from "preact/hooks";
+import { printDocument } from "../lib/printDocument";
 
 interface FormState {
   agencyName: string;
@@ -369,7 +370,61 @@ export default function AUPWizard() {
   };
 
   const printPdf = () => {
-    if (typeof window !== "undefined") window.print();
+    const agency = state.agencyName.trim() || "Agency";
+    const title = `${agency} Acceptable Use Policy for Artificial Intelligence`;
+    const meta: { label: string; value: string }[] = [
+      { label: "Effective", value: state.effectiveDate || "—" },
+      {
+        label: "Owner",
+        value:
+          [state.aiProgramLead, state.ownerOffice]
+            .map((s) => s.trim())
+            .filter(Boolean)
+            .join(", ") || "—",
+      },
+      {
+        label: "Approved by",
+        value:
+          state.approvingBody.trim() && state.approvalDate
+            ? `${state.approvingBody.trim()} on ${state.approvalDate}`
+            : state.approvingBody.trim() || "—",
+      },
+      {
+        label: "Review cadence",
+        value: "Annual, or upon material change to applicable law",
+      },
+    ];
+
+    // The cover page already shows agency + meta, so strip those from the
+    // body markdown to avoid repeating them. We also drop the markdown title
+    // and signature block (the latter becomes a structured signature block).
+    const md = renderAUPMarkdown(state)
+      .replace(/^# .*\n+/, "")
+      .replace(
+        /(\*\*Effective:\*\*[^\n]*\n)(\*\*Owner:\*\*[^\n]*\n)(\*\*Approved by:\*\*[^\n]*\n)(\*\*Review Cadence:\*\*[^\n]*\n)/,
+        "",
+      )
+      .replace(/\n+## Signature[\s\S]*$/, "")
+      .trim();
+
+    printDocument({
+      title,
+      subtitle: agency === "Agency" ? undefined : agency,
+      meta,
+      blocks: [
+        { kind: "markdown", source: md },
+        { kind: "rule" },
+        { kind: "heading", level: 2, text: "Signature" },
+        {
+          kind: "paragraph",
+          text: `I acknowledge that I have read and understood this policy, and I agree to comply with it in all use of AI on behalf of ${agency}.`,
+        },
+        {
+          kind: "signature",
+          lines: [{ label: "Signed" }, { label: "Printed name" }],
+        },
+      ],
+    });
   };
 
   const previewMd = useMemo(() => renderAUPMarkdown(state), [state]);

@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
 import { useEffect, useMemo, useState } from "preact/hooks";
+import { printDocument, type Block } from "../lib/printDocument";
 
 type Tier = 1 | 2 | 3;
 
@@ -283,7 +284,92 @@ export default function IntakeForm() {
   };
 
   const onPrint = () => {
-    if (typeof window !== "undefined") window.print();
+    if (!complete) {
+      setShowErrors(true);
+      return;
+    }
+    const date = new Date().toISOString().slice(0, 10);
+    const name = state.useCaseName.trim() || "AI use case";
+    const audienceLabel =
+      AUDIENCE_OPTIONS.find((o) => o.tier === state.audience)?.label ??
+      "Not answered";
+    const decisionLabel =
+      DECISION_OPTIONS.find((o) => o.tier === state.decision)?.label ??
+      "Not answered";
+    const dataLabels = DATA_OPTIONS.filter((o) => state.data[o.id]).map(
+      (o) => o.label,
+    );
+
+    const blocks: Block[] = [
+      { kind: "heading", level: 2, text: "Problem statement" },
+      { kind: "paragraph", text: state.problem.trim() || "(not provided)" },
+      { kind: "heading", level: 2, text: "Sponsor" },
+      {
+        kind: "definitionList",
+        items: [
+          { term: "Name", definition: state.sponsorName.trim() || "—" },
+          { term: "Role", definition: state.sponsorRole.trim() || "—" },
+          { term: "Department", definition: state.department.trim() || "—" },
+        ],
+      },
+      { kind: "heading", level: 2, text: "Intake answers" },
+      {
+        kind: "table",
+        headers: ["Question", "Answer"],
+        rows: [
+          ["Audience", audienceLabel],
+          ["Decision impact", decisionLabel],
+          [
+            "Data sensitivity",
+            dataLabels.length > 0 ? dataLabels.join("; ") : "Not answered",
+          ],
+        ],
+      },
+    ];
+
+    if (tier !== null) {
+      const m = TIER_NEXT[tier];
+      blocks.push(
+        { kind: "heading", level: 2, text: "Provisional risk tier" },
+        { kind: "lead", text: `${m.label} — ${m.summary}` },
+        {
+          kind: "callout",
+          tone: "warn",
+          title: "Provisional only",
+          text: "The AI Review Committee makes the final tier determination. This intake captures the sponsor's initial answers and is the starting point for that review.",
+        },
+        { kind: "heading", level: 2, text: "Recommended next step" },
+        { kind: "paragraph", text: m.nextStep },
+      );
+    }
+
+    blocks.push(
+      { kind: "rule" },
+      { kind: "heading", level: 2, text: "Sponsor sign-off" },
+      {
+        kind: "paragraph",
+        text: `I confirm the information in this intake is accurate to the best of my knowledge and that I am the staff member accountable for moving this use case through review.`,
+      },
+      {
+        kind: "signature",
+        lines: [{ label: "Sponsor signature" }, { label: "Date" }],
+      },
+    );
+
+    printDocument({
+      title: `AI Use Case Intake — ${name}`,
+      subtitle: state.department.trim() || undefined,
+      meta: [
+        { label: "Sponsor", value: state.sponsorName.trim() || "—" },
+        { label: "Department", value: state.department.trim() || "—" },
+        { label: "Submitted", value: date },
+        {
+          label: "Provisional tier",
+          value: tier !== null ? TIER_NEXT[tier].label : "Pending",
+        },
+      ],
+      blocks,
+    });
   };
 
   const errorClass = (filled: boolean) =>

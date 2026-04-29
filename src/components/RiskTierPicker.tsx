@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
 import { useEffect, useMemo, useState } from "preact/hooks";
+import { printDocument, type Block } from "../lib/printDocument";
 
 type Tier = 1 | 2 | 3;
 
@@ -343,7 +344,62 @@ export default function RiskTierPicker() {
   };
 
   const onPrint = () => {
-    if (typeof window !== "undefined") window.print();
+    if (!tier) return;
+    const m = TIER_META[tier];
+    const date = new Date().toISOString().slice(0, 10);
+    const name = state.useCaseName.trim() || "AI Use Case";
+    const desc = state.description.trim();
+
+    const dimRows = DIMENSIONS.map((d) => {
+      const t = state.answers[d.id];
+      const opt = d.options.find((o) => o.tier === t);
+      return [d.label, t ? `Tier ${t}` : "—", opt?.label ?? "Not answered"];
+    });
+
+    const blocks: Block[] = [
+      { kind: "heading", level: 2, text: "Recommended risk tier" },
+      { kind: "lead", text: `${m.name} — ${m.summary}` },
+    ];
+
+    if (desc) {
+      blocks.push({ kind: "heading", level: 2, text: "Use case description" });
+      blocks.push({ kind: "paragraph", text: desc });
+    }
+
+    blocks.push(
+      { kind: "heading", level: 2, text: "Dimension answers" },
+      {
+        kind: "table",
+        headers: ["Dimension", "Tier", "Answer"],
+        rows: dimRows,
+      },
+      { kind: "heading", level: 2, text: "Required reviewers" },
+      { kind: "list", items: m.reviewers },
+      { kind: "heading", level: 2, text: "Required documentation" },
+      { kind: "list", items: m.documentation },
+      { kind: "heading", level: 2, text: "Required disclosures" },
+      { kind: "list", items: m.disclosures },
+      { kind: "heading", level: 2, text: "Next actions" },
+      { kind: "list", items: m.nextActions.map((a) => a.text) },
+      { kind: "rule" },
+      {
+        kind: "callout",
+        tone: "info",
+        title: "How the tier is computed",
+        text: "Tier is the highest of the five dimension answers — any dimension reaching High pushes the overall use case to Tier 3. This recommendation is provisional. The AI Review Committee makes the final determination and may adjust based on local context. Document any dissent in the meeting minutes.",
+      },
+    );
+
+    printDocument({
+      title: `${name} — Risk Tier Determination`,
+      subtitle: `Provisional classification: ${m.name}`,
+      meta: [
+        { label: "Use case", value: name },
+        { label: "Recommended tier", value: m.name },
+        { label: "Classified", value: date },
+      ],
+      blocks,
+    });
   };
 
   const meta = tier ? TIER_META[tier] : null;
