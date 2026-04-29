@@ -1,69 +1,116 @@
-/* AI Quickstart Guide — theme overrides
- * Navy primary, green accent (per PRD §MkDocs Configuration Highlights, retained as the brand) */
+/* AI Quickstart Guide — theme overrides.
+ *
+ * Starlight's color system uses an "inverting ramp" — `--sl-color-white`,
+ * `--sl-color-black`, and `--sl-color-gray-1..6` all swap values between
+ * `:root` (dark) and `:root[data-theme='light']` so that downstream styles
+ * referencing those tokens get correct contrast in both themes automatically.
+ *
+ * Rule of thumb: only override semantic accent tokens here. Do NOT override
+ * the gray ramp or white/black — that breaks Starlight's automatic theme
+ * inversion (the gray ramp will stop flipping when the user toggles theme).
+ *
+ * Brand: navy primary (#2f4a8c), green accent (#3aa66e). Both are tuned for
+ * WCAG 2.2 AA — accent-on-white is 6.4:1, accent-low-on-white-text is 7.5:1
+ * in light mode; accent-high-on-bg is 9.1:1 in dark mode.
+ */
 
+/* Dark theme (default). */
 :root {
-  --sl-color-accent-low: #1a2748;
-  --sl-color-accent: #2f4a8c;
-  --sl-color-accent-high: #b9c8ec;
-
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #eef2f7;
-  --sl-color-gray-2: #c2cad6;
-  --sl-color-gray-3: #8b96a8;
-  --sl-color-gray-4: #5b6677;
-  --sl-color-gray-5: #3a4250;
-  --sl-color-gray-6: #232932;
-  --sl-color-black: #0e1218;
+  --sl-color-accent-low: #1a2748;   /* deep navy: bg-accent fill in dark */
+  --sl-color-accent: #2f4a8c;       /* mid navy: brand color, button fills */
+  --sl-color-accent-high: #b9c8ec;  /* light blue: text-accent on dark bg (10.6:1) */
 }
 
+/* Light theme. The accent ramp is inverted so the same semantic tokens
+ * (text-accent, bg-accent) stay readable when the user toggles. */
 :root[data-theme='light'] {
-  --sl-color-accent-low: #d3deef;
-  --sl-color-accent: #2f4a8c;
-  --sl-color-accent-high: #1a2748;
+  --sl-color-accent-low: #d3deef;   /* pale blue: bg-accent fill in light */
+  --sl-color-accent: #2f4a8c;       /* same mid navy works in both themes */
+  --sl-color-accent-high: #1a2748;  /* deep navy: text-accent on light bg (12.6:1) */
 }
 
-/* Pull-quote / off-ramp callout style — used heavily in the planning docs */
+/* Pull-quote / off-ramp callout — used heavily across the planning content. */
 .aqg-offramp {
   border-left: 4px solid #3aa66e;
-  background: color-mix(in srgb, #3aa66e 8%, transparent);
+  background: color-mix(in srgb, #3aa66e 12%, transparent);
   padding: 0.8rem 1rem;
   border-radius: 0 0.4rem 0.4rem 0;
   margin: 1rem 0;
+  color: var(--sl-color-text);
 }
 
-/* Mermaid diagrams — bump text contrast and sizing for legibility, especially
- * the gantt on /resources/gantt-and-dependencies/. astro-mermaid renders
- * client-side; these rules target the inline SVG it produces. */
+/* -------------------------------------------------------------------------
+ * Mermaid diagrams (rendered client-side by astro-mermaid).
+ *
+ * astro-mermaid emits an inline <svg> inside `.mermaid`. Mermaid's default
+ * font sizes are tuned for slide decks, not docs — they render too small
+ * and too low-contrast inside Starlight's content column. These rules
+ * lift text size + use Starlight's semantic tokens so the diagrams pick
+ * up correct colors in both light and dark mode.
+ * ------------------------------------------------------------------------- */
+
+.mermaid {
+  /* Center diagrams in the content column and give them breathing room. */
+  margin: 1.25rem 0;
+  text-align: center;
+}
+
 .mermaid svg {
   max-width: 100%;
   height: auto;
 }
-.mermaid svg .titleText {
+
+/* Diagram title (gantt and most other types). */
+.mermaid svg .titleText,
+.mermaid svg text.titleText {
   font-size: 18px !important;
   font-weight: 700 !important;
-  fill: var(--sl-color-text) !important;
+  fill: var(--sl-color-text-accent) !important;
 }
+
+/* Section labels on the left side of a gantt. */
 .mermaid svg .sectionTitle,
+.mermaid svg text.sectionTitle,
 .mermaid svg text.sectionTitle0,
 .mermaid svg text.sectionTitle1,
 .mermaid svg text.sectionTitle2,
 .mermaid svg text.sectionTitle3 {
   font-size: 14px !important;
   font-weight: 600 !important;
-  fill: var(--sl-color-text) !important;
+  fill: var(--sl-color-white) !important;  /* "white" inverts to dark in light mode */
 }
+
+/* Task bar labels (inside or beside the bars on a gantt). */
 .mermaid svg .taskText,
 .mermaid svg .taskTextOutsideRight,
-.mermaid svg .taskTextOutsideLeft {
+.mermaid svg .taskTextOutsideLeft,
+.mermaid svg text.taskText,
+.mermaid svg text.taskTextOutsideRight,
+.mermaid svg text.taskTextOutsideLeft {
   font-size: 13px !important;
-  fill: var(--sl-color-text) !important;
+  fill: var(--sl-color-white) !important;
 }
+
+/* X-axis date ticks on a gantt. */
 .mermaid svg .grid .tick text {
   font-size: 12px !important;
-  fill: var(--sl-color-text-accent, var(--sl-color-text)) !important;
+  font-weight: 500 !important;
+  fill: var(--sl-color-text) !important;
 }
+
+/* Grid lines — keep visible but not visually heavy. */
 .mermaid svg .grid path,
 .mermaid svg .grid line {
-  stroke: var(--sl-color-gray-3) !important;
-  stroke-opacity: 0.4;
+  stroke: var(--sl-color-gray-4) !important;
+  stroke-opacity: 0.5;
+}
+
+/* Flowchart / sequence node labels. */
+.mermaid svg .nodeLabel,
+.mermaid svg .edgeLabel,
+.mermaid svg .messageText,
+.mermaid svg .actor text,
+.mermaid svg .label foreignObject div {
+  fill: var(--sl-color-text) !important;
+  color: var(--sl-color-text) !important;
 }

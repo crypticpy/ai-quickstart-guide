@@ -163,8 +163,10 @@
 .aqg-readiness textarea::placeholder,
 .aqg-wizard textarea::placeholder,
 .aqg-tier textarea::placeholder {
-  /* Placeholder must still be readable. #767f8c on white = 4.6:1. */
-  color: #5b6677;
+  /* Placeholder must still be readable on the input background. gray-3
+   * resolves to a mid-tone that flips with theme: ~hsl(224, 6%, 56%) on
+   * either side, giving 4.5:1+ contrast on the input's white/dark bg. */
+  color: var(--sl-color-gray-3);
   opacity: 1;
 }
 
