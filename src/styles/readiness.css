@@ -42,8 +42,12 @@
 
 .aqg-readiness__progress {
   font-size: 0.95rem;
-  color: var(--sl-color-gray-3);
+  color: var(--sl-color-gray-2);
   white-space: nowrap;
+}
+
+:root[data-theme='light'] .aqg-readiness__progress {
+  color: var(--sl-color-gray-4);
 }
 
 .aqg-readiness__list {
@@ -65,31 +69,54 @@
 }
 
 .aqg-readiness__q::before {
-  content: 'Q' counter(aqg-q) '.';
-  font-weight: 600;
-  margin-right: 0.4rem;
-  color: var(--sl-color-accent-high);
+  content: 'Q' counter(aqg-q);
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-right: 0.55rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 0.25rem;
+  background: var(--sl-color-accent);
+  color: var(--sl-color-white);
+  vertical-align: middle;
 }
 
 .aqg-readiness__domain {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 0.25rem;
-  color: var(--sl-color-gray-3);
+  letter-spacing: 0.08em;
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, var(--sl-color-accent-high) 22%, transparent);
+  color: var(--sl-color-white);
+  vertical-align: middle;
+}
+
+:root[data-theme='light'] .aqg-readiness__domain {
+  color: var(--sl-color-accent-high);
+  background: color-mix(in srgb, var(--sl-color-accent) 18%, transparent);
 }
 
 .aqg-readiness__prompt {
+  display: block;
   font-weight: 600;
-  margin-bottom: 0.6rem;
-  display: inline;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+  margin-bottom: 0.7rem;
+  color: var(--sl-color-white);
+}
+
+:root[data-theme='light'] .aqg-readiness__prompt {
+  color: var(--sl-color-black);
 }
 
 .aqg-readiness__options {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.25rem;
   margin-top: 0.4rem;
 }
 
@@ -100,6 +127,7 @@
   padding: 0.35rem 0.5rem;
   border-radius: 0.3rem;
   cursor: pointer;
+  color: var(--sl-color-text);
 }
 
 .aqg-readiness__options label:hover {
