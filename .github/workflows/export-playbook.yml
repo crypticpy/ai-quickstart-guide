@@ -1,0 +1,80 @@
+name: Export playbook (PDF + DOCX)
+
+# Builds a single combined playbook (PDF and DOCX) from the markdown sources
+# and attaches both to the GitHub Release. Runs on release tags only — local
+# contributors do not need pandoc installed.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pandoc and TeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended
+
+      - name: Concatenate markdown sources in reading order
+        run: |
+          mkdir -p exports
+          # Order matters: getting-started → phases 1-6 → resources
+          ORDER=(
+            "src/content/docs/index.mdx"
+            "src/content/docs/getting-started"
+            "src/content/docs/phase-1-governance"
+            "src/content/docs/phase-2-education"
+            "src/content/docs/phase-3-infrastructure"
+            "src/content/docs/phase-4-dev-stack"
+            "src/content/docs/phase-5-platform"
+            "src/content/docs/phase-6-starter-projects"
+            "src/content/docs/resources"
+          )
+          : > exports/playbook.md
+          for path in "${ORDER[@]}"; do
+            if [ -f "$path" ]; then
+              cat "$path" >> exports/playbook.md
+              printf '\n\n' >> exports/playbook.md
+            elif [ -d "$path" ]; then
+              find "$path" -type f \( -name '*.md' -o -name '*.mdx' \) | sort | while read -r f; do
+                cat "$f" >> exports/playbook.md
+                printf '\n\n' >> exports/playbook.md
+              done
+            fi
+          done
+
+      - name: Build PDF
+        run: |
+          pandoc exports/playbook.md \
+            --pdf-engine=xelatex \
+            --toc --toc-depth=3 \
+            --metadata title='AI Quickstart Guide' \
+            --metadata date="$(date +%Y-%m-%d)" \
+            -o exports/ai-quickstart-guide.pdf
+
+      - name: Build DOCX
+        run: |
+          pandoc exports/playbook.md \
+            --toc --toc-depth=3 \
+            --metadata title='AI Quickstart Guide' \
+            -o exports/ai-quickstart-guide.docx
+
+      - name: Attach to release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            exports/ai-quickstart-guide.pdf
+            exports/ai-quickstart-guide.docx
+
+      - name: Upload as workflow artifact
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: playbook
+          path: exports/ai-quickstart-guide.*

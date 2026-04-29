@@ -1,0 +1,27 @@
+{
+  "name": "ai-quickstart-guide",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "AI Quickstart Strategy Guide — a 12-month playbook for government agencies adopting AI",
+  "private": false,
+  "license": "SEE LICENSE.md (dual: MIT for code, CC BY-SA 4.0 for content)",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint:links": "lychee --config lychee.toml './dist/**/*.html'"
+  },
+  "dependencies": {
+    "@astrojs/preact": "^5.0.0",
+    "@astrojs/starlight": "^0.38.0",
+    "astro": "^6.1.0",
+    "preact": "^10.25.0",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}

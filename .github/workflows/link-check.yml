@@ -1,0 +1,23 @@
+name: Link check
+
+on:
+  pull_request:
+    paths:
+      - 'src/content/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+  schedule:
+    # Weekly external link rot check
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --verbose --no-progress --max-concurrency 4 './src/content/**/*.md' './src/content/**/*.mdx' './README.md' './CONTRIBUTING.md'
+          fail: true

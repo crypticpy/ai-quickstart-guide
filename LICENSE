@@ -1,0 +1,14 @@
+This repository uses a dual-license model. See LICENSE.md for the full
+explanation.
+
+- Code (anything under code-samples/, src/components/, src/styles/, scripts/,
+  and configuration files like package.json, astro.config.mjs, *.ts, *.tsx,
+  *.yml workflows) is licensed under the MIT License (see LICENSE-CODE).
+
+- Documentation, guides, templates, and other written content (anything under
+  src/content/docs/, templates/, diagrams/, and the top-level Markdown files)
+  is licensed under the Creative Commons Attribution-ShareAlike 4.0
+  International License (CC BY-SA 4.0). See LICENSE-CONTENT.
+
+In case of ambiguity, the file's location and primary purpose decide the
+applicable license.

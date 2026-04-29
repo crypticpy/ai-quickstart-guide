@@ -1,0 +1,66 @@
+---
+title: AI Quickstart Guide
+description: A 12-month playbook for government agencies to build a modular AI platform and deploy their first production AI application.
+template: splash
+hero:
+  tagline: Paint-by-numbers AI adoption for any agency, any size.
+  actions:
+    - text: Start with the Readiness Assessment
+      link: /getting-started/readiness-assessment/
+      icon: right-arrow
+      variant: primary
+    - text: View the 90-day quickstart
+      link: /getting-started/quickstart-checklist/
+      icon: external
+      variant: secondary
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## What this is
+
+A complete, sequenced 12-month roadmap that any government agency can follow — from "we want to do AI" to "we have a modular platform running our first production AI application." The guide is open source, stack-agnostic, and includes the governance, education, and infrastructure required to sustain AI work past the first pilot.
+
+It is built from Austin Public Health's real-world experience: 2.5 years of AI exploration that produced 145+ reusable modules, the RAD platform, and production AI applications.
+
+## Six phases over 12 months
+
+<CardGrid stagger>
+  <Card title="1. Governance & Policy" icon="approve-check">
+    Risk classification, AUP, review committee, procurement guardrails. Months 1–3.
+  </Card>
+  <Card title="2. Culture & Education" icon="open-book">
+    Seven training tracks, champions network, intake pipeline. Runs all 12 months.
+  </Card>
+  <Card title="3. Infrastructure" icon="rocket">
+    Cloud sandbox, SSO, CI/CD, secrets, observability. Months 2–5.
+  </Card>
+  <Card title="4. Dev Stack" icon="pencil">
+    Stack selection, coding standards, AI-assisted dev, API design. Months 4–7.
+  </Card>
+  <Card title="5. Modular Platform" icon="puzzle">
+    Reusable module library: auth, data grid, API framework, AI orchestration. Months 5–10.
+  </Card>
+  <Card title="6. Starter Project" icon="star">
+    Deploy the agency's first AI application using platform modules. Months 7–12.
+  </Card>
+</CardGrid>
+
+## Pick your path
+
+Different agency sizes need different timelines and depth.
+
+| If your IT team is | Use the | Realistic timeline |
+|---|---|---|
+| 1–4 people | Small Agency Variant | 18–24 months |
+| 5–15 people | Default 12-month timeline | 12 months |
+| 15+ people | Compressed parallel tracks | 9–12 months |
+
+> **Off-ramps are real.** Agencies can stop after Phase 1 (governance only), Phase 2 (governance + education), or Phase 5 (platform without starter project) and still have a complete, valuable deliverable. The roadmap is designed so partial completion still beats no completion.
+
+## How to use this site
+
+- **Working through the guide:** start with the [Readiness Assessment](/getting-started/readiness-assessment/), then follow the [90-Day Quickstart](/getting-started/quickstart-checklist/).
+- **Just looking up a template:** every interactive template (AUP wizard, risk-tier matrix, ROI calculator) lives inside its phase and exports to your local machine — nothing is sent anywhere.
+- **Deploying your own copy:** click "Use this template" on the [GitHub repo](https://github.com/crypticpy/ai-quickstart-guide) → your agency owns its copy, online or offline.
+- **Downloading the PDF:** every release ships a combined PDF and DOCX. See the latest on the [Releases page](https://github.com/crypticpy/ai-quickstart-guide/releases).

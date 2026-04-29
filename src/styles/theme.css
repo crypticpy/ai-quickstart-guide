@@ -1,0 +1,32 @@
+/* AI Quickstart Guide — theme overrides
+ * Navy primary, green accent (per PRD §MkDocs Configuration Highlights, retained as the brand) */
+
+:root {
+  --sl-color-accent-low: #1a2748;
+  --sl-color-accent: #2f4a8c;
+  --sl-color-accent-high: #b9c8ec;
+
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #eef2f7;
+  --sl-color-gray-2: #c2cad6;
+  --sl-color-gray-3: #8b96a8;
+  --sl-color-gray-4: #5b6677;
+  --sl-color-gray-5: #3a4250;
+  --sl-color-gray-6: #232932;
+  --sl-color-black: #0e1218;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #d3deef;
+  --sl-color-accent: #2f4a8c;
+  --sl-color-accent-high: #1a2748;
+}
+
+/* Pull-quote / off-ramp callout style — used heavily in the planning docs */
+.aqg-offramp {
+  border-left: 4px solid #3aa66e;
+  background: color-mix(in srgb, #3aa66e 8%, transparent);
+  padding: 0.8rem 1rem;
+  border-radius: 0 0.4rem 0.4rem 0;
+  margin: 1rem 0;
+}
