@@ -1,0 +1,48 @@
+---
+title: ROI Calculator
+description: Build a defensible cost / savings / payback case for a single AI use case. Inputs stay in your browser; export the estimate as Markdown or PDF.
+sidebar:
+  order: 2
+---
+
+import ROICalculator from '../../../components/ROICalculator.tsx';
+
+The fastest way to lose a budget conversation is to overstate AI savings. The fastest way to lose the *next* conversation is to skip the math entirely. This calculator does the arithmetic for one use case at a time so you can show your work — costs, savings drivers, payback period, and a multi-year net — in a format your finance director will actually read.
+
+> **Use it for one use case at a time.** A single tool that scales to many users (e.g., an internal writing assistant) is one use case. A platform that runs three different workflows is three calculations — costs and savings don't share clean denominators.
+
+<ROICalculator client:load />
+
+## What to put in each field
+
+### Costs
+
+- **Vendor / SaaS license.** The annual list price for the tool. If you'll pay per-seat or per-1,000-API-calls, multiply out to a 12-month total at your expected usage. Add a 15–25% buffer for the first year — every agency that runs this calculation underestimates burst usage.
+- **Cloud / compute.** Inference, hosting, storage, and any retrieval database the tool depends on. If your tool is purely SaaS with no agency-side hosting, this is zero.
+- **Ongoing staff.** The fraction of an FTE that will operate, monitor, and triage the tool *after* launch. A reasonable floor for a Tier-2 use case is 0.1 FTE × loaded salary; for Tier-3, 0.25 FTE.
+- **Implementation staff time.** Internal hours × loaded hourly rate, year 1 only. This includes integration work, content review, prompt tuning, and the first round of evaluation. Easy to underestimate — multiply your gut number by 1.5.
+- **Training & change management.** Curriculum delivery, materials, and time staff are off the floor while learning. The Curriculum Map's per-track effort estimates are a good source for this.
+- **Legal / procurement review.** Outside counsel, procurement officer time, and any third-party security review. For Tier-2 use cases this is typically $5K–$25K; Tier-3 can be $25K–$100K depending on whether a bias audit is required.
+
+### Savings drivers
+
+- **Staff hours saved per week.** This is the conservative anchor — the line you can defend with timekeeping or before/after sampling. Be specific about *whose* time and what they'll do with it. Saved hours that the same person uses to do more of the same work are real savings; saved hours that disappear into the day are not.
+- **Blended loaded hourly rate.** Salary + benefits ÷ working hours. Government blended rates typically land between $45 and $95/hr depending on grade mix.
+- **Error / rework reduction.** Annual value of avoided rework, fines, appeals, or rebuilds. Only include this if you can point to a baseline rate today. "We think errors will go down" is not a savings line.
+- **Cycle-time / throughput value.** Faster permits issued, cases closed, or responses sent. Only count this if a faster cycle time produces measurable value (e.g., constituents stop calling, a backlog clears, a deadline is met).
+
+## The honest version of "ROI"
+
+A few caveats worth saying out loud, especially when this calculator is going into a memo:
+
+1. **First-year ROI is almost always lower than the model suggests.** Adoption ramps; staff learn the tool unevenly; integration takes longer. Run the calculator twice — once with your full estimates and once with staff hours and "other savings" cut by 50% — and present both to your sponsor.
+2. **"Hours saved" only counts if the agency captures the time.** If your finance director can't see staff doing more work or covering more ground after the tool launches, the savings are invisible — even if real. Decide *before* launch what you'll do with recovered capacity.
+3. **Re-run the calculation at 6 and 12 months.** Replace the estimates with actuals — measured staff hours, measured error rates, measured cycle times. The second-year estimate is the one budget reviewers will trust.
+
+> **Procurement reality check.** Your procurement cycle probably runs 6–12 months. If you start the calculator today and conclude you want a Tier-2 vendor, you're budgeting for next fiscal year, not this one. Use the Markdown export as the back-up exhibit in your budget request.
+
+## See also
+
+- [Comparable agency case studies](/resources/case-studies/) — three agencies that ran this math and what their actuals looked like
+- [Quarterly milestone report template](/resources/quarterly-report/) — how to roll the ROI into your sponsor reporting
+- [Procurement guardrails](/phase-1-governance/procurement-guardrails/) — the contract addendum and vendor checks that protect the assumptions in your model
