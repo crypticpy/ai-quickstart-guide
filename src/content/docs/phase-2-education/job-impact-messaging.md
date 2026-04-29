@@ -24,6 +24,19 @@ The letter is not a press release. It is a one-page memo, on agency letterhead, 
 
 ### Template
 
+Fill in these fields before sending. Every bracketed placeholder maps to a specific input — the letter only works if every one is replaced with a concrete value (no "TBD," no "to be determined later").
+
+| Field                                     | Example value                                                | Where it shows up                 |
+| ----------------------------------------- | ------------------------------------------------------------ | --------------------------------- |
+| `[Agency]`                                | "Travis County Public Health"                                | Salutation, body, signature block |
+| `[Director / City Manager / CIO Name]`    | "Maria Reyes, County Health Director"                        | FROM line, signature              |
+| `[Effective Date]`                        | "May 1, 2026"                                                | DATE line                         |
+| `[Start Date] through [End Date]`         | "May 1, 2026 through April 30, 2027"                         | The 12-month commitment window    |
+| `[Equity Officer / Ombuds / HR Director]` | "Equity Officer Lila Cho"                                    | Confidential-reporting channel    |
+| `[Signature]` and `[Name, Title]`         | (handwritten / e-signature) + "Maria Reyes, Health Director" | Signature block                   |
+
+Copy the template below to agency letterhead, fill the fields, route for executive-sponsor signature, and distribute per the steps above.
+
 > **TO:** All [Agency] Staff
 > **FROM:** [Director / City Manager / CIO Name]
 > **DATE:** [Effective Date]

@@ -53,9 +53,33 @@ Establish the guardrails that enable everything else. Without governance, infras
 - Legislative compliance matrix (Texas TRAIGA, Colorado AI Act, California SB 942, etc.)
 - AI use case inventory template (aligned with OMB M-24-10)
 
-## Off-ramp
+## Off-Ramp — Governance Only
 
-Agencies that complete only this phase walk away with an adopted AI policy, risk classification, and review committee. That alone satisfies most legislative requirements and is a complete, standalone outcome.
+Agencies that complete only this phase walk away with an adopted AUP, a 3-tier risk classification, a chartered Review Committee, and a procurement addendum attached to the standard contract template. That set alone satisfies most current legislative requirements and is a complete, standalone deliverable. Infrastructure build-out, education tracks beyond Track 1, and platform work are deferred — document them so they re-enter the roadmap when budget and staffing allow.
+
+## Sequencing within Phase 1
+
+| Weeks | Focus                                                                       | Gate                                                            |
+| ----- | --------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| 1–2   | Readiness assessment complete; existing AI uses inventoried                 | Baseline understood; committee membership identified            |
+| 3–4   | Risk tiers drafted; AUP adaptation begins from template                     | Tier definitions agreed; AUP first draft circulating            |
+| 5–6   | Review Committee charter drafted; procurement addendum drafted              | Committee charter ready for signature; addendum in legal review |
+| 7–8   | Track 3 sessions on AUP and committee charter; legal sign-off               | AUP signed; committee chartered and meeting                     |
+| 9–10  | Procurement addendum finalized; legislative compliance matrix localized     | Addendum attached to standard contract template                 |
+| 11–12 | Use case inventory populated; governance framework formal adoption          | G-03 — governance framework adopted                             |
+
+## Hard dependencies
+
+- **Phase 1 is the upstream blocker for Phase 3 (D-01).** Cloud provisioning needs governance approval, the AUP defines what data can flow where, and the procurement addendum gates vendor terms — without these, sandbox requests stall.
+- **Phase 1 gates any Tier-2 or Tier-3 production deployment (D-08).** Higher-tier workloads cannot ship without the risk classification, AUP, and committee in place.
+- **Risk classification must exist before Phase 3's security baseline.** The baseline maps tier to enforced policy (network posture, logging retention, contestation pathway); without tiers there is nothing to enforce.
+
+## What Phase 1 does NOT cover
+
+- Specific application code or architecture (that's Phase 4–5).
+- Specific model selection (Claude, GPT, Gemini, open weights) — that decision happens in Phase 5 against the platform's AI orchestration adapter.
+- The actual training of staff on the policy — Phase 2 / Track 3 owns delivery once the artifacts exist.
+- Case-by-case review of pending vendor contracts — the Review Committee owns that operationally; Phase 1 stands the committee up, it does not run its docket.
 
 ## What's in this phase
 
@@ -74,3 +98,24 @@ Agencies that complete only this phase walk away with an adopted AI policy, risk
 5. **Localize the Legislative Compliance Matrix** for your jurisdiction and update your AUP's `{{Applicable State AI Law}}` placeholder.
 
 You can run steps 1–3 in parallel if you have the people. Step 4 depends on legal sign-off; step 5 is a quarterly maintenance task once started.
+
+## Plain-English Guide to Phase 1 Terms
+
+- **AUP (Acceptable Use Policy).** The agency's plain-language rules for how staff, contractors, and vendors may use AI tools — what data can go in, what outputs are acceptable, who is accountable. The AUP is the document staff actually read; everything else in Phase 1 supports it.
+- **Risk tier (Low / Medium / High).** A 3-level classification of an AI use case based on the harm it could cause if it goes wrong. Low is internal productivity (drafting, summarizing); Medium touches public-facing or operational decisions; High influences benefits, enforcement, or safety. The tier dictates the controls that apply.
+- **Procurement guardrails.** Standard contract language and a vendor questionnaire that the agency attaches to any AI-related solicitation. They cover data rights, model provenance, audit access, and contestation — the items that are nearly impossible to retrofit after a contract is signed.
+- **Committee charter.** The signed document that names the Review Committee's members, scope of authority, decision rules, and meeting cadence. Without a charter the committee is a meeting; with one it is a body that can approve, defer, or block AI work.
+- **Legislative compliance.** The set of state and federal AI laws that apply to the agency — Texas TRAIGA, Colorado AI Act, California SB 942, OMB memoranda, and any local ordinance. The compliance matrix maps each requirement to the Phase 1 artifact that satisfies it.
+- **OMB M-24-10 / M-25-22.** Two federal memoranda that frame AI governance for agencies that take federal funds. M-24-10 covers AI use case inventory, impact assessment, and minimum risk practices. M-25-22 covers AI procurement — what contract terms agencies must require from AI vendors.
+- **NIST AI RMF.** The National Institute of Standards and Technology's AI Risk Management Framework. A non-prescriptive playbook organized around four functions (Govern, Map, Measure, Manage) that the agency's AUP, risk classification, and committee operationalize.
+
+## Research basis
+
+NIST AI Risk Management Framework 1.0 and 2.0, OMB M-24-10 (use case inventory and minimum practices), OMB M-25-22 (AI procurement), the Mississippi statewide AI Acceptable Use Policy, ISACA AI governance templates, the San Jose GovAI Coalition policy templates, the UK Government AI Playbook stages 0–1, Texas TRAIGA, the Colorado AI Act (SB24-205), and California SB 942.
+
+## Related
+
+- [Phase 2 — Track 3 Governance](/phase-2-education/track-3-governance/) — the people-side delivery of what Phase 1 produces
+- [Phase 3 — Infrastructure](/phase-3-infrastructure/) — what Phase 1 unblocks
+- [Legislative Tracker](/resources/legislative-tracker/) — current state and federal AI law tracked against Phase 1 artifacts
+- [Readiness Assessment](/getting-started/readiness-assessment/) — start here before adopting the templates
