@@ -10,14 +10,10 @@
   gap: 1.25rem;
   margin: 1rem 0 2rem;
   padding: 1.25rem;
+  /* gray-5/6 auto-invert via Starlight's ramp — see readiness.css. */
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 0.5rem;
   background: var(--sl-color-gray-6);
-}
-
-:root[data-theme='light'] .aqg-tier {
-  background: var(--sl-color-gray-1);
-  border-color: var(--sl-color-gray-2);
 }
 
 .aqg-tier__inputs {
@@ -198,13 +194,10 @@
 .aqg-tier__pending {
   padding: 0.75rem 1rem;
   border-radius: 0.35rem;
+  /* gray-5 auto-inverts: mid-dark in dark mode, mid-light in light mode. */
   background: var(--sl-color-gray-5);
   color: var(--aqg-text);
   font-size: 0.95rem;
-}
-
-:root[data-theme='light'] .aqg-tier__pending {
-  background: var(--sl-color-gray-2);
 }
 
 .aqg-tier__actions {
