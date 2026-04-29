@@ -30,3 +30,40 @@
   border-radius: 0 0.4rem 0.4rem 0;
   margin: 1rem 0;
 }
+
+/* Mermaid diagrams — bump text contrast and sizing for legibility, especially
+ * the gantt on /resources/gantt-and-dependencies/. astro-mermaid renders
+ * client-side; these rules target the inline SVG it produces. */
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+.mermaid svg .titleText {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  fill: var(--sl-color-text) !important;
+}
+.mermaid svg .sectionTitle,
+.mermaid svg text.sectionTitle0,
+.mermaid svg text.sectionTitle1,
+.mermaid svg text.sectionTitle2,
+.mermaid svg text.sectionTitle3 {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  fill: var(--sl-color-text) !important;
+}
+.mermaid svg .taskText,
+.mermaid svg .taskTextOutsideRight,
+.mermaid svg .taskTextOutsideLeft {
+  font-size: 13px !important;
+  fill: var(--sl-color-text) !important;
+}
+.mermaid svg .grid .tick text {
+  font-size: 12px !important;
+  fill: var(--sl-color-text-accent, var(--sl-color-text)) !important;
+}
+.mermaid svg .grid path,
+.mermaid svg .grid line {
+  stroke: var(--sl-color-gray-3) !important;
+  stroke-opacity: 0.4;
+}

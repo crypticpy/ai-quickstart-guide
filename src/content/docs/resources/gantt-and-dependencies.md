@@ -102,7 +102,9 @@ The diagram below is rendered from Mermaid source at page load and follows the s
 gantt
   title AI Quickstart 12-Month Timeline (Medium Agency)
   dateFormat  YYYY-MM-DD
-  axisFormat  M%-y
+  axisFormat  %b %y
+  tickInterval 1month
+  todayMarker off
 
   section Phase 1 — Governance
   Readiness assessment           :g01, 2026-01-01, 14d

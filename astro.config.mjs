@@ -22,6 +22,30 @@ export default defineConfig({
       theme: 'default',
       autoTheme: true,
       enableLog: false,
+      mermaidConfig: {
+        fontFamily:
+          'Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+        gantt: {
+          titleTopMargin: 28,
+          barHeight: 24,
+          barGap: 6,
+          topPadding: 60,
+          leftPadding: 170,
+          rightPadding: 30,
+          gridLineStartPadding: 12,
+          fontSize: 14,
+          sectionFontSize: 15,
+          numberSectionStyles: 4,
+        },
+        flowchart: {
+          curve: 'basis',
+          padding: 16,
+        },
+        sequence: {
+          actorMargin: 60,
+          messageFontSize: 14,
+        },
+      },
     }),
     preact(),
     starlight({
