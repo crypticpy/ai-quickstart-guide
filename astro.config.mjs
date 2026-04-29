@@ -29,7 +29,11 @@ export default defineConfig({
       },
       lastUpdated: true,
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 4 },
-      customCss: ['./src/styles/theme.css', './src/styles/readiness.css'],
+      customCss: [
+        './src/styles/theme.css',
+        './src/styles/readiness.css',
+        './src/styles/wizard.css',
+      ],
       sidebar: [
         {
           label: 'Start Here',
