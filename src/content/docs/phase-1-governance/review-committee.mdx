@@ -5,9 +5,17 @@ sidebar:
   order: 4
 ---
 
+import CharterWizard from '../../../components/CharterWizard.tsx';
+
 The AI Review Committee is the operational owner of AI governance in your agency. Without it, your AUP and risk classification matrix are documents nobody enforces. With it, every AI use case has a known approval path, every vendor has a known reviewer, and every staff member has a known place to bring concerns.
 
 This page provides the charter you can adopt. The fields in `{{ braces }}` are placeholders; the rest is the model text.
+
+## Charter wizard
+
+Fill in your agency's details to generate a tailored charter. Your inputs stay in your browser — nothing is sent to a server. Export the result as Markdown or print to PDF.
+
+<CharterWizard client:load />
 
 ## Why a committee, not a single owner
 
@@ -42,7 +50,7 @@ The committee:
 - **Maintains the Approved AI Tools List** referenced by the AUP.
 - **Sets policy** for AI training, disclosure, and use-case intake.
 - **Reviews vendor AI offerings** before procurement signs a contract.
-- **Conducts the annual AUP review** and recommends amendments to the {{Approving Body}}.
+- **Conducts the annual AUP review** and recommends amendments to the `{{Approving Body}}`.
 - **Investigates** reports of AI policy violations and recommends action.
 
 The committee does not:
@@ -57,7 +65,7 @@ The committee does not:
 | -------------------- | ------------------------------------------- | --------------------------------- | ----------------------------------------------------------------- |
 | Standing             | Bi-weekly (60 min)                          | 4 of 7 voting                     | Minutes; intake decisions; tier classifications                   |
 | Tier-3 deep-dive     | Ad-hoc when a Tier-3 use case is queued     | 5 of 7 voting + community advisor | Approval / denial with written rationale; impact assessment notes |
-| Annual policy review | Once per fiscal year                        | All voting                        | AUP and risk-matrix revisions for {{Approving Body}}              |
+| Annual policy review | Once per fiscal year                        | All voting                        | AUP and risk-matrix revisions for `{{Approving Body}}`              |
 | Incident response    | Within 5 business days of reported incident | 3 of 7 voting                     | Investigation notes; recommended action                           |
 
 Meetings are documented. Minutes include who proposed each use case, what tier was assigned, who voted how, and the rationale for any disagreement. Minutes are retained per the agency's records schedule.
@@ -73,31 +81,31 @@ Meetings are documented. Minutes include who proposed each use case, what tier w
 
 ## How to draft a charter quickly
 
-This page is the model. Copy it into a working document, fill the `{{ braces }}`, and present to the {{Approving Body}} for adoption. Most agencies can move from "no charter" to "adopted charter" in two committee meetings:
+This page is the model. Copy it into a working document, fill the `{{ braces }}`, and present to the `{{Approving Body}}` for adoption. Most agencies can move from "no charter" to "adopted charter" in two committee meetings:
 
 1. **Meeting 1 (charter draft):** review and edit this template. Identify candidate members; secure their willingness to serve.
-2. **Meeting 2 (charter approval):** vote to adopt; chair signs; transmit to {{Approving Body}}.
+2. **Meeting 2 (charter approval):** vote to adopt; chair signs; transmit to `{{Approving Body}}`.
 
 You do not need the AUP to be adopted before the charter — you need the charter to _enforce_ the AUP. Charter first; AUP within 60 days.
 
 ---
 
-### {{Agency Name}} AI Review Committee Charter
+### `{{Agency Name}}` AI Review Committee Charter
 
-**Effective:** {{Adoption Date}}
-**Chair:** {{AI Program Lead}}
-**Approved by:** {{Approving Body}} on {{Approval Date}}
+**Effective:** `{{Adoption Date}}`
+**Chair:** `{{AI Program Lead}}`
+**Approved by:** `{{Approving Body}}` on `{{Approval Date}}`
 **Review Cadence:** Annual
 
 #### 1. Purpose
 
-The {{Agency Name}} AI Review Committee (the "Committee") is established to govern the responsible adoption of artificial intelligence (AI) systems in the conduct of agency business, consistent with the {{Agency Name}} AI Acceptable Use Policy and applicable federal, state, and local law.
+The `{{Agency Name}}` AI Review Committee (the "Committee") is established to govern the responsible adoption of artificial intelligence (AI) systems in the conduct of agency business, consistent with the `{{Agency Name}}` AI Acceptable Use Policy and applicable federal, state, and local law.
 
 #### 2. Authority
 
-The Committee derives its authority from {{Approving Body}} and is empowered to:
+The Committee derives its authority from `{{Approving Body}}` and is empowered to:
 
-- Approve or deny Tier-2 and Tier-3 AI use cases as defined by the {{Agency Name}} Risk Classification Matrix
+- Approve or deny Tier-2 and Tier-3 AI use cases as defined by the `{{Agency Name}}` Risk Classification Matrix
 - Maintain the Approved AI Tools List
 - Recommend amendments to the AI Acceptable Use Policy and Risk Classification Matrix
 - Review vendor AI offerings prior to contract execution
@@ -107,12 +115,12 @@ The Committee derives its authority from {{Approving Body}} and is empowered to:
 
 The Committee shall consist of the following voting members:
 
-- Chair: {{AI Program Lead}}
-- {{CIO or designee}}
-- {{CISO or security lead}}
-- Legal counsel: {{General Counsel or designee}}
-- HR representative: {{HR Director or designee}}
-- Equity / civil rights officer: {{Equity Officer}}
+- Chair: `{{AI Program Lead}}`
+- `{{CIO or designee}}`
+- `{{CISO or security lead}}`
+- Legal counsel: `{{General Counsel or designee}}`
+- HR representative: `{{HR Director or designee}}`
+- Equity / civil rights officer: `{{Equity Officer}}`
 - Rotating program owner: appointed by the Chair on a per-use-case basis
 
 For Tier-3 use cases, the Committee shall include one non-staff community or external subject-matter advisor identified by the Chair.
@@ -136,11 +144,11 @@ Quorum is four of seven voting members for standing meetings; five of seven, inc
 
 #### 6. Recordkeeping
 
-The Committee shall maintain minutes of each meeting, including use cases reviewed, tier classifications, votes, and rationales. Minutes are retained per the {{Agency Records Schedule}} and are subject to applicable open-records law.
+The Committee shall maintain minutes of each meeting, including use cases reviewed, tier classifications, votes, and rationales. Minutes are retained per the `{{Agency Records Schedule}}` and are subject to applicable open-records law.
 
 #### 7. Reporting
 
-The Committee shall report annually to the {{Approving Body}}, summarizing:
+The Committee shall report annually to the `{{Approving Body}}`, summarizing:
 
 - Number and tier of use cases reviewed
 - Approvals, denials, and pending matters
@@ -153,7 +161,7 @@ Members with a personal or financial interest in any vendor or use case under re
 
 #### 9. Amendment
 
-This Charter may be amended by a two-thirds vote of the Committee, with subsequent approval by the {{Approving Body}}.
+This Charter may be amended by a two-thirds vote of the Committee, with subsequent approval by the `{{Approving Body}}`.
 
 ---
 
@@ -161,7 +169,7 @@ This Charter may be amended by a two-thirds vote of the Committee, with subseque
 
 Chair: ****************\_\_\_**************** Date: ****\_\_\_\_****
 
-{{Approving Body Officer}}: ****************\_\_\_**************** Date: ****\_\_\_\_****
+`{{Approving Body Officer}}`: ****************\_\_\_**************** Date: ****\_\_\_\_****
 
 ---
 
@@ -174,7 +182,7 @@ Chair: ****************\_\_\_**************** Date: ****\_\_\_\_****
 
 ## What you ship from this page
 
-- An adopted Charter signed by the Chair and {{Approving Body Officer}}
+- An adopted Charter signed by the Chair and `{{Approving Body Officer}}`
 - Named members for each seat with backups identified
 - A standing meeting on the calendar, with the first three agendas drafted
 - A minutes template and records-retention schedule referenced
