@@ -35,6 +35,7 @@ export default defineConfig({
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 4 },
       customCss: [
         './src/styles/theme.css',
+        './src/styles/forms.css',
         './src/styles/readiness.css',
         './src/styles/wizard.css',
         './src/styles/tier.css',

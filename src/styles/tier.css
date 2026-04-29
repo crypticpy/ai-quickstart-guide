@@ -1,4 +1,8 @@
-/* Risk Tier Picker — component styles */
+/* RiskTierPicker / IntakeForm — component layout
+ *
+ * Visual primitives (buttons, inputs, focus, validation) live in forms.css.
+ * This file owns the question-list structure and the tier result panel.
+ */
 
 .aqg-tier {
   display: flex;
@@ -19,37 +23,23 @@
 .aqg-tier__inputs {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .aqg-tier__field {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.35rem;
 }
 
 .aqg-tier__label {
   font-weight: 600;
   font-size: 0.95rem;
-}
-
-.aqg-tier__field input[type='text'],
-.aqg-tier__field textarea {
-  padding: 0.5rem 0.65rem;
-  font: inherit;
-  border-radius: 0.35rem;
-  border: 1px solid var(--sl-color-gray-4);
-  background: var(--sl-color-white);
-  color: var(--sl-color-black);
-}
-
-.aqg-tier__field textarea {
-  resize: vertical;
+  color: var(--aqg-text);
 }
 
 .aqg-tier__progress {
   font-size: 0.95rem;
-  color: var(--sl-color-gray-3);
 }
 
 .aqg-tier__list {
@@ -71,52 +61,57 @@
 }
 
 .aqg-tier__q::before {
-  content: 'D' counter(aqg-d) '.';
-  font-weight: 600;
-  margin-right: 0.4rem;
-  color: var(--sl-color-accent-high);
+  content: 'D' counter(aqg-d);
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-right: 0.55rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.3rem;
+  background: var(--sl-color-accent);
+  color: var(--sl-color-white);
+  vertical-align: middle;
+  line-height: 1.2;
 }
 
 .aqg-tier__dimension {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 0.25rem;
-  color: var(--sl-color-gray-3);
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 0.3rem;
+  vertical-align: middle;
+  line-height: 1.2;
 }
 
 .aqg-tier__prompt {
+  display: block;
   font-weight: 600;
-  margin-bottom: 0.6rem;
-  display: inline;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  margin-top: 0.6rem;
+  margin-bottom: 0.7rem;
+  color: var(--aqg-text);
 }
 
 .aqg-tier__options {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.25rem;
   margin-top: 0.4rem;
 }
 
 .aqg-tier__options label {
   display: flex;
-  gap: 0.55rem;
-  align-items: flex-start;
-  padding: 0.35rem 0.5rem;
+  gap: 0.6rem;
+  padding: 0.4rem 0.55rem;
   border-radius: 0.3rem;
   cursor: pointer;
 }
 
-.aqg-tier__options label:hover {
-  background: color-mix(in srgb, var(--sl-color-accent-high) 12%, transparent);
-}
-
-.aqg-tier__options input[type='radio'] {
-  margin-top: 0.25rem;
-}
-
-/* Result panel — color-coded by tier */
+/* Tier result panel — color-coded ----------------------------------------- */
 
 .aqg-tier__result {
   position: relative;
@@ -126,38 +121,40 @@
 }
 
 .aqg-tier__result--t1 {
-  background: color-mix(in srgb, #3aa66e 10%, transparent);
-  color: #3aa66e;
+  background: color-mix(in srgb, var(--aqg-success) 14%, transparent);
+  color: var(--aqg-success);
 }
 
 .aqg-tier__result--t2 {
-  background: color-mix(in srgb, #d09848 14%, transparent);
-  color: #b87a1f;
+  background: color-mix(in srgb, var(--aqg-warn) 16%, transparent);
+  color: var(--aqg-warn);
 }
 
 .aqg-tier__result--t3 {
-  background: color-mix(in srgb, #d04848 14%, transparent);
-  color: #b83030;
+  background: color-mix(in srgb, var(--aqg-error-strong) 16%, transparent);
+  color: var(--aqg-error-strong);
 }
 
+/* The tier color is used only on the badge and left border. Body text in the
+ * result panel always uses the high-contrast text token. */
 .aqg-tier__result h3,
 .aqg-tier__result p,
 .aqg-tier__result li,
 .aqg-tier__result h4 {
-  color: var(--sl-color-text);
+  color: var(--aqg-text);
 }
 
 .aqg-tier__badge {
   display: inline-block;
-  padding: 0.2rem 0.55rem;
-  border-radius: 0.25rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.3rem;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   background: currentColor;
   color: white !important;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
 .aqg-tier__result h3 {
@@ -190,65 +187,41 @@
   padding: 0.75rem 1rem;
   border-radius: 0.35rem;
   background: var(--sl-color-gray-5);
+  color: var(--aqg-text);
   font-size: 0.95rem;
+}
+
+:root[data-theme='light'] .aqg-tier__pending {
+  background: var(--sl-color-gray-2);
 }
 
 .aqg-tier__actions {
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
-}
-
-.aqg-tier__actions button {
-  padding: 0.55rem 0.9rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  border-radius: 0.35rem;
-  border: 1px solid var(--sl-color-accent);
-  background: var(--sl-color-accent);
-  color: var(--sl-color-white);
-  cursor: pointer;
-}
-
-.aqg-tier__actions button:hover:not(:disabled) {
-  filter: brightness(1.1);
-}
-
-.aqg-tier__actions button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  align-items: center;
 }
 
 .aqg-tier__actions .aqg-tier__reset {
-  background: transparent;
-  color: var(--sl-color-gray-2);
-  border-color: var(--sl-color-gray-4);
   margin-left: auto;
 }
 
 .aqg-tier__privacy {
   font-size: 0.85rem;
-  color: var(--sl-color-gray-3);
   margin: 0;
 }
 
 .aqg-tier__row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  gap: 0.75rem;
-}
-
-.aqg-tier__field--error input[type='text'],
-.aqg-tier__field--error textarea {
-  border-color: #d04848;
-  background: color-mix(in srgb, #d04848 6%, transparent);
+  gap: 0.85rem;
 }
 
 .aqg-tier__options.aqg-tier__field--error {
-  border: 1px solid #d04848;
+  border: 1px solid var(--aqg-error-strong);
   border-radius: 0.3rem;
-  padding: 0.35rem;
-  background: color-mix(in srgb, #d04848 6%, transparent);
+  padding: 0.4rem;
+  background: color-mix(in srgb, var(--aqg-error-strong) 6%, transparent);
 }
 
 @media print {

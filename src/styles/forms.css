@@ -1,0 +1,292 @@
+/* AI Quickstart Guide — shared form & control system
+ *
+ * Centralizes button sizing, input styling, focus indicators, and contrast-
+ * safe text/badge tokens for all interactive components on the site:
+ *   - ReadinessAssessment  (.aqg-readiness)
+ *   - AUPWizard / CharterWizard  (.aqg-wizard)
+ *   - RiskTierPicker / IntakeForm  (.aqg-tier)
+ *
+ * WCAG 2.2 AA targets:
+ *   - Normal text contrast >= 4.5:1
+ *   - Large text / UI component contrast >= 3:1
+ *   - Visible focus indicator (SC 2.4.7) >= 3:1 against adjacent colors
+ *   - Touch target size 24x24px (SC 2.5.8); we ship 44x44 for AAA SC 2.5.5
+ *   - Form inputs always paired with <label for=""> in the markup
+ */
+
+:root {
+  /* Touch / control sizing */
+  --aqg-control-height: 2.75rem;       /* 44px — AAA touch target */
+  --aqg-control-padding-x: 1rem;
+  --aqg-control-radius: 0.4rem;
+  --aqg-control-font-size: 0.95rem;
+
+  /* Contrast-safe text tokens.
+   * Dark theme is the default (data-theme is unset until JS toggles it). */
+  --aqg-text: var(--sl-color-white);
+  --aqg-text-muted: var(--sl-color-gray-2);     /* 7.4:1 on gray-6 */
+  --aqg-text-on-accent: #ffffff;                 /* 8.5:1 on #2f4a8c */
+
+  /* Focus indicator — accent-high is light blue on dark, dark navy on light;
+   * 3:1+ against either page bg by design. */
+  --aqg-focus-ring: var(--sl-color-accent-high);
+  --aqg-focus-offset: 2px;
+  --aqg-focus-width: 2px;
+
+  /* Validation */
+  --aqg-error: #f08a8a;                          /* 4.6:1 on gray-6 */
+  --aqg-error-strong: #d04848;
+  --aqg-warn: #e0a85a;
+  --aqg-success: #57c489;
+}
+
+:root[data-theme='light'] {
+  --aqg-text: var(--sl-color-black);
+  --aqg-text-muted: var(--sl-color-gray-4);     /* 5.6:1 on gray-1 */
+  --aqg-error: #b53030;                          /* 5.4:1 on gray-1 */
+}
+
+/* -------------------------------------------------------------------------
+ * Buttons
+ * Targets buttons inside any of our component wrappers so all action
+ * buttons share a single visual definition and a single focus treatment.
+ * ------------------------------------------------------------------------- */
+
+.aqg-readiness button,
+.aqg-wizard button,
+.aqg-tier button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: var(--aqg-control-height);
+  min-width: var(--aqg-control-height);
+  padding: 0 var(--aqg-control-padding-x);
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--aqg-control-font-size);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  border-radius: var(--aqg-control-radius);
+  border: 1px solid var(--sl-color-accent);
+  background: var(--sl-color-accent);
+  color: var(--aqg-text-on-accent);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, transform 80ms ease;
+}
+
+.aqg-readiness button:hover:not(:disabled),
+.aqg-wizard button:hover:not(:disabled),
+.aqg-tier button:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--sl-color-accent) 88%, white);
+  border-color: color-mix(in srgb, var(--sl-color-accent) 88%, white);
+}
+
+.aqg-readiness button:active:not(:disabled),
+.aqg-wizard button:active:not(:disabled),
+.aqg-tier button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.aqg-readiness button:disabled,
+.aqg-wizard button:disabled,
+.aqg-tier button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Ghost / secondary variant — used for back, reset, and cancel actions.
+ * The class names already exist on each component; this rule covers all of
+ * them with a single contrast-safe definition. */
+.aqg-readiness__reset,
+.aqg-wizard__back,
+.aqg-wizard__reset,
+.aqg-tier__reset {
+  background: transparent !important;
+  color: var(--aqg-text) !important;
+  border-color: var(--sl-color-gray-3) !important;
+}
+
+.aqg-readiness__reset:hover:not(:disabled),
+.aqg-wizard__back:hover:not(:disabled),
+.aqg-wizard__reset:hover:not(:disabled),
+.aqg-tier__reset:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--sl-color-accent) 14%, transparent) !important;
+  border-color: var(--sl-color-accent) !important;
+}
+
+/* -------------------------------------------------------------------------
+ * Form inputs — text, email, date, textarea, select
+ * ------------------------------------------------------------------------- */
+
+.aqg-readiness input[type='text'],
+.aqg-readiness input[type='email'],
+.aqg-readiness input[type='date'],
+.aqg-readiness select,
+.aqg-readiness textarea,
+.aqg-wizard input[type='text'],
+.aqg-wizard input[type='email'],
+.aqg-wizard input[type='date'],
+.aqg-wizard select,
+.aqg-wizard textarea,
+.aqg-tier input[type='text'],
+.aqg-tier input[type='email'],
+.aqg-tier input[type='date'],
+.aqg-tier select,
+.aqg-tier textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--aqg-control-height);
+  padding: 0.55rem 0.75rem;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--sl-color-black);
+  background: var(--sl-color-white);
+  border: 1px solid var(--sl-color-gray-4);
+  border-radius: var(--aqg-control-radius);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.aqg-readiness textarea,
+.aqg-wizard textarea,
+.aqg-tier textarea {
+  min-height: 5.5rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.aqg-readiness input::placeholder,
+.aqg-wizard input::placeholder,
+.aqg-tier input::placeholder,
+.aqg-readiness textarea::placeholder,
+.aqg-wizard textarea::placeholder,
+.aqg-tier textarea::placeholder {
+  /* Placeholder must still be readable. #767f8c on white = 4.6:1. */
+  color: #5b6677;
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------------------
+ * Labels & helper text
+ * ------------------------------------------------------------------------- */
+
+.aqg-readiness label,
+.aqg-wizard label,
+.aqg-tier label {
+  color: var(--aqg-text);
+}
+
+.aqg-readiness__progress,
+.aqg-wizard__intro,
+.aqg-wizard__helper,
+.aqg-readiness__privacy,
+.aqg-wizard__privacy,
+.aqg-tier__privacy,
+.aqg-tier__progress {
+  color: var(--aqg-text-muted) !important;
+}
+
+/* -------------------------------------------------------------------------
+ * Focus indicators — applied last so it wins over Starlight defaults.
+ * Visible at 3:1 contrast against any of our backgrounds. Skipped for
+ * mouse focus via :focus-visible (keyboard / a11y users still see it).
+ * ------------------------------------------------------------------------- */
+
+.aqg-readiness :focus-visible,
+.aqg-wizard :focus-visible,
+.aqg-tier :focus-visible {
+  outline: var(--aqg-focus-width) solid var(--aqg-focus-ring);
+  outline-offset: var(--aqg-focus-offset);
+  border-radius: var(--aqg-control-radius);
+}
+
+/* Inputs already have rounded corners and a border; pull the outline in
+ * slightly so it looks intentional rather than ringed. */
+.aqg-readiness input:focus-visible,
+.aqg-readiness select:focus-visible,
+.aqg-readiness textarea:focus-visible,
+.aqg-wizard input:focus-visible,
+.aqg-wizard select:focus-visible,
+.aqg-wizard textarea:focus-visible,
+.aqg-tier input:focus-visible,
+.aqg-tier select:focus-visible,
+.aqg-tier textarea:focus-visible {
+  outline-offset: 1px;
+  border-color: var(--sl-color-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--aqg-focus-ring) 40%, transparent);
+}
+
+/* -------------------------------------------------------------------------
+ * Radio and checkbox option rows — make the entire row clickable and
+ * highlight selection state at AA contrast.
+ * ------------------------------------------------------------------------- */
+
+.aqg-readiness__options label,
+.aqg-tier__options label {
+  min-height: 2.25rem;                  /* 36px — comfortable target */
+  align-items: center;
+  color: var(--aqg-text);
+  border: 1px solid transparent;
+}
+
+.aqg-readiness__options label:hover,
+.aqg-tier__options label:hover {
+  background: color-mix(in srgb, var(--sl-color-accent) 12%, transparent);
+}
+
+.aqg-readiness__options input[type='radio'],
+.aqg-readiness__options input[type='checkbox'],
+.aqg-tier__options input[type='radio'],
+.aqg-tier__options input[type='checkbox'] {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  accent-color: var(--sl-color-accent);
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------------------
+ * Badges & question chips — used for "Q1" counter, domain pills, tier badges.
+ * ------------------------------------------------------------------------- */
+
+.aqg-readiness__domain,
+.aqg-tier__dimension {
+  background: color-mix(in srgb, var(--sl-color-accent-high) 22%, transparent);
+  color: var(--sl-color-white);
+}
+
+:root[data-theme='light'] .aqg-readiness__domain,
+:root[data-theme='light'] .aqg-tier__dimension {
+  background: color-mix(in srgb, var(--sl-color-accent) 18%, transparent);
+  color: var(--sl-color-accent-high);
+}
+
+/* -------------------------------------------------------------------------
+ * Validation state — visible at AA contrast on either theme.
+ * ------------------------------------------------------------------------- */
+
+.aqg-wizard__error,
+.aqg-tier__error {
+  color: var(--aqg-error);
+  font-weight: 600;
+}
+
+.has-error input,
+.has-error textarea,
+.aqg-tier__field--error input,
+.aqg-tier__field--error textarea {
+  border-color: var(--aqg-error-strong) !important;
+  box-shadow: 0 0 0 1px var(--aqg-error-strong);
+}
+
+/* -------------------------------------------------------------------------
+ * Print
+ * ------------------------------------------------------------------------- */
+
+@media print {
+  .aqg-readiness button,
+  .aqg-wizard button,
+  .aqg-tier button { display: none !important; }
+}

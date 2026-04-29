@@ -1,4 +1,8 @@
-/* AI Readiness Assessment — component styles */
+/* AI Readiness Assessment — component layout
+ *
+ * Visual primitives (buttons, inputs, focus, badge contrast) live in
+ * forms.css. This file owns only structure unique to the assessment.
+ */
 
 .aqg-readiness {
   display: flex;
@@ -27,27 +31,14 @@
 .aqg-readiness__header label {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  flex: 1 1 16rem;
-}
-
-.aqg-readiness__header input[type='text'] {
-  padding: 0.45rem 0.6rem;
-  font-size: 1rem;
-  border: 1px solid var(--sl-color-gray-4);
-  border-radius: 0.35rem;
-  background: var(--sl-color-white);
-  color: var(--sl-color-black);
+  gap: 0.3rem;
+  flex: 1 1 18rem;
+  font-weight: 600;
 }
 
 .aqg-readiness__progress {
   font-size: 0.95rem;
-  color: var(--sl-color-gray-2);
   white-space: nowrap;
-}
-
-:root[data-theme='light'] .aqg-readiness__progress {
-  color: var(--sl-color-gray-4);
 }
 
 .aqg-readiness__list {
@@ -72,45 +63,36 @@
   content: 'Q' counter(aqg-q);
   display: inline-block;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   margin-right: 0.55rem;
-  padding: 0.05rem 0.4rem;
-  border-radius: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.3rem;
   background: var(--sl-color-accent);
   color: var(--sl-color-white);
   vertical-align: middle;
+  line-height: 1.2;
 }
 
 .aqg-readiness__domain {
   display: inline-block;
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 0.1rem 0.45rem;
-  border-radius: 0.25rem;
-  background: color-mix(in srgb, var(--sl-color-accent-high) 22%, transparent);
-  color: var(--sl-color-white);
+  padding: 0.2rem 0.55rem;
+  border-radius: 0.3rem;
   vertical-align: middle;
-}
-
-:root[data-theme='light'] .aqg-readiness__domain {
-  color: var(--sl-color-accent-high);
-  background: color-mix(in srgb, var(--sl-color-accent) 18%, transparent);
+  line-height: 1.2;
 }
 
 .aqg-readiness__prompt {
   display: block;
   font-weight: 600;
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   line-height: 1.4;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   margin-bottom: 0.7rem;
-  color: var(--sl-color-white);
-}
-
-:root[data-theme='light'] .aqg-readiness__prompt {
-  color: var(--sl-color-black);
+  color: var(--aqg-text);
 }
 
 .aqg-readiness__options {
@@ -122,27 +104,17 @@
 
 .aqg-readiness__options label {
   display: flex;
-  gap: 0.55rem;
-  align-items: flex-start;
-  padding: 0.35rem 0.5rem;
+  gap: 0.6rem;
+  padding: 0.4rem 0.55rem;
   border-radius: 0.3rem;
   cursor: pointer;
-  color: var(--sl-color-text);
-}
-
-.aqg-readiness__options label:hover {
-  background: color-mix(in srgb, var(--sl-color-accent-high) 12%, transparent);
-}
-
-.aqg-readiness__options input[type='radio'] {
-  margin-top: 0.25rem;
 }
 
 .aqg-readiness__result {
   padding: 1rem 1.25rem;
   border-radius: 0.4rem;
-  background: color-mix(in srgb, #3aa66e 10%, transparent);
-  border-left: 3px solid #3aa66e;
+  background: color-mix(in srgb, var(--aqg-success) 14%, transparent);
+  border-left: 4px solid var(--aqg-success);
 }
 
 .aqg-readiness__result h3 {
@@ -158,7 +130,7 @@
 .aqg-readiness__result td,
 .aqg-readiness__result th {
   text-align: left;
-  padding: 0.3rem 0.5rem;
+  padding: 0.4rem 0.5rem;
   border-bottom: 1px solid var(--sl-color-gray-5);
 }
 
@@ -169,38 +141,8 @@
   align-items: center;
 }
 
-.aqg-readiness__actions button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  height: 2.5rem;
-  padding: 0 1rem;
-  margin: 0;
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1;
-  border-radius: 0.35rem;
-  border: 1px solid var(--sl-color-accent);
-  background: var(--sl-color-accent);
-  color: var(--sl-color-white);
-  cursor: pointer;
-}
-
-.aqg-readiness__actions button:hover {
-  filter: brightness(1.1);
-}
-
-.aqg-readiness__actions .aqg-readiness__reset {
-  background: transparent;
-  color: var(--sl-color-gray-2);
-  border-color: var(--sl-color-gray-4);
-}
-
 .aqg-readiness__privacy {
   font-size: 0.85rem;
-  color: var(--sl-color-gray-3);
   margin: 0;
 }
 
