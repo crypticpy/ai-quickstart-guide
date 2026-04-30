@@ -11,11 +11,11 @@ For most agencies starting out, the answer is **start with managed**. Move to fu
 
 ## Decision: managed vs. full Kubernetes
 
-| Choice                                                              | When to pick                                                                           | Operational cost (FTE-days/month) |
-| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------- |
-| Managed container service (Container Apps / App Runner / Cloud Run) | Single team, ≤20 services, no GPU scheduling, no service mesh, no custom networking    | 1–3                               |
-| Managed Kubernetes (AKS / EKS / GKE)                                | Multiple teams, mature platform team, mesh required, GPU workloads, custom controllers | 5–15                              |
-| Self-managed Kubernetes                                             | Almost never. Reserved for air-gapped on-prem with no managed option                   | 30+                               |
+| Choice                                                              | When to pick                                                                           | Operational burden |
+| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------ |
+| Managed container service (Container Apps / App Runner / Cloud Run) | Single team, small service count, no GPU scheduling, no service mesh, no custom networking | Low |
+| Managed Kubernetes (AKS / EKS / GKE)                                | Multiple teams, mature platform team, mesh required, GPU workloads, custom controllers | Medium to high |
+| Self-managed Kubernetes                                             | Rare; reserved for air-gapped on-prem with no managed option                           | Very high |
 
 A useful test: if the agency does not yet have a platform engineer who has run Kubernetes in production for a year, choose managed. The managed service is almost always sufficient for the first 12–18 months and migration to Kubernetes later is well-understood.
 
@@ -32,7 +32,7 @@ A useful test: if the agency does not yet have a platform engineer who has run K
 
 - **Azure Container Apps** is the default. Built on Kubernetes (KEDA, Dapr, Envoy) but exposes a managed-service surface. Auto-scales to zero; supports background jobs and event-driven workloads.
 - **Azure Functions** for thin glue.
-- **Azure App Service** as a fallback for legacy or .NET-heavy stacks. Avoid for new AI workloads — it is not the strategic surface.
+- **Azure App Service** for agencies already standardized on it, especially simple web apps or .NET-heavy stacks. Container Apps is the default for new portable container workloads.
 - **Azure OpenAI** for inference is called from the workload, not orchestrated.
 
 ### Google Cloud — Cloud Run
@@ -60,7 +60,7 @@ For all three managed Kubernetes services, the agency-friendly pattern:
 - **EKS:** use Bottlerocket nodes; IRSA for workload identity; private cluster mode; enable EKS Pod Identity.
 - **GKE:** use GKE Autopilot if the team is small (Google operates the nodes); standard mode if you need node-level control. Enable Workload Identity and Binary Authorization.
 
-## Reference architecture (cloud-agnostic shape)
+## Reference architecture (portable shape)
 
 The diagram is the same on every cloud. Per environment:
 
@@ -71,12 +71,13 @@ Public ingress (WAF + CDN)
        ├── AI orchestration service (the platform)
        ├── Application services (per use case)
        └── Background workers
-    → Private endpoints to AI services (Bedrock / OpenAI / Vertex)
+    → Private endpoints to cloud-native AI services where supported
+    → Public third-party AI APIs only through approved egress controls
     → Private endpoints to data stores
     → Egress through inspection (Firewall / Squid / cloud-native NGFW)
 ```
 
-The AI orchestration service is the platform component (Phase 5) that fans out to the AI vendor of choice. It runs in the container runtime, not in serverless, because it holds connections, caches, and rate-limit state that benefit from longer-lived processes.
+The AI orchestration service is the platform component (Phase 5) that fans out to the AI vendor of choice. It usually runs in the container runtime rather than pure serverless because it holds connections, caches, and rate-limit state that benefit from longer-lived processes. Thin event handlers and low-risk Tier-1 automations can still be serverless when that is the simplest managed option.
 
 ## Staging vs. production separation
 
@@ -141,7 +142,7 @@ Per cloud:
 AI workloads have spiky compute and very spiky token cost. Configure:
 
 - **Container autoscaling** on CPU + memory + concurrent requests + queue depth (depending on workload shape).
-- **Scale-to-zero** in sandbox and staging; never in production for user-facing services.
+- **Scale-to-zero** in sandbox and staging, and for production batch jobs or non-user-facing work where latency and availability requirements allow it. Keep user-facing production services warm enough to meet their SLOs.
 - **Budget alarms** distinct from the cloud-wide budget — per-workload, per-environment.
 - **Concurrency limits** to bound the maximum cost per minute. AI services bill per token; an unbounded concurrency leak can produce a large bill before alarms fire.
 
@@ -150,7 +151,7 @@ AI workloads have spiky compute and very spiky token cost. Configure:
 - **Choosing Kubernetes too early.** A 5-service platform on AKS/EKS/GKE pays full operational cost without using full Kubernetes capability. Stick with managed until a hard requirement forces the change.
 - **Mixing serverless and containers in the orchestration core.** The orchestration service ends up split between Lambda functions and a container, and state synchronization becomes hard. Pick one for the core.
 - **No pod/container resource limits.** A misbehaving model call can pin CPU and starve other workloads. Set limits.
-- **Production exposed without WAF.** Even Tier-1 internal-only workloads benefit from WAF; for Tier-2/3 it is non-negotiable.
+- **Production exposed without WAF.** Public Tier-2/3 ingress should require WAF or the agency's approved equivalent. Tier-1 and internal workloads still benefit from WAF where policy and cost allow.
 - **No rollback test.** Every deploy path should have a tested rollback path. Test it monthly.
 
 ## Related

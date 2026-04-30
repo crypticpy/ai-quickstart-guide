@@ -1,36 +1,36 @@
 ---
 title: Phase 5 — Modular Platform Build
-description: Build the reusable module library, the "70% already solved" that makes future apps take weeks instead of months. Months 5–10.
+description: Build the reusable module library that makes future apps faster, safer, and less repetitive. Months 5–10.
 sidebar:
   order: 1
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Phase 5 is where the agency stops paying integration tax. The platform is not a product; it is a small library of well-bounded modules that every future application will compose. When the next intake submission becomes a project, 70% of the answer should already exist as code in the platform: auth, RBAC, data access, API plumbing, document rendering, AI orchestration. The team building the new application writes the 30% that is genuinely about the use case.
+Phase 5 is where the agency starts reducing integration tax. The platform is not a product mandate; it is a practical library of well-bounded modules, conventions, and templates that future applications can compose. When the next intake submission becomes a project, the common pieces should already have a recommended path: auth, RBAC, data access, API plumbing, document rendering, AI orchestration. The team building the new application can spend more time on the use case and less time rebuilding plumbing.
 
-This is the longest phase (six months) and the most consequential. A platform that ships works for a decade. A platform that doesn't gets quietly abandoned and each team rebuilds the same things forever.
+This is the longest phase in the standard path (about six months) and it is where scope discipline matters most. A useful platform lasts because teams can adopt it gradually, understand its seams, and still make exceptions when the business case is real. A platform that tries to solve every future problem on day one usually stalls.
 
 ## Objective
 
-Build seven core modules (independently testable, documented, versioned) with a coherent module taxonomy, an inner-source contribution model, a registry for discoverability, and an Internal Developer Platform (IDP) that exposes the platform's capabilities through self-service paths.
+Build the reusable pieces your next applications need: independently testable, documented, versioned modules; a coherent module taxonomy; a contribution model; a registry for discoverability; and, where the organization can support it, an Internal Developer Platform (IDP) that exposes the platform's capabilities through self-service paths.
 
 ## How this phase scales for your agency
 
 <Tabs syncKey="agency-size">
 <TabItem label="Small">
 
-**1–3 lightweight modules on managed infrastructure.** Don't try to build seven modules from scratch with two engineers. Pick the three that give the most leverage on your starter project, and lean heavily on pre-built frameworks (LangChain, Semantic Kernel, FastAPI extensions, off-the-shelf admin dashboards).
+**1–3 lightweight modules on managed infrastructure.** Don't try to build seven modules from scratch with two engineers. Pick the few reusable pieces that give the most leverage on your starter project, and lean heavily on pre-built frameworks, managed services, hosted admin tools, and the conventions already supported by your stack.
 
-- **Build only:** Auth (a thin wrapper around your IdP), API Framework (conventions on top of your web framework), AI Orchestration (the highest-leverage module, even small; wrap one LLM adapter and one retrieval path).
-- **Skip / use pre-built:** Data Grid (use a library), Admin Dashboard (use a hosted solution or skip), Document Rendering (call a service), RBAC (start with role-based JWT claims, defer attribute-based until needed).
-- **Skip:** Inner-source contribution model, IDP / module registry, full hexagonal architecture for non-AI modules.
-- **Budget:** $20K–$50K Year 1 (engineering time on three light modules).
+- **Start with:** Auth (a thin wrapper around your IdP), API conventions on top of your web framework, and, if your starter project uses AI, a small AI orchestration layer that wraps one approved model path and one retrieval path.
+- **Use pre-built where possible:** Data Grid (use a library), Admin Dashboard (use your IdP/cloud/admin tool or skip), Document Rendering (use a service or template library), RBAC (start with IdP groups or role claims, defer attribute-based policies until needed).
+- **Defer:** Formal inner source, a full IDP, custom module registry, and full hexagonal architecture for low-risk non-AI code.
+- **Budget:** Often mostly staff time plus managed-service cost; size the first year around the starter project instead of a standalone platform program.
 
 </TabItem>
 <TabItem label="Standard">
 
-**Build the seven modules across six months per the standard sequencing.** Run the modular monolith pattern with hexagonal seams, ship the inner-source guide, and stand up the module registry/IDP. The 6-month sequence below is calibrated for a 3–6 engineer platform team.
+**Build the core modules across six months per the standard sequencing.** Run the modular monolith pattern with hexagonal seams, ship the contribution guide, and stand up at least a lightweight registry. The full IDP is valuable when a 3–6 engineer platform team can maintain it.
 
 - **Cadence:** Follow the month-by-month schedule. Auth + RBAC first; AI Orchestration v1 in Month 4 so Phase 6 can start using it.
 - **Pattern:** Modular monolith, hexagonal architecture, OpenAPI everywhere.
@@ -39,7 +39,7 @@ Build seven core modules (independently testable, documented, versioned) with a 
 </TabItem>
 <TabItem label="Large">
 
-**Seven modules plus inner-source contribution from consumer teams.** Run the standard build with a dedicated platform team, then layer on a formal inner-source program: consumer teams contribute fixes and feature modules back, with a maintainership rotation. Add advanced modules (workflow engine, eligibility rules engine, Forms Builder) once the core is stable.
+**Core modules plus inner-source contribution from consumer teams.** Run the standard build with a dedicated platform team, then layer on a formal inner-source program: consumer teams contribute fixes and feature modules back, with a maintainership rotation. Add advanced modules such as workflow, eligibility rules, or forms only once the core is stable and adoption proves demand.
 
 - **Add:** Inner-source program with maintainership rotation, formal RFC for new modules, dedicated DevEx + platform-engineering function, advanced modules (workflow, rules engine, low-code Forms Builder).
 - **Cadence:** Months 1–6 build the core; Months 7–12 onboard consumer teams and harvest contributions back.
@@ -52,9 +52,9 @@ Build seven core modules (independently testable, documented, versioned) with a 
 
 | Path | Do now | Use / simplify | Defer |
 | --- | --- | --- | --- |
-| Small | Auth wrapper, API conventions, and a small AI orchestration layer | Hosted admin, library data grid, role claims instead of ABAC | IDP, module registry, full seven-module build |
-| Standard | Build seven core modules and a registry across six months | Modular monolith, not microservices | Advanced modules until the first app ships |
-| Large | Seven modules plus inner-source contribution model | Dedicated platform and DevEx teams | Only low-demand modules |
+| Small | Auth wrapper, API conventions, and a small AI orchestration layer if needed | Hosted admin, library data grid, role claims instead of ABAC | IDP, custom registry, full seven-module build |
+| Standard | Build the core modules and a registry across six months | Modular monolith by default | Advanced modules until the first app ships |
+| Large | Core modules plus inner-source contribution model | Dedicated platform and DevEx teams | Low-demand modules until adoption proves need |
 
 ## Minimum viable platform in plain English
 
@@ -62,22 +62,22 @@ For a small agency, "platform" does not mean a separate product team and seven c
 
 ## The pattern: modular monolith with hexagonal seams
 
-The platform is a **modular monolith**, not a microservice constellation. Modules live in one repo (or a small number) and ship as one deployable unit. Inside, each module is internally coherent and externally minimal: it exposes a small interface and depends on a small set of others. The seams use [hexagonal architecture / ports-and-adapters](/phase-5-platform/module-taxonomy/) so a module's domain logic does not depend on any specific cloud, database, or vendor.
+The recommended default is a **modular monolith**, not a microservice constellation. Modules live in one repo or a small number of repos and usually ship as one deployable unit. Inside, each module is internally coherent and externally minimal: it exposes a small interface and depends on a small set of others. The seams use [hexagonal architecture / ports-and-adapters](/phase-5-platform/module-taxonomy/) so a module's domain logic is less coupled to a specific cloud, database, or vendor.
 
 Why a modular monolith and not microservices:
 
 - **One deploy, not seven.** Phase 3 set up one CI/CD pipeline; one set of secrets; one observability backend. Microservices multiply each by N.
 - **Refactoring across modules is cheap.** When a contract needs to change, both sides move in one PR.
-- **Operational footprint is small.** A 5-person platform team can run a modular monolith. Microservices need 15–25.
+- **Operational footprint is smaller.** A small platform team can usually operate a modular monolith. Microservices add service discovery, network policy, distributed tracing, deploy coordination, and on-call burden.
 - **Performance is better.** In-process function calls beat HTTP between services for almost every metric except specific scale-out cases.
 
-The agency adopts this pattern explicitly. Microservices are reserved for the rare module that legitimately needs independent scaling, language difference, or deployment cadence. Most modules don't.
+Adopt this pattern explicitly as the default. Use microservices when a module has a clear need for independent scaling, language/runtime separation, ownership boundaries, or deployment cadence. Most starter modules do not.
 
 ## The seven modules
 
 | Module                                                             | What it does                                                                        | Why a module                                             |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| [Authentication & SSO](/phase-5-platform/auth-module/)             | OIDC sign-in, session management, JWT validation, MFA enforcement                   | Every app needs it; nobody should reimplement            |
+| [Authentication & SSO](/phase-5-platform/auth-module/)             | OIDC sign-in, session management, JWT validation, MFA signals                       | Every app needs it; nobody should reimplement            |
 | [RBAC](/phase-5-platform/rbac-module/)                             | Roles, scopes, attribute-based policies, permission enforcement                     | Authorization is high-stakes and uniform across apps     |
 | [Data Grid & Search](/phase-5-platform/data-grid-module/)          | Reusable typed list/filter/sort/export UI + backend; full-text search               | Every internal tool needs lists; reimplemented endlessly |
 | [API Framework](/phase-5-platform/api-framework-module/)           | Request/response plumbing, error format, pagination, rate limit, OpenAPI generation | Wraps web framework with agency conventions baked in     |
@@ -101,38 +101,38 @@ Six months of work, sequenced so blocking dependencies resolve early.
 | 3     | Admin Dashboard + Document Rendering                              | An app can be operated and its outputs delivered                   |
 | 4     | AI Orchestration v1 (LLM adapter + retrieval)                     | A prompt+retrieval feature can be added to any app via the module  |
 | 5     | AI Orchestration v2 (eval, cost, guardrails) + Inner-Source guide | The platform becomes safe for Tier-2 deployments                   |
-| 6     | Module Registry + IDP self-service paths + hardening              | Any developer can scaffold a new app in under 1 hour               |
+| 6     | Module Registry + IDP self-service paths + hardening              | A developer can scaffold a working app quickly, with a target of under 1 hour once automation is mature |
 
-The sequence assumes a small platform team (3–6 engineers). Larger teams can parallelize months 2–3.
+The sequence assumes a standard platform team of roughly 3–6 engineers. Smaller teams should cut scope before extending timelines; larger teams can parallelize months 2–3.
 
-## Hard dependencies
+## Readiness gates
 
-- **Phase 3 operational.** The platform runs on Phase 3's infrastructure. Without it, modules have nowhere to live.
-- **Phase 4 standards adopted.** Coding standards, testing strategy, API-first design, ADR practice. Modules embody these standards; without the standards in place, the modules drift.
-- **Track 4 graduates available.** Track 4 produces the engineers who build and maintain modules. Sequence Phase 5 to start as the first Track 4 cohort completes.
+- **Phase 3 operational for production.** Planning, prototypes, and local module work can start earlier, but production modules need Phase 3 infrastructure, secrets, CI/CD, observability, and rollback paths.
+- **Phase 4 standards adopted for shared modules.** Coding standards, testing strategy, API-first design, and ADR practice keep shared modules from drifting. Small teams can use a lighter checklist, but the decisions still need to be explicit.
+- **Track 4 skills available.** Track 4 produces the engineers who build and maintain modules. Sequence Phase 5 to start as the first Track 4 cohort completes, or bring in a partner team that can coach while internal staff ramp up.
 
 ## What Phase 5 does NOT cover
 
 - Specific user-facing applications. Apps come in Phase 6 (and onwards).
 - Domain-specific business logic. The modules are domain-agnostic; eligibility logic, inspection scheduling, etc., live in their own apps that consume the modules.
-- Vendor selection for foundation models. The AI Orchestration module's adapter pattern means the choice is config; the choice itself is procurement work.
+- Vendor selection for foundation models. The AI Orchestration module's adapter pattern limits how much application code changes, but vendor/model choices still require procurement review, evaluation, safety review, and migration testing.
 
 ## Off-Ramp — Platform Without Starter Project
 
-Agencies that complete Phase 5 have a working platform with reusable modules, established governance, trained staff, and development standards. This is production-ready infrastructure. **Phase 6 (the starter project) can be deferred** by a quarter or more without losing the Phase 5 investment. Some agencies use this off-ramp deliberately: ship the platform, then wait for the right business need to land before committing to the first starter project. The platform's value compounds once it exists.
+Agencies that complete Phase 5 have reusable modules, established governance, trained staff, and development standards. If the production gates are met, the result can be a production-ready foundation; if the work is still prototype-grade, label it honestly and keep hardening. **Phase 6 (the starter project) can be deferred** by a quarter or more without losing the Phase 5 investment. Some agencies use this off-ramp deliberately: ship the platform foundation, then wait for the right business need to land before committing to the first starter project.
 
 ## Plain-English Guide to Phase 5 Terms
 
 - **Module.** A self-contained unit of platform functionality with a small public interface. Other modules and applications consume it; they don't peek inside.
-- **Modular monolith.** All modules in one process, one deployable unit. Internal calls are function calls, not HTTP. Easier to operate than microservices; gives most of the benefits.
-- **Hexagonal architecture / ports-and-adapters.** The module's core logic ("hexagon") doesn't depend on its surroundings. It defines _ports_ (interfaces) and _adapters_ implement those ports for specific clouds, databases, or vendors. Swap the adapter; the core stays the same.
+- **Modular monolith.** Modules commonly run in one process or one deployable unit. Internal calls are function calls, not HTTP. Easier to operate than microservices for most starter platforms.
+- **Hexagonal architecture / ports-and-adapters.** The module's core logic ("hexagon") is isolated from its surroundings. It defines _ports_ (interfaces) and _adapters_ implement those ports for specific clouds, databases, or vendors. Swapping an adapter is bounded work, but still requires tests and review.
 - **Inner source.** Treating internal codebases like open-source projects within the agency: shared, contributed-to, transparent code reviews. Producer modules; consumer teams contribute fixes back.
-- **Internal Developer Platform (IDP).** The self-service surface that lets a developer scaffold a new app, deploy it, see its logs, and operate it without filing tickets. Backstage is the dominant open-source choice; Port and Cortex are commercial alternatives.
+- **Internal Developer Platform (IDP).** The self-service surface that lets a developer scaffold a new app, deploy it, see its logs, and operate it without filing tickets. Backstage is a strong open-source choice; commercial portals and lighter registries can be better fits for smaller teams.
 - **Golden path.** The recommended way to do a thing. The IDP makes the golden path the easy path, so teams choose it by default without needing to be told.
 
 ## Research basis
 
-Modular monolith pattern (Shopify's documented architecture; Amazon Prime Video's 2023 migration), hexagonal architecture (Cockburn 2005), Spring Modulith and similar implementations, Backstage IDP (CNCF), inner source (PayPal originated; CMS first federal OSPO 2024), and the SPACE framework for measuring the developer experience the platform produces.
+Modular monolith pattern (Shopify's documented architecture; Amazon Prime Video's 2023 migration), hexagonal architecture (Cockburn 2005), Spring Modulith and similar implementations, Backstage IDP (CNCF), inner source practices, and the SPACE framework for measuring the developer experience the platform produces.
 
 ## Related
 

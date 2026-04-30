@@ -7,7 +7,7 @@ sidebar:
 
 ## What this page replaces
 
-The [Pick Your Path](/getting-started/pick-your-path/) comparison table shows Year 1 ranges of $50K to $150K for Small, $150K to $400K for Standard, and $400K to $1M+ for Large. Those numbers are anchored, not hand-waved. This page shows how they were built so a finance team can rebuild them with their own pay bands, locality, and procurement vehicle.
+The [Pick Your Path](/getting-started/pick-your-path/) comparison table shows Year 1 ranges of $50K to $150K for Small, $150K to $400K for Standard, and $400K to $1M+ for Large. Those numbers are planning anchors, not promises. This page shows how they were built so a finance team can rebuild them with their own pay bands, locality, procurement vehicle, and accounting treatment for existing staff time.
 
 Read this when you need to defend the totals in a budget memo, when your CFO wants to see the inputs, or when you want to swap a default for a number you trust more.
 
@@ -18,7 +18,7 @@ Read this when you need to defend the totals in a budget memo, when your CFO wan
 3. **Tooling and licenses.** Per-developer and per-org software.
 4. **External services.** Legal counsel, training facilitation, audits, and penetration tests.
 
-Every dollar figure on this page is sourced. Every default is overridable in the [downloadable worksheet](#download-the-worksheet).
+Every dollar figure on this page is either sourced or explicitly labeled as an estimate. Every default is overridable in the [downloadable worksheet](#download-the-worksheet).
 
 ## 1. People cost
 
@@ -43,7 +43,7 @@ The product is the annual loaded cost for that role at that allocation.
 | GS-13 step 1 (typical senior dev)                 | [OPM 2025 General Schedule](https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/2025/general-schedule/) | ~$88,520 base + locality  | ~$143K to $180K loaded                       |
 | GS-14 step 1 (lead or manager)                    | [OPM 2025 General Schedule](https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/2025/general-schedule/) | ~$104,604 base + locality | ~$170K to $215K loaded                       |
 
-DC locality currently adds roughly 33% on top of base; Rest of US adds about 17%. Check the OPM table for your specific locality before pinning a number.
+Locality pay changes by year and location. Check the OPM table for your specific locality before pinning a number.
 
 ### Worked example
 
@@ -135,7 +135,7 @@ A few notes on how these stack up against the headline ranges:
 - The Standard range published as "$150K to $400K" is achievable when the agency reuses existing IT staff rather than hiring net-new headcount. The full-loaded math above is what the program costs when you account for fully attributed staff time.
 - The Large range scales linearly with FTE count and inference volume.
 
-These are anchored estimates. Real budgets vary by locality, existing infrastructure, procurement vehicle, and how much staff time you treat as already-allocated versus net-new.
+These are anchored estimates. Real budgets vary by locality, existing infrastructure, procurement vehicle, usage volume, and how much staff time you treat as already allocated versus net-new.
 
 ## Download the worksheet
 
@@ -145,7 +145,7 @@ The worksheet has every line item from this page, plus columns for the source UR
 
 ## Caveats
 
-- **Procurement cycles add 12 to 18 months of lead time.** The dollars on this page are operational, not procurement-cycle. Add procurement officer time and any third-party security review separately.
+- **Procurement cycles can add long lead time.** The dollars on this page are operational, not procurement-cycle. Add procurement officer time and any third-party security review separately.
 - **These figures are 2026 anchors.** Cloud AI service costs are dropping. Tooling licensing is evolving. Re-anchor annually, especially the inference per-token rates.
 - **Match to the variant for your agency size.** The component math should map to the [Pick Your Path](/getting-started/pick-your-path/) variant your agency picked. If you are between sizes, use the Standard inputs and reduce FTE allocation rather than mixing rows from two variants.
 

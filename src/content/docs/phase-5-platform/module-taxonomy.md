@@ -7,7 +7,7 @@ sidebar:
 
 A platform module is not a folder. A module is a unit with a small, deliberate **public interface** and a sealed **internal implementation**. Other modules and applications depend only on the interface; the implementation can be replaced without changing consumers. The taxonomy on this page describes the rules that make seven modules compose into one coherent platform instead of seven independent kingdoms with overlapping responsibilities.
 
-The pattern the agency adopts is **hexagonal architecture** (also called ports-and-adapters), introduced by Alistair Cockburn in 2005 and now the dominant pattern for long-lived, vendor-portable platform code. Hexagonal architecture is not the only way to keep a module clean, but it is the one most agencies will encounter in modern reference implementations (Spring Modulith, NestJS, .NET Clean Architecture templates, FastAPI clean-architecture starters), and it gives non-trivial, testable benefits.
+The recommended pattern is **hexagonal architecture** (also called ports-and-adapters), introduced by Alistair Cockburn in 2005 and now a common pattern for long-lived, vendor-portable platform code. Hexagonal architecture is not the only way to keep a module clean, but it is one many agencies will encounter in modern reference implementations, and it gives practical, testable benefits when a module must outlive a single vendor or application.
 
 ## What a module is
 
@@ -20,7 +20,7 @@ A module is the unit at which:
 - **Documentation** lives — a README, an ADR folder, and per-port reference docs.
 - **Boundaries** are enforced — code in module A does not import private code from module B.
 
-A module is _not_ a microservice. The seven platform modules ship in one process. The boundary is logical, enforced by linting and code review, not by a network hop.
+A module is _not_ automatically a microservice. In the standard path, the core platform modules usually ship in one process or one deployable unit. The boundary is logical, enforced by linting and code review, not by a network hop.
 
 ## The hexagon, in plain language
 
@@ -47,7 +47,7 @@ The visual is a hexagon because Cockburn wanted to break the "layered cake" ment
 
 Three concrete payoffs that are visible inside a year.
 
-1. **Vendor swaps are local.** When the AI Orchestration module swaps from Anthropic to AWS Bedrock, the change is in one adapter file. The domain code is untouched. The agency's exposure to vendor risk drops.
+1. **Vendor swaps are bounded.** When the AI Orchestration module changes model providers or cloud routes, most application logic should remain behind a stable port. The adapter still needs tests, evaluation, procurement review, and sometimes prompt or schema updates, but the agency's exposure to vendor risk drops.
 2. **Tests run in milliseconds.** The domain has no I/O. Unit tests instantiate the domain with in-memory adapters and execute thousands of assertions per second. The "is the testing pyramid the right shape" question (see [testing strategy](/phase-4-dev-stack/testing-strategy/)) becomes trivial — most logic _can_ be unit tested.
 3. **Cross-module boundaries are visible.** When a developer wants module A to call module B, the only allowed path is through B's public ports. Linting rejects "I'll just import the helper class from B" shortcuts. The platform stays modular.
 
@@ -180,10 +180,10 @@ Every module needs to log, emit metrics, and trace. The agency provides a thin *
 
 - A configured logger.
 - An OpenTelemetry tracer and meter.
-- A typed error base class with the [RFC 7807 Problem Details](/phase-4-dev-stack/api-first-design/) shape.
+- A typed error base class with the [Problem Details](/phase-4-dev-stack/api-first-design/) shape from RFC 9457.
 - Standard structured-log fields (request_id, tenant_id, user_id where present).
 
-Every module imports the bootstrap package; no module rolls its own. This is the one allowed exception to the strict module boundaries — bootstrap is below all modules, including platform modules. Bootstrap has no business logic; it is glue.
+Every shared module should use the bootstrap package. This is the one planned exception to the strict module boundaries — bootstrap is below all modules, including platform modules. Bootstrap has no business logic; it is glue.
 
 ## Adapter conventions
 
@@ -239,7 +239,7 @@ Three levels, mirroring the [testing pyramid](/phase-4-dev-stack/testing-strateg
 - **Adapter contract tests** run each adapter against the real external system. One contract per port.
 - **Module tests** drive the module through its public client class with real adapters wired up. They verify the module composes correctly.
 
-A module that ships without all three test layers is not done.
+For shared production modules, all three test layers are the target. Small teams can start with unit tests plus one end-to-end smoke path, then add adapter contract tests before broader reuse or Tier-2/Tier-3 data.
 
 ## When NOT to add a module
 
@@ -251,8 +251,8 @@ Use the seam test: if the code has its own port shape and could realistically be
 
 - **Anemic domain.** Domain models that are pure data with no behavior; all logic lives in services. Sometimes appropriate, often a sign that the domain is poorly understood.
 - **Leaky adapters.** A Postgres adapter that returns `psycopg.Row` objects up into the domain. The domain now depends on Postgres. Map adapter results into domain types at the boundary.
-- **God module.** One module accreting features that should belong elsewhere. Split when the public surface exceeds 15 methods or the README exceeds 1,500 words.
-- **Public-by-default.** Everything in the module is exported. Consumers reach into internals. Boundaries decay. Use `public/` discipline ruthlessly.
+- **God module.** One module accreting features that should belong elsewhere. Consider a split when the public surface keeps growing, the README can no longer explain the module clearly, or consumers need unrelated subsets of it.
+- **Public-by-default.** Everything in the module is exported. Consumers reach into internals. Boundaries decay. Use `public/` discipline deliberately.
 - **Cyclic dependencies.** Module A imports B; B imports A. The import-linter rejects this; if you find one, you have a missing module to extract or a layer violation.
 
 ## Plain-English Guide to Module Taxonomy Terms

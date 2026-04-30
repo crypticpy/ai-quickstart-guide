@@ -73,7 +73,7 @@ def retrieve(question: str, k: int = 3) -> list[Chunk]: ...
 def answer(question: str) -> AnswerResult: ...
 ```
 
-For retrieval, the simplest path that works on this corpus is keyword overlap with a small stoplist. The Lab 4.3 starter showed the same approach. The capstone is not the place to introduce a vector database for the first time. Once retrieval returns chunks, build the prompt the same way Lab 4.3 did, with the chunks as cited sources, and instruct the model to cite the title of each chunk it used. If the chunks do not contain the answer, the model must say so. The Anthropic guidance on grounded responses covers the prompt shape ([Anthropic system prompts overview](https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/system-prompts)).
+For retrieval, the simplest path that works on this corpus is keyword overlap with a small stoplist. The Lab 4.3 starter showed the same approach. The capstone is not the place to introduce a vector database for the first time. Once retrieval returns chunks, build the prompt the same way Lab 4.3 did, with the chunks as cited sources, and instruct the model to cite the title of each chunk it used. If the chunks do not contain the answer, the model must say so. Current provider prompt-engineering docs can help tune the exact wording, but the grounding pattern is provider-neutral.
 
 `triage.py` is the agent loop from Lab 4.4 with one change. The first tool the agent has is `classify_message` itself, exposed as a function call. The remaining tools are `lookup_permit_by_id` and `escalate_to_human`, vendored from Lab 4.4. The triage system prompt tells the model to classify first, then either look up a permit (if the classification is `permits_and_licensing` and the message contains a permit id), answer with the RAG layer (if the classification is policy-shaped), or escalate. The agent loop is the same as Lab 4.4: send the conversation, run any tool the model picks, append the result, repeat up to `max_iterations`.
 
@@ -210,7 +210,7 @@ Hints and reference answers for each exercise live in `code-samples/track-4/lab-
 
 ## Swap providers
 
-`settings.py` is the single config surface. Change `LLM_PROVIDER=openai` and `LLM_MODEL=gpt-4o-mini` in the environment, restart the service, and every endpoint flips. The judge inside `test_answer_judge.py` reads the same setting, so the judge swaps with the service. For Azure, set `LLM_PROVIDER=azure-openai` plus `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, and `AZURE_OPENAI_DEPLOYMENT`. For Bedrock, the cleanest path is Anthropic's [Bedrock integration](https://docs.claude.com/en/api/claude-on-amazon-bedrock); set `ANTHROPIC_BEDROCK_BASE_URL` and add `anthropic[bedrock]` to the install. The endpoint surface, the test surface, and `DEPLOYMENT.md` do not change.
+`settings.py` is the single config surface. Change `LLM_PROVIDER` and `LLM_MODEL` to the provider and model ID or deployment name your agency has approved, restart the service, and every endpoint flips through the same adapter boundary. The judge inside `test_answer_judge.py` reads the same setting, so the judge swaps with the service. For Azure, the model value is usually the deployment name. For Bedrock, Vertex AI, or another managed provider, follow the provider's current SDK docs and keep credential, region, endpoint, and model-name differences inside the provider adapter. The endpoint surface, the test surface, and `DEPLOYMENT.md` do not change.
 
 ## What you learned
 

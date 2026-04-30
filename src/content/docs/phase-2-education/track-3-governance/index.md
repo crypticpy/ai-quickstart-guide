@@ -6,7 +6,7 @@ sidebar:
   order: 0
 ---
 
-Track 3 is unusual in two ways. First, every session produces a real artifact — not a quiz, a deliverable that goes into the agency's AI governance package. Second, the audience is small and specific: policy analysts, privacy officers, legal counsel, CISOs, and compliance staff who own this work day-to-day.
+Track 3 is unusual in two ways. First, every session produces a real artifact — not a quiz, a deliverable that goes into the agency's AI governance package. Second, the audience is small and specific: the people who own governance day-to-day. In a large agency that may include policy analysts, privacy officers, legal counsel, CISOs, and compliance staff. In a smaller agency it may be a few designees covering those responsibilities.
 
 Each session is **90 minutes**, structured as a facilitated working session, not a presentation. Attendees are doing the work, not learning about it.
 
@@ -14,7 +14,7 @@ Each session is **90 minutes**, structured as a facilitated working session, not
 
 | Field        | Value                                                                        |
 | ------------ | ---------------------------------------------------------------------------- |
-| Audience     | Policy analysts, privacy officers, legal counsel, CISOs, compliance staff    |
+| Audience     | AI owner plus governance, legal/procurement, privacy/security, HR/records, and program designees |
 | Mandatory?   | For named members of the AI Review Committee                                 |
 | Format       | 5 × 90-minute working sessions                                               |
 | Group size   | 4–10 (small enough for active participation)                                 |
@@ -47,7 +47,7 @@ Each 90-minute session runs:
 
 Every session produces a **versioned draft** by close. "We'll finish it later" is the most common failure mode in Track 3 — and the one that prevents the Review Committee from operating on schedule. Push to a complete v1 in the room, even if it has square brackets where the room wants to think more.
 
-The artifacts are then circulated for legal review (typically 5–10 business days) and ratified at the next standing committee meeting.
+The artifacts are then circulated for legal review and ratified through the agency's local approval path. Five to ten business days is a common planning target, but counsel workload and public-meeting rules may change the timeline.
 
 ## Evaluation
 
@@ -61,7 +61,7 @@ The artifacts are then circulated for legal review (typically 5–10 business da
 
 Track 3 facilitators are typically the AI program lead, sometimes paired with the agency's General Counsel or CISO for the legal-heavy sessions (3.2 and 3.4).
 
-The facilitator must:
+The facilitator should be able to:
 
 - Have read the Phase 1 governance pages cold and can navigate them in real time.
 - Know the agency's existing policy structure (records schedule, AUP for general technology, procurement boilerplate) — Track 3 modifies, not duplicates, these.
@@ -71,7 +71,7 @@ The facilitator must:
 
 Track 3 does not work well async. The whole point is a facilitated working session — async, attendees default to "I'll comment on the doc later" and momentum dies. If a member cannot attend live, they should send written input _before_ the session and confirm asynchronously _after_, but the session itself is live.
 
-For agencies that genuinely cannot run live, a 2-day governance sprint with an external facilitator (typically $3K–$5K) compresses Track 3 into a single block. This is the small-agency variant.
+For agencies that genuinely cannot run five live sessions, a short governance sprint with an internal or external facilitator can compress Track 3 into a single block. This is the small-agency variant.
 
 ## Common Track 3 failures
 
@@ -84,4 +84,4 @@ For agencies that genuinely cannot run live, a 2-day governance sprint with an e
 
 - [Phase 1 — Governance](/phase-1-governance/) — the source of truth for the Track 3 artifacts
 - [AI Review Committee](/phase-1-governance/review-committee/) — the body Track 3 attendees populate
-- [Track 2 — Leadership](/phase-2-education/track-2-leadership/) — Track 2 chartters the committee Track 3 staffs
+- [Track 2 — Leadership](/phase-2-education/track-2-leadership/) — Track 2 charters the committee Track 3 staffs

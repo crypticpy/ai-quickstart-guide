@@ -27,7 +27,7 @@ const EMPTY: FormState = {
   applicableStateLaw: "",
   reviewCommitteeName: "AI Review Committee",
   entityListRef:
-    "the most recent U.S. Bureau of Industry and Security Entity List",
+    "applicable sanctions, entity-list, export-control, grant, or state procurement rules",
   personnelPolicyRef: "",
 };
 
@@ -126,7 +126,7 @@ const STEPS: StepDef[] = [
   {
     title: "Enforcement & references",
     intro:
-      "These references appear in the enforcement section and the foreign-adversary clause. Defaults are provided; edit only if you have a more specific reference.",
+      "These references appear in the enforcement section and the excluded-vendor clause. Defaults are provided; edit only if you have a more specific reference.",
     fields: [
       {
         key: "reviewCommitteeName",
@@ -137,11 +137,11 @@ const STEPS: StepDef[] = [
       },
       {
         key: "entityListRef",
-        label: "Federal entity-list reference",
+        label: "Sanctions / entity-list / procurement reference",
         placeholder:
-          "the most recent U.S. Bureau of Industry and Security Entity List",
+          "applicable sanctions, entity-list, export-control, grant, or state procurement rules",
         helper:
-          "Cite the federal list your foreign-adversary exclusion will check against. The default is the BIS Entity List.",
+          "Cite the source your excluded-vendor or excluded-jurisdiction clause will check against.",
       },
       {
         key: "personnelPolicyRef",
@@ -192,7 +192,8 @@ function renderAUPMarkdown(s: FormState): string {
   const stateLaw = s.applicableStateLaw.trim() || "applicable state AI law";
   const committee = s.reviewCommitteeName.trim() || "AI Review Committee";
   const entityList =
-    s.entityListRef.trim() || "the most recent federal entity list";
+    s.entityListRef.trim() ||
+    "applicable sanctions, entity-list, export-control, grant, or state procurement rules";
   const personnel = s.personnelPolicyRef.trim() || "agency personnel policy";
 
   return `# ${agency} Acceptable Use Policy for Artificial Intelligence
@@ -230,7 +231,17 @@ All staff using AI on behalf of the agency must:
 2. **Disclose AI use** when an output materially shapes a public-facing communication, a decision affecting a person, or work product attributed to a staff member.
 3. **Protect agency data** by using only AI tools approved for the relevant data sensitivity (see Section 6).
 4. **Classify use cases** by risk tier before deployment and re-classify when scope changes.
-5. **Comply with applicable law**, including ${stateLaw}, the applicable open-records statute, and federal mandates on AI use.
+5. **Comply with applicable law**, including ${stateLaw}, the applicable open-records statute, and federal AI requirements where they apply.
+
+## 5. Risk Classification and Review
+
+AI use cases are reviewed according to the agency's Risk Classification Matrix:
+
+- **Tier 1 (Low)** — internal productivity or reference use with non-sensitive data and reversible consequences. Manager approval and inventory notation are usually sufficient.
+- **Tier 2 (Medium)** — staff-facing decision support, limited public-facing use, or internal sensitive data. Review Committee approval is required before deployment.
+- **Tier 3 (High)** — use cases that materially affect rights, benefits, employment, safety, liberty, housing, health, education, enforcement, or similar protected domains. Review Committee approval, counsel review, impact assessment, public notice where required, and a contestation or appeal pathway are required before deployment.
+
+The ${committee} may escalate a use case to a higher tier based on local law, data sensitivity, public impact, or operational risk.
 
 ## 6. Tool Approval
 
@@ -243,7 +254,7 @@ The ${committee} maintains the Approved AI Tools List, classified by data sensit
 **Prohibited unless explicitly approved:**
 
 - Entering PII, PHI, CJI, or other sensitive data into any AI tool not on the Approved Tools List for that data class
-- Deploying AI from foreign-adversary-controlled vendors as defined in ${entityList}
+- Deploying AI from vendors, sub-processors, models, or jurisdictions barred by ${entityList}
 - Using AI to make a final, uncontested determination affecting a person's rights, benefits, employment, or liberty
 - Bypassing the use-case intake and tier-classification process
 - Sharing agency credentials with any AI service for the purpose of automating account access
@@ -260,7 +271,7 @@ Disclosure formats are maintained by the ${committee} and updated as state law e
 
 ## 8. Procurement and Contracts
 
-All contracts under which a vendor will provide AI services to ${agency} must include the AI Procurement Addendum. Staff may not enter into AI service agreements — including no-cost trials and click-through terms — without procurement and legal review for any tool that will touch agency or sensitive data.
+Contracts under which a vendor will provide AI services to ${agency} should include the AI Procurement Addendum or a counsel-approved equivalent. Staff may not enter into AI service agreements — including no-cost trials and click-through terms — without procurement and legal review for any tool that will touch agency or sensitive data.
 
 ## 9. Training
 

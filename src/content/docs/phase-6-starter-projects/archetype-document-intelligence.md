@@ -29,7 +29,7 @@ Plus operator surface:
 
 ## When this is the right starter
 
-- The agency has a document corpus the size of "more than analysts can read" — typically thousands to hundreds of thousands of documents.
+- The agency has a document corpus the size of "more than analysts can read" — this may be hundreds, thousands, or more depending on document length, complexity, and workflow.
 - Analysts already do this work, slowly, by hand. The current process is searching SharePoint and reading PDFs.
 - Citations matter — analysts must verify against sources before relying on the output.
 - The corpus is mostly textual (PDFs of varying quality, DOCX, HTML). Image-heavy or scan-heavy corpora need OCR pre-processing.
@@ -57,8 +57,8 @@ Plus operator surface:
 
 Same shape as the chatbot, with three additions:
 
-- **Hybrid search.** Keyword (BM25 / Postgres `tsvector`) + vector search, results merged. Works better than vector-only on rare-word queries (case names, statute numbers, agency-specific jargon).
-- **Cross-encoder reranker.** A second-pass model (Cohere Rerank, BGE Reranker) scores the top-50 retrievals; top-10 reranked results feed the prompt.
+- **Hybrid search.** Keyword search plus vector search, results merged. Works better than vector-only on rare-word queries (case names, statute numbers, agency-specific jargon).
+- **Reranker.** A second-pass rerank model scores candidate retrievals; the top results feed the prompt.
 - **Multi-step synthesis.** For longer outputs (draft brief, comparison memo), an outliner-then-writer pattern: a planning prompt generates section structure; per-section prompts fill content with citations.
 
 ```
@@ -92,7 +92,7 @@ Document intelligence corpora are larger and messier than chatbot corpora. The i
 - **Quality variance.** Some PDFs are clean text; some are 1990s scans where OCR introduces noise.
 - **Re-ingestion at scale.** Updating the embedding model means re-embedding everything — plan for it.
 
-OCR options for scanned PDFs: Tesseract (open source, baseline), AWS Textract / Azure Document Intelligence / GCP Document AI (cloud-native, better quality). For the starter, the agency picks one matching the Phase 3 cloud.
+OCR options for scanned PDFs include open-source OCR, cloud document-extraction services, and specialty document AI providers. For the starter, pick the option that fits Phase 3 cloud/networking, procurement, data classification, and expected scan quality.
 
 ## Hybrid search
 
@@ -105,7 +105,7 @@ Vector-only retrieval misses queries with rare named entities. Hybrid search:
 5. Rerank with cross-encoder.
 6. Return top-K to the prompt.
 
-Pgvector + Postgres `tsvector` gets you both in one database for the starter. Larger corpora may move to OpenSearch + a dedicated vector store.
+An existing database plus native full-text/vector support may be enough for the starter. Larger or more complex corpora may move to a dedicated search service and vector backend.
 
 ## Citation grounding
 
@@ -113,7 +113,7 @@ Citation quality is the project's reputation. Standards:
 
 - **Every claim cited.** The prompt instructs the model to cite the chunk that supports each claim.
 - **Citation format.** `[doc_id:section_id]` inline. The UI renders these as clickable links to the source.
-- **Citation grounding eval.** A separate eval — given a generated answer with citations, fetch each cited chunk and verify the chunk supports the claim. The evaluator can be an LLM-as-judge with a strict rubric.
+- **Citation grounding eval.** A separate eval — given a generated answer with citations, fetch each cited chunk and verify the chunk supports the claim. The evaluator can be model-as-judge with a strict rubric, human review, or both.
 - **Refuse if can't cite.** When retrieval doesn't surface evidence for the question, the prompt instructs the model to say so. Confabulated citations are the project's worst failure mode.
 
 The synthesized export (brief, memo) carries footnoted citations; readers can click through to source documents.
@@ -142,16 +142,16 @@ Heavier than the chatbot's:
 | ---------------------- | ------------------------------------------------------------------ |
 | **Single-doc Q&A**     | 30+ questions with ground-truth answers in known documents         |
 | **Multi-doc Q&A**      | 20+ questions requiring synthesis across multiple documents        |
-| **Citation grounding** | All cited chunks must support the claim (LLM-as-judge with rubric) |
+| **Citation grounding** | All cited chunks should support the claim (model-as-judge with rubric and/or human review) |
 | **Retrieval recall**   | For known questions, did retrieval surface the right documents?    |
 | **Should refuse**      | Questions the corpus doesn't answer; system must refuse            |
 | **Comparison**         | Known-difference document pairs; verify the system identifies them |
 
-Threshold targets:
+Starter threshold targets:
 
-- Citation grounding ≥ 95%. (Lower means citations are unreliable.)
-- Retrieval recall@10 ≥ 90%. (Lower means analysts can't trust the system to surface the right documents.)
-- Should-refuse ≥ 95%. (Lower means confabulation.)
+- Citation grounding around 95% for launch candidates. Lower means citations are unreliable.
+- Retrieval recall@10 around 90% for known-answer questions. Lower means analysts may not trust the system to surface the right documents.
+- Should-refuse around 95%. Lower means confabulation risk.
 
 ## Output: the brief / memo
 
@@ -161,7 +161,7 @@ Synthesized outputs are not just chat replies. They are documents the analyst wi
 - **Citation footnotes** with hyperlinks to the source documents (in the corpus admin UI).
 - **PDF / DOCX export** with the agency's letterhead.
 - **Watermarking** for sensitive corpora — the export carries the user, timestamp, query.
-- **Version metadata** — which prompt version, which corpus version, which model. Reproducibility matters because analyst outputs may be relied on later.
+- **Version metadata** — which prompt version, corpus version, model ID/tier, and renderer version. Reproducibility matters because analyst outputs may be relied on later.
 
 ## Cost ceiling
 
@@ -169,12 +169,12 @@ Document-intelligence costs are higher per query than chatbot costs:
 
 - More retrieved tokens per query (10 chunks of 800 tokens, vs 5 of 500).
 - Reranker adds a small cost.
-- Synthesis tasks may use a flagship model (Claude Opus / GPT-class flagship) for quality.
-- Multi-step synthesis means multiple LLM calls per output.
+- Synthesis tasks may use a higher-capability approved model tier for quality.
+- Multi-step synthesis means multiple model calls per output.
 
-Realistic per-query cost: $0.10–$0.50 for a question; $1–$5 for a synthesis task. Per-user budgets in the cost dashboard.
+Per-query cost varies widely by provider, model tier, retrieval size, reranking, and output length. Estimate with current pricing, then enforce per-user and per-feature budgets in the cost dashboard.
 
-For the starter, prefer the mid-tier model and only escalate to flagship for synthesis tasks the user explicitly opts into.
+For the starter, prefer the mid-tier approved model and only escalate to a higher-capability tier for synthesis tasks the user explicitly opts into.
 
 ## Build sprints (Months 7–10)
 

@@ -1,4 +1,4 @@
-"""Tests for the lab 4.1 classifier.
+"""Tests for the lab 4.2 classifier.
 
 These tests do not call the real API. They use a stub `complete` function so
 the lab can be exercised offline. The real accuracy run happens when you

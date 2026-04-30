@@ -106,7 +106,7 @@ Track 7 ends here as a structured course, but the work continues. The AI program
 - Review Committee discussion (next standing meeting). Tier-2 candidates get pilot scoping; Tier-3 candidates get bias-review track assigned.
 - Manager feedback loop (within 30 days). Each manager receives a status update on each submission, even if the answer is "not yet" or "merged with another submission."
 
-The feedback loop matters. Managers who submit and then hear nothing stop submitting. The 30-day status update is a non-negotiable obligation of the AI program lead.
+The feedback loop matters. Managers who submit and then hear nothing stop submitting. A 30-day status update is a strong default for the AI program lead; agencies with a different review cadence should publish their local response target and meet it consistently.
 
 ## Common questions managers ask
 

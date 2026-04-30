@@ -1,4 +1,4 @@
-"""Lab 4.1 solution: three classifiers for constituent intake messages.
+"""Lab 4.2 solution: three classifiers for constituent intake messages.
 
 This is the reference answer. Three strategies, one evaluator, and a
 `__main__` block that runs all three over the synthetic dataset.

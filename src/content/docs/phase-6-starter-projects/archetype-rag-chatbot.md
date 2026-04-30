@@ -5,7 +5,7 @@ sidebar:
   order: 3
 ---
 
-A retrieval-augmented chatbot is the most common starter project for a government agency, and for good reason. The shape is well understood, the platform exercise is meaningful, the user value is concrete ("I asked a question and got a useful answer"), and the failure modes are mostly recoverable (a wrong answer is annoying, not catastrophic, when the chatbot is allowed to refuse).
+A retrieval-augmented chatbot is a common starter project for a government agency, and for good reason. The shape is well understood, the platform exercise is meaningful, the user value is concrete ("I asked a question and got a useful answer"), and the failure modes are mostly recoverable when the chatbot is allowed to refuse.
 
 This page describes a starter-grade RAG chatbot — narrow audience, narrow corpus, strong refusal behavior, robust eval — built on the platform modules from [Phase 5](/phase-5-platform/). It is _not_ "the agency's chatbot for everything." It is a focused tool for a named audience with a known set of questions.
 
@@ -58,7 +58,7 @@ The RAG chatbot is the platform's "hello world" — it exercises most of the sev
 | -------------------------------------------------------------- | ----------------------------------------------------------------- |
 | [Auth](/phase-5-platform/auth-module/)                         | SSO sign-in for staff users                                       |
 | [RBAC](/phase-5-platform/rbac-module/)                         | Per-program-area access; admin vs. user; corpus-scope permissions |
-| [API Framework](/phase-5-platform/api-framework-module/)       | The streaming chat endpoint; rate-limited; RFC 7807 errors        |
+| [API Framework](/phase-5-platform/api-framework-module/)       | The streaming chat endpoint; rate-limited; Problem Details errors |
 | [AI Orchestration](/phase-5-platform/ai-orchestration-module/) | Prompt registry, retrieval, eval, cost — the heart of the project |
 | [Admin Dashboard](/phase-5-platform/admin-dashboard-module/)   | Conversation monitoring, eval results, feedback inbox             |
 | [Data Grid](/phase-5-platform/data-grid-module/)               | Lists of conversations, feedback, corpus documents                |
@@ -97,10 +97,10 @@ The streaming token loop:
 3. Orchestration looks up the prompt by ID; validates inputs.
 4. Retrieval module embeds the question, fetches top-K chunks (filtered by user's allowed scopes), reranks.
 5. Orchestration constructs the prompt with retrieved context + system prompt + conversation history.
-6. LLM generates streamed response tokens.
+6. The selected model generates streamed response tokens.
 7. Output guardrail watches for PII leaks, ungrounded claims; can downgrade or refuse.
 8. Citation post-processor extracts which chunks were used; emits with the response.
-9. Audit log captures the full conversation for retention per classification.
+9. Audit log captures required metadata and any approved redacted conversation content per classification and records policy.
 
 ## Corpus
 
@@ -142,7 +142,7 @@ The platform's [AI orchestration module](/phase-5-platform/ai-orchestration-modu
 - Vector store insertion with metadata (source, section, classification, ingested_at).
 - Re-ingestion when source documents change.
 
-Ingestion runs as a background job. For a starter, the corpus is small enough (~ thousands of chunks) that pgvector on the platform's existing Postgres is sufficient.
+Ingestion runs as a background job. For many starters, the corpus is small enough that an existing database/search service with vector support is sufficient; use a dedicated vector/search service when corpus size, latency, isolation, or operations needs justify it.
 
 ### Refresh cadence
 
@@ -193,7 +193,7 @@ The system prompt is in the [prompt registry](/phase-5-platform/ai-orchestration
 
 The single most important behavior of a starter chatbot is _confident refusal_. The prompt instructs the model to refuse rather than guess. The eval suite has explicit "should refuse" cases — questions that the corpus doesn't answer; the system passes the case if it refuses, fails if it confabulates.
 
-Refusal protects the agency more than any other single behavior. A chatbot that refuses 30% of questions but never lies is far more useful than one that answers everything but is sometimes wrong.
+Refusal protects the agency more than almost any other single behavior. A chatbot that refuses out-of-scope questions is more useful than one that answers everything but is sometimes wrong.
 
 ## Eval suite
 
@@ -212,7 +212,7 @@ The eval is run:
 - Nightly (catches model drift if the vendor silently changes behavior).
 - Before any production change (pre-deploy gate).
 
-Threshold: 90% of golden Q&A pass; 95% of should-refuse pass; zero adversarial cases produce harmful output. A failing eval blocks merge and blocks deploy.
+Starter target: 90% of golden Q&A pass; 95% of should-refuse pass; no known adversarial case produces harmful output. Tune thresholds to corpus size, risk tier, and launch cohort. A failing production-risk eval should block merge and deploy until reviewed.
 
 ## Conversation handling
 
@@ -225,14 +225,14 @@ A chatbot is multi-turn. The starter's stance:
 
 ## Cost ceiling
 
-The starter operates inside a per-user-per-month budget — say, $5 per active staff user. With realistic usage patterns (5–20 messages per day for active users), this requires:
+The starter should operate inside a per-user or per-feature monthly budget. The exact number depends on provider pricing, usage patterns, retrieval size, and selected model tier. To stay predictable:
 
-- **Mid-tier model.** Claude Sonnet, GPT-class mid, Gemini Flash. Flagship models are unnecessary for the starter's question shape.
-- **Aggressive prompt caching.** The system prompt + corpus boilerplate cache via the provider's prompt-cache feature.
+- **Mid-tier model.** Use the lowest-cost approved model tier that passes eval for the starter's question shape.
+- **Prompt/context caching where available.** Cache static system prompt and reusable context through the provider, gateway, or application layer when supported.
 - **Compact retrieval.** Top-K = 5 chunks of ~500 tokens each. Not 20 chunks of 1,000 tokens each.
 - **Concise output.** The prompt instructs concise answers; eval enforces token-length caps.
 
-The [cost dashboard](/phase-5-platform/ai-orchestration-module/) surfaces per-user, per-feature, per-prompt cost. Anomalies (one user generating $200 of usage) trigger alerts.
+The [cost dashboard](/phase-5-platform/ai-orchestration-module/) surfaces per-user, per-feature, per-prompt cost. Anomalies trigger alerts based on the approved budget.
 
 ## Guardrails
 
@@ -241,7 +241,7 @@ For a starter:
 - **Input PII detection** — the system warns if the user appears to have pasted PII into a question, suggesting they not paste case-specific personal data.
 - **Output PII redaction** — outputs are scanned for PII; flagged outputs are downgraded or refused.
 - **Prompt injection detection** — adversarial inputs are flagged; the model is instructed to refuse if instructions in the user message contradict the system prompt.
-- **Citation requirement** — outputs without at least one citation are rejected and regenerated.
+- **Citation requirement** — RAG outputs without citations are rejected, regenerated, or downgraded according to risk and UX policy.
 
 Tier-2 starters layer in additional guardrails (toxicity classifier on outputs, stricter PII rules). Tier-3 starters wait until a later project.
 

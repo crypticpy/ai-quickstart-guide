@@ -7,7 +7,7 @@ sidebar:
 
 The identity layer decides who can do what — and "who" includes both humans and the software that calls AI services on their behalf. Agencies that get identity right have a one-day onboarding ramp, a clear audit trail, and the ability to revoke access in seconds. Agencies that get it wrong end up with shared service accounts, hard-coded API keys checked into git, and no way to answer "who used the model to generate this output?"
 
-The right pattern is two layers: federated SSO for humans and short-lived workload identity for software. Both are available on every major cloud and through every major identity-provider product; the choice is which IdP, not whether to use one.
+The right pattern is two layers: federated SSO for humans and short-lived workload identity for software wherever the provider supports it. Most major clouds and identity-provider products support this pattern. Some direct API providers still use API keys; the goal is to make those exceptions explicit, scoped, rotated, and stored in a managed secret store.
 
 ## Two identity surfaces
 
@@ -16,35 +16,35 @@ The right pattern is two layers: federated SSO for humans and short-lived worklo
 | Human SSO         | Developers, managers, reviewers        | OIDC/SAML federation from agency IdP            | Session (hours)        |
 | Workload identity | CI/CD jobs, services, AI orchestrators | Cloud-issued token bound to a workload identity | Minutes (auto-rotated) |
 
-The unifying rule: **no long-lived credentials for either surface**. No shared admin passwords, no static service account keys, no API tokens in environment files. Both surfaces have well-supported alternatives on every cloud.
+The unifying rule: **avoid long-lived credentials wherever an identity-native option exists**. No shared admin passwords, no static service account keys, no API tokens in environment files. When an API key is unavoidable, use the exception pattern later on this page.
 
 ## Identity provider choice
 
-Agencies typically pick one of three IdPs. The choice is usually decided before Phase 3 begins (often by the existing email/collaboration platform); Phase 3 wires it in.
+Agencies usually start with the identity provider they already have. Entra ID, Okta, Auth0, Google Workspace, Ping, a state identity service, or another SAML/OIDC provider can work if it supports MFA, lifecycle management, groups, audit logs, and application federation.
 
 ### Microsoft Entra ID (formerly Azure AD)
 
-Default if the agency runs Microsoft 365 or Azure. Supports SAML and OIDC out of the box; integrates natively with Azure resources via Managed Identity; federates to AWS via SAML and to Google Cloud via Workforce Identity Federation. Conditional access policies are mature.
+Common fit if the agency runs Microsoft 365 or Azure. Supports SAML and OIDC out of the box; integrates natively with Azure resources via Managed Identity; federates to AWS via SAML and to Google Cloud via Workforce Identity Federation. Conditional access policies are mature.
 
-Strong points: best-in-class for hybrid environments, integrated MFA, and group-based access already wired into HR systems.
+Strong points: hybrid environments, integrated MFA, and group-based access already wired into HR systems.
 
 ### Okta
 
-Default for agencies that want best-in-class SSO without a Microsoft commitment. Strong directory integration, very mature SCIM provisioning, broad SaaS catalog. Often paired with a non-Microsoft email platform.
+Common fit for agencies that want a dedicated SSO platform or are not centered on Microsoft. Strong directory integration, mature SCIM provisioning, broad SaaS catalog. Often paired with a non-Microsoft email platform.
 
-Strong points: highest-quality lifecycle management for SaaS access; strong partner ecosystem for government identity (PIV/CAC support, FedRAMP-authorized at multiple impact levels).
+Strong points: lifecycle management for SaaS access and a broad partner ecosystem for government identity patterns such as PIV/CAC support.
 
 ### Auth0
 
-Best for agencies that need consumer- or constituent-facing identity (residents, applicants, public-portal users) alongside staff identity. Now part of Okta but distinct product line.
+Common fit for consumer- or constituent-facing identity (residents, applicants, public-portal users) alongside staff identity. Now part of Okta but distinct product line.
 
-Strong points: developer-friendly API; strong support for B2C scenarios; good for the contestation/appeals portal that Tier-3 use cases require.
+Strong points: developer-friendly API and support for B2C scenarios, including public portals where the approved use case requires one.
 
-Many agencies run two IdPs deliberately: Entra or Okta for staff, Auth0 (or a separate Okta tenant) for constituents. The platform should never collapse them; staff identity and constituent identity are different trust domains and should remain separate.
+Many agencies run two IdPs deliberately: one for staff and another for constituents. The platform should not collapse them; staff identity and constituent identity are different trust domains and should remain separate.
 
 ## Workload identity (cloud-specific)
 
-Software calling AI APIs needs to authenticate. **Never use long-lived API keys.** Every cloud provides a way to issue short-lived, identity-bound credentials to workloads.
+Software calling AI APIs needs to authenticate. **Prefer short-lived workload identity wherever the provider supports it.** Every major cloud provides a way to issue short-lived, identity-bound credentials to workloads.
 
 ### AWS
 
@@ -73,7 +73,7 @@ The model: avoid service account keys entirely. Vertex AI authorizes on the atta
 
 ### Cross-cloud baseline
 
-If the platform spans clouds (e.g., the orchestrator runs on AWS but calls Vertex AI), use **OIDC federation between clouds** rather than a static key. Each cloud's federation primitive accepts the other clouds' OIDC tokens. The setup is one-time and removes a class of credential leak entirely.
+If the platform spans clouds (e.g., the orchestrator runs on AWS but calls Vertex AI), use **OIDC federation between clouds where supported** rather than a static key. Support varies by service, tenant, and SDK. If federation is not available, use a tightly controlled secret-broker pattern: per-environment secret, scoped access, central audit logging, and rotation owned by the platform team.
 
 ## RBAC scope design
 
@@ -86,14 +86,14 @@ A workable starter role set:
 | `platform-admin`    | All non-prod                               | Configure landing zone, IAM, networking. Tightly held — 3–5 people max.                  |
 | `platform-operator` | Per environment                            | Deploy via CI/CD, view logs and metrics, restart workloads. The day-to-day on-call role. |
 | `developer`         | Sandbox only                               | Push code, run experiments, deploy to personal namespace.                                |
-| `reviewer`          | Read-only across all envs                  | Read code, logs, metrics. For Review Committee, audit, and incident response.            |
+| `reviewer`          | Read-only across all envs                  | Read code, logs, metrics. For the review path, audit, and incident response.             |
 | `data-steward`      | Per data domain                            | Approve which workloads can read which classified datasets.                              |
 | `break-glass`       | All environments, alarmed and time-bounded | Emergency-only; checked out of a vault with two-person approval.                         |
 
 Every role grant is:
 
 - **Mapped to an identity group** in the IdP (not granted directly to a user).
-- **Time-bounded.** No standing admin in production. Use just-in-time elevation (Entra PIM, AWS IAM Access Analyzer + ABAC, GCP IAM Conditions).
+- **Time-bounded.** No routine standing admin in production. Use just-in-time elevation where available (Entra PIM, AWS IAM Access Analyzer + ABAC, GCP IAM Conditions) or a documented manual approval path for smaller agencies.
 - **Logged.** Role assumption events flow to the central log sink.
 
 ## Group structure
@@ -103,7 +103,7 @@ Build the IdP groups around the platform, not around the org chart. A working pa
 - `platform-admins` — the small set of people who run Phase 3.
 - `platform-operators-{env}` — operators per environment.
 - `developers-{team}` — per-team developer groups.
-- `ai-reviewers` — Review Committee members and equity/legal designees.
+- `ai-reviewers` — Review Committee or review-group members and equity/legal designees.
 - `data-stewards-{domain}` — owners of specific data domains.
 - `champions` — Track 5 champions, with sandbox elevated permissions during their term.
 - `break-glass` — auditable, two-person.
@@ -123,15 +123,15 @@ Workload identity is exempt from human MFA but should be bound to a specific wor
 
 ## Service-to-service authorization (AI APIs)
 
-Workloads call AI services. Each major AI service supports identity-based authorization:
+Workloads call AI services. Cloud-hosted AI services commonly support identity-based authorization:
 
 - **AWS Bedrock.** Authorize on IAM role; resource policies on Knowledge Bases / Agents; Bedrock Guardrails attached to the role.
 - **Azure OpenAI.** Authorize on managed identity; RBAC roles `Cognitive Services OpenAI User` (inference) and `Cognitive Services OpenAI Contributor` (deploy models).
 - **Google Vertex AI.** Authorize on attached service account; predefined roles `aiplatform.user`, `aiplatform.predictor`. Customer-Managed Encryption Keys for Tier-3.
-- **Anthropic API direct.** Use a per-environment API key stored in the cloud's secrets manager; rotate via CI/CD; log key use through Anthropic's audit log. The agency's workload identity issues the call to retrieve the key, then makes the API call.
+- **Anthropic API direct.** Use a per-environment API key stored in the cloud's secrets manager; rotate through the approved runbook or CI/CD; log key use where provider audit logs support it. The agency's workload identity retrieves the key, then makes the API call.
 - **OpenAI direct.** Same pattern as Anthropic.
 
-The Anthropic and OpenAI direct cases are the only places a long-lived secret lives, and it lives only in the secrets manager — never in code, env files, or CI variables. The platform's [secrets management](/phase-3-infrastructure/secrets-management/) page covers rotation.
+The direct API cases are the exception pattern: per-environment key, least privilege available from the provider, stored in a managed secret store, rotated on a documented schedule, audited where possible, and never committed to code, local `.env` files, chat, tickets, or CI variables. The platform's [secrets management](/phase-3-infrastructure/secrets-management/) page covers rotation.
 
 ## Onboarding and offboarding
 
@@ -143,7 +143,7 @@ The litmus test of an identity setup is how fast it handles change.
 
 ## Common identity failures
 
-- **Long-lived API keys in code.** Detected by secret scanners but only after the leak. The right fix is the workload identity pattern, not "remember not to commit secrets."
+- **Long-lived API keys in code.** Detected by secret scanners but only after the leak. The right fix is workload identity where supported, or the managed-secret exception pattern where direct API keys are unavoidable.
 - **Shared admin accounts.** "We all use `aws-admin`" is a finding in any audit. Replace with named roles immediately.
 - **No break-glass plan.** When the IdP is down, can the on-call still operate? Document and test the break-glass path; alarm on its use.
 - **Constituent identity bleeding into staff identity.** Resident logins and staff logins should never share a tenant. If an Auth0 tenant has both, separate them.

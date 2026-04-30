@@ -11,25 +11,27 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Establish the guardrails that enable everything else. Without governance, infrastructure requests stall, vendors can't be evaluated, and any public-facing AI deployment carries unmanaged political risk.
 
+> **Use this as an implementation guide, not legal authority.** Phase 1 describes the baseline governance controls agencies should put in place before AI work scales: risk tiers, an AUP, a review path, procurement guardrails, and an inventory. The artifacts can be simplified, sequenced, or localized to fit staffing and legal requirements; counsel decides what is binding in your jurisdiction.
+
 ## How this phase scales for your agency
 
 <Tabs syncKey="agency-size">
 <TabItem label="Small">
 
-**2-day governance sprint with external counsel.** Hire a contract attorney with public-sector AI experience for a focused two-day intensive that produces the AUP, the 3-tier risk classification, and the committee charter. Adopt the templates as-is rather than redrafting from scratch.
+**2-day governance sprint with counsel or a shared legal resource.** Use a city/county attorney, regional association, or contract attorney with public-sector AI experience for a focused intensive that produces the AUP, the 3-tier risk classification, and a lightweight review charter. Adopt the templates with minimal edits rather than redrafting from scratch.
 
 - **Deliverables:** AUP (adopted), risk classification (adopted), committee charter (signed), procurement addendum (attached to standard contract template).
-- **Skip for now:** Standing review committee meetings (run ad-hoc instead), legislative compliance matrix (refer to the published one rather than maintaining your own).
+- **Simplify:** One named AI owner, ad-hoc review meetings, a starter spreadsheet inventory, and the published compliance matrix as a reference instead of a locally maintained legal tracker.
 - **Budget:** $3K–$8K (single sprint engagement).
-- **Off-ramp:** This is itself a complete deliverable; most legislative requirements are satisfied by what comes out of the sprint.
+- **Off-ramp:** This is a complete starting governance baseline. It covers common policy needs and gives counsel concrete artifacts to review when a law, grant, or procurement requires more.
 
 </TabItem>
 <TabItem label="Standard">
 
-**Five working sessions across Months 1–3.** Convene a 6–8 person Review Committee (tech lead, legal, security, ethics, business sponsor, public representative) and run them through the full deliverable list using the templates in this phase.
+**Five working sessions across Months 1–3.** Convene a small Review Committee or working group (technology owner, legal/procurement, security or records, HR, program sponsor) and run them through the full deliverable list using the templates in this phase.
 
 - **Deliverables:** Everything listed below: 3-tier risk classification, AUP, committee charter, procurement guardrails, legislative compliance matrix, use case inventory.
-- **Cadence:** Committee meets every other week through the launch period, monthly thereafter.
+- **Cadence:** Committee meets every other week through launch if the workload justifies it; otherwise monthly with ad-hoc reviews for urgent Tier-2 or Tier-3 items.
 - **Budget:** $5K–$25K (staff time + external legal review).
 
 </TabItem>
@@ -39,7 +41,7 @@ Establish the guardrails that enable everything else. Without governance, infras
 
 - **Deliverables:** Everything in the Standard path, plus jurisdiction-specific procurement guardrails, multi-jurisdiction compliance matrix (if you operate across states), and an annual policy refresh process.
 - **Cadence:** Standing committee meets monthly; sub-groups meet weekly during launch.
-- **Budget:** Skews toward the high end of $25K and into the dedicated policy-counsel range.
+- **Budget:** Skews toward the high end of $25K and into the dedicated policy-counsel range when multiple offices, jurisdictions, or high-impact systems are in scope.
 
 </TabItem>
 </Tabs>
@@ -48,22 +50,22 @@ Establish the guardrails that enable everything else. Without governance, infras
 
 | Path | Do now | Use / simplify | Defer |
 | --- | --- | --- | --- |
-| Small | Adopt AUP, risk tiers, charter, and procurement addendum in one sprint | Use the published compliance matrix and ad-hoc committee meetings | Local matrix maintenance and standing sub-groups |
-| Standard | Run the five working sessions and populate the use-case inventory | Use the model artifacts with light legal review | Advanced jurisdiction-specific policy refresh |
-| Large | Stand up committee, sub-groups, and quarterly compliance review | Split policy and procurement workstreams | Nothing core; large agencies need all Phase 1 controls |
+| Small | Name an AI owner; adopt AUP, risk tiers, lightweight charter, and procurement questions in one sprint | Use the published compliance matrix, a starter inventory, and ad-hoc reviews | Local legal tracker, standing sub-groups, advanced reporting |
+| Standard | Run the five working sessions and populate the use-case inventory | Use the model artifacts with light legal/procurement review | Multi-jurisdiction policy refresh unless needed |
+| Large | Stand up committee, sub-groups, quarterly compliance review, and records process | Split policy and procurement workstreams | None of the core controls, but sequence them instead of doing everything in week one |
 
 ## Deliverables
 
 - 3-tier AI risk classification (Low / Medium / High) with examples mapped to agency operations
 - AI Acceptable Use Policy (based on Mississippi/ISACA templates, adapted for agency context)
-- AI Review Committee charter (6–8 members)
-- AI procurement guardrails (per OMB M-25-22)
-- Legislative compliance matrix (Texas TRAIGA, Colorado AI Act, California SB 942, etc.)
-- AI use case inventory template (aligned with OMB M-25-21, which supersedes M-24-10)
+- AI Review Committee charter (3–8 members, depending on agency size)
+- AI procurement guardrails (M-25-22-informed for federal alignment, adapted for state/local use)
+- Legislative compliance matrix (state, federal, and local references for counsel review)
+- AI use case inventory template (starter fields plus expanded compliance fields for agencies that need them)
 
 ## Off-Ramp — Governance Only
 
-Agencies that complete only this phase walk away with an adopted AUP, a 3-tier risk classification, a chartered Review Committee, and a procurement addendum attached to the standard contract template. That set alone satisfies most current legislative requirements and is a complete, standalone deliverable. Infrastructure build-out, education tracks beyond Track 1, and platform work are deferred; document them so they re-enter the roadmap when budget and staffing allow.
+Agencies that complete only this phase walk away with an adopted AUP, a 3-tier risk classification, a chartered review path, a starter inventory, and procurement guardrails attached to the standard contract template. That set is a complete, standalone governance baseline and covers many common policy requirements. Infrastructure build-out, education tracks beyond Track 1, and platform work are deferred; document them so they re-enter the roadmap when budget and staffing allow.
 
 ## Sequencing within Phase 1
 
@@ -94,7 +96,7 @@ Agencies that complete only this phase walk away with an adopted AUP, a 3-tier r
 - [3-Tier Risk Classification](/phase-1-governance/risk-classification/): matrix, 15 government examples, classification workflow
 - [AI Acceptable Use Policy](/phase-1-governance/acceptable-use-policy/): fillable AUP based on Mississippi/ISACA reference templates
 - [Review Committee Charter](/phase-1-governance/review-committee/): composition, authority, decision rules
-- [Procurement Guardrails](/phase-1-governance/procurement-guardrails/): OMB M-25-22 contract addendum, vendor questionnaire, red flags
+- [Procurement Guardrails](/phase-1-governance/procurement-guardrails/): M-25-22-informed addendum, vendor questionnaire, red flags
 - [Use Case Inventory](/phase-1-governance/use-case-inventory/): local register for reviewed ideas with CSV export
 - [Legislative Compliance Matrix](/phase-1-governance/legislative-compliance/): federal + state AI law mapped to Phase 1 artifacts
 
@@ -137,12 +139,12 @@ This framing originated with state agencies operating under explicit statutory a
 - **Procurement guardrails.** Standard contract language and a vendor questionnaire that the agency attaches to any AI-related solicitation. They cover data rights, model provenance, audit access, and contestation: the items that are nearly impossible to retrofit after a contract is signed.
 - **Committee charter.** The signed document that names the Review Committee's members, scope of authority, decision rules, and meeting cadence. Without a charter the committee is a meeting; with one it is a body that can approve, defer, or block AI work.
 - **Legislative compliance.** The set of state and federal AI laws that apply to the agency: Texas TRAIGA, Colorado AI Act, California SB 942, OMB memoranda, and any local ordinance. The compliance matrix maps each requirement to the Phase 1 artifact that satisfies it.
-- **OMB M-25-21 / M-25-22.** Two federal memoranda that frame AI governance for agencies that take federal funds. M-25-21 (April 2025; supersedes M-24-10) covers AI use case inventory, impact assessment, and minimum risk practices. M-25-22 (April 2025; supersedes M-24-18) covers AI procurement, the contract terms agencies must require from AI vendors.
+- **OMB M-25-21 / M-25-22.** Two federal memoranda that bind covered federal agencies and serve as useful reference models for state and local agencies. They may apply indirectly when incorporated into a grant, contract, state policy, or local procurement requirement. M-25-21 (April 2025; supersedes M-24-10) covers AI use case inventory, impact assessment, and minimum risk practices. M-25-22 (April 2025; supersedes M-24-18) covers federal AI procurement and contract-planning expectations.
 - **NIST AI RMF.** The National Institute of Standards and Technology's AI Risk Management Framework. A non-prescriptive playbook organized around four functions (Govern, Map, Measure, Manage) that the agency's AUP, risk classification, and committee operationalize.
 
 ## Research basis
 
-NIST AI Risk Management Framework 1.0 and 2.0, OMB M-25-21 (April 2025; supersedes M-24-10; use case inventory and minimum practices), OMB M-25-22 (April 2025; supersedes M-24-18; AI procurement), the Mississippi statewide AI Acceptable Use Policy, ISACA AI governance templates, the San Jose GovAI Coalition policy templates, the UK Government AI Playbook stages 0–1, Texas TRAIGA, the Colorado AI Act (SB24-205), and California SB 942.
+NIST AI RMF 1.0, the NIST AI RMF Playbook, NIST-AI-600-1, OMB M-25-21 (April 2025; supersedes M-24-10; use case inventory and minimum practices for covered federal agencies), OMB M-25-22 (April 2025; supersedes M-24-18; federal AI procurement), the Mississippi statewide AI Acceptable Use Policy, ISACA AI governance templates, the San Jose GovAI Coalition policy templates, the UK Government AI Playbook stages 0–1, Texas TRAIGA, the Colorado AI Act (SB24-205), California SB 942, and California AB 2013.
 
 ## Related
 

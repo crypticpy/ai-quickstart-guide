@@ -4,7 +4,7 @@ Shared scaffolding used by every Track 4 lab. Each lab's starter and solution di
 
 Contents:
 
-- `llm_client.py`. Thin provider wrapper. `get_client(provider="anthropic")` returns a callable with the signature `complete(system: str, user: str, **kwargs) -> str`. Supports `anthropic`, `openai`, and `azure-openai`. Add a Bedrock branch in Lab 4.6 if you need it earlier.
+- `llm_client.py`. Thin provider wrapper. `get_client(provider="anthropic")` returns a callable with the signature `complete(system: str, user: str, **kwargs) -> str`. Supports `anthropic`, `openai`, and `azure-openai`.
 - `synthetic_data/constituent_messages.jsonl`. 60 synthetic 311-style messages with department labels. No real names, addresses, phone numbers, or case identifiers. Use for any lab that needs labeled intake data.
 - `pyproject.toml`. Shared dependencies. Each lab's starter copies or extends this.
 
@@ -30,3 +30,13 @@ export OPENAI_API_KEY=sk-...
 ```
 
 The wrapper reads the key from the environment. It does not write a config file and does not log the key.
+
+Model IDs are provider-specific slugs used in API calls. Providers maintain the current list in their model/API docs, and agencies should also check their approved tools list before using a live model. You can set a model explicitly:
+
+```bash
+export ANTHROPIC_MODEL_ID=<provider-model-slug>
+export OPENAI_MODEL_ID=<provider-model-slug>
+export AZURE_OPENAI_DEPLOYMENT=<agency-deployment-name>
+```
+
+For Azure OpenAI, the deployment name configured in the Azure resource is usually the value passed to the SDK. Cloud-specific details such as regions, model availability, identity, and private networking change over time; treat the Track 4 code as a teaching scaffold and verify the current provider documentation before deployment.

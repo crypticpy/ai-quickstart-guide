@@ -258,7 +258,7 @@ Hints and a reference answer for each exercise live in `code-samples/track-4/lab
 
 ## Swap providers
 
-OpenAI uses a slightly different shape called function calling, but the loop is identical ([OpenAI function calling docs](https://platform.openai.com/docs/guides/function-calling)). Two changes get you there. First, build an OpenAI client and pass `tools=` shaped as `{"type": "function", "function": {...}}` per tool. Second, the model returns `tool_calls` on each `choices[0].message`, and you append a role `"tool"` message with the `tool_call_id` and the JSON content. The agent loop, the tool registry, and the trace stay exactly as you wrote them. For Bedrock the cleanest path is Anthropic's [Bedrock integration](https://docs.claude.com/en/api/claude-on-amazon-bedrock); the prompt and tool schemas do not change.
+Provider SDKs use different names for tool calling, function calling, and hosted-agent loops, but the control loop is the same: send tool schemas, receive a tool request, validate arguments, run the local tool, append the tool result, and ask the model to continue. When swapping providers, use the current provider API docs for the request shape and keep the tool registry, validation, trace, and error handling unchanged.
 
 ## What you learned
 

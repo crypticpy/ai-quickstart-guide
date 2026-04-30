@@ -1,9 +1,9 @@
-# Lab 4.7 starter
+# Lab 4.7 solution
 
 Two packages live in this directory.
 
 ```
-starter/
+solution/
 ├── policy_classifier/   # the reusable module (port + adapters + tests)
 └── consumer-app/        # a FastAPI app that depends on the module
 ```
@@ -38,7 +38,7 @@ pass.
 
 ## How to run
 
-From the `starter` directory:
+From the `solution` directory:
 
 ```bash
 # 1. Install the module so the consumer app can import it.

@@ -260,7 +260,7 @@ You get back `{"department": "public_works", "confidence": 0.95}`. Change `CLASS
 ## Exercises
 
 1. **Add a `MockAdapter`.** Create `adapters/mock.py` that returns a configurable canned response. Register it in the factory under `"mock"`. Run the existing contract test suite against it. No new tests required. This is the test double that lets other apps unit-test their integration with `policy_classifier` without an API key.
-2. **Add an `OpenAIAdapter`.** Implement zero-shot against OpenAI's chat completions API. Add `"openai_zero_shot"` to the factory. Run the contract suite against the new adapter. The test that fails first will tell you what part of the contract you missed (often confidence range or label normalization).
+2. **Add an `OpenAIAdapter`.** Implement zero-shot against the current OpenAI text-generation API your agency has approved. Add `"openai_zero_shot"` to the factory. Run the contract suite against the new adapter. The test that fails first will tell you what part of the contract you missed (often confidence range or label normalization).
 3. **Add a circuit breaker at the port level.** Wrap `Classifier` subclasses with a decorator that opens after three consecutive failures and returns a `general_info` fallback for thirty seconds. The decorator should accept any `Classifier` and return something that also satisfies `Classifier`. The contract suite still has to pass; the decorator only changes failure behavior, not happy-path behavior.
 
 Reference answers and worked solutions are in `code-samples/track-4/lab-7/solution/`.
@@ -297,7 +297,7 @@ Reference answers and worked solutions are in `code-samples/track-4/lab-7/soluti
 
 ## Swap providers
 
-To run the same module against OpenAI instead of Anthropic, write a single new adapter file. Copy `adapters/zero_shot.py`, replace the `anthropic.Anthropic` client with `openai.OpenAI`, and register the new class in `factory.py`. The contract tests run unchanged against it. For Azure OpenAI, the OpenAI SDK exposes an `AzureOpenAI` class that takes `azure_endpoint`, `api_key`, and `api_version`; same adapter shape. For Anthropic via Bedrock, install `anthropic[bedrock]` and use the `AnthropicBedrock` client; the rest of the adapter is identical because Bedrock is just a different transport for the same model family ([Claude on Amazon Bedrock](https://docs.claude.com/en/api/claude-on-amazon-bedrock)).
+To run the same module against another provider, write a single new adapter file. Copy `adapters/zero_shot.py`, replace the provider SDK call with the current SDK shape from that provider's docs, and register the new class in `factory.py`. The contract tests run unchanged because they test the port, not the provider. For Azure OpenAI, the model value is usually the agency's deployment name. For Bedrock, Vertex AI, or another managed provider, keep provider-specific credential, region, and endpoint handling inside the adapter.
 
 ## What you learned
 

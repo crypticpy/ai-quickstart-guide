@@ -7,6 +7,10 @@ interface Item {
   department: string;
   tier: string;
   status: string;
+  vendorSystem: string;
+  dataCategory: string;
+  decisionSupport: string;
+  impactAssessment: string;
   nextReview: string;
 }
 
@@ -17,13 +21,19 @@ const EMPTY: Item = {
   department: "",
   tier: "Tier 1",
   status: "Submitted",
+  vendorSystem: "",
+  dataCategory: "Public / non-sensitive",
+  decisionSupport: "No decision support",
+  impactAssessment: "Not needed",
   nextReview: "",
 };
 
 function loadItems(): Item[] {
   if (typeof window === "undefined") return [];
   try {
-    return JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? "[]");
+    const parsed = JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? "[]");
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map((item) => ({ ...EMPTY, ...item }));
   } catch {
     return [];
   }
@@ -51,13 +61,28 @@ export default function UseCaseInventory() {
 
   const exportCsv = () => {
     const rows = [
-      ["Use case", "Sponsor", "Department", "Tier", "Status", "Next review"],
+      [
+        "Use case",
+        "Sponsor",
+        "Department",
+        "Tier",
+        "Status",
+        "Vendor / system",
+        "Data category",
+        "Decision support",
+        "Impact assessment",
+        "Next review",
+      ],
       ...items.map((i) => [
         i.name,
         i.sponsor,
         i.department,
         i.tier,
         i.status,
+        i.vendorSystem,
+        i.dataCategory,
+        i.decisionSupport,
+        i.impactAssessment,
         i.nextReview,
       ]),
     ];
@@ -79,11 +104,11 @@ export default function UseCaseInventory() {
       "",
       `Exported: ${new Date().toISOString().slice(0, 10)}`,
       "",
-      "| Use case | Sponsor | Department | Tier | Status | Next review |",
-      "| --- | --- | --- | --- | --- | --- |",
+      "| Use case | Sponsor | Department | Tier | Status | Vendor / system | Data category | Decision support | Impact assessment | Next review |",
+      "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
       ...items.map(
         (i) =>
-          `| ${i.name || "—"} | ${i.sponsor || "—"} | ${i.department || "—"} | ${i.tier} | ${i.status} | ${i.nextReview || "—"} |`,
+          `| ${i.name || "—"} | ${i.sponsor || "—"} | ${i.department || "—"} | ${i.tier} | ${i.status} | ${i.vendorSystem || "—"} | ${i.dataCategory} | ${i.decisionSupport} | ${i.impactAssessment} | ${i.nextReview || "—"} |`,
       ),
       "",
     ];
@@ -151,6 +176,53 @@ export default function UseCaseInventory() {
           </select>
         </label>
         <label>
+          Vendor / system
+          <input
+            type="text"
+            value={draft.vendorSystem}
+            onInput={(e) => update("vendorSystem", e.currentTarget.value)}
+            placeholder="Tool, vendor, or internal system"
+          />
+        </label>
+        <label>
+          Data category
+          <select
+            value={draft.dataCategory}
+            onInput={(e) => update("dataCategory", e.currentTarget.value)}
+          >
+            <option>Public / non-sensitive</option>
+            <option>Internal</option>
+            <option>Sensitive</option>
+            <option>Regulated / confidential</option>
+            <option>Unknown</option>
+          </select>
+        </label>
+        <label>
+          Decision support
+          <select
+            value={draft.decisionSupport}
+            onInput={(e) => update("decisionSupport", e.currentTarget.value)}
+          >
+            <option>No decision support</option>
+            <option>Informs a staff decision</option>
+            <option>Materially supports a decision</option>
+            <option>Automates or filters a decision</option>
+          </select>
+        </label>
+        <label>
+          Impact assessment
+          <select
+            value={draft.impactAssessment}
+            onInput={(e) => update("impactAssessment", e.currentTarget.value)}
+          >
+            <option>Not needed</option>
+            <option>Needed</option>
+            <option>In progress</option>
+            <option>Complete</option>
+            <option>Counsel review</option>
+          </select>
+        </label>
+        <label>
           Next review
           <input
             type="date"
@@ -183,6 +255,10 @@ export default function UseCaseInventory() {
               <th>Department</th>
               <th>Tier</th>
               <th>Status</th>
+              <th>Vendor / system</th>
+              <th>Data category</th>
+              <th>Decision support</th>
+              <th>Impact assessment</th>
               <th>Next review</th>
               <th>Action</th>
             </tr>
@@ -190,7 +266,7 @@ export default function UseCaseInventory() {
           <tbody>
             {items.length === 0 ? (
               <tr>
-                <td colspan={7}>No use cases recorded in this browser yet.</td>
+                <td colspan={11}>No use cases recorded in this browser yet.</td>
               </tr>
             ) : (
               items.map((item, index) => (
@@ -200,6 +276,10 @@ export default function UseCaseInventory() {
                   <td>{item.department || "—"}</td>
                   <td>{item.tier}</td>
                   <td>{item.status}</td>
+                  <td>{item.vendorSystem || "—"}</td>
+                  <td>{item.dataCategory}</td>
+                  <td>{item.decisionSupport}</td>
+                  <td>{item.impactAssessment}</td>
                   <td>{item.nextReview || "—"}</td>
                   <td>
                     <button type="button" onClick={() => remove(index)}>

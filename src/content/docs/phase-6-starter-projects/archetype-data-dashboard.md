@@ -93,7 +93,7 @@ The pipeline:
 1. **Schema retrieval.** From the question, retrieve relevant tables and columns. Do not pass the whole schema to the model — pass the most-likely-relevant subset.
 2. **Few-shot examples.** Include 3–5 example questions with their correct SQL. Examples are curated by the data team.
 3. **Generate SQL.** Mid-tier model with structured output (JSON: `{ sql: "...", explanation: "...", referenced_tables: [...] }`).
-4. **Parse and validate.** SQL must parse. Must be a SELECT (no writes, no DDL). Must reference only allowlisted tables. Must not use forbidden constructs (cross-database joins, UDF calls, etc.).
+4. **Parse and validate.** SQL must parse. It should be SELECT-only (no writes, no DDL), reference only allowlisted tables, and avoid forbidden constructs such as cross-database joins or unsafe UDF calls.
 5. **RBAC rewrite.** Inject row-level filters based on the user's identity. (E.g., if the user is scoped to Region 4, every reference to `cases` is rewritten to `(SELECT * FROM cases WHERE region = 4)` via a view or a filter predicate.)
 6. **Dry-run / cost estimate.** EXPLAIN the query; estimate cost; reject queries above a threshold.
 7. **Execute against read-only DB.** Separate database user with read-only permissions and a statement timeout.
@@ -113,7 +113,7 @@ This archetype's safety is largely SQL guardrails. Specifically:
 - **Row-level security.** RBAC-derived row filters are enforced at the DB layer (Postgres RLS, or a query-rewriter), not just by trusting the generated SQL.
 - **Statement timeout.** Default 30 seconds. Long-running queries are killed.
 - **Cost cap.** Queries with extreme estimated cost (cross joins on large tables, queries against unindexed columns) are rejected with a "this query is too expensive" error.
-- **Sandbox warehouse.** Queries run against a read replica or dedicated reporting warehouse — never against the production OLTP database.
+- **Sandbox warehouse.** Queries should run against a read replica or dedicated reporting warehouse, not the production OLTP database.
 
 The validator's defaults are deny. New tables, columns, and constructs are allowlisted explicitly.
 
@@ -152,7 +152,7 @@ Three levels:
 
 Result match is the gold standard — it doesn't matter if the SQL is differently shaped, as long as the answer is right. The eval suite has 30–50 questions with curated reference SQL; comparison is on row sets.
 
-Threshold: ≥ 90% result match on the eval suite. Below this, the model's accuracy doesn't justify the trust the UX implies.
+Starter target: at least 90% result match on the eval suite. Tune the threshold to question complexity and risk; below the local threshold, the model's accuracy does not justify the trust the UX implies.
 
 ## Caveats users see
 
@@ -202,11 +202,11 @@ Total starter budget is small. The risk is not cost; it is wrong answers reachin
 
 - **Wrong-but-plausible SQL.** The model writes SQL that runs and returns plausible numbers, but the join is wrong or the filter is off. Result-match eval catches systematic issues; user-facing SQL display catches case-by-case ones.
 - **Schema poisoning.** Adding a new table without a description, with a misleading description, or with overlapping naming confuses the model. Schema descriptions are first-class artifacts maintained by the data team.
-- **RBAC bypass.** A user gets data they shouldn't because the RBAC rewrite missed a path. Defense-in-depth: row-level security at the DB layer is mandatory.
+- **RBAC bypass.** A user gets data they should not because the RBAC rewrite missed a path. Defense-in-depth: enforce row-level security or equivalent controls at the DB/reporting layer wherever possible.
 - **Confidence inflation.** The system implies high confidence on shaky answers; users trust it; bad decisions follow. Calibrate confidence; show the SQL.
 - **The data is wrong.** The warehouse data has stale ETLs or data-quality issues; the system surfaces wrong answers from correct SQL. Data quality is a precondition, not a feature.
 - **The dashboard replaces curation.** Stakeholders abandon their curated dashboards because "the AI can answer it." Curated dashboards are still authoritative; the NL layer complements, doesn't replace.
-- **Adversarial queries.** A user tries to get the system to generate SQL that exfiltrates data. Validator + read-only user + RLS together; never trust generated SQL alone.
+- **Adversarial queries.** A user tries to get the system to generate SQL that exfiltrates data. Validator + read-only user + RLS/equivalent controls together; do not trust generated SQL alone.
 
 ## Plain-English Guide to NL Data Dashboard Terms
 

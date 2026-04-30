@@ -15,7 +15,7 @@ Voice rules (must follow):
 Stack rules:
 
 - Python 3.12 + FastAPI for runnable code.
-- Anthropic Claude as the default model in examples. Show how to swap to OpenAI / Azure / Bedrock at the end of each lab in a 5-line "Swap providers" subsection.
+- Provider-neutral model configuration in examples. If a concrete provider is used for a lab, explain that the model ID is an example slug and include a short "Swap providers" subsection that points to current provider docs.
 - Both `uv` and `pip` install paths in the Setup section.
 - All code must run on a developer laptop without paid infrastructure beyond an API key.
 
@@ -66,7 +66,7 @@ sidebar:
 
 ## Swap providers
 
-[5-line subsection showing how to swap Anthropic to OpenAI, Azure, or Bedrock. Code diff or env-var change.]
+[Short subsection showing how to swap providers through the existing adapter/config boundary. Mention current provider docs for exact SDK names, model IDs, regions, and cloud settings.]
 
 ## What you learned
 

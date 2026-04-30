@@ -5,11 +5,11 @@ sidebar:
   order: 2
 ---
 
-The stack the agency picks in Phase 4 is the one its developers will use for the next decade. It will outlast the framework's current major version, the cloud's current naming for managed services, and probably the current vendor for the IDE. The choice should be made deliberately, with criteria, and recorded as ADR-001 of the new dev practice. This page is the structured decision tree.
+The stack the agency picks in Phase 4 is the one its developers, vendors, or support partners will use for years. It will outlast the framework's current major version, the cloud's current naming for managed services, and probably the current vendor for the IDE. The choice should be made deliberately, with criteria, and recorded as ADR-001 of the new dev practice. This page is the structured decision tree.
 
 ## The single biggest rule
 
-**Most agencies should pick the stack they already have.** A team with a working Java/Spring application and three years of operational experience should not switch to Python because Python is fashionable in AI; the migration cost dwarfs the modest productivity gain, and the operational pain during the transition is real. The right question is not "what is the best stack for AI work" — every modern stack does AI work. The right question is "what stack are our developers most productive in, and does that stack meet our requirements for AI?"
+**Most agencies should pick the stack they already have and can support.** A team with a working Java/Spring application and three years of operational experience should not switch to Python because Python is fashionable in AI; the migration cost can dwarf the productivity gain, and the operational pain during the transition is real. The right question is not "what is the best stack for AI work" — every modern stack can call AI services. The right question is "what stack can our staff, vendors, and hosting environment support while meeting our requirements for AI?"
 
 The exceptions to this rule are documented below. They are narrower than they look.
 
@@ -19,27 +19,27 @@ Score each candidate stack on the following dimensions. The right stack is the o
 
 ### 1. Existing team skills
 
-Look at the agency's working developer population, not aspirational hires. If 80% of the developers are .NET people who can ship .NET in their sleep, that stack scores 5/5 on this dimension regardless of any other consideration.
+Look at the agency's working developer population and vendor support model, not aspirational hires. If most of the developers or maintainers are .NET people who can ship .NET confidently, that stack scores highly on this dimension regardless of any other consideration.
 
 ### 2. Existing operational footprint
 
-Are there already production .NET / Java / Python applications running? An ops team that knows how to deploy, monitor, and patch the stack is a year of effort that doesn't have to be repeated. Score the existing operational footprint, not the bench depth.
+Are there already production .NET / Java / Python / Node applications running? Is there a vendor or shared service already supporting them? An operations pattern that already knows how to deploy, monitor, and patch the stack is effort that does not have to be repeated. Score the existing operational footprint, not the aspiration.
 
 ### 3. AI ecosystem maturity
 
-Some stacks are stronger for AI work than others. As of 2026:
+Some stacks have a smoother AI-development path than others. As of this guide's 2026 audit, the practical pattern is:
 
-- **Python** — strongest. Direct SDKs from Anthropic, OpenAI, and every model vendor; reference notebooks for retrieval and agents; the entire ML and data science world.
-- **TypeScript / Node** — second. First-class SDKs from major vendors; strong serverless story; identical language between frontend and backend.
+- **Python** — strongest ecosystem for orchestration, retrieval, evals, notebooks, and data-science-adjacent work.
+- **TypeScript / Node** — strong SDK and web-app ecosystem; useful when one language across frontend/backend matters.
 - **Go** — strong for service code; Anthropic and OpenAI have Go SDKs; less common for the orchestration layer because async / streaming patterns are heavier.
-- **.NET** — Azure OpenAI has first-class .NET integration; Semantic Kernel is a viable orchestration framework; broader Anthropic/OpenAI SDK coverage is thinner.
-- **Java / Spring** — Spring AI is real and improving; vendor SDK coverage is thinner than Python/TypeScript; works well for service code, less idiomatic for prompt-heavy orchestration.
+- **.NET** — strong Azure integration and mature enterprise tooling; Semantic Kernel and Microsoft.Extensions.AI are viable orchestration options.
+- **Java / Spring** — strong enterprise/service ecosystem; Spring AI is improving and Spring remains a credible platform for modular service code.
 
-A stack scoring 3/5 on this dimension is not disqualifying — every modern stack can call HTTP APIs and parse JSON. But Python and TypeScript are the path of least resistance for the AI orchestration layer specifically.
+A lower score on this dimension is not disqualifying. Every modern stack can call HTTP APIs, parse JSON, and use provider SDKs. Python and TypeScript are often the path of least resistance for AI orchestration, but an agency that already operates .NET, Java, or Go well should account for that advantage.
 
 ### 4. Hiring market
 
-In a multi-year build, attrition is real. The agency must be able to hire (or contract with) developers in the stack five years from now. All five candidate stacks pass this test today; none is clearly fading.
+In a multi-year build, attrition is real. The agency must be able to hire, contract, or obtain shared-service support in the stack five years from now. All five candidate stacks pass this test today; none is clearly fading.
 
 ### 5. Government adoption and procurement
 
@@ -65,7 +65,7 @@ The chosen stack should run reasonably on AWS, Azure, and GCP. All five candidat
 
 **Best for:** Agencies without an entrenched stack; teams hiring data-science-leaning developers; the agency that is hiring for AI/ML capability and wants the broadest ecosystem.
 
-**Strengths.** Largest AI/ML ecosystem; FastAPI is purpose-designed for typed, async, OpenAPI-first APIs; React frontend is the de facto standard for new public-sector portals.
+**Strengths.** Large AI/ML ecosystem; FastAPI is purpose-designed for typed, async, OpenAPI-first APIs; React is a common frontend choice for new public-sector portals.
 
 **Watch-outs.** Python deployment is heavier than the alternatives (Docker is the right packaging unit; do not deploy raw Python). Frontend / backend split means two languages, two test stacks, two CI surfaces. The reference implementation in this guide uses this stack and explains the tradeoff.
 
@@ -73,7 +73,7 @@ The chosen stack should run reasonably on AWS, Azure, and GCP. All five candidat
 
 **Best for:** Microsoft-shop agencies; teams with strong existing .NET operational experience; agencies on Azure with deep Entra ID integration.
 
-**Strengths.** Excellent IDE / debugger; strong async story; Azure integration is best-in-class; mature ORMs and frameworks; Semantic Kernel and Microsoft.Extensions.AI.
+**Strengths.** Excellent IDE / debugger; strong async story; strong Azure integration; mature ORMs and frameworks; Semantic Kernel and Microsoft.Extensions.AI.
 
 **Watch-outs.** Smaller AI ecosystem than Python (improving fast). If the team uses Blazor, double-check the operational story and the eventual hiring market for Blazor specifically.
 
@@ -81,7 +81,7 @@ The chosen stack should run reasonably on AWS, Azure, and GCP. All five candidat
 
 **Best for:** Agencies with established Spring expertise; teams that need the modular monolith pattern with strong tooling support; transactional / data-heavy backends.
 
-**Strengths.** Spring Modulith is purpose-built for the modular monolith Phase 5 produces; strong test ecosystem (JUnit 5, Testcontainers, Pact); excellent transactional and database story; long deprecation cycles (good for government).
+**Strengths.** Spring Modulith supports the modular monolith pattern Phase 5 uses; strong test ecosystem (JUnit 5, Testcontainers, Pact); excellent transactional and database story; long deprecation cycles (good for government).
 
 **Watch-outs.** AI ecosystem (Spring AI) is real but younger; verbose for prompt-heavy code. Hiring market for senior Spring developers is thinner than Python/Node in some regions.
 
@@ -89,7 +89,7 @@ The chosen stack should run reasonably on AWS, Azure, and GCP. All five candidat
 
 **Best for:** Web-heavy public portals; agencies wanting a single language across frontend and backend; teams already shipping Node.
 
-**Strengths.** Same language across the stack reduces context switching; Next.js is the dominant React metaframework; OpenAI and Anthropic SDKs are first-class; Vercel/Cloud Run/App Service all have first-party Next.js paths.
+**Strengths.** Same language across the stack reduces context switching; Next.js is a common React metaframework; major model providers have TypeScript SDKs; managed hosting paths are widely available.
 
 **Watch-outs.** Operational discipline matters more in Node than in JVM/.NET; long-running processes and memory leaks need care; the npm dependency surface is large and requires active hygiene (Phase 4's [coding standards](/phase-4-dev-stack/coding-standards/) covers this).
 
@@ -108,31 +108,35 @@ Q1. Does the agency have a working production application maintained by ≥5 dev
     Yes → Score that stack first. Unless it scores ≤2/5 on AI ecosystem maturity, choose it.
     No → Continue.
 
-Q2. Is the agency primarily on Azure with strong .NET operational experience?
+Q2. Is the agency primarily vendor-managed, low-code, or without in-house developers?
+    Yes → Choose the stack your vendor/shared-service can maintain, and require standards, tests, APIs, and data rules contractually.
+    No → Continue.
+
+Q3. Is the agency primarily on Azure with strong .NET operational experience?
     Yes → .NET is the default; evaluate against Python only if the agency is hiring data science capability.
     No → Continue.
 
-Q3. Is the agency primarily building public-facing web portals?
+Q4. Is the agency primarily building public-facing web portals?
     Yes → Python+FastAPI+React or Node+TypeScript+Next.js — pick whichever the team prefers.
     No → Continue.
 
-Q4. Is the agency primarily building integrations and event-driven backends?
+Q5. Is the agency primarily building integrations and event-driven backends?
     Yes → Python+FastAPI is the broadest fit; Go for high-throughput service tiers; .NET if Azure-native; Java if Spring expertise exists.
     No → Continue (small fraction of agencies).
 
-Q5. Default → Python+FastAPI+React.
+Q6. Default for code-owning teams with no entrenched stack → Python+FastAPI+React.
 ```
 
-The default exists because Python+FastAPI+React is the broadest, easiest-to-hire, AI-friendly stack with strong government adoption. It is the choice this guide's reference implementation uses. It is not always the right choice — the questions above route most agencies to a different answer.
+The default exists because Python+FastAPI+React is broad, AI-friendly, and easy to teach in the guide's reference implementation. It is not always the right choice — the questions above route many agencies to a different answer.
 
 ## Two-stack decisions
 
-A small number of agencies legitimately need two stacks. The rule: **never two stacks for the same kind of work.** Acceptable splits:
+A small number of agencies legitimately need two stacks. The rule: **avoid two stacks for the same kind of work unless there is a documented owner and reason.** Acceptable splits:
 
 - **Service tier in Go, orchestration tier in Python.** The platform's gateway and high-throughput services are Go; the AI orchestration layer is Python. Each tier is one stack; the seam between them is HTTP/gRPC.
 - **Backend in .NET, ML/data tier in Python.** The agency's transactional systems are .NET; the AI orchestration and any data preparation tooling are Python. Same rule: each tier is one stack.
 
-Unacceptable splits: "team A uses Python, team B uses Java, both build orchestration." That ends up with two implementations of every cross-cutting concern. If the platform truly needs more than one stack, ADR the boundary explicitly.
+High-risk splits: "team A uses Python, team B uses Java, both build orchestration." That ends up with two implementations of every cross-cutting concern. If the platform truly needs more than one stack, ADR the boundary explicitly.
 
 ## What to record in ADR-001
 
@@ -144,7 +148,7 @@ The ADR for stack selection captures:
 4. **Decision drivers.** Which selection criteria mattered most and why.
 5. **Alternatives considered.** Each candidate stack with a short rationale for why it was not chosen.
 6. **Consequences.** What this means for hiring, operational tooling, training, and migration of any non-conforming workloads.
-7. **Review cadence.** Re-evaluate every 24 months unless triggered by a major shift.
+7. **Review trigger.** Re-evaluate at major contract renewal, major platform shift, or roughly every 24 months.
 
 ## Migration policy for non-conforming workloads
 

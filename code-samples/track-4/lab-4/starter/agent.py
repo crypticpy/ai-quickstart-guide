@@ -57,7 +57,7 @@ class AgentResult:
     stopped_reason: str = "end_turn"
 
 
-def run_agent(user_message: str, *, client, model: str = "claude-sonnet-4-5",
+def run_agent(user_message: str, *, client, model: str = "claude-sonnet-4-20250514",
               max_iterations: int = MAX_ITERATIONS) -> AgentResult:
     """TODO: implement the agent loop.
 

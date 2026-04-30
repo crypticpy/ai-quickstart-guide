@@ -225,7 +225,9 @@ Reference answers for each exercise live in `code-samples/track-4/lab-3/solution
 
 ## Swap providers
 
-Embedding model and chat model are independent. To swap the chat model from Anthropic to OpenAI, change one line in `rag.py` (or pass `complete=get_client(provider="openai", model="gpt-4o-mini")` from the caller). For Azure OpenAI, set `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, and `AZURE_OPENAI_DEPLOYMENT`, then call `get_client(provider="azure-openai")`. For Bedrock, use Anthropic's [Bedrock integration](https://docs.claude.com/en/api/claude-on-amazon-bedrock). To swap the embedding model from local sentence-transformers to OpenAI's `text-embedding-3-small`, change the `embedding_function` argument in `get_collection`; you must delete `.chroma/` and re-ingest because embeddings from different models are not comparable.
+Embedding model and chat model are independent. To swap the chat model, pass a different provider and approved model ID to `get_client`, for example `get_client(provider="openai", model="<approved-model-id>")`. For Azure OpenAI, the model value is usually the deployment name from the Azure resource, so set `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, and `AZURE_OPENAI_DEPLOYMENT`, then call `get_client(provider="azure-openai")`. For Bedrock, Vertex AI, or another managed provider, follow that provider's current SDK docs and preserve the same adapter boundary.
+
+To swap the embedding model from local sentence-transformers to a hosted embedding model, change the `embedding_function` argument in `get_collection`; you must delete `.chroma/` and re-ingest because embeddings from different models are not comparable. Verify the current embedding model ID, dimensions, pricing, and data-handling terms in provider docs before a live deployment.
 
 ## What you learned
 

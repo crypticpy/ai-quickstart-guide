@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     llm_provider: str = "anthropic"
-    llm_model: str = "claude-sonnet-4-5"
+    llm_model: str = "claude-sonnet-4-20250514"
 
     policy_corpus_dir: Path = PROJECT_DIR / "data" / "policy_corpus"
     permits_path: Path = PROJECT_DIR / "data" / "permits" / "permits.json"

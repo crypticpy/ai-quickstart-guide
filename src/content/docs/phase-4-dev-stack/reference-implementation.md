@@ -19,19 +19,19 @@ It does five things, and each thing exercises a layer:
 2. Receives a natural-language query through a small React UI.
 3. Retrieves relevant chunks from a vector store of agency policy documents.
 4. Calls a foundation model with a structured prompt that grounds the answer in retrieved chunks, and returns the answer with citations.
-5. Captures the prompt, response, retrieval results, and user feedback to the observability backend.
+5. Captures AI invocation metadata, retrieval references, and user feedback to the observability backend; captures redacted prompt/response artifacts only when approved by the use case's data rules.
 
 ## Stack used
 
 The reference uses the default stack from [stack selection](/phase-4-dev-stack/stack-selection/):
 
-- **Python 3.12** + **FastAPI** for the orchestration service.
-- **TypeScript** + **React 19** + **Vite** + **TanStack Query** for the frontend.
-- **PostgreSQL 17** with the **pgvector** extension as the vector store (one fewer system to operate vs. a dedicated vector DB).
-- **Anthropic Claude** as the foundation model (any vendor with an OpenAI-compatible or first-party SDK works; the adapter pattern below makes the swap trivial).
+- **Python** on a currently supported version + **FastAPI** for the orchestration service.
+- **TypeScript** + a currently supported **React** release + **Vite** + **TanStack Query** for the frontend.
+- **PostgreSQL** on a currently supported major version with the **pgvector** extension as the vector store when the agency already operates Postgres (one fewer system to operate vs. a dedicated vector DB).
+- **A currently approved foundation model** configured by provider model ID / slug (any vendor with a first-party or compatible SDK can fit the adapter pattern below).
 - **OpenTelemetry** instrumentation throughout; OTLP exporter to whichever backend Phase 3 wired in.
 
-Every other Phase 4 stack should produce an equivalent reference application. The architecture is the lesson; the language is interchangeable.
+Use currently supported runtime, framework, database, and extension versions from official project documentation at implementation time. Track extension security advisories, especially for vector-search components such as pgvector. Every other Phase 4 stack should produce an equivalent reference application. The architecture is the lesson; the language is interchangeable.
 
 ## Repository layout
 
@@ -112,7 +112,7 @@ async def post_inquiry(
         chunks = await retrieve(store, payload.query, user.scopes)
         messages = build_prompt(payload.query, chunks)
         result = await llm.invoke(messages, user_id=user.id)
-        capture_for_review(payload, chunks, messages, result, user)
+        capture_ai_telemetry(payload, chunks, messages, result, user)
         return InquiryResponse(answer=result.text, citations=cite(chunks))
 ```
 
@@ -140,7 +140,7 @@ class BedrockAdapter:
     ...
 ```
 
-The application code depends on the protocol, not on a specific vendor. Swapping `claude-opus-4-7` for `gpt-4o` or `gemini-2.x` is a config change. Swapping vendors is a single new adapter class. The procurement work in [Phase 1](/phase-1-governance/procurement-guardrails/) requires this — the model substitution clause assumes the agency can re-evaluate by configuration.
+The application code depends on the protocol, not on a specific vendor. A model ID is the provider-maintained slug used in API calls or tool configuration, such as `<provider-model-id>`. Changing the configured model should be a bounded change, but not a blind one: provider behavior differs in streaming, tool use, structured outputs, safety filters, context windows, rate limits, and authentication. The adapter keeps the change contained; the agency still re-runs evals and reviews provider-specific behavior before promotion.
 
 ### Retrieval (RAG) with citations
 
@@ -202,7 +202,7 @@ The cases file is small (start with 30; grow over time) and includes:
 - Cases where the answer is genuinely not in the corpus (the model should refuse).
 - Cases that probe specific failure modes (ambiguous queries, scope-leakage attempts, prompt-injection attempts).
 
-The runner is invoked in CI as a gate. A drop of more than 5% from baseline blocks merge.
+The runner is invoked in CI as a gate once the eval suite is calibrated. A drop of more than the agency's starter threshold, often around 5%, blocks merge for production-bound AI changes.
 
 ## Observability instrumentation
 
@@ -283,13 +283,13 @@ If the agency picked .NET, Java, Node, or Go in [stack selection](/phase-4-dev-s
 - Same eval suite shape.
 - Same observability conventions.
 
-Build the equivalent reference repo before the first Track 4 cohort. A working reference in the agency's stack is non-negotiable; without it, Track 4 labs degenerate into "translate the Python example."
+Build the equivalent reference repo before the first Track 4 cohort where possible. If staffing or procurement prevents that, use the guide's reference as a teaching sample and add a short translation note for the agency's chosen stack before the first pilot begins.
 
 ## Common reference-implementation pitfalls
 
 - **Reference repo grows into a real platform.** Resist. The reference exists to teach. Phase 5 produces the platform separately.
 - **Reference is not maintained.** A reference using a model API that is two years old, or a framework version that is unsupported, is worse than no reference. Pin a maintainer; update on each model major version.
-- **Reference uses agency production data.** It should not. Synthetic or sanitized data only. The Review Committee approves the synthetic set once.
+- **Reference uses agency production data.** It should not. Synthetic or sanitized data only. The approved review path approves the synthetic set once.
 - **Reference skips evals.** If the reference does not include an eval suite, no team built from it will. Include it.
 
 ## Related

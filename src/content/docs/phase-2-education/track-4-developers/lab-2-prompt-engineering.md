@@ -201,13 +201,15 @@ Hints and a reference answer for each exercise live in `code-samples/track-4/lab
 
 ## Swap providers
 
-The `llm_client.py` wrapper accepts a `provider` argument. To switch from Anthropic to OpenAI, change one line at the top of `classifier.py`:
+The `llm_client.py` wrapper accepts a `provider` argument and an optional model ID. A model ID is the provider slug or deployment name used in the API call. Provider docs and agency policy determine which values are current and approved.
+
+To switch from Anthropic to OpenAI, change one line at the top of `classifier.py` and use the model ID your agency has approved:
 
 ```python
-complete = get_client(provider="openai", model="gpt-4o-mini")
+complete = get_client(provider="openai", model="<approved-model-id>")
 ```
 
-For Azure OpenAI, set `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, and `AZURE_OPENAI_DEPLOYMENT`, then call `get_client(provider="azure-openai")`. For Bedrock, the cleanest path is to use Anthropic's [Bedrock integration](https://docs.claude.com/en/api/claude-on-amazon-bedrock) by setting `ANTHROPIC_BEDROCK_BASE_URL` and adding an `anthropic[bedrock]` install; the prompt and call shape stay the same.
+For Azure OpenAI, set `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, and `AZURE_OPENAI_DEPLOYMENT`, then call `get_client(provider="azure-openai")`. For Bedrock, Vertex AI, or another managed provider, follow that provider's current SDK documentation and implement the same wrapper shape: configuration in environment, provider adapter at the edge, normalized text result returned to the classifier.
 
 ## What you learned
 

@@ -1,6 +1,6 @@
 ---
 title: "Session 3.5 — Legislative Compliance Navigator"
-description: 90-minute working session that produces the agency's state-by-state AI compliance matrix with deadlines and action items.
+description: 90-minute working session that produces the agency's jurisdiction-specific AI compliance matrix with deadlines and action items.
 sidebar:
   order: 5
 ---
@@ -9,7 +9,7 @@ The fifth Track 3 session maps the federal and state AI regulation landscape ont
 
 ## Deliverable produced
 
-A state-by-state AI compliance matrix tailored to the agency's operating jurisdictions, with deadlines and named action items.
+A jurisdiction-specific AI compliance matrix tailored to the agency's operating footprint, with deadlines and named action items.
 
 ## Audience and prerequisites
 
@@ -24,16 +24,16 @@ Same Track 3 audience plus the agency's compliance officer or designee. General 
 ## Materials
 
 - The Phase 1 [Legislative Compliance](/phase-1-governance/legislative-compliance/) matrix.
-- Federal framework summaries: NIST AI RMF 1.0, OMB M-25-21 (April 2025; supersedes M-24-10), OMB M-25-22 (April 2025; supersedes M-24-18).
-- State law summaries: Colorado AI Act, Texas TRAIGA, California SB 942, similar legislation in any other operating jurisdictions.
+- Federal framework summaries: NIST AI RMF 1.0 and current OMB AI governance memos for covered federal agencies.
+- State and local law summaries for the agency's actual jurisdictions, including any AI, automated decision, surveillance, privacy, employment, education, healthcare, or procurement rules that apply.
 - The agency's existing compliance calendar (records, FOIA, breach notification, etc.) for cross-reference.
 
 ## 15-minute context-setting
 
 The facilitator walks through the regulatory landscape:
 
-1. **Federal frameworks.** NIST AI RMF (voluntary but referenced by procurement); OMB M-25-21 and M-25-22 (April 2025, supersede M-24-10 and M-24-18; binding on federal agencies; widely adopted as model by state/local).
-2. **State laws.** Broad AI laws in 8+ states with disclosure, impact assessment, and contestation requirements; sector-specific laws (employment, healthcare, education) in many more.
+1. **Federal frameworks.** NIST AI RMF is voluntary but frequently referenced by procurement and governance programs. OMB AI memos directly bind covered federal agencies and are often useful reference material for state, local, tribal, and territorial agencies when adapted locally.
+2. **State laws.** Some states have broad AI, automated-decision, privacy, or disclosure rules; many more have sector-specific rules in employment, healthcare, education, criminal justice, procurement, or surveillance.
 3. **Local laws.** TRUST Act (Oakland), CCOPS (San Francisco, Seattle, others), surveillance ordinances. Apply when the agency is in scope.
 
 The scope filter: **what laws apply to your agency, in your jurisdictions, for your AI use cases?** Not every state law applies to every agency. The session narrows the scope.
@@ -66,14 +66,14 @@ The output is a use-case-by-law cross-tab that the Review Committee uses when re
 
 The compliance matrix usually surfaces 5–15 named action items. Examples:
 
-- "Colorado AI Act effective 2026-02-01: file impact assessment for [use case X] by Q1."
-- "OMB M-25-21 inventory due quarterly; AI program lead owns submission."
+- "Colorado AI Act or successor requirements: confirm effective date and impact-assessment obligations for [use case X] with counsel."
+- "Covered federal agency inventory requirement: AI program lead owns submission cadence under the current OMB memo."
 - "TRUST Act applies to surveillance technology procurement; Review Committee adds CCOPS impact statement to Tier-3 review checklist."
 
 The room prioritizes:
 
-- **Tier 1, must-do this quarter.** Hard deadlines, statutory penalties, or active litigation risk.
-- **Tier 2, must-do this year.** Soft deadlines, ongoing disclosure obligations, audit-readiness.
+- **Priority 1, this quarter.** Hard deadlines, statutory penalties, or active litigation risk.
+- **Priority 2, this year.** Soft deadlines, ongoing disclosure obligations, audit-readiness.
 - **Tier 3, track.** Pending or proposed legislation that may apply but isn't yet enacted.
 
 ### Block D — Monitoring rhythm (5 min)
@@ -99,8 +99,8 @@ The facilitator reads back the matrix and the prioritized action items. The outp
 
 - **"What if a law is ambiguous?"** Document the ambiguity, get a written legal interpretation from counsel, and act on the interpretation. Keep the documentation; if the interpretation is wrong, the audit trail shows good-faith effort.
 - **"What if we operate in 50 states?"** Most agencies don't. For those that do (federal, multi-state nonprofits, large school districts), the matrix becomes a substantial document. Prioritize the laws with binding deadlines and impact assessments first.
-- **"Do federal frameworks apply to local agencies?"** OMB memos directly bind federal agencies. State and local agencies are not bound but are increasingly adopting the framework as a model, and federal grant compliance often references it.
-- **"What about the EU AI Act?"** Generally does not apply to U.S. domestic agencies. Applies if the agency provides services to or processes data of EU residents, which is rare for state and local agencies. Document the analysis if there's any doubt.
+- **"Do federal frameworks apply to local agencies?"** OMB memos directly bind covered federal agencies. State and local agencies are not bound unless a grant, contract, state rule, or local policy incorporates them, but the framework can still be useful as a model.
+- **"What about the EU AI Act?"** It generally does not apply to U.S. domestic agencies, but confirm with counsel if the agency provides services to EU residents, processes EU-resident data, or contracts with an entity that imposes EU AI Act obligations.
 
 ## Closing — Track 3 wrap
 
@@ -112,7 +112,7 @@ Session 3.5 is the last Track 3 working session. By the end, the agency has:
 - A draft procurement addendum (Session 3.4)
 - A working compliance matrix (Session 3.5)
 
-Together these constitute the **complete Phase 1 governance package**, customized to the agency. The remaining work is legal review, executive ratification, and operationalization through the Review Committee. The committee is now ready to begin standing meetings.
+Together these constitute a **localized Phase 1 governance package draft**. The remaining work is legal review, executive or board ratification where required, and operationalization through the Review Committee. The committee is now ready to begin standing meetings.
 
 ## Related
 

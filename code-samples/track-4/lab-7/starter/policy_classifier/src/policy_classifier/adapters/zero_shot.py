@@ -20,7 +20,7 @@ ZERO_SHOT_SYSTEM = (
 class ZeroShotClaudeAdapter(Classifier):
     """Adapter: zero-shot prompt against Anthropic Claude."""
 
-    def __init__(self, model: str = "claude-sonnet-4-5", api_key: str | None = None):
+    def __init__(self, model: str = "claude-sonnet-4-20250514", api_key: str | None = None):
         # Imported here so the package can be imported in environments
         # that have not installed the anthropic SDK yet (e.g., test runs
         # that only use a fake adapter).

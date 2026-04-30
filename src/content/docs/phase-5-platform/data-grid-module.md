@@ -1,13 +1,13 @@
 ---
 title: Data Grid & Search Module
-description: Reusable typed list, filter, sort, pagination, and full-text search — UI and backend, used by every internal tool.
+description: Reusable typed list, filter, sort, pagination, and full-text search patterns for internal tools.
 sidebar:
   order: 5
 ---
 
-Almost every internal government tool has the same screen: a table of records with filters across the top, sortable columns, a search box, an export button, and pagination at the bottom. The "back-office app" archetype is 60% list views by line count, and every team that builds one rebuilds the same pattern from scratch — usually inconsistently, often with subtle bugs in pagination boundaries, filter combinations, or sort stability.
+Many internal government tools share the same screen: a table of records with filters across the top, sortable columns, a search box, an export button, and pagination at the bottom. Teams often rebuild this pattern from scratch, usually inconsistently and sometimes with subtle bugs in pagination boundaries, filter combinations, row-level authorization, or sort stability.
 
-The Data Grid module is the agency's reusable answer. One backend pattern + one frontend component + one query language = every list view in every app, with consistent behavior, accessibility, exports, and search.
+The Data Grid module is the agency's reusable answer. One backend pattern, one frontend component or library wrapper, and one query language give list views consistent behavior, accessibility, exports, and search without forcing every app to invent its own table system.
 
 ## What this module owns
 
@@ -76,7 +76,7 @@ import { DataGrid } from "@platform/data-grid";
 />;
 ```
 
-That's a complete, accessible, paginated, filterable, sortable, exportable case list. The consuming app writes 15 lines of TSX instead of 800.
+That is a complete, accessible, paginated, filterable, sortable, exportable case list. The exact line count will vary, but the consuming app should mostly describe columns and defaults instead of rebuilding list behavior.
 
 ## The query DSL
 
@@ -165,7 +165,7 @@ def cases_row_filter(user_id, base_query):
         return base_query.where(False)  # see nothing
 ```
 
-The Data Grid module always applies the row filter; the consuming app cannot accidentally bypass it. This eliminates a class of bugs where "list cases" returns cases the user shouldn't see because the developer forgot the WHERE clause.
+The Data Grid module should always apply the row filter inside the shared query path so the consuming app cannot accidentally bypass it. This reduces a class of bugs where "list cases" returns cases the user should not see because the developer forgot the WHERE clause.
 
 The row filter is also applied to exports. You cannot export rows you cannot see.
 
@@ -187,12 +187,12 @@ Search adapter options:
 
 | Option                                                                 | When                                                                             |
 | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Postgres `tsvector`                                                    | Default for ≤ 10M rows; no extra infrastructure                                  |
+| Postgres `tsvector`                                                    | Good default for modest datasets when Postgres is already the system of record   |
 | OpenSearch / Elasticsearch                                             | Larger corpora; cross-entity search; advanced queries                            |
-| Cloud-native (AWS OpenSearch / Azure AI Search / GCP Vertex AI Search) | Use if already in the cloud and aligned with [Phase 3](/phase-3-infrastructure/) |
+| Cloud-native search service                                            | Use if already in the cloud and aligned with [Phase 3](/phase-3-infrastructure/) |
 | pgvector + embeddings                                                  | Semantic search; combine with keyword search                                     |
 
-The module's adapter pattern means search backend swaps are local. Most agencies start with Postgres `tsvector` and migrate to a dedicated search engine when corpus size or query complexity demand it.
+The module's adapter pattern keeps search backend changes bounded. Most agencies can start with their database's native full-text search and migrate to a dedicated search engine when corpus size, query complexity, or cross-entity search demand it.
 
 Search results carry highlighted snippets:
 
@@ -253,7 +253,7 @@ Customization:
 - Row context menu.
 - Header actions (bulk, export, refresh).
 
-The component is a 30 KB gzipped bundle on its own; it shares dependencies with the rest of the platform shell.
+Bundle size depends on the chosen UI framework and dependency sharing. Track it in CI for the reference shell instead of treating a specific size as a promise.
 
 ## Saved views
 
@@ -267,7 +267,7 @@ Stored as a JSON document keyed by `(user, entity, name)` in the platform DB. Sa
 
 ## Performance
 
-Targets on a typical agency dataset (1M rows, 10 columns):
+Starter targets on a typical indexed agency dataset:
 
 - Empty filter, default sort: p95 ≤ 100ms.
 - Filtered query (one indexed predicate): p95 ≤ 100ms.
@@ -275,7 +275,7 @@ Targets on a typical agency dataset (1M rows, 10 columns):
 - Search (ts_query against searchable columns): p95 ≤ 200ms.
 - Export of 10,000 rows (sync): p95 ≤ 2s.
 
-Critical: every filterable + sortable field has an index. The registration step asserts this against the live DB schema; missing indexes fail the boot. This catches the "I added `is_archived` as a filter but forgot the index, now everything is a sequential scan in production" bug.
+Critical: every high-traffic filterable + sortable field has an index. The registration step should assert this against the live DB schema for production entities, or at minimum surface a CI warning before launch. This catches the "I added `is_archived` as a filter but forgot the index, now everything is a sequential scan in production" bug.
 
 ## Caching
 
@@ -318,4 +318,4 @@ Translation files ship with the module (English baseline + agency-supplied local
 - [API Framework](/phase-5-platform/api-framework-module/) — exposes the grid endpoints with consistent error / pagination / auth handling
 - [RBAC Module](/phase-5-platform/rbac-module/) — provides the row filter authority
 - [Auth Module](/phase-5-platform/auth-module/) — identifies the user the row filter applies to
-- [API-First Design](/phase-4-dev-stack/api-first-design/) — pagination + RFC 7807 error standards the grid follows
+- [API-First Design](/phase-4-dev-stack/api-first-design/) — pagination + Problem Details error standards the grid follows

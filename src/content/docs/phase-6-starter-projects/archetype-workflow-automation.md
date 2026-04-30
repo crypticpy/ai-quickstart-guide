@@ -5,11 +5,11 @@ sidebar:
   order: 6
 ---
 
-Workflow automation is the most operationally impactful of the five starter archetypes — and the one with the most governance scrutiny. The pattern is the same across many agencies: a high-volume intake (forms, applications, tickets, complaints, inquiries) needs to be classified, routed, prioritized, or summarized. A human currently does this work; an AI can suggest the answer; a human still ratifies; the team's throughput goes up significantly.
+Workflow automation can be the most operationally impactful of the five starter archetypes — and the one with the most governance scrutiny. The pattern is the same across many agencies: a high-volume intake (forms, applications, tickets, complaints, inquiries) needs to be classified, routed, prioritized, or summarized. A human currently does this work; an AI can suggest the answer; a human still ratifies; the team's throughput may improve significantly.
 
 Get this right and the agency moves from "we're trying AI" to "AI is meaningfully changing how the team operates." Get it wrong and the agency ships an AI that quietly miscategorizes intake for weeks before anyone notices.
 
-This is **not the easy starter**. Pick this only if the agency has a clearly bottlenecked intake stream, a real history of human-classified examples, a stakeholder who will ratify decisions, and the discipline to keep humans in the loop. Otherwise, do the [chatbot](/phase-6-starter-projects/archetype-rag-chatbot/) first.
+This is **not the easy starter**. Pick this only if the agency has a clearly bottlenecked intake stream, a real history of human-classified examples, a stakeholder who will ratify decisions, and the discipline to keep humans in the loop. Otherwise, do the [chatbot](/phase-6-starter-projects/archetype-rag-chatbot/) first or narrow this project to shadow mode.
 
 ## What the project ships
 
@@ -150,21 +150,21 @@ The most demanding of any starter archetype.
 | **Adversarial**            | Intake with prompt-injection-like content; system must not be subverted                                     |
 | **Drift detection**        | Recent intake (last 30 days) vs. older eval baseline; accuracy stable?                                      |
 
-Thresholds:
+Starter threshold targets:
 
-- Overall accuracy ≥ baseline (the human-only baseline accuracy on a held-out set).
-- Confidence calibration: bucketed accuracy within 5% of bucketed confidence.
-- Bias probe: accuracy variance across protected-attribute slices ≤ 3%.
-- No should-refuse case produces an unflagged classification.
+- Overall accuracy meets or beats a documented baseline on a held-out set.
+- Confidence calibration is close enough that reviewers can use it for triage; investigate buckets where confidence materially overstates accuracy.
+- Bias probe variance across protected-attribute slices stays within a locally approved tolerance.
+- No known should-refuse case produces an unflagged classification.
 
-A failing eval blocks deploy. A failing bias probe blocks deploy and triggers a separate review.
+A failing production-risk eval should block deploy. A failing bias probe should block launch expansion and trigger a separate review.
 
 ## Bias and fairness
 
 This is the archetype that needs the most attention to fairness:
 
-- **Demographic features must not directly enter the prompt.** Names, addresses, ZIP codes, etc. that correlate with protected attributes either (a) get redacted before the model sees them, or (b) are explicitly evaluated to ensure they don't drive classification.
-- **Bias probes in CI.** A synthetic test set where the same intake content is varied across demographic-correlated attributes; classification must be stable.
+- **Demographic features should not directly enter the prompt unless justified.** Names, addresses, ZIP codes, etc. that correlate with protected attributes either (a) get redacted before the model sees them, or (b) are explicitly evaluated to ensure they do not drive classification unfairly.
+- **Bias probes in CI for higher-risk launches.** A synthetic test set where the same intake content is varied across demographic-correlated attributes; classification should be stable within approved tolerances.
 - **Outcome monitoring.** Post-launch, classifications are sliced by recipient demographic where data is available; persistent disparities trigger review.
 - **Reviewer override patterns.** When reviewers consistently override suggestions for one demographic group, that's a signal — investigate.
 - **External review.** For starters with high consequence, an external fairness review (academic partner, civil-rights office) before launch.
@@ -212,7 +212,7 @@ When drift exceeds thresholds, the operator has options: re-run eval against fre
 
 Per-classification cost is small ($0.01–$0.05 with mid-tier models on small inputs). For high-volume intake, the cumulative cost is meaningful but manageable.
 
-For starters: target ≤ 10% of the comparable human-review cost. If the system costs more than the humans it augments, the project's economics are broken.
+For starters: target a small fraction of comparable human-review cost, then validate with real volume. If the system costs more than the work it augments, the project needs scope, model, or process changes before expansion.
 
 ## Build sprints (Months 7–10)
 
@@ -234,7 +234,7 @@ For starters: target ≤ 10% of the comparable human-review cost. If the system 
 ## Common workflow-automation failures
 
 - **Rubber-stamping.** Reviewers under pressure ratify without reading. Mitigations: random spot-checks; supervisor sampling; targeted training; load-balancing reviewer queues.
-- **Drift unnoticed.** The system slowly degrades over months because nobody monitors. Drift dashboards are mandatory; alerts on thresholds.
+- **Drift unnoticed.** The system slowly degrades over months because nobody monitors. Drift dashboards and threshold alerts should be part of the launch plan.
 - **Bias propagation.** Past biased decisions teach the model to be biased. Bias probes catch it; re-eval after every prompt change.
 - **Inappropriate autonomy creep.** Stakeholders ask "can we skip the human review for the high-confidence ones?" Resist for the starter; document the criteria for ever lifting it (it's a separate project).
 - **Reviewer churn.** Reviewers leave; new reviewers don't know the override norms. Reviewer onboarding is part of the runbook.

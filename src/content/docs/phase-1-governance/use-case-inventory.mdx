@@ -7,9 +7,19 @@ sidebar:
 
 import UseCaseInventory from '../../../components/UseCaseInventory.tsx';
 
-The intake form captures one idea. The inventory is the register that survives the review meeting. It records what the agency knows about each AI use case: who owns it, which department it affects, its current tier, its status, and when it needs review again.
+The intake form captures one idea. The inventory is the register that survives the review meeting. It records what the agency knows about each AI use case: who owns it, which department it affects, its current tier, its status, what data it touches, and when it needs review again.
 
-This page provides a lightweight browser-only inventory for agencies that do not yet have a portfolio tool. It is intentionally simple: add reviewed ideas, export CSV or Markdown, and move the export into the agency system of record.
+This page provides a lightweight browser-only starter inventory for agencies that do not yet have a portfolio tool. It is intentionally simple: add reviewed ideas, export CSV or Markdown, and move the export into the agency system of record.
+
+> **Use this as your operating inventory.** An inventory is a core Phase 1 control because it keeps AI work visible after review. Some federal, state, or grant-specific inventories require more fields or a prescribed format; use this starter structure to get organized, then expand it when counsel or the reporting body identifies required fields.
+
+## How this page scales for your agency
+
+| Path | Minimum useful version | Add when capacity exists |
+| --- | --- | --- |
+| Small / no IT department | Track use case, sponsor, department, tier, status, data category, and next review in the browser tool or a spreadsheet | Add vendor/system name and impact-assessment status for anything public-facing or sensitive |
+| Medium | Export CSV after each review meeting and store it with committee minutes | Add procurement status, approved tool, and decision-support fields |
+| Large | Maintain the inventory in the agency portfolio/GRC system with records retention and reporting views | Add state/federal reporting fields, impact assessments, public inventory fields, and audit history |
 
 <UseCaseInventory client:load />
 
@@ -22,6 +32,10 @@ This page provides a lightweight browser-only inventory for agencies that do not
 | Department | Where the idea originated and who will pilot it |
 | Tier | Current risk classification from the Review Committee |
 | Status | Submitted, approved, deferred, retired, or needs refinement |
+| Vendor / system | Tool, vendor, or internally built system involved |
+| Data category | Public, internal, sensitive, regulated, or unknown |
+| Decision support | Whether AI independently makes, informs, or materially supports a decision |
+| Impact assessment | Not needed, needed, in progress, complete, or counsel review |
 | Next review | Date the committee rechecks status, controls, or law changes |
 
 ## Operating rule

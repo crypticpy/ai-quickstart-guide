@@ -5,19 +5,19 @@ sidebar:
   order: 11
 ---
 
-A platform that nobody can find isn't a platform. The Module Registry and Internal Developer Platform (IDP) are the user interface for the platform — the surfaces that let a developer discover what's available, scaffold a new application, deploy it, see its logs, and operate it without filing tickets.
+A platform that nobody can find is hard to adopt. The Module Registry and, where the agency can support it, an Internal Developer Platform (IDP) are the user interface for the platform — the surfaces that let a developer discover what's available, scaffold a new application, deploy it, see its logs, and operate it with fewer tickets.
 
-The IDP is what turns "we have seven modules and inner-source contribution" into "a developer at the agency can scaffold a working internal tool in under an hour, with auth, RBAC, lists, AI, and admin already wired in." That's the moment Phase 5 cashes its check.
+The IDP or lightweight registry is what turns "we have reusable modules and contribution norms" into "a developer at the agency can scaffold a working internal tool quickly, with auth, RBAC, lists, AI, and admin following approved patterns." That is the moment Phase 5 cashes its check.
 
 ## What "Internal Developer Platform" means
 
 A few definitions in circulation; the agency's working definition:
 
-> An IDP is the self-service surface that lets a developer go from "I want to build a thing" to "the thing is in production" without per-step approval, ticket filing, or specialist knowledge of the underlying infrastructure.
+> An IDP is the self-service surface that helps a developer go from "I want to build a thing" to "the thing is running" with fewer per-step approvals, fewer tickets, and less specialist knowledge of the underlying infrastructure.
 
 The IDP is _not_ the underlying platform — that's Phases 3, 4, and 5 combined. The IDP is the layer on top that exposes the platform's capabilities through a coherent, self-service interface.
 
-The dominant open-source choice is **Backstage** (CNCF, originated at Spotify, used by hundreds of organizations including the U.S. Department of Defense via Platform One). Commercial alternatives — Port, Cortex, OpsLevel — provide similar functionality with less assembly required. The agency picks one and commits.
+**Backstage** is a strong open-source choice for developer portals and is an incubating CNCF project. Commercial alternatives such as Port, Cortex, OpsLevel, and cloud-native developer portals can provide similar functionality with less assembly required. Smaller agencies can also start with a simple registry page, templates in the source-control system, and links to CI/CD and observability. The agency records the choice in an ADR and commits to maintaining it.
 
 ## What the IDP exposes
 
@@ -34,7 +34,7 @@ The agency's IDP surface, organized by user task:
 | Find an owner / on-call                  | **Catalog** (every entity has an owner)                   |
 | Track ownership across the platform      | **Software catalog** (entities + relationships)           |
 
-Every surface is a Backstage plugin or equivalent in the chosen IDP.
+Every surface is a Backstage plugin, commercial-IDP feature, cloud-native portal capability, or lightweight registry entry in the chosen approach.
 
 ## The software catalog
 
@@ -75,8 +75,8 @@ Backstage scrapes these files from registered repos and renders the relationship
 
 Discovery rules:
 
-- **Required for production.** A component cannot reach production without a catalog entry. CI enforces.
-- **Owner is mandatory.** Unowned entities are auto-flagged for orphan resolution.
+- **Required for production in the standard path.** A component should not reach production without a catalog entry. Mature teams can enforce this in CI; smaller teams can start with a release checklist.
+- **Owner is mandatory.** Unowned entities are flagged for orphan resolution.
 - **Lifecycle is honest.** `production` / `staging` / `experimental` / `deprecated`. Filter by lifecycle in views.
 
 ## Module registry
@@ -159,7 +159,7 @@ The developer fills in a form (name, owner, primary entity, AI yes/no) and click
 - Catalog entry is registered.
 - The first deploy to the dev environment is in progress.
 
-The whole "from idea to running app" cycle that used to take 4–8 weeks now takes under an hour. That ratio is the IDP's headline metric.
+The goal is to shrink "from idea to running app" from weeks of setup to hours or less once the templates and automation mature. Track this as an IDP headline metric, but treat early rollouts as a learning loop rather than a guaranteed stopwatch.
 
 ### Reference templates the agency ships
 
@@ -184,11 +184,11 @@ A "golden path" is the recommended way to do a thing. The IDP makes the golden p
 - The golden path for "I need to run scheduled jobs" is "use the worker template with the platform queue." Easier than running your own cron.
 - The golden path for "I need a vector store" is "register an index with AI orchestration." Easier than provisioning a separate vector DB.
 
-The agency does not _require_ teams to take the golden path — they're allowed to deviate, with an ADR — but the golden path is so easy that 90% of teams take it.
+The agency does not need to _force_ every team onto the golden path. Teams can deviate with an ADR, but the golden path should be easier than rolling a one-off solution, so most routine work naturally uses it.
 
 ## TechDocs
 
-Documentation is rendered inside the IDP from markdown files in each repo. Backstage's TechDocs plugin reads `mkdocs.yml` (yes, MkDocs, not the Astro site we're building, though the agency standardizes on this guide as the cross-platform reference). Documentation lives next to the code it describes; the IDP renders it in a unified search.
+Documentation should live next to the code it describes and be searchable from the developer portal or registry. Backstage's TechDocs plugin is one common implementation; hosted portals and source-control systems have their own equivalents. The point is findability, not a specific documentation renderer.
 
 The result: a developer searching "how do I set up rate limiting" finds the API framework's docs, regardless of which repo they live in. Documentation does not become unfindable in Confluence-land.
 
@@ -205,7 +205,7 @@ Common operations that used to require ticket filing become self-service IDP act
 | Request elevated permission | Creates a typed approval ticket; auto-grants on dual sign-off |
 | Submit eval suite run       | Runs an AI orchestration eval suite ad-hoc                    |
 
-Each action is a Backstage scaffolder template (or commercial-IDP equivalent) wired to the underlying infrastructure. Self-service paths replace ticket queues. Approvals are still required for sensitive actions, but the workflow is in the IDP, audit trails included.
+Each action is a Backstage scaffolder template, commercial-IDP action, CI workflow, or cloud automation wired to the underlying infrastructure. Self-service paths reduce ticket queues. Approvals are still required for sensitive actions, but the workflow should be typed and auditable.
 
 ## Service overview view
 
@@ -221,7 +221,7 @@ For a deployed service, the IDP shows:
 - **Metrics** — request rate, error rate, latency p95.
 - **Cost** — last month's compute / storage / AI cost (where applicable).
 
-The view is the operator's "one stop shop" for context on a service. Engineers don't bounce between four tools to figure out what's going on.
+The view is the operator's "one stop shop" for context on a service. It should link to the source systems rather than trying to replace every specialist dashboard.
 
 ## Backstage vs. commercial alternatives
 
@@ -234,7 +234,7 @@ The choice depends on the agency's posture.
 | **Cortex**    | Strong scorecards / quality gates                   | Less flexible for arbitrary plugins                           |
 | **OpsLevel**  | Mature service catalog; SLO tooling                 | Catalog-focused; less "platform" surface                      |
 
-Most agencies under 50 developers should pick Port or Cortex — the operational cost of Backstage is a real burden. Larger agencies, especially those willing to invest in IDP engineering, get more from Backstage. The agency's choice goes in an ADR.
+Agencies with small developer populations should seriously consider hosted or lightweight options before operating Backstage themselves. Larger agencies, especially those willing to invest in IDP engineering, may get more from Backstage's flexibility and plugin ecosystem. The agency's choice goes in an ADR.
 
 ## The Backstage stack (for agencies that pick it)
 
@@ -246,9 +246,9 @@ Backstage is a TypeScript application. The stack:
 - **Auth** — OIDC against the agency IdP (Phase 3).
 - **Plugins** — TechDocs, Scaffolder, Catalog, plus chosen extras (Kubernetes, GitHub, Sentry, Linear, Sonarqube).
 
-Hosting: Backstage typically runs on the agency's standard Kubernetes cluster. Resource requirements are modest (a couple of pods, a Postgres instance).
+Hosting: Backstage often runs on the agency's standard container platform with a Postgres instance, but deployment shape depends on the agency's Phase 3 infrastructure and security model.
 
-A small dedicated team (2–3 engineers) maintains the agency's Backstage installation. Without that team, customizations stagnate and the IDP becomes a museum.
+A small dedicated team or named maintainers should own the agency's Backstage installation. Without that ownership, customizations stagnate and the IDP becomes stale.
 
 ## Lifecycle and deprecation in the catalog
 
@@ -274,11 +274,11 @@ The IDP can apply scorecards to entities — a set of checks that score a servic
 - All dependencies are not deprecated? ❌
 - Has on-call rotation defined? ❌
 
-Scores are aggregated by team and surfaced in dashboards. Scorecards are not punitive in their first quarter — they're a feedback signal. Once teams have time to react, scores can be tied to deploy gates (e.g., a service must score ≥ 80 on the production scorecard).
+Scores are aggregated by team and surfaced in dashboards. Scorecards should be advisory at first — a feedback signal. Once teams have time to react, selected checks can be tied to deploy gates, starting with the controls that matter most for production readiness.
 
 ## Adoption arc
 
-Backstage / IDP rollouts have predictable phases. The agency plans for:
+IDP and registry rollouts have predictable phases. The agency plans for:
 
 - **Months 1–2.** Platform team stands up the IDP. Catalogs the platform's own modules. Ships the first software template (the most common app shape).
 - **Months 3–4.** Pilot teams use the IDP to scaffold their next service. Feedback drives template improvements. The catalog grows organically.
@@ -289,16 +289,16 @@ The pattern that fails: rolling out the IDP fully on day one, requiring everyone
 
 ## Common IDP failures
 
-- **Catalog becomes stale.** Entities are registered once and never updated. Health: percentage of entities updated in the last 90 days; alert below 60%.
+- **Catalog becomes stale.** Entities are registered once and never updated. Health: percentage of entities updated recently; investigate stale or unowned entries.
 - **No software templates.** Catalog without scaffolder is a directory; the IDP earns its keep through golden paths.
 - **Required by mandate, not by usefulness.** Mandating IDP usage when the IDP is incomplete teaches developers that the IDP is a hurdle. Make it useful first.
-- **Backstage without a team.** A Backstage install with no maintainer rots within a year — plugin updates, custom views, agency-specific integrations all need ongoing work.
+- **Portal without owners.** An IDP or registry with no maintainer decays — plugin updates, custom views, agency-specific integrations, and ownership cleanup all need ongoing work.
 - **Templates that drift from reality.** A scaffolded app that doesn't actually run in the current platform shape. Templates have CI; reference apps generated from templates pass the same CI as hand-written apps.
 - **Catalog ownership unclear.** Who keeps the catalog clean? The IDP team. They need authority to require entries and to prune orphans.
 
-## What "<1 hour from idea to running app" requires
+## What "quickly from idea to running app" requires
 
-The Phase 5 success criterion is "any developer can scaffold a new app in <1 hour." Achieving this requires:
+The Phase 5 success criterion is a developer can scaffold a working app quickly enough that the platform feels like help, not overhead. A mature target can be under an hour. Achieving this requires:
 
 1. The software template exists and works.
 2. Auth, RBAC, API framework, data grid are reachable through the template.
@@ -312,7 +312,7 @@ Miss any one of these and the time stretches to days. All six in place is the un
 ## Plain-English Guide to IDP Terms
 
 - **IDP (Internal Developer Platform).** The self-service surface that exposes the agency's underlying platform to its developers — catalog, scaffolder, docs, deploy.
-- **Backstage.** The dominant open-source IDP, originated at Spotify, donated to the CNCF.
+- **Backstage.** A major open-source developer portal framework, originated at Spotify and donated to the CNCF.
 - **Catalog.** A registry of every "entity" (service, API, library, team, resource) the platform tracks.
 - **Software template / golden path.** A scaffold that creates a working application from an approved pattern.
 - **Scorecard.** A set of checks scored against an entity (e.g., a service); surfaces quality and ownership gaps.

@@ -1,6 +1,6 @@
 ---
 title: RBAC Module
-description: Roles, scopes, attribute-based policies, and uniform permission enforcement across every application.
+description: Roles, scopes, attribute-based policies, and consistent permission enforcement across applications.
 sidebar:
   order: 4
 ---
@@ -148,16 +148,16 @@ input → │ 1. Resolve user roles + attributes │
         └────────────────────────────────────┘
 ```
 
-Step 5 emits before step 6 returns. Even denied decisions are logged; unattempted decisions are not. Volume control: the audit adapter samples successful `*.read` decisions at a configurable rate (default 10%) but always logs writes, denies, and `*.admin` actions.
+Step 5 emits before step 6 returns. Even denied decisions are logged; unattempted decisions are not. Volume control: the audit adapter can sample successful low-risk `*.read` decisions at a configurable rate, but writes, denies, Tier-2/Tier-3 actions, and `*.admin` actions should be logged unless policy says otherwise.
 
 ## Where checks happen
 
-The agency's rule: every privileged operation is checked at **at least two layers**.
+The recommended rule: every privileged operation is checked at the API layer, and high-risk operations are checked again in the domain layer.
 
-1. **API layer.** The [API framework](/phase-5-platform/api-framework-module/) decorator `@requires(Permission.case_read)` runs on the request handler. Returns 403 with an RFC 7807 problem document if denied.
-2. **Domain layer.** The case-management service calls `rbac.assert_can(user, 'case.read', case_ref)` before returning the case. The reason: defense-in-depth — direct callers (background jobs, CLI tools) bypass the API; the domain check catches them.
+1. **API layer.** The [API framework](/phase-5-platform/api-framework-module/) decorator `@requires(Permission.case_read)` runs on the request handler. Returns 403 with a Problem Details response if denied.
+2. **Domain layer.** For sensitive resources or code paths with non-HTTP callers, the case-management service calls `rbac.assert_can(user, 'case.read', case_ref)` before returning the case. The reason: defense-in-depth — background jobs and CLI tools can bypass the API; the domain check catches them.
 
-UI gating using `list_permissions()` is a third layer but is _convenience_, not security. Always assume an authenticated user can craft any request the API surface allows; rely on the API + domain layer for enforcement.
+UI gating using `list_permissions()` is a third layer but is _convenience_, not security. Assume an authenticated user can craft any request the API surface allows; rely on server-side enforcement.
 
 ## Architecture (ports and adapters)
 
@@ -219,14 +219,14 @@ This module's design heads off the canonical authorization bugs:
 - **Insecure direct object reference (IDOR).** "I can read case 1234 because I'm logged in" — fixed by passing the resource into `can()` and writing policies that check ownership.
 - **Confused deputy.** A trusted service performs an action with its own authority instead of the user's. Policies must consider the on-behalf-of user, not the calling service.
 - **Privilege escalation via role-assignment.** Anybody who can assign roles can grant themselves admin. The `user.admin` permission is itself protected; only existing admins can grant it.
-- **Forgotten permission check.** A new endpoint ships without a check. Guarded by the API framework's lint that fails the build if a route handler is missing a `@requires` decorator (default-deny posture).
+- **Forgotten permission check.** A new endpoint ships without a check. Guarded by the API framework's lint or review checklist that requires `@requires`, `@public`, or an explicit assertion (default-deny posture).
 - **Permission sprawl.** Permissions accumulate without retirement. Quarterly review of the permission registry; unused permissions are removed.
 
 ## Default deny
 
 The module is **default-deny**. If no policy matches, the answer is `deny` with reason `no-applicable-policy`. The platform's wiring assumes this:
 
-- The API framework's `@requires` decorator is mandatory; routes without one fail the build.
+- The API framework should require each route to declare `@requires`, `@public`, or an explicit authorization assertion. Mature teams can enforce this with lint/build gates; smaller teams can start with review checklists and route tests.
 - The default permission for any new endpoint is `none` (i.e., even authenticated users can't call it) until a permission is declared.
 - Background jobs that need elevated authority use a service principal whose role is reviewed.
 
@@ -241,6 +241,8 @@ Other modules need fast, deterministic authz in tests:
 - `rbac.testing.with_role(user, role)` — sugar for setting up role assignments.
 
 ## Performance
+
+Starter targets:
 
 - `can()`: p95 ≤ 5ms (cache hit), p95 ≤ 20ms (cache miss with one DB query).
 - `assign_role()`: p95 ≤ 50ms.

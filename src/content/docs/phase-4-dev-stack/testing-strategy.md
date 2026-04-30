@@ -93,16 +93,17 @@ Counts are illustrative. The shape — large base, narrow top — is the discipl
 
 **Bar.**
 
-- Every cross-service surface has a contract test.
+- Minimum: every cross-service surface has a documented contract and schema validation.
+- Standard: critical producer and consumer surfaces have contract tests.
+- Large/regulated: contract tests run for every critical consumer/producer pair and block merge on failure.
 - Producer-side test: "I produce messages that match this contract."
 - Consumer-side test: "I correctly handle messages that match this contract."
-- Run on every PR; block merge on failure.
 
 **Tooling.**
 
-- **Pact** is the dominant cross-language tool. Excellent IDE / CI integration; supports HTTP, message queues, gRPC.
+- **Pact** is a common cross-language tool with strong IDE / CI integration; supports HTTP, message queues, gRPC.
 - **OpenAPI-driven** alternatives: tools like `schemathesis`, Dredd verify the API matches the spec. Less expressive than Pact for asynchronous flows.
-- For internal use, the agency runs a Pact Broker (self-hosted, free) so teams can publish and verify contracts.
+- For internal use, larger agencies may run a Pact Broker or equivalent so teams can publish and verify contracts. It may be open source, but it still has operating cost.
 
 **Where it goes wrong.** Contract tests rot when nobody updates them. Make publishing the contract a CI step, not a manual action.
 
@@ -189,7 +190,7 @@ Each line:
 - Pre-prod: full suite with the production model.
 - Nightly: full suite + production traffic-sampled cases.
 
-**The blocking rule.** A drop of 5% in aggregate score from baseline blocks merge. The number is conservative; agencies will tune it. Never make eval gates advisory — they get ignored.
+**The blocking rule.** Start advisory while the eval suite is being calibrated. Once the baseline is stable, production-bound changes that touch prompts, retrieval, or model configuration should block when they drop below the agency's threshold. A 5% aggregate drop is a starter threshold; tune it by workload. Tier-2/3 production changes should have a blocking eval gate before launch.
 
 ## Performance tests
 
@@ -219,7 +220,7 @@ The agency's test data discipline:
 - **Sanitized data** in staging and E2E tests. The synthetic dataset approved for sandbox use is the same dataset used for E2E.
 - **No production data** ever in tests. If a bug requires production data to reproduce, sanitize first, then add to fixtures.
 
-For AI workloads, the synthetic dataset's structure must match production for evals to be meaningful. The Review Committee approves the synthetic dataset once and re-reviews if the production data shape changes.
+For AI workloads, the synthetic dataset's structure should match production for evals to be meaningful. The approved review path approves the synthetic dataset once and re-reviews if the production data shape changes. For a small agency, that review path can be the named AI owner plus the data owner or manager sponsor.
 
 ## Coverage
 
@@ -240,7 +241,7 @@ Coverage is a guardrail, not a goal.
 
 ## CI integration
 
-The pipeline (covered in [CI/CD](/phase-3-infrastructure/cicd-pipeline/)) runs tests in this order, fast-failing:
+The standard pipeline (covered in [CI/CD](/phase-3-infrastructure/cicd-pipeline/)) runs tests in this order, fast-failing. Small agencies can start with lint/format, unit tests, secret scan, and manual deploy approval, then add the rest as the pilot matures:
 
 1. Lint and format (under 30s).
 2. Unit tests (under 60s).
@@ -254,7 +255,7 @@ The pipeline (covered in [CI/CD](/phase-3-infrastructure/cicd-pipeline/)) runs t
 10. Manual approval gate.
 11. Deploy to production.
 
-Failures at any stage block the pipeline. The order means a typo gets caught in 30 seconds, not 30 minutes.
+For standard/large production workflows, failures at any stage block the pipeline. The order means a typo gets caught in 30 seconds, not 30 minutes.
 
 ## Test maintenance
 

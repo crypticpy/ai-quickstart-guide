@@ -19,13 +19,21 @@ This playbook is the set of low-cost, high-leverage mechanisms that prevent that
 | 4   | Quarterly Engagement Pulse | Quarterly      | AI program lead           | 3-question survey        |
 | 5   | Month 13 Handoff Plan      | Once, Mo 12    | AI program lead + sponsor | 1 working session        |
 
-Each mechanism is small. Skipping any one of them rarely kills the program; skipping three of them reliably does.
+Each mechanism is small. Skipping any one of them rarely kills the program; skipping several of them raises the risk that adoption fades after launch.
+
+## How this page scales for your agency
+
+| Path | Minimum useful version | Add when capacity exists |
+| ---- | ---------------------- | ------------------------ |
+| Small / no dedicated IT | One monthly demo in an existing meeting, one named owner, one quarterly pulse | Peer story every other month |
+| Medium | Lunch & Learns, Champions recognition, quarterly pulse, Month 13 handoff memo | Department-level intake review and refresher labs |
+| Large / federated | Formal Champions network, recognition cadence, engagement reporting by division | Year-2 budget line and rotating department playbooks |
 
 ## 1. Monthly Lunch & Learns
 
 A 20-minute Lunch & Learn on AI, embedded inside an _existing_ department staff meeting — not a new meeting. Led by a Champion from that department, not by the AI program lead. Focused on one real use case the staff in the room actually face.
 
-**Why this works.** New meetings on a new initiative get the lowest priority on a busy calendar. A 20-minute slot inside a meeting people already attend gets near-100% attendance.
+**Why this works.** New meetings on a new initiative get the lowest priority on a busy calendar. A 20-minute slot inside a meeting people already attend gets much higher attendance.
 
 **Format.**
 
@@ -160,7 +168,7 @@ By Month 13, the program shifts from launch to operations. The pattern most agen
 - **Champions Network (Track 5)** continues monthly. Champions rotate annually so leadership doesn't ossify.
 - **Tracks 4 (Developers)** evolves into a more focused community-of-practice as the platform (Phase 5) matures. Less curriculum, more code review and ADR discussion.
 
-The Year 2 budget is typically 30–50% of the Year 1 budget. Most of the curriculum content is already produced; the cost is facilitation and recognition.
+The Year 2 budget is often lower than the Year 1 launch budget because most curriculum content is already produced. Still plan for facilitation time, Champion support, recognition, tool access, and response to pulse findings.
 
 ## Common failures and recovery
 

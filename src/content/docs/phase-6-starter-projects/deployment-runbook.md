@@ -7,7 +7,7 @@ sidebar:
 
 A deployment runbook is the script the team follows to take the starter project from "ready in staging" to "real users using it on Monday morning." Without a runbook, launches are improvised; improvised launches surface issues that should have been caught a week earlier and stress the on-call team unnecessarily. The runbook is the agency's promise to itself that launch day is boring.
 
-This page is a template. Copy it into the starter project's repo, fill in the blanks, and rehearse it before the actual launch.
+This page is a template. Copy it into the starter project's repo, scale it to the launch risk, fill in the blanks, and rehearse the critical parts before the actual launch.
 
 ## Pre-launch: T-2 weeks
 
@@ -27,7 +27,7 @@ The two weeks leading up to launch are the most important. The team's stance shi
 ### One week before launch
 
 - [ ] **Final UAT round** with the test cohort. Fixes for any blockers shipped.
-- [ ] **Load test executed.** Expected concurrent-user load sustained for ≥30 minutes without errors above SLO threshold.
+- [ ] **Load test executed.** Expected concurrent-user load sustained for a documented window; 30 minutes is a useful starter target.
 - [ ] **Security review signed off.** AppSec or equivalent reviewed the deployment. Findings tracked.
 - [ ] **Privacy review signed off.** Privacy / records officer reviewed retention, audit, and PII handling.
 - [ ] **Communications draft ready.** Launch announcement (internal-only at first), feedback channel, escalation paths.
@@ -44,7 +44,7 @@ The two weeks leading up to launch are the most important. The team's stance shi
 
 ### Day before launch (the go/no-go gate)
 
-A short meeting (≤ 30 minutes). Attendees: business owner, AI program lead, platform tech lead, on-call lead, security/privacy reviewer.
+A short meeting (target ≤ 30 minutes). Attendees: business owner, AI program lead or equivalent, platform tech lead, on-call lead, and security/privacy reviewer. In small agencies one person may hold multiple roles, but the decision record should name the responsibility.
 
 The decision is one of:
 
@@ -129,10 +129,10 @@ The first month is when the team learns what running this system actually feels 
 
 ## Rollback procedure
 
-The runbook includes a documented rollback. It must be:
+The runbook includes a documented rollback. It should be:
 
 1. **Rehearsed.** The team has executed it at least once in staging before launch.
-2. **Fast.** Total time from "we should rollback" to "rolled back" ≤ 15 minutes.
+2. **Fast.** Total time from "we should rollback" to "rolled back" has a rehearsed target; 15 minutes is a useful default for simple starters.
 3. **Reversible.** A rolled-back deploy can be re-deployed when fixed; data isn't lost.
 4. **Communicated.** Users see a notice when the system is rolled back; the team's status page reflects it.
 
@@ -150,7 +150,7 @@ What's _not_ in the rollback:
 
 ## Incident response
 
-The first month will have at least one incident. Plan for it:
+The first month may have an incident. Plan for it:
 
 - **Severity definitions.** S1 = users can't use the system; S2 = degraded experience; S3 = bug affecting some users.
 - **Page channels.** S1 pages on-call; S2 alerts on-call; S3 goes to the issue tracker.

@@ -5,9 +5,9 @@ sidebar:
   order: 7
 ---
 
-The admin dashboard is the operations surface for every application built on the platform. Operators don't have eight different admin UIs; they have one, and each application registers its admin views into it. This is what cuts the cost of running a portfolio of internal tools — you don't train operators eight times, and they don't switch tools to do their job.
+The admin dashboard is the recommended operations surface for applications built on the platform. Operators should not have to learn a different admin UI for every internal tool. In small agencies this may be a hosted admin console plus a few app-specific screens; in larger agencies it can become a shared shell where each application registers its admin views.
 
-The dashboard is itself a platform module. Every app's admin lives behind it through registration, not duplication.
+The dashboard can be a platform module. When an app needs custom admin workflows, prefer registration into the shared operations surface over duplicating user, role, audit, and health views.
 
 ## What this module owns
 
@@ -63,7 +63,7 @@ The default user-management surface, available to anyone with `user.admin`:
 - **Suspend / unsuspend** — disable sign-in without removing the user.
 - **Impersonation** (optional, gated by separate permission) — sign in as the user for support purposes; clearly labeled, fully audited.
 
-User-create / delete flows route through the IdP, not the dashboard. The dashboard never creates an identity that doesn't exist in the IdP.
+User-create / delete flows should route through the IdP or authoritative directory, not a standalone dashboard database. The dashboard should not create an identity that does not exist in the IdP.
 
 ### Impersonation rules
 
@@ -133,7 +133,7 @@ The flag system supports four backends:
 - **Cloud-native** (LaunchDarkly, GrowthBook, Azure App Configuration, AWS AppConfig) — the dashboard talks to the API.
 - **OpenFeature SDK** — agency-vendor-neutral; backend is configurable.
 
-Flag changes are audit events. Sensitive flags (anything that affects authorization, billing, or data classification) require dual control — two operators must approve the change.
+Flag changes are audit events. Sensitive flags (anything that affects authorization, billing, data classification, or safety behavior) should require stronger control, such as dual approval or change review, depending on risk.
 
 ## System health
 
@@ -211,10 +211,10 @@ Every action an operator takes through the dashboard is an audit event. Beyond a
 
 ## Common admin-dashboard failures
 
-- **Every app builds its own admin.** The platform's whole point is that they don't. Establish "register, don't rebuild" as the standard at Phase 5 kickoff.
+- **Every app builds its own admin.** The platform loses leverage when basic admin surfaces are duplicated. Establish "register, don't rebuild" as the standard where a shared dashboard exists.
 - **No bulk safeguards.** An admin "delete all" button without preview/confirmation/audit. Build the bulk-op pattern once; reuse it.
 - **Admin actions not audited.** Audit the dashboard at least as carefully as the user-facing app — admin actions are higher risk per click.
-- **Impersonation without controls.** Either don't have it or have all the controls. Halfway is the worst option.
+- **Impersonation without controls.** Either avoid it or implement the full control set. Halfway implementations create audit and privacy risk.
 - **Permissions confused with roles in the UI.** Operators routinely confuse "this user has role X" with "this user has permission Y." The UI should make both visible.
 - **System health is a graveyard.** Status indicators that always say "healthy" become unread. Tie indicators to real readiness checks; tune so green means something.
 

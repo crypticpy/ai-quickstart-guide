@@ -5,23 +5,29 @@ sidebar:
   order: 7
 ---
 
-> **What this is, and is not.** This is not a maintained tracker. State AI legislation moves faster than a documentation site can keep up; 45 states introduced AI bills in 2025 and one in three states had something material on the table going into 2026. Trying to maintain a per-state list here would mean shipping outdated information within months. Instead, this page does two things: (1) point you to the maintained external trackers that _are_ kept current, and (2) give you a one-pass compliance checklist that maps the laws most likely to apply to a US public agency to the controls already documented in this playbook. The checklist is the durable part; the underlying laws will change, but the questions you have to answer about your agency rarely change.
+> **What this is, and is not.** This is not a maintained legal tracker and it is not legal advice. State AI legislation moves faster than a documentation site can keep up. Instead, this page does two things: (1) point you to maintained external trackers that are updated more frequently, and (2) give you a one-pass compliance checklist that maps common AI-law obligations to controls already documented in this playbook. The checklist is the durable part; the underlying laws will change, but the questions you have to answer about your agency rarely change.
 
 ## Maintained external trackers
 
-These three are the highest-signal sources we recommend bookmarking. Two of them publish briefings; one is a full searchable database.
+These are useful sources to bookmark. Cross-check them against your legislature, attorney general, procurement office, or counsel before citing a law in an official memo.
 
 ### IAPP — Global AI Law and Policy Tracker
 
-The International Association of Privacy Professionals maintains a global tracker covering federal, state, and international AI legislation, with status (introduced, enacted, vetoed) and effective dates. Updated monthly. **Go here when:** you need a one-stop summary of where every active AI bill stands across the US and major foreign jurisdictions.
+The International Association of Privacy Professionals maintains a global tracker covering federal, state, and international AI legislation, with status and effective-date context. **Go here when:** you need a broad summary of where active AI bills stand across the US and major foreign jurisdictions.
+
+URL: https://iapp.org/resources/article/global-ai-legislation-tracker/
 
 ### NCSL — Artificial Intelligence: 2025 Legislation
 
-The National Conference of State Legislatures publishes a year-by-year summary of state-level AI legislation, organized by topic (algorithmic discrimination, generative AI, government use, deepfakes, healthcare). It is the canonical state-government source. **Go here when:** you need a state-by-state cut of bills with status and short summaries, and you trust an organization whose audience is state legislators.
+The National Conference of State Legislatures publishes an AI legislation database, organized by topic such as government use, healthcare, responsible use, discrimination, and private-sector use. It is a strong state-government source. **Go here when:** you need a state-by-state cut of bills with status and short summaries.
+
+URL: https://www.ncsl.org/financial-services/artificial-intelligence-legislation-database
 
 ### Multistate.ai — AI bills database
 
-A searchable database of every state-level AI bill across all 50 states, with full text, sponsors, and committee status. **Go here when:** you need full bill text and you don't yet know which state(s) are introducing similar language.
+A searchable database of state-level AI bills, with bill text, sponsors, and committee status. **Go here when:** you need full bill text and you don't yet know which state(s) are introducing similar language.
+
+URL: https://www.multistate.ai/
 
 > **Don't trust any single tracker.** Cross-check at least two of the above whenever you're about to cite a specific law in a memo. Trackers occasionally lag behind real signings, especially in states that don't electronically publish to a stable URL.
 
@@ -31,15 +37,15 @@ Most agencies don't need to track every state's AI law. They need to know which 
 
 ### 1. Are we in scope of a state-level AI act?
 
-Five jurisdictions have material AI laws on the books or imminent as of late 2025–2026:
+Several jurisdictions have material AI laws or AI-specific obligations to monitor as of April 30, 2026. Verify current status before relying on this table:
 
-| Jurisdiction  | Law                         | Effective                                          | Applies to public agencies?                                                       | Headline obligation                                                              |
-| ------------- | --------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Colorado      | Colorado AI Act (SB 24-205) | 2026 (effective date subject to delay legislation) | Yes, where they "deploy" high-risk AI                                             | Risk management program, impact assessments, consumer notices                    |
-| Texas         | TRAIGA (HB 149)             | 2026                                               | Yes, government use carve-outs apply                                              | Disclosure to constituents, prohibited uses, attorney-general enforcement        |
-| California    | SB 942 (AI transparency)    | 2026                                               | Limited (large generative AI providers); indirect impact on agencies that procure | Watermarking and transparency disclosures from covered AI providers              |
-| New York City | Local Law 144               | 2023 (in force)                                    | Yes, for hiring tools                                                             | Bias audit + notice for automated employment decision tools                      |
-| Federal       | OMB M-25-21 + OMB M-25-22   | April 2025 (federal); often adopted by states      | Federal directly; many states adopt by reference                                  | Designate a Chief AI Officer, public AI use case inventory, risk management plan |
+| Jurisdiction  | Law or policy                         | Status to verify                                          | Public-agency relevance                                                       | Headline obligation                                                              |
+| ------------- | ------------------------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Colorado      | Colorado AI Act (SB 24-205, delayed by SB25B-004) | Requirements delayed to June 30, 2026 by SB25B-004 | Relevant where public agencies deploy covered high-risk AI                     | Risk management program, impact assessments, consumer notices                    |
+| Texas         | TRAIGA (HB 149)                       | Effective January 1, 2026 per Texas Legislature reports   | Relevant for specific governmental-entity provisions and consumer interactions | Disclosure to constituents, prohibited social scoring, biometric limits, AG enforcement |
+| California    | SB 942 (AI transparency)              | Effective January 1, 2026 for covered providers/licensees | Mostly indirect for agencies that procure or use covered generative AI systems | Detection tools and content-provenance disclosures from covered providers        |
+| New York City | Local Law 144                         | In force for automated employment decision tools          | Relevant for covered hiring tools                                             | Bias audit + notice for automated employment decision tools                      |
+| Federal       | OMB M-25-21 + OMB M-25-22             | April 2025 memoranda                                      | Covered federal agencies directly; state/local agencies only if incorporated by grant, contract, state policy, or local rule | Chief AI Officer, use case inventory, high-impact AI practices, federal acquisition controls |
 
 **Action for your agency:**
 
@@ -60,7 +66,7 @@ Most modern AI laws apply only when AI affects employment, housing, credit, educ
 
 ### 3. Have we adopted the M-25-21 / M-25-22 controls (or our state's equivalent)?
 
-M-25-21 (April 2025) supersedes M-24-10 from the prior administration. M-25-22 supersedes M-24-18. The substantive control set carried over. Even if your agency is not federal, the M-24-10 / M-25-21 lineage has become the _de facto_ template that many state laws now reference by name (often still citing "M-24-10" because the statute predates the supersession). The four headline obligations:
+M-25-21 (April 2025) supersedes M-24-10 from the prior administration. M-25-22 supersedes M-24-18. These memoranda bind covered federal agencies directly. For state and local agencies, treat them as useful reference models unless a grant, contract, state policy, or local rule incorporates them. The four headline controls worth mapping are:
 
 | Control                                                 | Where in the playbook                                                                                                                             |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -19,19 +19,19 @@ Three concrete benefits.
 
 ## The agency standard
 
-Every API the agency exposes — internally to other teams or externally to vendors and partners — meets this bar:
+Every API the agency exposes — internally to other teams or externally to vendors and partners — should have a documented contract. The minimum is a committed OpenAPI file or README contract table with an owner; the standard path is an OpenAPI document enforced in CI.
 
 | Surface              | Standard                                                                                             |
 | -------------------- | ---------------------------------------------------------------------------------------------------- |
-| Specification format | **OpenAPI 3.1** (or AsyncAPI 3.0 for event-driven), in YAML, in the repo                             |
+| Specification format | **OpenAPI 3.1+** or the current agency-supported OpenAPI version; evaluate OpenAPI 3.2 as tooling supports it. Use AsyncAPI 3.0 for event-driven APIs. |
 | Source of truth      | The spec is generated from the code OR the code is generated from the spec — pick one and CI-enforce |
 | Style                | Agency style guide (this page) applied via Spectral linting in CI                                    |
 | Versioning           | Semantic versioning of the API; breaking changes require a major bump and a deprecation plan         |
 | Documentation        | Auto-rendered Swagger UI / Redoc on a stable URL per environment                                     |
-| Discovery            | Published to the agency's API registry on every release                                              |
-| Contract tests       | Pact (or equivalent) for every consumer the API has                                                  |
+| Discovery            | Minimum: README/catalog entry; Standard: static registry or gateway developer portal; Large: Backstage/API catalog |
+| Contract tests       | Minimum: schema validation and generated-client tests; Standard/Large: Pact or equivalent for critical consumers |
 | Authentication       | OIDC bearer tokens; no API keys for human-driven traffic                                             |
-| Error format         | RFC 7807 Problem Details                                                                             |
+| Error format         | RFC 9457 Problem Details (obsoletes RFC 7807)                                                        |
 
 ## Specification-first vs. code-first
 
@@ -68,7 +68,7 @@ The agency style guide is a Spectral rules file. CI runs `spectral lint openapi.
 | Operations have `operationId`                      | Generators produce useful method names                          |
 | Operations have `summary` and `description`        | Generated docs are usable                                       |
 | Operations have at least one `tag`                 | Docs grouping                                                   |
-| Every 4xx response uses `application/problem+json` | RFC 7807 error format                                           |
+| Every 4xx response uses `application/problem+json` | RFC 9457 Problem Details format                                 |
 | Every 200 list response is paginated               | Lists never become unbounded                                    |
 | Every endpoint declares its security               | Auth is explicit, not inherited silently                        |
 | Schemas have `description` on every property       | Generated clients have IntelliSense; partners can read the spec |
@@ -115,7 +115,7 @@ Every endpoint declares:
 
 The spec is the source of truth for "who can call what." Service-side authorization checks reference the same scopes; mismatch is a CI failure.
 
-## Error format (RFC 7807 Problem Details)
+## Error format (RFC 9457 Problem Details)
 
 ```json
 {
@@ -128,7 +128,7 @@ The spec is the source of truth for "who can call what." Service-side authorizat
 }
 ```
 
-The agency requirement:
+RFC 9457 obsoletes RFC 7807 and defines the current Problem Details format for HTTP APIs. The agency requirement:
 
 - All 4xx and 5xx responses use this shape.
 - `type` is a stable URL; documentation lives at that URL.
@@ -165,29 +165,32 @@ Contract tests (covered in [testing strategy](/phase-4-dev-stack/testing-strateg
 
 Together, they prevent the "we changed `caseId` to `case_id` and four downstream services broke" failure.
 
-## API registry
+## API discoverability
 
-The agency runs an API registry that any developer can search. It catalogs every API the agency exposes:
+The agency should make APIs discoverable at a level that matches its size. A small agency with one or two APIs does not need Backstage on day one; it does need an owner and a place where another developer or vendor can find the contract.
+
+Minimum catalog fields:
 
 - Name, owner, description, current version, status (active / beta / deprecated).
-- Link to the OpenAPI spec.
-- Link to the rendered docs.
-- Production endpoint URL.
-- Authentication required (and how to request access).
+- Link to the OpenAPI spec or contract table.
+- Link to rendered docs if available.
+- Endpoint URL by environment where appropriate.
+- Authentication required and how to request access.
 
 Tooling options:
 
 - **Backstage** with the API plugin — heaviest, most flexible. Good if the agency commits to Backstage as IDP (Phase 5).
 - **GitOps registry** — a single repo with `apis/{name}/spec.yaml` and a CI pipeline that publishes a static catalog site. Lightweight; good first version.
 - **Cloud-native API gateways** (Azure API Management, AWS API Gateway, Apigee) include a developer portal that doubles as a registry. Pick this if the agency already has the gateway.
+- **README table** — enough for the first pilot: API name, owner, spec path, environment URL, auth notes.
 
-The registry is mandatory; "I didn't know this API existed" is a primary cause of duplicate-effort across teams.
+API discoverability is a core Phase 4 control; the tool can scale from a README table to a formal registry. "I didn't know this API existed" is a primary cause of duplicate-effort across teams.
 
 ## Async and event-driven APIs
 
 Not every interface is HTTP request/response. For event-driven surfaces:
 
-- **AsyncAPI 3.0** is the OpenAPI equivalent for async. Same discipline: spec is source of truth, validated in CI, registered.
+- **AsyncAPI 3.0** is the OpenAPI equivalent for async. Same discipline: spec is source of truth, validated in CI where possible, and cataloged.
 - **Schema registry** (Confluent Schema Registry, AWS Glue Schema Registry, etc.) for the message payloads.
 - **Event versioning:** carry a `schemaVersion` field in every event; consumers log + alert on unexpected versions.
 
@@ -206,7 +209,7 @@ Both follow the style guide. The differences are in deprecation policy, document
 
 - **OpenAPI files that don't match the running app.** Drift is the default; CI must enforce equality.
 - **No deprecation plan.** Teams break partners and only learn about it through angry emails.
-- **Different error formats per endpoint.** Pick RFC 7807 once; apply everywhere.
+- **Different error formats per endpoint.** Pick RFC 9457 Problem Details once; apply everywhere.
 - **Unbounded lists.** Returning all 50,000 cases in one response. Always paginate.
 - **Auth as an afterthought.** Endpoints with no security declaration "because it's internal." Internal still authenticates; the workload identity scheme applies.
 - **One giant API for many concerns.** A 400-endpoint API is unmaintainable. Split into domain-bounded APIs; reference them from the registry.

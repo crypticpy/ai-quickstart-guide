@@ -49,12 +49,13 @@ const DIMENSIONS: DimensionDef[] = [
       { tier: 1, label: "Public or non-sensitive internal data only" },
       {
         tier: 2,
-        label: "Internal sensitive data (HR, operational, non-PII)",
+        label:
+          "Internal sensitive data, routine resident contact data, or operational records",
       },
       {
         tier: 3,
         label:
-          "PII, PHI, criminal-justice, financial, immigration, or child-welfare data",
+          "Sensitive PII, PHI, criminal-justice, financial, immigration, child-welfare, or confidential records",
       },
     ],
   },
@@ -173,12 +174,12 @@ const TIER_META: Record<
   3: {
     name: "High (Tier 3)",
     summary:
-      "AI directly drives a decision affecting a person's rights, benefits, employment, safety, or liberty. Two-thirds Review Committee approval, legal sign-off, public notice, contestation pathway, and a full impact assessment are required before deployment.",
+      "AI directly drives a decision affecting a person's rights, benefits, employment, safety, or liberty. Expect heightened committee review, counsel involvement, impact assessment, and public notice or contestation planning where required by law or policy.",
     reviewers: [
-      "AI Review Committee — two-thirds approval, including legal and equity officer",
-      "Legal counsel — formal sign-off",
-      "Designated Agency AI Official (per OMB M-24-10)",
-      "Community / external advisor (Tier-3 deep-dive)",
+      "AI Review Committee or local review group — heightened review under the charter",
+      "Legal counsel — review against applicable law and policy",
+      "Designated AI official or accountable owner where applicable",
+      "Privacy, equity, civil-rights, labor, community, or external advisor when the use case calls for it",
     ],
     documentation: [
       "Use case in the agency AI inventory with impact summary",

@@ -11,21 +11,31 @@ The AI Review Committee is the operational owner of AI governance in your agency
 
 This page provides the charter you can adopt. The fields in `{{ braces }}` are placeholders; the rest is the model text.
 
+> **Use the smallest review body that can make real decisions.** A documented review path is a core Phase 1 control. It can be a formal seven-seat committee, or it can be a three-to-five-person working group for a small agency. The point is accountable review, not a perfect org chart.
+
 ## Charter wizard
 
 Fill in your agency's details to generate a tailored charter. Your inputs stay in your browser; nothing is sent to a server. Export the result as Markdown or print to PDF.
 
 <CharterWizard client:load />
 
-## Why a committee, not a single owner
+## Why a review body, not a single unchecked owner
 
-Single-owner governance ("the CIO decides") fails three ways:
+A named AI owner is useful, especially for small agencies. The risk is making one person the only authority for every AI decision. Single-owner governance ("the CIO decides") fails three ways:
 
 1. **It centralizes risk** in one person, who is then politically exposed when an AI use case becomes controversial.
 2. **It misses domain context.** The CIO can evaluate technical risk; only the program owner can evaluate operational risk; only legal can evaluate legal risk. Each AI use case touches all three.
 3. **It doesn't scale.** Once your agency has 10+ AI use cases, the single owner becomes the bottleneck, and shadow AI grows around them.
 
-A committee with 6–8 members across IT, legal, a frontline program owner, HR, equity, and (for high-tier cases) external community input distributes both the work and the legitimacy.
+A committee or small working group with IT, legal/procurement, a frontline program owner, HR or records, and (for high-tier cases) equity, civil-rights, or external community input distributes both the work and the legitimacy.
+
+## How this page scales for your agency
+
+| Path | Minimum useful version | Add when capacity exists |
+| --- | --- | --- |
+| Small / no IT department | Name an AI owner, legal/procurement contact, HR or records contact, and rotating program sponsor; meet ad hoc and keep written notes | Bring in outside counsel, regional IT, or a community advisor only for Tier-3/high-impact uses |
+| Medium | Use a 5–7 person committee with monthly or bi-weekly meetings while use cases are active | Add standing agendas, minutes template, and renewal/procurement review |
+| Large | Use the full committee, sub-groups, formal quorum, records schedule, and annual reporting | Add community advisors, civil-rights review, and legal-boundary escalation |
 
 ## Recommended size and composition
 
@@ -40,13 +50,13 @@ A committee with 6–8 members across IT, legal, a frontline program owner, HR, 
 | **Equity / civil rights officer**         | Disparate-impact assessment, public trust, community engagement             | Equity Officer or Civil Rights Officer               |
 | **Community / external advisor (Tier 3)** | Resident voice for high-impact, public-facing use cases                     | Resident representative or domain expert (non-staff) |
 
-For agencies under 200 staff, the chair, CIO, legal, HR, and one rotating program owner (5 seats) is a workable minimum. Equity and community advisors join when a Tier-3 use case is on the agenda.
+For agencies under 200 staff, the chair, technology contact, legal/procurement contact, HR or records contact, and one rotating program owner (4–5 seats) is a workable minimum. Equity, civil-rights, security, and community advisors can join when a Tier-3 use case is on the agenda.
 
 ## Authority
 
-The committee:
+The committee or small-agency review group:
 
-- **Approves or denies** Tier-2 and Tier-3 AI use cases. Tier-1 cases are batch-noted, not individually voted.
+- **Approves, denies, or defers** Tier-2 and Tier-3 AI use cases. Tier-1 cases can be batch-noted, not individually voted.
 - **Maintains the Approved AI Tools List** referenced by the AUP.
 - **Sets policy** for AI training, disclosure, and use-case intake.
 - **Reviews vendor AI offerings** before procurement signs a contract.

@@ -1,17 +1,17 @@
 ---
 title: AI Orchestration Module
-description: LLM adapters, prompt management, retrieval, evaluation, cost tracking, and guardrails — the heart of the platform.
+description: Model adapters, prompt management, retrieval, evaluation, cost tracking, and guardrails for AI features.
 sidebar:
   order: 9
 ---
 
-The AI Orchestration module is the single most consequential piece of the platform. It is where the agency's investment in AI either compounds (every new feature gets the right model, retrieval, eval, and guardrails by default) or fragments (each app reinvents prompt-handling, picks a different vendor, runs unevaluated, leaks PII to whatever endpoint it likes). The pattern is the same as for the other modules — small public surface, clean ports-and-adapters seams — but the stakes are higher.
+The AI Orchestration module is one of the highest-leverage pieces of the platform. It is where the agency's investment in AI either compounds (new features get a consistent model path, retrieval, eval, and guardrails) or fragments (each app reinvents prompt-handling, picks a different provider, runs unevaluated, and logs sensitive data inconsistently). The pattern is the same as for the other modules — small public surface, clean ports-and-adapters seams — but the stakes are higher.
 
 This module is what lets the agency say _yes_ to "let's add a summarization feature" in days instead of months. It is also what lets the agency say _no_ confidently to features that don't pass eval or budget gates. Both capabilities matter equally.
 
 ## What this module owns
 
-- **LLM adapters.** Vendor-neutral access to foundation models (Anthropic Claude, OpenAI GPT, Azure OpenAI, AWS Bedrock, GCP Vertex AI, on-prem Llama).
+- **Model adapters.** Provider-neutral access to approved foundation models, whether through direct model APIs, cloud model platforms, managed gateways, or self-hosted endpoints.
 - **Prompt management.** Versioned prompts with metadata, tested separately from code.
 - **Retrieval.** RAG plumbing — chunking, embedding, vector store, retrieval, reranking.
 - **Tool / function calling.** Structured tool invocation with schema validation.
@@ -19,7 +19,7 @@ This module is what lets the agency say _yes_ to "let's add a summarization feat
 - **Evaluation.** Harness for offline eval; CI integration; gate thresholds.
 - **Cost tracking.** Token counting, cost attribution per app / per user / per feature.
 - **Guardrails.** Input/output scanning, PII detection, prompt injection defense.
-- **Observability.** Per-call traces with prompt + response + metadata.
+- **Observability.** Per-call traces with metadata by default and redacted prompt/response content only where policy allows it.
 
 ## What this module does NOT own
 
@@ -57,7 +57,7 @@ class AIClient(Protocol):
         """Run an eval suite against a prompt."""
 ```
 
-The public types are intentionally thin. Apps building AI features call `ai.call("case-summary", inputs={...})` and don't care which model or vendor served it; the prompt registry's metadata declares the binding.
+The public types are intentionally thin. Apps building AI features call `ai.call("case-summary", inputs={...})` and usually do not care which approved model or provider served it; the prompt registry's metadata declares the binding.
 
 ## The vendor-neutral adapter pattern
 
@@ -73,32 +73,40 @@ class LLMProvider(Protocol):
     def context_window(self) -> int: ...
 ```
 
-Production adapters:
+Production adapters usually fall into these categories:
 
-| Provider                  | Adapter                      | Notes                                        |
-| ------------------------- | ---------------------------- | -------------------------------------------- |
-| Anthropic API             | `anthropic_provider`         | Claude Opus / Sonnet / Haiku                 |
-| Anthropic via AWS Bedrock | `bedrock_anthropic_provider` | Same Claude family, AWS billing & data plane |
-| Anthropic via GCP Vertex  | `vertex_anthropic_provider`  | Same, GCP                                    |
-| OpenAI API                | `openai_provider`            | GPT family direct                            |
-| Azure OpenAI              | `azure_openai_provider`      | OpenAI models with Azure data residency      |
-| Bedrock (other)           | `bedrock_provider`           | Cohere, Mistral, Llama via Bedrock           |
-| Vertex AI (other)         | `vertex_provider`            | Google Gemini family                         |
-| On-prem (vLLM, Ollama)    | `local_provider`             | Self-hosted models for sensitive workloads   |
+| Provider route | Adapter | Notes |
+| --- | --- | --- |
+| Direct model API | `direct_provider` | Provider-hosted model endpoint |
+| Cloud model platform | `cloud_model_provider` | Cloud billing, networking, and data-plane controls |
+| Model gateway / broker | `gateway_provider` | Central routing, policy, caching, and observability |
+| Self-hosted endpoint | `local_provider` | Open-weight or privately hosted model for specific data/control needs |
 
-Switching providers is a config change; the prompts and the application logic don't change. The module's request/response types are a superset that translates to and from the vendor-specific shapes.
+Switching providers should be a bounded platform change, not an app-by-app rewrite. The module's request/response types translate to and from provider-specific shapes, but provider changes still require eval runs, safety review, cost review, procurement review, and sometimes prompt, schema, or tool-calling updates.
 
-The adapter pattern is **the** primary defense against vendor lock-in. If procurement moves the agency from Anthropic to Bedrock for billing reasons, the platform absorbs the change in one config file. If a new model lands and the agency wants to test it, that's an adapter; existing prompts can be evaluated on it without code changes elsewhere.
+The adapter pattern is one defense against vendor lock-in. If procurement moves the agency to a different approved provider route, the platform absorbs most of the integration work in the adapter and prompt registry. If a new model becomes available, add or update an adapter and evaluate existing prompts against it before production use.
+
+### Model IDs and provider catalogs
+
+Providers identify models with **model IDs** or **slugs**: short strings used in API calls and deployment configuration, such as `provider-model-family-version` or a cloud deployment name. These IDs change as providers release new model versions, retire old ones, or expose the same model through different cloud platforms.
+
+This guide intentionally avoids a fixed list of current model IDs. For implementation, use the provider's current model catalog and API reference, then record the selected model ID, version/date, region or deployment name, and fallback in the prompt registry or model-routing config. Good starting points are:
+
+- OpenAI API model documentation: `https://platform.openai.com/docs/models`
+- Azure OpenAI model documentation: `https://learn.microsoft.com/azure/ai-services/openai/concepts/models`
+- AWS Bedrock model provider documentation: `https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html`
+- Google Vertex AI model documentation: `https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models`
+- Anthropic model documentation: `https://docs.anthropic.com/en/docs/about-claude/models`
 
 ## Choosing models
 
 Three model tiers, mapped to use cases (per the [agency's procurement guardrails](/phase-1-governance/procurement-guardrails/)):
 
-| Tier             | Examples                                     | Use cases                                                       |
+| Tier             | Description                                  | Use cases                                                       |
 | ---------------- | -------------------------------------------- | --------------------------------------------------------------- |
-| **Flagship**     | Claude Opus, GPT-5, Gemini Ultra-class       | Long-context reasoning; high-stakes summaries; complex tool use |
-| **Mid**          | Claude Sonnet, GPT-class mid, Gemini Flash   | Most production features                                        |
-| **Light / fast** | Claude Haiku, small open-weight, Gemini Nano | Classification, retrieval rerank, structured extraction         |
+| **Flagship**     | Highest-capability models in the approved catalog | Long-context reasoning; high-stakes summaries; complex tool use |
+| **Mid**          | Balanced cost/quality models                 | Most production features                                        |
+| **Light / fast** | Smaller or specialized low-latency models    | Classification, retrieval rerank, structured extraction         |
 
 The prompt registry binds each prompt to a default tier; the model within the tier is configurable per-environment. Cost-sensitive paths use the lightest tier that passes eval.
 
@@ -147,7 +155,7 @@ When an app calls `ai.call("case-summary", inputs={...})`:
 3. The user-template is rendered with inputs.
 4. The system prompt + rendered user prompt + any tools are sent to the model.
 5. The output is validated against the output schema.
-6. The whole call (with redacted inputs and full metadata) is logged.
+6. The whole call's metadata is logged; input/output content is redacted, sampled, or omitted according to classification and audit policy.
 
 Prompt changes go through code review like any other change. Major version bumps (incompatible schema, materially different behavior) require an eval-pass-rate floor before deployment.
 
@@ -176,12 +184,12 @@ query  →    │  Embedder   │ →  │  Retriever   │ ──────�
 Each stage is a port. Adapters exist for:
 
 - **Chunker.** Document-aware (markdown, PDF, DOCX, HTML) with overlapping windows. Default chunk size: 512 tokens with 50-token overlap.
-- **Embedder.** Vendor adapters (OpenAI text-embedding-3, Cohere Embed, Voyage, Vertex, on-prem). Embedding choice is configurable per index.
-- **Vector store.** pgvector (default), Pinecone, Weaviate, Azure AI Search, AWS OpenSearch, Vertex Matching Engine.
+- **Embedder.** Provider or self-hosted embedding adapters. Embedding choice is configurable per index and recorded with the index metadata.
+- **Vector store.** Existing Postgres with vector extension, managed search/vector services, dedicated vector databases, or self-hosted vector stores.
 - **Retriever.** Top-K with metadata filters; supports hybrid search (vector + keyword).
-- **Reranker.** Cross-encoder reranker (Cohere Rerank, BGE) over the top-K to improve precision.
+- **Reranker.** A cross-encoder or rerank model over the top-K to improve precision.
 
-Reasonable defaults: pgvector on the existing Postgres for ≤ 1M chunks; switch to dedicated vector DB above that, or earlier if tenant isolation requires it.
+Reasonable defaults: start with the database/search service the agency already operates when the corpus is modest; switch to a dedicated vector/search backend when corpus size, query latency, isolation, or operational ownership justifies it.
 
 ### Embedding model selection
 
@@ -191,7 +199,7 @@ Embedding choice has three knobs:
 - **Latency** — small embedding models run on-device (sub-10ms), cloud embeddings are ~50–200ms per call.
 - **Privacy** — sending text to a cloud embedder is a data flow that needs to be classified just like generation.
 
-Default: agency picks one per index; mixing embedding models in a single index doesn't work (different vector spaces).
+Default: agency picks one embedding model per index and records it. Mixing embedding models in a single index generally does not work because the vectors live in different spaces; migration usually means re-embedding.
 
 ### Chunk metadata
 
@@ -223,7 +231,7 @@ The retrieval port enforces metadata filters at the store layer; bypassing filte
 
 Every RAG response includes citation metadata: which chunks were retrieved, which were used. Prompts are written to instruct the model to cite. The output post-processor extracts citations and returns them as structured data alongside the response. The UI renders them; users can click to the source document.
 
-Citations are not optional. A response that doesn't surface its sources is opaque and untrustworthy in a government context.
+For RAG answers that inform decisions, citations should be treated as the default. A response that does not surface its sources is harder to trust and review in a government context. For non-RAG tasks, such as format conversion or classification, document the evidence/output requirements separately.
 
 ## Tool / function calling
 
@@ -245,7 +253,7 @@ response = await ai.complete(LLMRequest(
 
 The module:
 
-- Translates the tool definitions to the vendor's format (Anthropic, OpenAI, Vertex use slightly different schemas).
+- Translates the tool definitions to the provider's format; tool/function schemas differ across APIs.
 - Receives the model's tool-call request.
 - Validates the tool call against the schema.
 - Invokes the tool handler with appropriate authz context.
@@ -258,7 +266,7 @@ Tool handlers run inside the agency's RBAC. A tool the user doesn't have permiss
 
 Long-form output streams to clients via SSE (Server-Sent Events). The module's SSE adapter integrates with the [API framework](/phase-5-platform/api-framework-module/), exposing a typed streaming endpoint. WebSocket support is available for bidirectional flows (interactive chat).
 
-Streaming responses are still fully logged (the complete output is reconstructed for the audit record); telemetry includes time-to-first-token and time-to-completion metrics.
+Streaming responses still emit telemetry, including time-to-first-token and time-to-completion metrics. Full output reconstruction should happen only when classification, records policy, and privacy review allow it; otherwise log metadata, redacted excerpts, hashes, and request IDs.
 
 ## Evaluation
 
@@ -296,8 +304,8 @@ Assertion types:
 - **`contains` / `not_contains` / `matches_regex`** — string-level.
 - **`token_length_min` / `token_length_max`** — output-shape constraints.
 - **`json_schema`** — structured output validation.
-- **`rubric_score`** — LLM-as-judge against a stored rubric, threshold required.
-- **`embedding_similarity`** — cosine similarity to a reference output, threshold required.
+- **`rubric_score`** — model-as-judge against a stored rubric, threshold required.
+- **`embedding_similarity`** — similarity to a reference output, threshold required.
 - **`tool_called`** — for tool-use prompts, asserts the right tool was selected.
 - **`pii_redaction`** — output passes through PII detector; must be clean.
 
@@ -310,11 +318,11 @@ Assertion types:
 
 ### Eval thresholds
 
-Each eval suite declares its threshold (e.g., "85% of cases must pass" or "average rubric score ≥ 4.0"). Thresholds are stored in the suite metadata and ratcheted upward over time — a regression that drops below the threshold blocks the change. Lowering a threshold requires explicit justification in the PR.
+Each eval suite declares its threshold (e.g., "85% of cases must pass" or "average rubric score ≥ 4.0"). Thresholds are stored in the suite metadata and tightened over time as confidence grows. A regression below the threshold should block production prompt changes; lowering a threshold requires explicit justification in the PR.
 
 ### Human eval
 
-LLM-as-judge has limits. For high-stakes prompts, a small set of human-graded examples is mixed into the suite quarterly. Disagreement between human and LLM-judge signals that the rubric or judge needs work.
+Model-as-judge has limits. For high-stakes prompts, a small set of human-graded examples is mixed into the suite quarterly. Disagreement between human and automated judge signals that the rubric or judge needs work.
 
 ## Cost tracking
 
@@ -322,7 +330,7 @@ Every LLM call records:
 
 - `prompt_id`, `prompt_version`, `model`, `provider`.
 - Input tokens, output tokens, cached tokens.
-- Computed cost (per provider's published pricing, kept current in config).
+- Computed cost using the provider's current pricing/configuration, kept current outside code.
 - App, user, feature, request_id (for attribution).
 - Latency, time-to-first-token.
 
@@ -333,20 +341,20 @@ Aggregations the module exposes:
 - **Cost by prompt** — which prompts are expensive; opportunities to optimize.
 - **Cost by model** — distribution across tiers.
 
-The [admin dashboard](/phase-5-platform/admin-dashboard-module/) surfaces these. Per-app monthly budgets trigger alerts at 70% / 90%; hard caps optionally hard-stop a feature.
+The [admin dashboard](/phase-5-platform/admin-dashboard-module/) surfaces these. Per-app monthly budgets can trigger alerts at warning and critical thresholds; hard caps can optionally hard-stop a feature after policy approval.
 
-Cache hits (Anthropic prompt caching, OpenAI cached input pricing) are tracked and credited in the cost view — the savings should be visible.
+Provider-side or gateway-side cache hits should be tracked and credited in the cost view where the selected provider exposes that data.
 
 ## Guardrails
 
-Two layers, both off by default unless the prompt's classification triggers them.
+Two layers, selected by prompt classification and data sensitivity. Metadata, cost tracking, and eval hooks are baseline for production AI features; DLP, safety filters, prompt-injection checks, and human review gates are added by risk tier.
 
 ### Input guardrails
 
 Run on the inputs before sending to the model:
 
 - **Prompt injection detection** — heuristics + a small classifier looking for instructions that try to subvert the system prompt.
-- **PII detection** — Presidio / cloud-native (AWS Comprehend, Azure Language, GCP DLP) on inputs that aren't supposed to carry PII.
+- **PII detection** — open-source, cloud-native, or enterprise DLP tools on inputs that are not supposed to carry PII.
 - **Classification check** — if the prompt is `tier-1` and the inputs are flagged tier-3, reject before sending.
 
 ### Output guardrails
@@ -354,7 +362,7 @@ Run on the inputs before sending to the model:
 Run on the model's output before returning it:
 
 - **PII detection / redaction** — same engines.
-- **Toxicity / unsafe content** — vendor moderation API or a small local classifier.
+- **Toxicity / unsafe content** — provider moderation API, local classifier, or approved content-safety service.
 - **Schema validation** — already covered by output_schema; more strict types of validation can be layered.
 - **Citation check** — outputs from RAG prompts must include at least one citation; missing citations downgrade the response or trigger a regeneration.
 
@@ -362,18 +370,18 @@ Guardrails are themselves logged. A blocked output is a security event in the au
 
 ## Observability
 
-Every AI call emits a rich trace span with:
+Every AI call emits a trace span with:
 
-- Inputs (with PII redacted per classification).
+- Input metadata and, where approved, redacted inputs.
 - Resolved prompt id + version.
 - Model + provider.
 - Tools available + tools called.
 - Retrieval queries + retrieved chunk IDs.
-- Output (full or truncated per policy).
+- Output metadata and, where approved, redacted or truncated output.
 - Token counts, cost, latency.
 - Guardrail outcomes.
 
-Traces flow into the standard observability backend (Phase 3). The module's reference dashboards include:
+Traces flow into the standard observability backend (Phase 3). Raw prompts, retrieved text, and model outputs should not become a shadow content repository unless records, privacy, and security policy explicitly require it. The module's reference dashboards include:
 
 - Quality score (rolling eval pass rate).
 - Cost per day / week / month.
@@ -392,30 +400,30 @@ The orchestration module is wired into the platform stack:
 - The [document rendering module](/phase-5-platform/document-rendering-module/) consumes orchestration outputs to fill templates.
 - The [admin dashboard](/phase-5-platform/admin-dashboard-module/) surfaces cost, eval results, prompt registry, guardrail incidents.
 
-This is what makes the platform compound. A new AI feature is "register a prompt + write 50 lines of glue code in an existing app"; the rest is already there.
+This is what makes the platform compound. A new AI feature should mostly be "register a prompt, wire the app-specific inputs, and run the evals"; the rest is reusable platform work.
 
 ## What "v1" vs "v2" means
 
 The Phase 5 timeline ships AI Orchestration in two waves:
 
-- **v1 (Month 4).** LLM adapters + retrieval + prompt registry + cost tracking + basic guardrails. Enough to ship a useful feature.
+- **v1 (Month 4).** Model adapters + retrieval + prompt registry + cost tracking + basic guardrails. Enough to ship a useful feature.
 - **v2 (Month 5).** Full eval harness + CI integration + advanced guardrails + multi-provider failover + per-app budgets. Enough to operate at Tier-2.
 
-Tier-3 features wait until v2 lands.
+Tier-3 features should wait until v2-level evaluation, logging, DLP, approval, and incident-response paths are in place.
 
 ## Common AI orchestration failures
 
-- **Each app with its own LLM client.** The whole point of this module is gone. The platform's architecture review must reject any app that imports an LLM SDK directly.
+- **Each app with its own model client.** The point of this module is weakened. Architecture review should push apps toward the orchestration module unless a documented exception exists.
 - **Prompts as inline strings in code.** Untestable, unversioned. Move them to the registry on day one.
-- **No eval.** Prompt changes go to production unmeasured; quality drifts; nobody notices until a stakeholder complains. Eval is not optional for production prompts.
+- **No eval.** Prompt changes go to production unmeasured; quality drifts; nobody notices until a stakeholder complains. Eval should be required for production AI features, scaled to risk.
 - **Cost surprise.** Long-context models used everywhere "because they're better." Cost dashboard plus tier-routing prevents the bill spike.
 - **PII in prompts.** Prompt logs become a PII repository. Redact before logging; store full prompts only in the encrypted, classified path.
-- **Vendor-specific features in prompts.** Anthropic-specific XML tags in a prompt that the registry says is provider-agnostic. The eval suite catches this when run against a different provider.
+- **Provider-specific features in provider-agnostic prompts.** A prompt uses syntax or tool behavior from one provider while the registry says it is portable. The eval suite catches this when run against a different provider.
 - **Tool authorization bypass.** A tool fetches data the calling user shouldn't see because the tool runs as the service. Tool handlers must use the calling user's authz, not the service's.
 
 ## Plain-English Guide to AI Orchestration Terms
 
-- **LLM (Large Language Model).** A foundation model that generates text — Claude, GPT, Gemini, Llama. The agency is a consumer of these via APIs or self-hosting.
+- **LLM (Large Language Model).** A foundation model that generates text. The agency is usually a consumer of these via APIs, managed cloud platforms, gateways, or self-hosting.
 - **RAG (Retrieval-Augmented Generation).** Look up relevant documents first, then ask the LLM to answer with that context. Grounds answers in agency content rather than the model's training data.
 - **Embedding.** A vector representation of text. Similar texts have nearby vectors. Used for retrieval.
 - **Vector store.** A database that indexes embeddings for fast nearest-neighbor search.
@@ -423,7 +431,7 @@ Tier-3 features wait until v2 lands.
 - **Tool / function calling.** The LLM, instead of just generating text, calls a typed function the agency exposes. The function runs and the result is fed back to the LLM.
 - **Prompt registry.** A versioned, tested catalog of prompts — the equivalent of source code for the AI features.
 - **Eval suite.** A set of test cases for a prompt. Each case has expected properties of the output. Eval measures quality regression.
-- **LLM-as-judge.** Using a (usually larger / better) LLM to grade another LLM's output against a rubric. A common eval technique.
+- **Model-as-judge.** Using a model to grade another model's output against a rubric. A common eval technique, but not a substitute for human review on high-stakes prompts.
 - **Guardrail.** A check applied to inputs before they go to the LLM, or to outputs before they return to the user — PII detection, prompt-injection detection, content filtering.
 
 ## Related

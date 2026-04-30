@@ -5,7 +5,7 @@ sidebar:
   order: 11
 ---
 
-Launching the starter project is not the end of Phase 6. The first two weeks after launch are not "done" — on-call is real, the eval suite is catching regressions, the user feedback mechanism is filling up, and the cost dashboard is showing whether the projection matched reality. This is the time the team learns what running an AI product feels like. Do not start the next project. Finish this one's first incident response and first cost reconciliation before turning attention elsewhere.
+Launching the starter project is not the end of Phase 6. The first two weeks after launch are not "done" — on-call is real, the eval suite is catching regressions, the user feedback mechanism is filling up, and the cost dashboard is showing whether the projection matched reality. This is the time the team learns what running an AI product feels like. Avoid starting the next project until this one has completed its first stability review, incident-response check, and cost reconciliation.
 
 ## Two-week stability watch
 
@@ -40,7 +40,7 @@ After Month 14, the starter project is no longer "the new thing." It needs the b
 
 ## Retirement is real
 
-Every starter project should have named a retirement condition at launch. Common conditions:
+Every starter project should name a retirement condition at launch or at the first annual review. Common conditions:
 
 - "We replace this with a vendor product when one matures."
 - "The underlying workflow is automated by a different system."

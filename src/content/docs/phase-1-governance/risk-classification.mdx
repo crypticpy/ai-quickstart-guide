@@ -7,9 +7,19 @@ sidebar:
 
 import RiskTierPicker from '../../../components/RiskTierPicker.tsx';
 
-Every AI use case in your agency must be classified into a risk tier _before_ development starts. Tier determines what governance applies: who reviews it, what evidence is required, what disclosures are mandatory, and whether it can ship at all.
+Every AI use case in your agency should be classified into a risk tier _before_ development starts. Tier determines what governance applies: who reviews it, what evidence is required, what disclosures may be needed, and whether the use case is ready to ship.
 
 This page defines the three tiers, gives you 15 government-specific examples, and walks you through the classification workflow your AI Review Committee will adopt in writing.
+
+> **Use the tier picker as a guide to a governance decision.** Risk classification is a core Phase 1 control, but the matrix is not a statute or a final legal decision. Your Review Committee or AI owner can adjust the tier with a written reason.
+
+## How this page scales for your agency
+
+| Path | Minimum useful version | Add when capacity exists |
+| --- | --- | --- |
+| Small / no IT department | Use the three-tier table and document one sentence explaining the tier for each AI idea | Keep examples from your own departments so staff can classify routine uses faster |
+| Medium | Use the picker during intake review, batch-note Tier-1 uses, and discuss Tier-2/Tier-3 uses in committee | Add quarterly review dates and attach classifications to procurement files |
+| Large | Maintain a formal classification record with dissent, legal notes, and records retention | Add the legal-boundary layer for uses that may be prohibited absent statutory authority |
 
 ## Classify a use case
 
@@ -34,15 +44,15 @@ Five-tier and seven-tier matrices look more rigorous but tend to collapse in pra
 | --------------------------------- | -------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------- |
 | Affects rights, benefits, safety? | No                               | Indirectly (informs a human decision)    | Directly (drives or strongly shapes the decision)                            |
 | Reversibility of harm             | Trivially reversible             | Reversible with effort                   | Hard to reverse / irreversible                                               |
-| Data sensitivity                  | Public or non-sensitive internal | Internal sensitive (HR, operational)     | PII, PHI, criminal-justice, financial, immigration, child welfare            |
+| Data sensitivity                  | Public, non-sensitive internal, or ordinary business-contact data | Internal sensitive (HR, operational, routine resident contact data) | Sensitive PII, PHI, criminal-justice, financial, immigration, child welfare, protected or confidential records |
 | Audience                          | Internal staff only              | Internal staff + limited public          | General public, beneficiaries, applicants                                    |
 | Automation level                  | Suggests; human always acts      | Recommends; human approves before action | Decides or filters; human review is post-hoc, optional, or absent            |
 | Required review                   | Manager approval                 | AI Review Committee approval             | AI Review Committee + legal + (where applicable) elected oversight           |
 | Required disclosures              | None                             | Note in workflow doc; staff training     | Public notice, plain-language explanation, contestation pathway              |
 | Required evaluation               | Spot-check before launch         | Pre-launch evaluation + quarterly review | Pre-launch + bias/impact assessment + ongoing monitoring + annual audit      |
-| Vendor / model constraints        | Any approved vendor              | Approved vendor with data non-use clause | Approved vendor + explainability + audit access; no foreign-adversary models |
+| Vendor / model constraints        | Any approved vendor              | Approved vendor with data non-use clause | Approved vendor + explainability + audit access; no barred vendors, sub-processors, models, or jurisdictions |
 | Procurement clauses (Phase 1)     | Standard                         | AI Addendum (data non-use, exit)         | AI Addendum + bias testing + decision logs + government data sovereignty     |
-| OMB M-25-21 reporting             | Track in inventory               | Track + impact summary                   | Track + impact summary + designated agency AI official sign-off              |
+| Federal-style reporting / inventory | Track in inventory             | Track + impact summary                   | Track + impact summary + designated AI official or accountable owner sign-off |
 
 > **Rule of thumb.** If a real person can lose a benefit, a job, custody, housing, freedom, or money because of the AI's output (or even because a staff member followed an AI recommendation without independent verification), it's High. When in doubt, it's High.
 
@@ -105,7 +115,7 @@ The classification flow is the same whether the request comes from IT, a departm
 | Ongoing monitoring + annual audit        |          | ✓ (light)    | ✓ (full)                                     |
 | Contestation / appeal pathway            |          |              | ✓                                            |
 | Decision-log retention                   | 30 days  | 1 year       | 7 years (or per applicable records schedule) |
-| Vendor must sign AI Procurement Addendum | Optional | ✓            | ✓ + bias-testing rider                       |
+| Vendor addendum expected when procured | Optional | ✓            | ✓ + bias-testing rider                       |
 
 ## Pitfalls to avoid
 

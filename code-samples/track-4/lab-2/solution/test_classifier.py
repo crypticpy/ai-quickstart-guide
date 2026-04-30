@@ -1,4 +1,4 @@
-"""Tests for the lab 4.1 solution. No real API calls."""
+"""Tests for the lab 4.2 solution. No real API calls."""
 
 from __future__ import annotations
 

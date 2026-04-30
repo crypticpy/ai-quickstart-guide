@@ -15,7 +15,7 @@ The module is opinionated on purpose. Every internal HTTP API across the agency 
 - **Request lifecycle.** Trace ID propagation, request logging, body size limits, timeouts.
 - **Authentication middleware.** Validates the session token via the [auth module](/phase-5-platform/auth-module/); attaches `request.user`.
 - **Authorization decorator.** `@requires(permission)` that calls the [RBAC module](/phase-5-platform/rbac-module/).
-- **Error handling.** RFC 7807 Problem Details on every 4xx/5xx response.
+- **Error handling.** RFC 9457 Problem Details on 4xx/5xx responses.
 - **Pagination helpers.** `Paginated[T]` types and cursor encode/decode.
 - **Rate limiting.** Per-user and per-IP limits with consistent `Retry-After` headers.
 - **OpenAPI generation.** Spec produced from typed handlers; schema endpoint at `/openapi.json`.
@@ -59,7 +59,7 @@ async def get_case(case_id: str, ctx: RequestContext):
     ...
 ```
 
-The `requires` decorator is mandatory. The framework has a startup check that fails the boot if any non-public route is missing one. This implements [default-deny](/phase-5-platform/rbac-module/) at the API layer.
+Each route should explicitly declare its access posture: `@requires`, `@public`, or an imperative `rbac.assert_can(...)` call. Mature teams can enforce this with startup checks or lint rules; smaller teams can start with route tests and review checklists. This implements [default-deny](/phase-5-platform/rbac-module/) at the API layer.
 
 ## The middleware stack (in order)
 
@@ -74,12 +74,12 @@ The framework wires middleware in a specific order; consumers can add to the cha
 7. **Authentication** — validate session token; attach user.
 8. **CSRF** — for browser-driven mutating endpoints; double-submit cookie.
 9. **Route handler** — runs `@requires` permission check, then the handler body.
-10. **Error formatter** — convert any exception to RFC 7807.
+10. **Error formatter** — convert any exception to Problem Details.
 11. **Response log** — emit "request.completed" log; close span.
 
 Each middleware is in its own file behind a port; production adapters use the language's idiomatic mechanism (FastAPI middleware, ASP.NET middleware, Spring filters, Hono middleware).
 
-## Error format (RFC 7807)
+## Error format (RFC 9457 Problem Details)
 
 Every error response has the same shape, per the [API-first standard](/phase-4-dev-stack/api-first-design/):
 
@@ -120,7 +120,7 @@ The framework provides three patterns for auth checks:
 2. **Imperative** — call `rbac.assert_can(...)` inside the handler. Used when the resource isn't known until partway through the handler.
 3. **Public** — `@public`. Explicitly marks an endpoint as not requiring auth (e.g., health checks, IdP callbacks). The startup check counts these and emits a warning if there are more than expected.
 
-Lint rule: every route must have one of `@requires`, `@public`, or an explicit `rbac.assert_can` call. Boot fails otherwise.
+Production target: every route has one of `@requires`, `@public`, or an explicit `rbac.assert_can` call. Enforce with lint/startup checks when possible; otherwise require route tests that prove protected endpoints deny unauthorized access.
 
 ## Pagination
 
@@ -198,7 +198,7 @@ The error format is consistent across stacks. Front-end form components map fiel
 
 ## OpenAPI generation
 
-The framework auto-generates an OpenAPI 3.1 spec from typed handlers, with the agency's conventions applied:
+The framework auto-generates an OpenAPI 3.1+ spec from typed handlers, with the agency's conventions applied. Use the version supported by the chosen framework and validator, and track OpenAPI updates through the toolchain rather than hand-editing specs.
 
 - **Operation IDs** generated from the route name (e.g., `getCaseById`).
 - **Tags** inherited from the router.
@@ -214,7 +214,7 @@ Every request carries a `X-Request-ID` header. If absent, the framework generate
 
 - **OTel span** is started with the request as root.
 - **Logs** emitted carry `request_id`, `trace_id`, `user_id`, `route`.
-- **Errors** include the `request_id` in the RFC 7807 body so users can quote it.
+- **Errors** include the `request_id` in the Problem Details body so users can quote it.
 - **Outbound calls** propagate the trace via W3C Trace Context.
 
 The framework's logger has structured-field support; consuming code adds fields and the framework emits them in the standard JSON shape (Phase 3 [observability](/phase-3-infrastructure/observability/)).
@@ -277,7 +277,7 @@ class ApiSettings(BaseModel):
     otel: OTelSettings
 ```
 
-Secrets are never read from `os.getenv` directly — they come through the platform [secrets manager](/phase-3-infrastructure/secrets-management/).
+Secrets should come through the platform [secrets manager](/phase-3-infrastructure/secrets-management/) or runtime secret references. Plain environment variables are acceptable for non-secret settings; secret reads should stay centralized so rotation and workload identity work consistently.
 
 ## Testing the framework
 
@@ -298,7 +298,7 @@ Behavior of every middleware is tested in the framework's own test suite; consum
 
 ## Performance overhead
 
-The framework adds budget on every request. Measured on the reference implementation:
+The framework adds budget on every request. Example starter budget from a reference implementation:
 
 - Authentication (cache hit): ~1ms
 - Authorization: ~2ms

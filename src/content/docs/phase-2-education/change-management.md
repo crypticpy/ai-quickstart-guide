@@ -5,11 +5,19 @@ sidebar:
   order: 2
 ---
 
-Prosci's research finds that **63% of AI initiative failures trace to human factors, not technology**. Your tooling can be flawless and your governance airtight; if you skip the change-management work, the rollout will still stall. This playbook is the operational guide for facilitators, managers, and the AI program lead through the five ADKAR stages.
+Prosci reports that human factors are a major driver of failed AI and digital-change efforts. Your tooling can be flawless and your governance airtight; if you skip the change-management work, the rollout will still stall. This playbook is the operational guide for facilitators, managers, and the AI program lead through the five ADKAR stages.
 
 ## What ADKAR is, in one paragraph
 
 ADKAR (Awareness, Desire, Knowledge, Ability, Reinforcement) is a sequenced model: people cannot want a change they don't understand, cannot learn what they don't want, cannot apply what they haven't learned, and cannot sustain what isn't reinforced. Skipping a stage doesn't speed things up — it produces the symptom of that stage's neglect months later.
+
+## How this page scales for your agency
+
+| Path | Minimum useful version | Add when capacity exists |
+| ---- | ---------------------- | ------------------------ |
+| Small / no dedicated IT | Sponsor note, one kickoff/listening session, simple FAQ, one quarterly pulse | Champions-led demos in existing team meetings |
+| Medium | ADKAR stage map, manager coaching cards, pulse-and-review protocol | Department-specific role maps and peer stories |
+| Large / federated | Formal change plan, executive sponsor cadence, HR/labor/comms coordination | Department-level dashboards and recurring executive reviews |
 
 ## Stage map
 
@@ -47,7 +55,7 @@ If staff cannot answer #3, you do not have Awareness — you have rumor.
 
 ## Desire — Months 1–3
 
-**Goal.** A critical mass of staff (target: 30%) actively wants to engage with AI tools — not just tolerate them, but submit ideas, attend optional sessions, ask questions in 1:1s.
+**Goal.** A meaningful share of staff actively wants to engage with AI tools — not just tolerate them, but submit ideas, attend optional sessions, ask questions in 1:1s. Set the numeric target locally; 30% is a useful planning benchmark, not a universal requirement.
 
 Desire is built socially, not informationally. It comes from peers, not from training departments. The interventions that work are the ones that produce visible peers using AI well.
 
@@ -106,12 +114,12 @@ This is the longest stage and the one most agencies underfund. Ability is built 
 - **Champions Network monthly meetups** (Track 5) — peer problem-solving on real cases.
 - **Pair-programming or pair-using model**: staff trying a new AI workflow do their first three uses with a Champion shadowing.
 - **Office hours** — weekly drop-in (30 min) hosted by AI program lead or Champions. Low-stakes "I tried this and got stuck" conversations.
-- **Explicit failure protocol**: if an AI output produces a wrong outcome, the response is a recorded post-mortem and a process update — never staff discipline (assuming policy was followed). This must be visible behavior from leadership, not just a written policy.
+- **Explicit failure protocol**: if an AI output produces a wrong outcome, the response is a recorded post-mortem and a process update — never staff discipline when policy was followed. Leadership should make that visible through behavior, not just written policy.
 
 ### What goes wrong
 
 - **No deliberate practice.** Staff are taught at, never required to do guided practice on real work.
-- **Punishing early failure.** A single highly-publicized AI mistake produces a year of risk aversion. Leadership must visibly defend staff who followed policy and got a bad output.
+- **Punishing early failure.** A single highly-publicized AI mistake can produce a year of risk aversion. Leadership should visibly defend staff who followed policy and got a bad output.
 - **No buddy system.** Solo learners under deadline pressure revert to the old workflow. Pair them.
 
 > **Recovery.** If Ability is low, the diagnostic is "what does someone do at 4:55 PM on a Friday with three things on their desk?" If the answer is "the old way," your Ability rollout has failed. Increase pair-using density and reduce the number of new tools — fewer tools, more practice with each.
@@ -156,13 +164,13 @@ If you are only measuring Level 1 (smile sheets), you are measuring whether peop
 
 ## When to pause the rollout
 
-Three triggers should pause technical phases:
+Three triggers should prompt a review and, where practical, pause technical phases:
 
 1. **Quarterly engagement pulse drops below 3.5/5.0** on any of the three questions ("Do you feel supported in learning AI?" / "Have you used an AI tool in your work this month?" / "Do you understand how AI will affect your role?").
 2. **A high-visibility AI failure** — wrong public-facing output, biased automated decision, leaked staff data — that has not yet been publicly addressed.
 3. **A senior champion leaves** — the Director, CIO, or program lead departs without a named successor to the program.
 
-Pausing means: stop adding new tools, stop running new training, hold a 60-day stabilization sprint, and only resume when the trigger is resolved. Pushing through any of these accelerates failure.
+Pausing means: stop adding new tools, stop running new training, hold a short stabilization sprint, and resume when the trigger is resolved or a documented mitigation is in place. Pushing through without review increases the risk of failure.
 
 ## Plain-English Guide to Change Terms
 
@@ -174,7 +182,7 @@ Pausing means: stop adding new tools, stop running new training, hold a 60-day s
 
 ## Research basis
 
-- Prosci ADKAR Model — Best Practices in Change Management, 11th Edition. (63% of AI failures attributed to human factors.)
+- Prosci ADKAR Model — Best Practices in Change Management, 11th Edition; AI adoption and change-management research on human factors.
 - Kirkpatrick Partners — _Kirkpatrick's Four Levels of Training Evaluation_ (2016).
 - GSA Centers of Excellence — AI training cohort retrospective (12,000+ federal staff reached, 2024–2025).
 - U.S. Department of Labor — AI Literacy Framework, February 2026.

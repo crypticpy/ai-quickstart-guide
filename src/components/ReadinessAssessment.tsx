@@ -56,7 +56,7 @@ const QUESTIONS: Question[] = [
     options: [
       { label: "None / no training offered", score: 0 },
       { label: "A few volunteers", score: 1 },
-      { label: "Most of IT and some leadership", score: 2 },
+      { label: "Most technical staff and some leadership", score: 2 },
       { label: "All staff, with regular refreshers", score: 3 },
     ],
   },
@@ -67,9 +67,9 @@ const QUESTIONS: Question[] = [
       "Is there a way for non-technical staff to submit AI use case ideas?",
     options: [
       { label: "No intake mechanism", score: 0 },
-      { label: "Informal — email IT", score: 1 },
+      { label: "Informal — email or verbal request", score: 1 },
       { label: "A form exists; no defined triage", score: 2 },
-      { label: "Form + committee triage on a published cadence", score: 3 },
+      { label: "Form + review-group triage on a published cadence", score: 3 },
     ],
   },
   {
@@ -79,8 +79,8 @@ const QUESTIONS: Question[] = [
     options: [
       { label: "No — production or nothing", score: 0 },
       { label: "Personal accounts only", score: 1 },
-      { label: "Shared sandbox; no SSO", score: 2 },
-      { label: "Provisioned sandbox with SSO and CI/CD", score: 3 },
+      { label: "Approved SaaS or shared sandbox with synthetic data", score: 2 },
+      { label: "Provisioned sandbox with identity, logs, and deploy controls", score: 3 },
     ],
   },
   {
@@ -91,7 +91,7 @@ const QUESTIONS: Question[] = [
       { label: "Local accounts per system", score: 0 },
       { label: "Some SSO coverage", score: 1 },
       { label: "SSO across most systems", score: 2 },
-      { label: "SSO + RBAC + service principals", score: 3 },
+      { label: "SSO + RBAC + workload identities or service principals", score: 3 },
     ],
   },
   {
@@ -101,8 +101,8 @@ const QUESTIONS: Question[] = [
     options: [
       { label: "No documented standard", score: 0 },
       { label: "Documented but inconsistently applied", score: 1 },
-      { label: "Documented + linting in CI", score: 2 },
-      { label: "Documented, enforced in CI, reviewed quarterly", score: 3 },
+      { label: "Starter repo with format, test, and secret scan", score: 2 },
+      { label: "Documented, CI-enforced, and reviewed periodically", score: 3 },
     ],
   },
   {
@@ -112,8 +112,8 @@ const QUESTIONS: Question[] = [
     options: [
       { label: "Forbidden or unaddressed", score: 0 },
       { label: "Allowed informally; no guardrails", score: 1 },
-      { label: "Allowed with documented guardrails", score: 2 },
-      { label: "Guardrails + audit trail + PR review requirements", score: 3 },
+      { label: "Approved tenant or synthetic-code-only rule", score: 2 },
+      { label: "Guardrails + review expectations + audit review", score: 3 },
     ],
   },
   {
@@ -134,8 +134,8 @@ const QUESTIONS: Question[] = [
     options: [
       { label: "No API standards", score: 0 },
       { label: "APIs exist but no specs", score: 1 },
-      { label: "OpenAPI specs for new services", score: 2 },
-      { label: "Specs first + contract testing + API registry", score: 3 },
+      { label: "OpenAPI specs or contract tables for new services", score: 2 },
+      { label: "Specs first + contract tests + API catalog", score: 3 },
     ],
   },
   {
@@ -181,7 +181,7 @@ const MATURITY_THRESHOLDS = [
     min: 12,
     level: 2,
     name: "Walk",
-    summary: "Foundation — sandbox and review committee come next.",
+    summary: "Foundation — sandbox and review path come next.",
   },
   {
     min: 24,
@@ -216,8 +216,8 @@ function nextStepsForLevel(level: number): string[] {
       ];
     case 2:
       return [
-        "Charter the AI Review Committee and run its first standing meetings.",
-        "Provision a developer sandbox with SSO and CI/CD (Phase 3).",
+        "Charter the AI Review Committee or small-agency review group and run its first standing meetings.",
+        "Provision an approved SaaS or developer sandbox with identity, logs, and deploy controls (Phase 3).",
         "Select the agency dev stack and document the coding standard (Phase 4).",
         "Run two or three Tier-1 use cases end-to-end through the intake-to-deploy pipeline.",
       ];
@@ -441,7 +441,7 @@ export default function ReadinessAssessment() {
             type="text"
             value={agencyName}
             onInput={(e) => setAgencyName((e.target as HTMLInputElement).value)}
-            placeholder="e.g. City of Springfield IT"
+            placeholder="e.g. City of Springfield"
           />
         </label>
         <div class="aqg-readiness__progress">

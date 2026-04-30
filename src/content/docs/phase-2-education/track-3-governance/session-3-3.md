@@ -45,17 +45,17 @@ Names the decisions the room makes today.
 ### Block A — Composition and chair (20 min)
 
 - **Confirm the chair**, named in Briefing 2.2. The chair signs the charter once adopted.
-- **Confirm the voting members.** The recommended composition (CIO, CISO, legal, HR, equity, rotating program owner, community advisor for Tier-3) gets walked through, and the room confirms named individuals or designees.
+- **Confirm the voting members.** Walk through the recommended composition and local adaptation: technology/security, legal or procurement, HR or records, privacy, equity or civil-rights where applicable, and rotating program owners. The room confirms named individuals or designees.
 - **Confirm the non-voting roles.** Sponsor presenters, committee secretary, AI program lead. The model text describes each.
-- **Confirm small-agency adaptation if applicable.** For agencies under 200 staff, a 5-seat composition (chair, CIO, legal, HR, rotating program owner) with equity and community advisors joining for Tier-3 deep-dives is the workable minimum.
+- **Confirm small-agency adaptation if applicable.** For smaller agencies, a 4- or 5-seat review group can work if it covers chair, technology/security, legal or procurement, HR/records, and a rotating program owner. Bring in equity, civil-rights, privacy, labor, or community advisors for Tier-3 deep-dives when relevant.
 
 ### Block B — Cadence and decision rules (20 min)
 
 - **Standing meeting frequency.** Bi-weekly is the model recommendation. Discuss whether monthly is sufficient (smaller agencies) or whether weekly is needed (larger agencies with high intake volume).
-- **Quorum and supermajority.** Confirm: simple majority for Tier-1 and Tier-2, two-thirds for Tier-3 (including legal and equity officer).
+- **Quorum and escalation rule.** Confirm the local decision rule. A simple majority for Tier-1 and Tier-2 and heightened review for Tier-3 is a useful default; some agencies require counsel concurrence, executive approval, or public-meeting process instead.
 - **Sponsor recusal.** The staff member who proposed the use case attends as non-voting presenter and recuses from the vote. Confirm.
 - **Tie-break.** Chair breaks ties on Tier-1/2; Tier-3 ties default to "not approved" and the use case is sent back for additional review. Confirm or adjust.
-- **Legal veto.** Counsel may veto on grounds of statutory non-compliance only. Veto must be in writing and cite the controlling law. The committee may revise the use case and re-present.
+- **Counsel review.** Counsel may stop or return a use case on grounds of statutory non-compliance. Ask for the reason in writing and cite the controlling authority where possible. The committee may revise the use case and re-present.
 - **Conflict of interest.** Anyone with a personal or financial interest in a vendor under review must disclose and recuse. Confirm.
 
 ### Block C — Build the review checklist (20 min)
@@ -92,7 +92,7 @@ The facilitator reads back the charter edits and the checklist. The wizard is up
 - **"Can a single person serve in multiple seats?"** Avoid. The composition is intentionally distributed for legitimacy. If one person is both legal and HR, the review loses two perspectives that are supposed to be independent.
 - **"What if a member can't attend?"** Designees with full voting authority. Document who designates whom in the charter. Avoid "ad-hoc designation" — it produces inconsistent review.
 - **"What about confidentiality?"** Committee minutes are public records under most state law. Sensitive sponsor or vendor details are redacted per the records officer's guidance, but the existence and outcome of reviews is on the public record.
-- **"Can we charter without naming a community advisor?"** For initial launch, yes — the community advisor seat is filled when a Tier-3 case is queued. But the seat must be in the charter, and the chair must have a recruiting plan ready.
+- **"Can we charter without naming a community advisor?"** For initial launch, yes. Many agencies add community or subject-matter advisors when a Tier-3 case is queued rather than naming a standing seat immediately. Document the trigger and the recruiting path in the charter.
 
 ## Related
 

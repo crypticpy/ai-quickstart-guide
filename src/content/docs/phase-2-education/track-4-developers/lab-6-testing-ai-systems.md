@@ -152,13 +152,13 @@ Reference solutions live in `code-samples/track-4/lab-6/solution/`.
 
 ## Swap providers
 
-The `cassette_complete` fixture is provider-agnostic. To swap from Anthropic to OpenAI, change one line in `conftest.py`:
+The `cassette_complete` fixture is provider-agnostic. To swap providers, change the provider argument and use a model ID or deployment name approved for your agency:
 
 ```python
-real_complete = get_client(provider="openai", model="gpt-4o-mini")
+real_complete = get_client(provider="openai", model="<approved-model-id>")
 ```
 
-For Azure OpenAI, set `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, and `AZURE_OPENAI_DEPLOYMENT`, then call `get_client(provider="azure-openai")`. For Bedrock, install the `anthropic[bedrock]` extra and set `ANTHROPIC_BEDROCK_BASE_URL`. Cassette files are keyed on the model string, so a provider swap invalidates the existing cassette and forces a re-record. That is the right behavior; you should re-baseline accuracy whenever the model changes.
+For Azure OpenAI, set `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, and `AZURE_OPENAI_DEPLOYMENT`, then call `get_client(provider="azure-openai")`. For Bedrock, Vertex AI, or another managed provider, follow the provider's current SDK documentation and implement the same `complete(system, user, **kwargs)` adapter shape. Cassette files are keyed on the model string, so a provider swap invalidates the existing cassette and forces a re-record. That is the right behavior; you should re-baseline accuracy whenever the model changes.
 
 ## What you learned
 
@@ -170,6 +170,6 @@ For Azure OpenAI, set `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, and `AZUR
 
 ## Where to go next
 
-- [Lab 4.7: Reusable Prompt Modules](/phase-2-education/track-4-developers/lab-7-reusable-modules/) packages the patterns from labs 4.1 through 4.6 into reusable modules.
+- [Lab 4.7: Reusable Prompt Modules](/phase-2-education/track-4-developers/lab-7-reusable-ai-modules/) packages the patterns from labs 4.1 through 4.6 into reusable modules.
 - [Lab 4.8: Capstone Project](/phase-2-education/track-4-developers/lab-8-capstone/) ties the prompts, agents, retrieval, and tests into a single deliverable.
 - The [Phase 4 Testing Strategy](/phase-4-dev-stack/testing-strategy/) page covers where AI tests fit alongside unit, integration, and contract tests in the broader pipeline.

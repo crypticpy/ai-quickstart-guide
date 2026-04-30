@@ -1,17 +1,17 @@
 ---
 title: CI/CD Pipeline
-description: Trunk-based development, automated tests, SBOM generation, artifact signing, and SLSA Level 2 attestations — implemented on GitHub Actions, Azure DevOps, GitLab, or cloud-native runners.
+description: Protected-branch development, automated tests, SBOM generation, artifact signing, and SLSA Level 2 maturity targets — implemented on GitHub Actions, Azure DevOps, GitLab, or cloud-native runners.
 sidebar:
   order: 4
 ---
 
-The CI/CD pipeline is what turns "we should review this before deploy" into "this cannot deploy without review." Every gate that exists in policy — eval pass, security scan, license check, signed image — must exist in the pipeline as code, or it does not exist at all. The Phase 3 target is a pipeline that runs on every change, deploys to every environment, attests its outputs, and refuses to ship anything that fails a gate.
+The CI/CD pipeline is what turns "we should review this before deploy" into "this cannot deploy without review." Every gate that exists in policy — eval pass, security scan, license check, signed image — should exist in the pipeline as code, or it will be applied inconsistently. The Phase 3 target is a pipeline that runs on every change, deploys to every environment, attests its outputs, and refuses to ship anything that fails a gate. Small agencies can begin with protected branches, tests, secret scanning, and a documented manual deploy approval, then add SBOMs, signing, and provenance as maturity increases.
 
 Pipeline tooling is largely interchangeable: GitHub Actions, Azure DevOps Pipelines, GitLab CI, and Google Cloud Build all support the gates this page describes. The agency's existing source-of-truth for code (typically GitHub or GitLab) usually decides the runner choice; do not introduce a second CI system to chase a feature.
 
 ## Trunk-based development
 
-The branching model is decided in [Phase 4](/phase-4-dev-stack/), but Phase 3's pipeline assumes it. The default:
+The branching model is decided in [Phase 4](/phase-4-dev-stack/). For new AI services, trunk-based development is the default:
 
 - One long-lived branch (`main`).
 - Short-lived feature branches (≤2 days) merged via PR.
@@ -19,7 +19,7 @@ The branching model is decided in [Phase 4](/phase-4-dev-stack/), but Phase 3's 
 - Releases are tags on `main`, not separate branches.
 - Hotfixes branch from the last released tag, are tagged, and immediately merge back to `main`.
 
-Trunk-based development is the precondition for every gate that follows. Long-lived branches make eval results, SBOMs, and provenance attestations meaningless because the artifact under review is days or weeks behind the code being shipped.
+Trunk-based development keeps eval results, SBOMs, and provenance close to the artifact being shipped. If the agency uses release branches, vendor delivery branches, or change-control windows, apply the same gates to every protected branch and build once/promote by digest.
 
 ## Pipeline stages
 
@@ -36,7 +36,7 @@ The standard pipeline runs the following stages on every change. Failures block 
 
 - Unit tests with coverage threshold (≥75% line coverage as a baseline; team can raise per repo).
 - Contract tests (`pact` or equivalent) for any cross-service surface.
-- Eval tests for AI components — the regression suite from [Track 4 Lab 4.4](/phase-2-education/track-4-developers/) runs as a CI gate. Drop in score below threshold blocks merge.
+- Eval tests for AI components — the regression suite from [Track 4 Lab 4.6](/phase-2-education/track-4-developers/) runs as a CI gate. Drop in score below threshold blocks merge.
 
 ### Stage 3 — Build, scan, and sign (target: 5 minutes)
 
@@ -55,7 +55,7 @@ The standard pipeline runs the following stages on every change. Failures block 
 
 ### Stage 5 — Deploy to production (gated)
 
-- Manual approval from a named approver (Review Committee designate for Tier-2; AI program lead for Tier-1).
+- Manual approval from a named approver (review-path designate for Tier-2; AI program lead or manager sponsor for Tier-1).
 - Image must have a signed SLSA attestation (verified at admission).
 - Eval gate must have passed in staging within last 24 hours.
 - Deploy with progressive rollout (10% → 50% → 100%) and automatic rollback on SLO breach.
@@ -70,7 +70,7 @@ The SBOM is the primary artifact for "are we affected by CVE-XXXX?" The agency-w
 - Push to a central SBOM repository (Dependency-Track, GUAC, or a simple S3/Blob/Storage bucket with index).
 - Re-scan SBOMs nightly; alert on new CVEs against any deployed image.
 
-The SBOM is required by OMB M-22-18 / M-23-16 self-attestations for federal agencies and increasingly by state procurement language. Generate it whether or not it is currently required — it costs nothing once automated and prevents a category of incident.
+Federal secure software attestation focuses on secure development practices. Depending on criticality, risk, and procurement language, agencies may also request supporting artifacts such as SBOMs. Generate SBOMs even when they are not strictly required; they make vulnerability response much faster. They are not free after automation, because someone still has to store, scan, triage, and remediate findings, but the operational cost is usually worth it.
 
 ## Artifact signing and verification
 
@@ -82,19 +82,19 @@ Signing closes the loop on supply chain. Without it, an image with the right nam
 
 ## SLSA Level 2 in practice
 
-SLSA L2 requires:
+SLSA L2 is a strong standard/large-agency target and a useful maturity add for small agencies. The SLSA v1.1 model focuses on hosted builds and provenance. In practice, L2 requires:
 
 1. The build runs on a hosted, version-controlled build platform (any major CI/CD service qualifies).
 2. The build generates provenance describing what was built, by which build, from which source.
 3. The provenance is signed by the build platform.
 4. The provenance is non-falsifiable by the project authors.
 
-The shortest path on each runner:
+The shortest path depends on the current runner and vendor support. Verify against the runner's current documentation before freezing the implementation:
 
-- **GitHub Actions:** `slsa-github-generator` action. Produces SLSA L3-eligible provenance; L2 is automatic.
-- **GitLab CI:** GitLab's built-in SLSA provenance generator (GitLab 16.0+).
-- **Azure DevOps:** Use the `slsa-buildkit-provenance` task or generate via `cosign attest` from the runner.
-- **Cloud Build:** Build provenance is generated automatically; verify in pipeline before promotion.
+- **GitHub Actions:** use the current SLSA generator or artifact attestation path supported for the repository type.
+- **GitLab CI:** use GitLab's current provenance and attestation support where available.
+- **Azure DevOps:** generate provenance through the build system or container build tooling, then attest with the agency's chosen signing approach.
+- **Cloud Build:** use generated build provenance and verify it before promotion.
 
 Document the chosen path in an ADR (Architecture Decision Record) so the agency has a stable answer when an auditor asks "show me your provenance."
 
@@ -102,7 +102,7 @@ Document the chosen path in an ADR (Architecture Decision Record) so the agency 
 
 Adding model evals to the gate is the single most effective AI-specific CI improvement. The pattern:
 
-1. The eval suite (from Track 4 Lab 4.4) is a directory of `(input, expected_output_signal)` cases plus a scorer.
+1. The eval suite (from Track 4 Lab 4.6) is a directory of `(input, expected_output_signal)` cases plus a scorer.
 2. The pipeline runs the suite against the candidate model + prompts on every PR.
 3. Aggregate score must be within a tolerance band of the baseline; significant regressions block merge.
 4. The PR comment shows score deltas and links to per-case diffs.

@@ -13,7 +13,7 @@ A draft 3-tier risk classification matrix, customized with the agency's name and
 
 ## Audience and prerequisites
 
-- AI Review Committee members or designees: CIO/CISO, legal, HR, equity officer, rotating program owner.
+- AI Review Committee members or designees: AI owner or chair, technology/security, legal or procurement, HR or records, and a rotating program owner. Add privacy, equity, civil-rights, labor, or community advisors when the use cases in scope call for those perspectives.
 - Pre-read: the [Risk Classification](/phase-1-governance/risk-classification/) page in full.
 - Pre-work: each attendee brings 1–2 candidate use cases from their domain to classify in the session.
 

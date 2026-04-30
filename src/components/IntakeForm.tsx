@@ -45,11 +45,15 @@ const DECISION_OPTIONS: RadioOption[] = [
 ];
 
 const DATA_OPTIONS: DataOption[] = [
-  { id: "public", tier: 1, label: "Public or non-sensitive internal data" },
+  {
+    id: "public",
+    tier: 1,
+    label: "Public, non-sensitive internal, or ordinary business-contact data",
+  },
   {
     id: "internal_sensitive",
     tier: 2,
-    label: "Internal sensitive data (HR, operational, non-PII)",
+    label: "Internal sensitive data (HR, operational, or routine resident contact data)",
   },
   { id: "pii", tier: 3, label: "Personally identifiable information (PII)" },
   { id: "phi", tier: 3, label: "Protected health information (PHI / HIPAA)" },
@@ -98,7 +102,7 @@ const TIER_NEXT: Record<
   1: {
     label: "Tier 1 (Low)",
     summary:
-      "Looks like an internal productivity use case with reversible consequences. Manager approval is sufficient; the use case is batch-noted to the Review Committee.",
+      "Looks like an internal productivity use case with reversible consequences. Manager approval is usually sufficient; the use case can be batch-noted to the Review Committee or small-agency review group.",
     nextStep:
       "Send this intake to your manager for sign-off, then add it to the AI use case inventory.",
     href: "/phase-1-governance/risk-classification/",
@@ -114,9 +118,9 @@ const TIER_NEXT: Record<
   3: {
     label: "Tier 3 (High)",
     summary:
-      "Looks like AI may directly drive a decision affecting rights, benefits, employment, safety, or liberty. A two-thirds Review Committee approval, legal sign-off, and a public-notice / contestation pathway will be required.",
+      "Looks like AI may directly drive a decision affecting rights, benefits, employment, safety, or liberty. Expect heightened review, counsel involvement, and public-notice or contestation planning where required by law or policy.",
     nextStep:
-      "Submit this intake. The Review Committee will schedule a Tier-3 deep dive with legal and the equity officer.",
+      "Submit this intake. The Review Committee or local review group will schedule a Tier-3 deep dive with counsel and any privacy, equity, civil-rights, labor, or program advisors needed for the use case.",
     href: "/phase-1-governance/risk-classification/",
   },
 };

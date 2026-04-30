@@ -1,13 +1,13 @@
 ---
 title: Production Readiness Checklist
-description: Eight criteria a starter project must meet before launch — what separates a pilot from a production AI deployment.
+description: Eight criteria a starter project should clear, or explicitly document as a variance, before launch.
 sidebar:
   order: 8
 ---
 
-The production readiness checklist is the gate between "we tried it with a small group" (pilot) and "real users are using it for real work, on call is real, and we can't quietly turn it off" (launch). Most starter projects fail not at build but at this gate — the system works, the users like the demo, but one of the eight criteria below has been quietly skipped. The checklist exists to surface that gap before launch day rather than during the first incident.
+The production readiness checklist is the gate between "we tried it with a small group" (pilot) and "real users are using it for real work, on call is real, and we can't quietly turn it off" (launch). Many starter projects fail not at build but at this gate — the system works, the users like the demo, but one of the eight criteria below has been quietly skipped. The checklist exists to surface that gap before launch day rather than during the first incident.
 
-The Month-10 production readiness gate is when the team walks the checklist with the business owner, security reviewer, and platform lead. Each criterion is green, yellow (documented variance), or red. Two or more reds is a no-go.
+The Month-10 production readiness gate is when the team walks the checklist with the business owner, security reviewer, and platform lead. Each criterion is green, yellow (documented variance), or red. Multiple reds usually mean no-go or a narrower launch; leadership can approve a variance only with owner, mitigation, and date.
 
 ## The eight criteria
 
@@ -17,7 +17,7 @@ The system is exposed to a named cohort of real users doing their real job, not 
 
 - **How to verify**
   - The cohort is named and listed in the launch memo.
-  - At least one identified user has confirmed in writing they will use the system for a specified workflow within 30 days of launch.
+  - At least one identified user or team has confirmed they will use the system for a specified workflow soon after launch.
   - The cohort is not the team that built the system.
 - **Common pitfall.** Launching to "the project team plus a few volunteers." That's a pilot in production clothing.
 
@@ -26,7 +26,7 @@ The system is exposed to a named cohort of real users doing their real job, not 
 The eval suite is automated, runs on every change and on a schedule, and a failure below threshold blocks deploy.
 
 - **How to verify**
-  - The CI pipeline shows the eval job as a required check.
+  - The CI pipeline shows the eval job as a required check, or the team has a documented manual gate for a small pilot.
   - A scheduled run (nightly or weekly) is logged for the previous two weeks.
   - The threshold values are documented and code-enforced — not "we eyeball it."
 - **Common pitfall.** Evals exist as a notebook the platform engineer runs by hand. They drift, scores degrade quietly, the team finds out from a user.
@@ -48,7 +48,7 @@ The team knows what each interaction costs and the projected monthly bill at exp
 - **How to verify**
   - A cost dashboard shows cost per query and cost per active user.
   - A simulated week at expected volume has been run; total cost is projected and approved.
-  - Cost alerts are configured at 80% and 100% of monthly budget.
+  - Cost alerts are configured at warning and critical thresholds tied to the monthly budget.
 - **Common pitfall.** "We'll watch the bill" — until a runaway loop or a chatty integration burns the quarter's API budget in 36 hours.
 
 ### 5. Audit log captures user actions that need capturing
@@ -68,7 +68,7 @@ A documented rollback procedure exists and has been executed end-to-end at least
 - **How to verify**
   - The rollback procedure is in the deployment runbook.
   - A staging rehearsal log is timestamped within the last 30 days.
-  - Rollback time-to-completion is ≤15 minutes.
+  - Rollback time-to-completion target is documented and rehearsed; 15 minutes is a useful target for low-complexity starters.
 - **Common pitfall.** A rollback "plan" that's three bullet points in a wiki and has never been run. On launch day it doesn't work and nobody can find the previous SHA.
 
 ### 7. User feedback mechanism exists and is monitored
@@ -95,11 +95,11 @@ The project has a named condition under which it will be sunset. The agency does
 
 The Month-10 production readiness gate is the team's chance to say "not yet" without losing the build. A no-go is not a failure — the build still ran, the platform was still exercised, the user research is still real. If two or more criteria are not green, the [off-ramp on the Phase 6 index](/phase-6-starter-projects/#off-ramp--pilot-without-production-launch) ("Pilot Without Production Launch") is the right call. Most agencies that defer ship within the next two quarters with sharper scope.
 
-A conditional go — proceed with a smaller cohort, a narrower scope, or one yellow criterion under remediation — is the right answer when most criteria are green and the gap is documented.
+A conditional go — proceed with a smaller cohort, a narrower scope, or a documented yellow criterion under remediation — is the right answer when most criteria are green and the gap is owned.
 
-## Sign-offs required
+## Sign-offs
 
-The gate is recorded with signatures from each role responsible for a subset of the criteria.
+The gate is recorded with signatures or lightweight written approvals from each role responsible for a subset of the criteria. Small agencies can combine roles, but the responsibilities should still be named.
 
 - **Tech lead.** Eval thresholds (criterion 2) and rollback rehearsal (criterion 6).
 - **Security / CISO.** Audit log (criterion 5) and RBAC enforcement — see the [RBAC module](/phase-5-platform/rbac-module/).

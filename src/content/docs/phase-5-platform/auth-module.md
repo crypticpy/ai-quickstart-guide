@@ -1,11 +1,11 @@
 ---
 title: Authentication & SSO Module
-description: OIDC sign-in, session management, JWT validation, MFA enforcement — one implementation that every application uses.
+description: OIDC sign-in, session management, JWT validation, and MFA signals — one implementation pattern that applications reuse.
 sidebar:
   order: 3
 ---
 
-The authentication module turns "the agency's identity provider says this user is who they claim" into a session and a set of claims that every other module can trust. It is the first module the agency builds because every subsequent module depends on it; nothing else can move forward until sign-in works.
+The authentication module turns "the agency's identity provider says this user is who they claim" into a session and a set of claims that other modules can trust. It is one of the first modules to stabilize because production user access depends on it. Planning, local prototypes, and non-user-facing module work can move in parallel, but broad rollout should not.
 
 The bar is high. Auth bugs are security bugs. The module has a small public surface, a thin layer of agency-specific logic, and a hard rule against reinventing protocol-level cryptography. It uses well-known libraries (Authlib, MSAL, Microsoft.Identity.Web, Spring Security, Auth.js) at the adapter layer and exposes one consistent API to every application.
 
@@ -14,7 +14,7 @@ The bar is high. Auth bugs are security bugs. The module has a small public surf
 - **Sign-in flows.** OIDC Authorization Code with PKCE for browser apps; client credentials for service-to-service.
 - **Session management.** Issuing, refreshing, and revoking the agency's session token.
 - **Token validation.** Verifying JWTs from the IdP and from the agency's own session signer.
-- **MFA enforcement.** Knowing when MFA was required and verifying it occurred.
+- **MFA signals and step-up checks.** Knowing when MFA was required, whether it occurred, and when sensitive actions need fresh authentication.
 - **User identity.** A `User` type that carries the stable identifier other modules use.
 - **Audit hooks.** Every authentication-relevant event is emitted as a structured log + OTel span.
 
@@ -60,11 +60,11 @@ Other modules import only from `auth.public`. The internal domain models (databa
 ## Standards followed
 
 - **OIDC** — OpenID Connect Core 1.0. The agency is an OIDC Relying Party.
-- **OAuth 2.1** — used internally for service-to-service flows; OAuth 2.0 + the PKCE / refresh-token-rotation BCPs.
-- **JWT** — RS256 or ES256 for tokens. Never HS256 (symmetric) for tokens that cross trust boundaries.
+- **OAuth 2.0 / current OAuth guidance.** Use authorization code with PKCE, client credentials where appropriate, refresh token rotation, and the current OAuth 2.1 draft or successor guidance as your IdP/library supports it.
+- **JWT** — asymmetric algorithms such as RS256 or ES256 for tokens that cross trust boundaries. Symmetric signing is only acceptable when key distribution is tightly controlled and documented.
 - **PKCE** — required for all browser flows.
 - **State parameter** — required; cryptographically random; bound to session.
-- **Refresh token rotation** — every refresh returns a new refresh token; old one becomes invalid (RFC 6749 + OAuth 2.1 BCP).
+- **Refresh token rotation** — every refresh returns a new refresh token where supported; old one becomes invalid per current OAuth security best practices.
 - **Token revocation** — RFC 7009 endpoint exposed.
 
 The module does not implement these protocols from scratch. It uses Authlib (Python), Microsoft.Identity.Web (.NET), Spring Security (Java), or Auth.js (Node) at the adapter layer.
@@ -82,7 +82,7 @@ Following the [hexagonal pattern](/phase-5-platform/module-taxonomy/), the modul
 | `MFAVerifier`    | Confirm MFA happened recently for an action            | IdP claim inspection (default)                         |
 | `UserRepository` | Look up / upsert agency user records                   | Postgres                                               |
 
-The domain — `services.sign_in`, `services.complete`, `services.validate`, etc. — depends only on these ports. Swapping Authlib for MSAL changes one adapter file.
+The domain — `services.sign_in`, `services.complete`, `services.validate`, etc. — depends only on these ports. Swapping Authlib for MSAL should be bounded to the adapter and tests, but still requires integration testing with the IdP.
 
 ## IdP support
 
@@ -92,9 +92,9 @@ The agency standardizes on **OIDC**. The module is tested against:
 - **Okta**
 - **Auth0**
 - **Keycloak** (for self-hosted / on-prem agencies)
-- **Login.gov** (federal — required for U.S. citizen-facing apps; OIDC, IAL2/AAL2)
+- **Login.gov** (federal public sign-in option; evaluate for public-facing federal services and identity-proofing needs)
 
-Each IdP is a configuration profile, not a separate adapter. The OIDC discovery endpoint (`/.well-known/openid-configuration`) provides everything the module needs at runtime; no IdP-specific code paths.
+Each IdP should be treated as a configuration profile where possible. The OIDC discovery endpoint (`/.well-known/openid-configuration`) provides most runtime metadata, but agencies should expect some IdP-specific configuration for claims, groups, logout behavior, and assurance levels.
 
 ## Session token shape
 
@@ -122,11 +122,11 @@ Decisions:
 
 ## MFA policy
 
-MFA is **required for every user**, not just admins. The agency's policy:
+MFA policy should be risk-based and aligned with the agency IdP, NIST 800-63, and any local security policy. A practical default:
 
-1. **Initial sign-in.** MFA is enforced by the IdP. The module checks the AMR / ACR claim and rejects sign-ins that didn't include MFA.
+1. **Initial sign-in.** MFA is enforced by the IdP for workforce users and for public users where the application's assurance level requires it. The module checks the AMR / ACR claim when the IdP provides it.
 2. **Sensitive actions.** Re-MFA required if the last MFA was more than _N_ minutes ago. The default _N_ is 30 minutes; sensitive actions (bulk export, role change, secret rotation) reduce it to 5.
-3. **MFA methods.** The module trusts whatever the IdP enforces — TOTP, FIDO2, push, SMS as last resort. The agency's IdP configuration (Phase 3) sets the allowed methods.
+3. **MFA methods.** Prefer phishing-resistant methods where feasible. The module trusts whatever the IdP enforces — passkeys/FIDO2, TOTP, push, or SMS where policy permits. The agency's IdP configuration (Phase 3) sets the allowed methods.
 4. **Step-up auth.** When `require_mfa()` returns `Required`, the consuming app redirects to the IdP with a `prompt=login` and `acr_values` requesting fresh MFA.
 
 ## Service-to-service authentication
@@ -136,7 +136,7 @@ Inter-module calls inside the modular monolith do not authenticate — they trus
 - Each service has an identity in the IdP (Entra service principal / Okta service app / etc.).
 - It obtains a token via client credentials at startup; refreshes before expiry.
 - The receiving service validates the token with the same `validate_session()` machinery (different audience).
-- No long-lived API keys for service-to-service. The Phase 3 [secrets management](/phase-3-infrastructure/secrets-management/) workload identity gives services their token without storing a static credential.
+- Prefer workload identity or short-lived credentials for service-to-service calls. Long-lived API keys should be treated as exceptions with expiration, rotation, owner, and audit trail per Phase 3 [secrets management](/phase-3-infrastructure/secrets-management/).
 
 ## Logging out
 
@@ -157,15 +157,15 @@ Sessions can be revoked centrally:
 
 Revocation is implemented as a small cache (Redis or DB-backed) checked on every `validate_session()`. Cache size is bounded by session count; entries expire when the session would have expired anyway.
 
-## Failure modes the module must handle
+## Failure modes the module should handle
 
 Auth modules fail in distinctive ways. The reference implementation tests for all of these:
 
 - **Clock skew.** IdP token is rejected for being "in the future" because the validating server is a few seconds ahead. Allow ±60s by default.
 - **JWKS rotation.** The IdP rotated its signing key; the module's cached keys are stale. Re-fetch JWKS on validation failure once before erroring.
 - **State mismatch.** A returned `state` doesn't match the one stored. Reject; do not exchange the code.
-- **Redirect URI mismatch.** Always match against the registered URI, never trust query parameters.
-- **Open redirector.** Post-login redirect targets must be on the allow list. Never trust an arbitrary `?next=` parameter.
+- **Redirect URI mismatch.** Match against the registered URI; do not derive redirect trust from query parameters.
+- **Open redirector.** Post-login redirect targets should be on an allow list. Do not trust an arbitrary `?next=` parameter.
 - **Concurrent refresh.** Two browser tabs refresh at the same time; one wins, one's refresh token becomes invalid. Treat the loser's failure as "go back to sign-in," not as a security event.
 
 ## Observability hooks
@@ -195,7 +195,7 @@ The module is the front door to the platform. The threats it explicitly handles:
 - **Replay of old MFA.** `mfa_at` claim + sensitive-action re-prompt.
 - **Audit log tampering.** Logs go to an append-only sink (Phase 3 observability stack); the module does not store audit logs in its own DB.
 
-The module does NOT solve account compromise upstream of the IdP — that is the IdP's job (impossible-travel detection, brute-force protection, password rotation). Configure those controls in the IdP, not here.
+The module does NOT solve account compromise upstream of the IdP — controls such as impossible-travel detection, brute-force protection, authenticator policy, and account recovery live in the IdP. Configure those controls there, not in app code.
 
 ## Public test utilities
 
@@ -209,7 +209,7 @@ Importing from `auth.testing` is allowed from any test file in any module. Impor
 
 ## Performance
 
-The module is on every request path. Targets:
+The module is on every request path. Starter targets:
 
 - `validate_session`: p95 ≤ 2ms (cache hit), p95 ≤ 15ms (cache miss with KMS verify).
 - `complete_sign_in`: p95 ≤ 200ms (one IdP token-exchange round-trip).

@@ -11,13 +11,13 @@ This page is the protocol the starter team runs in Month 9 — the hardening + U
 
 ## Recruiting the test cohort
 
-The cohort is small, deliberately mixed, and recruited rather than volunteered.
+The cohort is small, deliberately mixed, and recruited rather than purely volunteered.
 
-- **Size.** 8–12 testers. Smaller than that produces thin signal; larger than that overwhelms the team's ability to respond to feedback in real time.
+- **Size.** 8–12 testers is a good standard target. Smaller teams can start with 4–6 if the workflow is narrow, but they should run additional sessions before expansion.
 - **Mix.** Three groups in roughly equal proportion:
   - The workflow's daily users — the people who will actually live with the system after launch.
   - Skeptics who flagged concerns during discovery — they surface failure modes the enthusiasts won't.
-  - One auditor or governance representative — to test the system from a compliance/oversight angle.
+  - One auditor, privacy, records, or governance representative — to test the system from a compliance/oversight angle.
 - **Avoid.** Anyone who built the system, anyone whose review is "of course it's great, I helped pick it," and anyone whose only stake is novelty.
 - **Source.** The [Champions Network](/phase-2-education/track-5-champions/) is the natural pool. Champions are trained, sympathetic to the program, and embedded in the user community.
 
@@ -29,7 +29,7 @@ Sixty-minute sessions, one tester at a time, with a facilitator and an observer.
 - **30 minutes — scripted scenarios.** A set of 4–6 representative tasks the tester walks through. Includes at least one task the team expects to fail (to surface how the user reacts to a bad output).
 - **15 minutes — open exploration.** The tester uses the system however they want. This is where unscripted failure modes show up.
 - **10 minutes — structured feedback.** A short questionnaire and an open conversation. What worked, what didn't, what surprised them, what they'd want changed.
-- **Recording.** Sessions are recorded with consent. Recordings feed back into the eval suite as additional test cases.
+- **Recording.** Sessions are recorded only with consent and policy approval. Notes or sanitized transcripts can feed back into the eval suite as additional test cases.
 
 ## What to capture
 
@@ -52,7 +52,7 @@ The UAT readout is a one-page document summarizing cohort size, scenarios run, b
 
 ## Cohort safety
 
-Test users are not lab subjects. Tell them what's recorded, who sees it, how long it's retained, and what happens to their feedback. Get written consent before the first session — verbal "is it OK if we record" at the start of a call is not sufficient. The agency's [acceptable use policy](/phase-1-governance/acceptable-use-policy/) governs the test environment, including any PII the testers might enter while exercising the system.
+Test users are not lab subjects. Tell them what's recorded, who sees it, how long it's retained, and what happens to their feedback. Get written or otherwise auditable consent before the first session when recording or collecting identifiable feedback. The agency's [acceptable use policy](/phase-1-governance/acceptable-use-policy/) governs the test environment, including any PII the testers might enter while exercising the system.
 
 ## Related
 

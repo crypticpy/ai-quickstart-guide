@@ -7,7 +7,7 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Phase 6 is where the platform meets reality. After five phases of governance, training, infrastructure, dev stack, and modular platform work, the agency picks one application and ships it to real users. Not as a pilot, not as a demo — as a production deployment that gets used on a Tuesday morning by someone who has a job to do.
+Phase 6 is where the platform meets reality. After five phases of governance, training, infrastructure, dev stack, and modular platform work, the agency picks one application and ships it to real users. The standard goal is a controlled production launch, but a limited internal launch or extended pilot can be the right off-ramp when readiness gaps are real.
 
 The choice of application is the agency's, not the guide's. This page describes the candidate archetypes and what each one teaches the team, but the right starter project is the one whose users are ready, whose data is in shape, and whose stakeholders care about the outcome.
 
@@ -16,11 +16,11 @@ The choice of application is the agency's, not the guide's. This page describes 
 <Tabs syncKey="agency-size">
 <TabItem label="Small">
 
-**One archetype, simplified, built on pre-built frameworks.** Pick the archetype with the lowest production risk and the warmest user audience — usually a RAG Chatbot or Meeting Transcriber for an internal team that already wants the tool. Use LangChain / Semantic Kernel rather than building orchestration from scratch.
+**One archetype, simplified, built on pre-built frameworks.** Pick the archetype with the lowest production risk and the warmest user audience — usually a RAG Chatbot or Meeting Transcriber for an internal team that already wants the tool. Use a proven orchestration framework, hosted service, or vendor product where it reduces build and operations burden.
 
-- **Pick:** RAG Chatbot or Meeting Transcriber. Both are well-bounded, low-stakes, and have strong reference implementations.
+- **Pick:** RAG Chatbot or Meeting Transcriber. Both can be well-bounded, lower-stakes, and supported by strong reference patterns.
 - **Skip:** Workflow Automation (too much governance scrutiny for a small first project), NL Data Dashboard (too much SQL guardrail work).
-- **Approach:** Buy or borrow rather than build — pre-built frameworks for orchestration, a hosted vector store, off-the-shelf transcription APIs.
+- **Approach:** Buy or borrow rather than build — pre-built orchestration, managed retrieval/search, off-the-shelf transcription, and hosted admin where appropriate.
 - **Budget:** $15K–$40K (engineering time + APIs + light user testing).
 
 </TabItem>
@@ -30,7 +30,7 @@ The choice of application is the agency's, not the guide's. This page describes 
 
 - **Pick:** Whatever archetype best fits user readiness and stakeholder appetite. The selection guide in this phase walks through the criteria.
 - **Cadence:** Follow the month-by-month schedule below.
-- **Production readiness:** All eight readiness criteria met before launch.
+- **Production readiness:** Readiness criteria green or documented with an approved variance before launch.
 - **Budget:** $30K–$80K (development + UAT + deployment).
 
 </TabItem>
@@ -94,7 +94,7 @@ The cadence is deliberate. Months 7–8 are exploratory; months 9–10 are tight
 
 ## What "ships" means
 
-Production launch passes the [production readiness checklist](/phase-6-starter-projects/production-readiness/). Specifically:
+A full production launch passes the [production readiness checklist](/phase-6-starter-projects/production-readiness/). Specifically:
 
 - Real users (not just pilots) are using it for real work.
 - The eval suite runs in CI and on a schedule; thresholds are enforced.
@@ -105,33 +105,33 @@ Production launch passes the [production readiness checklist](/phase-6-starter-p
 - A user feedback mechanism exists and is monitored.
 - The retirement plan exists (the project will eventually sunset; we don't pretend otherwise).
 
-Anything less is a pilot. Pilots are useful, but the agency's Phase 6 commitment is to a launch.
+Anything less should be labeled honestly: pilot, limited internal launch, or production launch. Pilots are useful when they are intentional and governed; the standard Phase 6 path aims for launch, but the off-ramp exists so teams do not force a risky go-live.
 
-## Hard dependencies
+## Readiness dependencies
 
-- **Phase 5 platform.** The starter project _composes_ Phase 5's modules. Skipping Phase 5 means rebuilding auth, RBAC, data grid, AI orchestration into the starter — eight months of work hidden inside a "starter."
-- **Phase 4 standards.** The starter is built to coding standards, tested per the testing strategy, with API-first design. ADRs cover the project-specific decisions.
-- **Phase 3 infrastructure.** Production deployment is into the Phase 3 environments. The starter doesn't introduce new infrastructure patterns.
+- **Phase 5 platform.** The starter project _composes_ Phase 5's modules where they exist. If Phase 5 was intentionally scoped down, the starter should use managed services or simpler patterns instead of hiding a full platform build inside the project.
+- **Phase 4 standards.** The starter is built to coding standards, tested per the testing strategy, with API-first design. ADRs cover the project-specific decisions, scaled to project risk.
+- **Phase 3 infrastructure.** Production deployment is into the Phase 3 environments. The starter should not introduce new infrastructure patterns without an ADR and operations owner.
 - **Phase 1 governance.** Risk classification, procurement guardrails, AUP — all apply. The starter is the first thing the governance machinery has to actually rate, approve, and monitor in production.
 - **Phase 2 training.** The team building the starter is largely Track 4 graduates plus the platform team. The user-facing audience needs Track 1 / Track 5 awareness.
 
-If any of these are weak, the starter project will surface that weakness as a launch blocker. That's not a problem with the starter — it's the system working. Fix the gap before launching.
+If any of these are weak, the starter project will surface that weakness as a launch risk. That's not a problem with the starter — it's the system working. Fix the gap, narrow the launch, or take the pilot off-ramp.
 
 ## Off-Ramp — Pilot Without Production Launch
 
-Some agencies will reach Month 10 and decide the starter project should not launch yet. Reasons vary: the eval scores aren't where they need to be, the user-research surfaces a redesign, the political moment for AI deployment passed, the budget shifted. **The Phase 6 investment is not lost if launch is deferred.** What's been built is real platform exercise, real institutional learning, and a test cohort's worth of feedback. The agency can re-enter Phase 6 with a different archetype, a refined version of the same one, or a different audience. Most agencies that defer ship within the next two quarters with a clearer scope.
+Some agencies will reach Month 10 and decide the starter project should not launch yet. Reasons vary: the eval scores aren't where they need to be, the user research surfaces a redesign, the political moment for AI deployment passed, the budget shifted. **The Phase 6 investment is not lost if launch is deferred.** What's been built is real platform exercise, real institutional learning, and a test cohort's worth of feedback. The agency can re-enter Phase 6 with a different archetype, a refined version of the same one, or a different audience.
 
 ## Plain-English Guide to Phase 6 Terms
 
 - **Starter project.** The agency's first production AI application built on the platform. Chosen for low risk and high learning, not for "biggest impact."
 - **Archetype.** A category of AI application with a known shape — RAG chatbot, document intelligence, etc. Picking an archetype gives the team a starting point.
 - **Pilot vs. launch.** A pilot is "we tried it with a small group." A launch is "real users are using it for real work, on call is real, and we can't quietly turn it off."
-- **Production readiness.** A specific checklist of conditions a project must meet before launch.
+- **Production readiness.** A specific checklist of conditions a project should clear, or explicitly document as variances, before launch.
 - **User Acceptance Testing (UAT).** A structured period where intended users try the system and provide feedback before launch.
 
 ## Research basis
 
-NIST AI RMF (manage stage), GSA's TTS RAG-as-a-service patterns, Anthropic's enterprise deployment patterns, Microsoft's AI Center of Excellence playbook, and the State of California's GenAI playbook (2024). Specific archetype patterns draw on documented federal and state deployments — Login.gov's chatbot, San Francisco's permit chatbot, Pennsylvania's ChatGPT pilot, the Department of Veterans Affairs' summarization pilots.
+NIST AI RMF (manage stage), government RAG and service-delivery patterns, enterprise AI deployment playbooks, and state/local GenAI playbooks. Specific archetype patterns draw on documented federal, state, and local deployments such as public-service chatbots, permit assistants, staff productivity pilots, and summarization pilots.
 
 ## Related
 

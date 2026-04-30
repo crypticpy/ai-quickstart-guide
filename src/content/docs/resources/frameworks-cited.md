@@ -5,7 +5,7 @@ sidebar:
   order: 6
 ---
 
-> **Why this page exists.** Each phase of the playbook cites at least one external framework as research basis. This page consolidates those citations in one place, with version numbers, and explains specifically where each framework is load-bearing in the guide. The goal is twofold: make the citations auditable for an agency that needs to defend its choices to a board or legislature, and make it obvious where the playbook will need an update when a framework version changes.
+> **Why this page exists.** Each phase of the playbook cites at least one external framework as research basis. This page consolidates those citations in one place, with version numbers, and explains specifically where each framework is load-bearing in the guide. The goal is twofold: make the citations auditable for an agency that needs to defend its choices to a board or legislature, and make it obvious where the playbook will need an update when a framework version changes. Verify policy memoranda and standards against the publisher's current page before relying on them in an official memo.
 
 ## NIST AI RMF 1.0
 
@@ -42,7 +42,7 @@ NIST's Generative AI Profile (NIST AI 600-1, July 2024) supplements RMF 1.0 with
 
 ### What changes when OMB updates the memorandum
 
-M-25-21 is policy that can change with administration. The playbook's content survives changes to the _enforcement_ of M-25-21 because the underlying controls (CAIO designation, public inventory, risk management plan, contestation pathway) are also required by several state laws. See the [Legislative Tracker](/resources/legislative-tracker/). If M-25-21 is rescinded or materially weakened, no playbook content needs to be removed; the citation simply moves from "federal requirement" to "industry best practice."
+M-25-21 is policy that can change with administration. The playbook's content survives changes to the _enforcement_ of M-25-21 because the underlying controls (AI accountable official, inventory, risk management plan, contestation pathway) also appear in state/local policy patterns and procurement expectations. See the [Legislative Tracker](/resources/legislative-tracker/). If M-25-21 is rescinded or materially changed, update the citation and legal applicability notes rather than removing the underlying governance practice automatically.
 
 ### Historical predecessor: M-24-10
 
@@ -82,7 +82,7 @@ M-25-22, like M-25-21, is policy. Many of its procurement obligations are also b
 
 ### What changes when SLSA updates the specification
 
-SLSA's specification gets minor updates (mostly clarifications). The level structure (1–4) is stable. If a future SLSA version adds a level or restructures the existing levels, the recommendations in CI/CD Pipeline and Reference Implementation will need to be re-pinned, but the principle (use the highest level achievable with reasonable engineering effort) is durable.
+SLSA's specification gets updates over time. If a future SLSA version adds a level or restructures the existing levels, the recommendations in CI/CD Pipeline and Reference Implementation will need to be re-pinned, but the principle (use the highest level achievable with reasonable engineering effort) is durable.
 
 ## SPACE — Software Productivity, Activity, Communication, Efficiency
 
@@ -99,7 +99,7 @@ SLSA's specification gets minor updates (mostly clarifications). The level struc
 
 ### What changes when SPACE evolves
 
-SPACE is a research framework, not a standard, so it doesn't get versioned in the formal sense. The five dimensions are stable and likely to remain the canonical framing of developer productivity for the next several years. If a successor framework emerges (DORA's research division has been extending SPACE-adjacent work), the playbook will incorporate it as a complement, not a replacement.
+SPACE is a research framework, not a standard, so it does not get versioned in the formal sense. The five dimensions are a durable framing for developer productivity. If a successor or complementary framework emerges, incorporate it as a complement rather than automatically replacing the measurement approach.
 
 ## Frameworks referenced but not load-bearing
 

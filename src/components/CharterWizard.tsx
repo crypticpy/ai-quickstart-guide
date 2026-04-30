@@ -140,9 +140,8 @@ const STEPS: StepDef[] = [
         key: "equityOfficer",
         label: "Equity / civil rights officer",
         placeholder: "e.g. Equity Officer, Civil Rights Officer",
-        required: true,
         helper:
-          "If the agency has no dedicated equity officer, name the role most often consulted on disparate-impact and civil-rights matters.",
+          "Optional for small agencies. If there is no dedicated equity officer, name the role most often consulted on disparate-impact and civil-rights matters or leave blank and consult externally for Tier-3 uses.",
       },
     ],
   },
@@ -201,12 +200,21 @@ function renderCharterMarkdown(s: FormState): string {
   const ciso = s.ciso.trim();
   const counsel = s.generalCounsel.trim() || "{{General Counsel or designee}}";
   const hr = s.hrDirector.trim() || "{{HR Director or designee}}";
-  const equity = s.equityOfficer.trim() || "{{Equity Officer}}";
+  const equity = s.equityOfficer.trim();
   const records = s.recordsSchedule.trim() || "{{Agency Records Schedule}}";
 
   const cisoLine = ciso
     ? `- ${ciso}`
     : "- _CISO or security lead (combined with CIO seat unless separately staffed)_";
+  const equityLine = equity
+    ? `- Equity / civil rights officer: ${equity}`
+    : "- _Equity / civil-rights consultation assigned to legal, HR, or an external advisor for Tier-3 uses_";
+  const votingCount = 5 + (ciso ? 1 : 0) + (equity ? 1 : 0);
+  const standingQuorum = Math.max(3, Math.ceil(votingCount / 2));
+  const tier3Quorum = Math.max(standingQuorum, Math.ceil((2 * votingCount) / 3));
+  const equityRequirement = equity
+    ? "legal and the equity officer"
+    : "legal and documented equity/civil-rights consultation";
 
   return `# ${agency} AI Review Committee Charter
 
@@ -238,7 +246,7 @@ The Committee shall consist of the following voting members:
 ${cisoLine}
 - Legal counsel: ${counsel}
 - HR representative: ${hr}
-- Equity / civil rights officer: ${equity}
+${equityLine}
 - Rotating program owner: appointed by the Chair on a per-use-case basis
 
 For Tier-3 use cases, the Committee shall include one non-staff community or external subject-matter advisor identified by the Chair.
@@ -250,7 +258,7 @@ For Tier-3 use cases, the Committee shall include one non-staff community or ext
 - Annual policy review: once per fiscal year
 - Incident response: within 5 business days of report
 
-Quorum is four of seven voting members for standing meetings; five of seven, including legal and the equity officer, for Tier-3 deep-dives.
+Quorum is ${standingQuorum} of ${votingCount} voting members for standing meetings; ${tier3Quorum} of ${votingCount}, including ${equityRequirement}, for Tier-3 deep-dives.
 
 ## 5. Decision Rules
 

@@ -1,11 +1,11 @@
 ---
 title: Observability Foundation
-description: OpenTelemetry instrumentation, centralized logging, prompt/response capture, AI-specific metrics, and SLO definitions across AWS, Azure, and GCP.
+description: OpenTelemetry instrumentation, centralized logging, AI invocation telemetry, governed prompt/response capture, AI-specific metrics, and SLO definitions across AWS, Azure, and GCP.
 sidebar:
   order: 8
 ---
 
-You cannot operate, debug, or evaluate what you cannot see. Observability is the layer that turns "the AI is acting weird" into "request 4f3c spent 18 seconds in retrieval, generated 4,200 tokens, hit Bedrock at p99=2.1s, and the user marked the answer wrong." Phase 3's observability foundation produces that detail by default for every AI workload, on every cloud, without each application team building it from scratch.
+You cannot operate, debug, or evaluate what you cannot see. Observability is the layer that turns "the AI is acting weird" into "request 4f3c spent 18 seconds in retrieval, generated 4,200 tokens, hit Bedrock at p99=2.1s, and the user marked the answer wrong." Phase 3's observability foundation should produce useful metadata by default for every AI workload, on every cloud, without each application team building it from scratch. Raw prompt and response capture is more sensitive and should be enabled only when the approved data rules, redaction, retention, and access controls support it.
 
 The center of the strategy is **OpenTelemetry**. It is the only widely-supported, vendor-neutral standard for traces, metrics, and logs. Every cloud accepts OTLP. Every major observability backend accepts OTLP. The platform's instrumentation is OTel; where it goes is a policy decision the agency can revisit without rewriting code.
 
@@ -17,7 +17,7 @@ For AI workloads, the standard observability triad gains a fourth signal:
 | ------- | ---------------------------- | ------------------------------------------------------------------------------------------- |
 | Traces  | Request flow across services | Spans for retrieval, prompt assembly, model call, tool calls; token counts per span         |
 | Metrics | Aggregated time-series       | Tokens-per-second, cost-per-request, eval pass rate, refusal rate, content-filter trip rate |
-| Logs    | Discrete event records       | Structured logs with trace IDs; redacted prompt/response capture for incident review        |
+| Logs    | Discrete event records       | Structured logs with trace IDs; approved redacted prompt/response capture for incident review |
 | Evals   | Quality of model outputs     | Continuous eval scoring against the regression suite; per-version score; alert on drift     |
 
 The fourth signal — evals — is the one teams skip and the one they regret. Build it from day one.
@@ -64,7 +64,7 @@ Every cloud has its own backend, and most agencies will use it for cost reasons.
 If the agency wants a single pane of glass across clouds:
 
 - **Grafana Cloud** (free tier generous for early use) accepts OTLP from anywhere.
-- **Honeycomb** is best-in-class for trace analytics; OTLP-native.
+- **Honeycomb** is strong for trace analytics and is OTLP-native.
 - **Datadog / New Relic / Dynatrace** for full-stack APM if the budget supports.
 - **Self-hosted Grafana + Loki + Tempo + Mimir** if the team has operations capacity.
 
@@ -79,34 +79,44 @@ All workloads ship structured logs (JSON) to a central log sink owned by securit
 - **Index strategy.** Recent logs in a hot index for query, older logs in cold storage with full-text search at higher latency.
 - **Access.** Application teams have read access to their service's logs in non-prod and read-only / audited access in prod. Security has read access everywhere.
 
-## Prompt and response capture
+## AI invocation telemetry
 
-The most important AI-specific telemetry. Capture every model invocation:
+The most important AI-specific telemetry starts metadata-first. Capture every model invocation's operational facts:
 
-- The system prompt + user prompt (with sensitive data redacted at the OTel collector).
-- The full response.
 - Model identity and version.
 - Token counts (input, output, cached).
 - Latency breakdown (queue, generation, post-processing).
-- Tool calls invoked and their results.
+- Tool calls invoked, status, and result classification.
 - Cost in dollars (computed from token counts).
+- Retrieval source IDs or document references, without raw source text unless approved.
+- Safety/DLP events and policy decisions.
 
-Why all of it: the difference between "the AI got it wrong" and "the AI got it wrong because retrieval returned the wrong document on this prompt at this version" is the entire prompt/response/retrieval log.
+For Tier-1 internal productivity tools, this metadata may be enough. For Tier-2/3 use cases, the agency may also need redacted prompt/response capture to support incident review, contestation, records, and evaluation. Treat that as a governed setting, not a default for every workload.
+
+### Prompt and response capture
+
+When approved by the data rules and review path, capture:
+
+- The system prompt + user prompt after upstream redaction.
+- The response after output leakage checks.
+- Tool-call inputs and outputs only when they do not contain prohibited data, or after redaction.
+
+Why it matters: the difference between "the AI got it wrong" and "the AI got it wrong because retrieval returned the wrong document on this prompt at this version" is often in the prompt/response/retrieval trail.
 
 ### Redaction
 
 The capture pipeline applies redaction before the data lands:
 
 - PII / Confidential / Restricted spans of text are replaced with placeholder tokens.
-- The DLP service (covered in [security baseline](/phase-3-infrastructure/security-baseline/)) runs at the OTel collector or upstream of it.
-- Redaction is logged so an authorized investigator can request the unredacted version through a documented process.
+- The DLP service (covered in [security baseline](/phase-3-infrastructure/security-baseline/)) runs upstream of prompt assembly when possible, and at the OTel collector only as a defense-in-depth control.
+- Redaction is logged so an authorized investigator can follow a documented process if unredacted material is legally and operationally available.
 
 ### Storage and access
 
-- Stored encrypted with a CMK in the appropriate environment's secrets/log storage.
-- Access for AI program lead, application team lead, security incident response, and audit.
-- Constituent right-to-access requests can include AI-generated content; the capture pipeline must support per-user retrieval.
-- Tier-3 capture supports the contestation pathway — when a constituent challenges a decision, the operator can produce the exact prompt/response that produced it.
+- Stored encrypted with a CMK or equivalent approved key control in the appropriate environment's log storage.
+- Access limited to named roles such as AI program lead, application team lead, security incident response, records, and audit, with production access logged.
+- Constituent right-to-access or records requests may include AI-generated content; design per-user retrieval when the approved use case requires it.
+- Tier-3 capture, when approved, supports the contestation pathway by preserving the evidence needed to review the decision.
 
 ## AI-specific metrics
 
@@ -123,11 +133,11 @@ Beyond standard service metrics (RPS, latency, error rate), AI workloads track:
 - **User-feedback rate** — fraction of responses where the user gave thumbs-up or thumbs-down.
 - **Time-to-first-token** vs. **time-to-completion** for streaming workloads.
 
-Build a dashboard per use case. Every Tier-2 use case has its own dashboard reviewed weekly; every Tier-3 use case has a dashboard reviewed at every standing Review Committee meeting.
+Build a dashboard per use case. Every Tier-2 use case should have a dashboard reviewed weekly; every Tier-3 use case should have a dashboard reviewed through the standing review path.
 
 ## Service Level Objectives (SLOs)
 
-SLOs put numbers on what "good" means. The Phase 3 baseline target set:
+SLOs put numbers on what "good" means. The Phase 3 starter targets below should be calibrated by workload class, user impact, staffing, and procurement constraints:
 
 | SLO                                        | Target                                 | Window     |
 | ------------------------------------------ | -------------------------------------- | ---------- |
@@ -137,7 +147,7 @@ SLOs put numbers on what "good" means. The Phase 3 baseline target set:
 | Eval regression                            | Score within 5% of baseline            | per deploy |
 | Cost per request                           | Within 20% of budget                   | 30 days    |
 
-Each SLO has an associated error budget, alarm thresholds, and an owner. SLO violations stop the deploy pipeline by default; resuming requires explicit approval.
+Each SLO has an associated error budget, alarm thresholds, and an owner. For production Tier-2/3 services, SLO violations may pause promotion by default; resuming should require explicit approval. For small agencies and Tier-1 pilots, start with alerts and a review note, then make the gate stricter as the process matures.
 
 ## Anomaly detection
 
@@ -154,13 +164,13 @@ Cloud-native anomaly detection (CloudWatch Anomaly Detection, Azure Monitor anom
 
 Each AI request carries:
 
-- The model called (e.g., `claude-opus-4-7-1m`).
+- The model called (provider and model slug from the provider's current API documentation).
 - The use case it served.
 - The user (where appropriate) or workload identity.
 - Tokens in / out / cached.
 - Computed dollar cost.
 
-Aggregate by use case daily and weekly. Per-use-case cost is the conversation managers and Review Committee need; per-token cost is for engineers tuning prompts and retrieval.
+Aggregate by use case daily and weekly. Per-use-case cost is what managers and the review path need; per-token cost is for engineers tuning prompts and retrieval.
 
 ## Incident review and replay
 
@@ -174,7 +184,7 @@ Every Tier-2/3 incident gets a post-incident review. The observability foundatio
 
 - **Logs without trace context.** Every log line should carry `trace_id`. Without it, correlation is grep work.
 - **Sampling that drops the interesting traces.** Tail sampling that keeps errors and slow requests is far better than random sampling.
-- **No prompt/response capture.** When the model hallucinates and the user complains, the team has to reproduce the issue blind. Capture from day one.
+- **No AI invocation telemetry.** When the model hallucinates and the user complains, the team has to reproduce the issue blind. Capture metadata from day one, and add redacted prompt/response capture when the approved data rules allow it.
 - **No eval continuity.** Evals run in CI but not in prod. The first signal of model drift then comes from users.
 - **Cost dashboards behind a paywall.** Engineers and managers should see cost as casually as they see latency. Free up access.
 - **One backend, no portability.** Backends are fashionable; agencies last decades. Keep instrumentation OTel-first so you can change minds.

@@ -32,7 +32,7 @@ Same Track 3 audience plus the agency's chief procurement officer or designee. S
 
 The addendum has three sections, each tied to a tier:
 
-- **Section A** — applies to all AI procurement (any tier). Data non-use, data residency, exit, basic security.
+- **Section A** — default starter terms for AI-bearing purchases. For low-risk, no-data, or already-covered tools, agencies may use the vendor questionnaire and existing IT clauses instead of the full addendum.
 - **Section B** — additional terms for Tier-2 use cases. Pilot phase, evaluation rights, model substitution notice, price cap.
 - **Section C** — additional terms for Tier-3 use cases. Bias testing, audit access, indemnification, explainability requirements.
 
@@ -44,9 +44,9 @@ A vendor selling into a Tier-3 use case signs A + B + C. A Tier-2 vendor signs A
 
 Walk through Section A clause by clause. The room confirms or modifies:
 
-- **Data non-use.** The vendor will not use agency data for model training, fine-tuning, evaluation, or any purpose other than serving the agency. Strict.
-- **Data residency.** Where the data and inference happen. Most agencies require U.S. residency at minimum; some require state residency for specific data types.
-- **Foreign-adversary model exclusion.** No models trained primarily by entities in countries on the relevant federal restricted list (or state equivalent).
+- **Data non-use.** The vendor will not use agency data for model training, fine-tuning, evaluation, or any purpose other than serving the agency unless the contract expressly allows it.
+- **Data residency.** Where the data and inference happen. Some data classes, grant terms, or agency rules require U.S. or state residency; document the applicable rule instead of assuming one universal requirement.
+- **Restricted-party and supply-chain screening.** Screen vendors, model providers, and hosting arrangements against applicable sanctions, entity-list, export-control, grant, and state procurement restrictions.
 - **Exit and data export.** On termination, the vendor returns agency data in plain, non-proprietary format within 30 days. Embeddings and indices either deleted or returned in documented format.
 - **Security baseline.** Standard agency contract security clauses extended for AI specifics.
 
@@ -54,7 +54,7 @@ Open issues for legal review get parked with named owners.
 
 ### Block B — Section B: Tier-2 terms (15 min)
 
-- **Pilot phase mandate.** Tier-2 deployment requires a pilot scope (typically 4–8 weeks, named users, named success metrics) before broad rollout.
+- **Pilot phase default.** For Tier-2 deployments, define a pilot scope before broad rollout when proportional to the risk: named users, named success metrics, and a review date.
 - **Evaluation rights.** The agency may evaluate the vendor's outputs against agency-defined test cases at any time. The vendor will provide test access at no additional cost.
 - **Model substitution notice.** The vendor notifies the agency at least 30 days before swapping the underlying foundation model and provides re-evaluation access.
 - **Price cap.** Year-2 price uplift capped (typically 15–25% above Year-1) or the agency may exit without penalty.
@@ -64,7 +64,7 @@ Open issues for legal review get parked with named owners.
 
 - **Bias testing rider.** The vendor cooperates with pre-deployment bias testing using agency-supplied test sets. Bias-test results are shared with the Review Committee.
 - **Audit access.** The agency or its designated auditor has access to model documentation, training data summaries (where available), and operational logs.
-- **Explainability.** The vendor provides explainability for each individual decision (or output) in a form the affected person could understand if they contested the decision.
+- **Explainability.** The vendor provides appropriate explanation, audit, or contestation support for affected outputs where law, policy, or the risk tier requires it.
 - **Indemnification.** The vendor indemnifies the agency for harm caused by AI bias or specific failure modes covered by the contract — within reasonable bounds, calibrated to the agency's risk appetite. (Vendors will resist; this is a negotiation point.)
 - **Records sovereignty.** Agency-generated content remains agency property. The vendor cannot use it for promotional or research purposes without written permission.
 

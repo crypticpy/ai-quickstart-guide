@@ -9,20 +9,20 @@ import StarterProjectSelector from '../../../components/StarterProjectSelector.t
 
 The right starter project is rarely the most exciting one. It is the one whose audience is identifiable, whose data is in shape, whose stakeholders care about the outcome, and whose failure modes the agency can absorb without harm. This page is the selection process — the readiness checks the candidate goes through, the scoring rubric across the [five archetypes](/phase-6-starter-projects/), and the decision tree that points to a default choice when the team can't decide.
 
-The selection conversation typically lives over a 2–3 week discovery period in Month 7. The output is one chosen archetype with a one-page selection memo signed by the AI program lead and the affected business owner.
+The selection conversation typically lives over a 2–3 week discovery period in Month 7. Smaller teams can compress this, but they should still produce one chosen archetype with a short selection memo approved by the AI program lead or equivalent and the affected business owner.
 
 ## The five readiness checks
 
-Each candidate project passes — or fails — five tests. A candidate that fails any one of these is not ready; pick a different one or invest in fixing the gap.
+Each candidate project is checked against five tests. A candidate that fails one of these is not ready for a production starter; pick a different one, narrow scope, or invest in fixing the gap.
 
 ### 1. Audience readiness
 
-There are real users who can articulate what they want and who will use the thing within a month of launch.
+There are real users who can articulate what they want and are willing to try the system in a defined workflow soon after launch.
 
 - **Pass:** A specific named team or audience exists and has been interviewed. They have a workflow problem the system addresses. They've agreed to be the test cohort.
 - **Fail:** The audience is "all staff" or "the public." Nobody has been asked. Adoption is hoped-for, not committed.
 
-The single most common starter-project failure is shipping to nobody in particular. A real audience is non-negotiable.
+The single most common starter-project failure is shipping to nobody in particular. A real audience is the first selection gate.
 
 ### 2. Data readiness
 
@@ -40,7 +40,7 @@ The classification tier, AUP rules, and risk-classification framework all apply.
 - **Pass:** Tier known (most starters are Tier-1 or Tier-2). The required controls per tier are mapped to the platform's existing capabilities. No fresh procurement is needed.
 - **Fail:** "We'll figure out the classification later." Or the candidate is Tier-3 and the platform doesn't have the Tier-3 controls operating yet.
 
-Tier-3 starter projects are not a good idea. The agency's first production AI deployment should not also be the first time the agency operates at Tier-3.
+Tier-3 starter projects are usually a poor first choice. The agency's first production AI deployment should not also be the first time the agency operates at Tier-3 unless leadership explicitly accepts the added schedule, control, and review burden.
 
 ### 4. Stakeholder readiness
 
@@ -58,7 +58,7 @@ If the system produces a wrong answer once, what happens? The agency can absorb 
 - **Pass:** Wrong outputs are observable, recoverable, and don't carry through to a binding decision. A user can dismiss a bad summary; a wrong chatbot answer is corrected by a human follow-up; a misclassified intake is reclassified.
 - **Fail:** Wrong outputs flow into a binding decision (eligibility, enforcement, benefit award) without a human checkpoint. Or the system's failure mode is hard to detect.
 
-A starter project's failure mode must be observable and recoverable. The agency builds the muscle for higher-stakes deployments later, not in the starter.
+A starter project's failure mode should be observable and recoverable. The agency builds the muscle for higher-stakes deployments later, not in the starter.
 
 ## The scoring rubric
 
@@ -111,7 +111,7 @@ Q4: Do leaders complain that they "can't get answers from
 
 ```
 
-The tree biases toward the easier archetypes earlier. RAG chatbot is the most-traveled path; meeting transcriber is the second-most. Workflow automation and NL dashboard are higher-impact but harder; pick them only if the easier options don't fit.
+The tree biases toward easier archetypes earlier. RAG chatbot and meeting transcriber are common first paths. Workflow automation and NL dashboard can be higher-impact but harder; pick them only when the readiness checks support the extra risk.
 
 ## What good archetype-fit looks like
 
@@ -227,7 +227,7 @@ The memo is short on purpose. A 20-page selection document means the team is rat
 ## Plain-English Guide to Selection Terms
 
 - **Archetype.** A category of AI application with known shape and known module exercise. The agency picks one as the starter.
-- **Readiness check.** A pass/fail criterion that must be met before a candidate is selected (audience, data, governance, stakeholder, failure tolerance).
+- **Readiness check.** A criterion that should be met before a candidate is selected for production launch (audience, data, governance, stakeholder, failure tolerance).
 - **Selection rubric.** A 1-5 scoring across user pull, module exercise, reversibility, time-to-value, and visibility. Used to compare candidates.
 - **Selection memo.** The one-page document that records the chosen archetype, audience, business owner, and rationale.
 

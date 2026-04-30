@@ -1,13 +1,13 @@
 ---
 title: Document Rendering Module
-description: Templated PDF, DOCX, and HTML output — letters, reports, forms — rendered once, shared by every app.
+description: Templated PDF, DOCX, and HTML output for letters, reports, forms, and notices.
 sidebar:
   order: 8
 ---
 
 Government work is paper work. Even when the workflow is digital, the output is often a letter, a report, a determination, a permit, a form. Every agency has a fleet of templates that need to be filled in with case data and rendered to the format the recipient expects — usually PDF, sometimes DOCX, sometimes HTML email.
 
-The Document Rendering module is the platform's answer. One template engine, one rendering pipeline, consistent typography, accessible output, and a clean separation between data, template, and presentation. Every application that produces documents uses this module; nobody hand-rolls PDF generation again.
+The Document Rendering module is the platform's reusable answer. One template engine, one rendering pipeline, consistent typography, accessible output, and a clean separation between data, template, and presentation. Applications that regularly produce official documents should use this path instead of hand-rolling PDF generation.
 
 ## What this module owns
 
@@ -141,20 +141,20 @@ PDF is the dominant output. The agency's choice of converter matters because opt
 
 | Converter                                                          | Pros                                  | Cons                                     |
 | ------------------------------------------------------------------ | ------------------------------------- | ---------------------------------------- |
-| **WeasyPrint** (Python)                                            | Open source, accessible PDF, good CSS | Slower than headless Chrome              |
+| **WeasyPrint** (Python)                                            | Open source, tagged PDF/PDF variants, good CSS support | Slower than headless Chrome              |
 | **Headless Chromium** / Puppeteer                                  | Excellent fidelity to web rendering   | Heavyweight; less accessible by default  |
 | **Apache PDFBox** (Java)                                           | Mature; good for low-level work       | Verbose; not template-driven             |
 | **wkhtmltopdf**                                                    | Simple to deploy                      | Unmaintained since 2023; not recommended |
-| **PrinceXML** (commercial)                                         | Best-in-class CSS Print support       | License cost                             |
+| **PrinceXML** (commercial)                                         | Strong CSS print support              | License cost                             |
 | **Cloud-native**: Azure Document Intelligence Layout, AWS Textract | Specialized output                    | Generally not for outbound rendering     |
 
-The agency's default is **WeasyPrint** for its accessibility support (tagged PDF, PDF/UA-compliant) and zero license cost. Agencies with high-fidelity needs (commercial print, complex layouts) pick PrinceXML.
+The agency's default can be **WeasyPrint** when the stack is Python-friendly and the templates are built from semantic HTML. It supports tagged PDFs and PDF/A/PDF/UA variants, but agencies should validate actual output because accessibility depends on template structure, metadata, fonts, and test tooling. Agencies with high-fidelity print needs or commercial publishing requirements may choose a commercial renderer.
 
-PDF/A-2u or PDF/A-3u for archival output (compliance requirement at many agencies). The module's PDF adapter supports both PDF (web) and PDF/A (archive) profiles.
+Use PDF/A profiles for archival output when records policy requires them. The module's PDF adapter should support both PDF (web) and PDF/A (archive) profiles when the selected renderer can produce and validate them.
 
 ### Accessible PDF (PDF/UA)
 
-Government documents must be accessible. The PDF/UA standard (ISO 14289) requires:
+Public-facing government documents and many internal workflows have accessibility obligations. Treat accessible output as the default. The PDF/UA standard (ISO 14289) requires:
 
 - Tagged structure (headings, lists, tables) — produced from semantic HTML.
 - Reading order matches visual order.
@@ -162,7 +162,7 @@ Government documents must be accessible. The PDF/UA standard (ISO 14289) require
 - No content as raster images (text remains text).
 - Language identified at document and language-change boundaries.
 
-WeasyPrint supports this with the right CSS and HTML structure. The module's reference templates demonstrate the patterns; teams writing new templates have a checklist.
+Modern renderers can support tagged and PDF/UA-oriented output, but the renderer cannot fix a non-semantic template. The module's reference templates demonstrate the patterns; teams writing new templates have a checklist and run validation before release.
 
 ## DOCX rendering
 
@@ -197,7 +197,7 @@ Templates are code. The authoring workflow is the same as for any other code:
 
 ## Versioning and reproducibility
 
-Generated documents are reproducible: `template@version + data` produces the same output bytes. Reproducibility matters because:
+Generated documents should be reproducible enough to reconstruct what was sent: `template@version + renderer version + assets + data reference` should identify the output. Byte-for-byte reproduction may require pinned renderer versions, fonts, timestamps, metadata settings, and environment controls. Reproducibility matters because:
 
 - An applicant disputes a letter; investigators reconstruct exactly what was sent.
 - A template change should not retroactively change historical documents.
@@ -205,9 +205,9 @@ Generated documents are reproducible: `template@version + data` produces the sam
 
 The module:
 
-- Records `template_id`, `template_version`, `data_hash`, `rendered_at` for every document.
-- Stores the input data alongside the rendered output (with PII handling per [classification](/phase-1-governance/risk-classification/)).
-- Supports re-render: take the recorded inputs, run the same template version, and verify the output matches.
+- Records `template_id`, `template_version`, renderer version, asset versions, `data_hash`, `rendered_at`, and operator/system context for every document.
+- Stores the rendered output and a manifest. Store raw input data only when records policy, retention schedule, and classification rules allow it; otherwise store a hash, source record reference, and schema version.
+- Supports re-render where policy permits: take the recorded manifest and approved source data, run the same template version, and verify the output matches within the chosen tolerance.
 
 PDFs include their template version and document ID in the footer (a short hash) so a paper copy can be matched back to the rendering record.
 
@@ -257,7 +257,7 @@ Some workflows render hundreds or thousands of documents at once (mass mailings,
 
 ## Performance
 
-Targets per render:
+Starter targets per render:
 
 - HTML: p95 ≤ 50ms.
 - PDF (WeasyPrint, single-page letter): p95 ≤ 800ms.
@@ -266,7 +266,7 @@ Targets per render:
 
 The PDF rendering cost dominates. Templates are compiled and cached; a hot template path renders 10–50 PDFs per second per CPU.
 
-For per-record rendering at scale, the batch path is mandatory — a sync request loop will exhaust connections.
+For per-record rendering at scale, prefer the batch path. A sync request loop can exhaust connections and is harder to retry safely.
 
 ## Architecture (ports and adapters)
 
@@ -283,9 +283,9 @@ For per-record rendering at scale, the batch path is mandatory — a sync reques
 ## Common rendering failures
 
 - **Missing data field at render time.** Caught by schema validation; a clear error beats a corrupt letter that shipped.
-- **PDF accessibility regressions.** A new template skips heading hierarchy; PDF/UA validation in CI catches it.
+- **PDF accessibility regressions.** A new template skips heading hierarchy; PDF accessibility validation in CI catches it.
 - **Pixel-perfect drift between formats.** PDF and DOCX render slightly differently; templates that depend on exact pixel layout are fragile. Design for typographic consistency, not pixel-perfection.
-- **Untested templates.** Production renders fail because no one rendered the template with realistic data before deploy. Snapshot tests required for every template.
+- **Untested templates.** Production renders fail because no one rendered the template with realistic data before deploy. Snapshot tests should exist for templates that produce official or user-facing output.
 - **Locale fallback bugs.** Spanish template missing a key falls through to English silently. Explicit error or explicit fallback policy; not silent default.
 - **Storage costs.** A high-volume mass mailing without retention review fills the bucket. Every template declares its retention; document outputs aren't kept forever by default.
 
@@ -295,7 +295,7 @@ For per-record rendering at scale, the batch path is mandatory — a sync reques
 - **Schema.** The contract describing what data the template needs. Validated before render.
 - **Variant.** A version of a template for a specific case — different language, large print, different format.
 - **PDF/UA.** The accessibility standard for PDF (ISO 14289). Tagged structure, reading order, alt text.
-- **PDF/A.** The archival standard for PDF (ISO 19005). Self-contained; deterministic; for long-term preservation.
+- **PDF/A.** The archival standard for PDF (ISO 19005). Self-contained; designed for long-term preservation.
 - **Tagged PDF.** A PDF whose internal structure (headings, lists, tables) is machine-readable — required for accessibility.
 
 ## Related

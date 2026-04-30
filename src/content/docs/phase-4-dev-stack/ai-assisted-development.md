@@ -1,69 +1,75 @@
 ---
 title: AI-Assisted Development
-description: Claude Code, GitHub Copilot, and Cursor configured for government work. Approved configurations, reviewer expectations, and AI-generated code disclosure norms.
+description: Common AI coding tool patterns, example configurations, reviewer expectations, and AI-generated code disclosure norms for government work.
 sidebar:
   order: 5
 ---
 
-By 2026, AI-assisted coding is not a choice the agency can avoid. The [2026 JetBrains AI Pulse](https://blog.jetbrains.com/research/2026/04/which-ai-coding-tools-do-developers-actually-use-at-work/) found 90% of professional developers regularly use AI coding tools at work (10,000+ developer sample, January 2026 wave). Agencies that ban these tools simply discover their developers are using personal accounts on personal laptops. The right stance is neither prohibition nor laissez-faire. It is _configured_ adoption: a small set of approved tools, configured for government data handling, with clear reviewer expectations and a non-negotiable rule that the human committing the code is responsible for the code regardless of who or what wrote it.
+By 2026, AI-assisted coding is part of normal software work. The [2026 JetBrains AI Pulse](https://blog.jetbrains.com/research/2026/04/which-ai-coding-tools-do-developers-actually-use-at-work/) found 90% of professional developers regularly use AI coding tools at work (10,000+ developer sample, January 2026 wave). Agencies that ban these tools often discover their developers are using personal accounts on personal laptops. The practical stance is neither prohibition nor laissez-faire. It is _configured_ adoption: a small set of approved tools, configured for government data handling, with clear reviewer expectations and a firm rule that the human committing the code is responsible for the code regardless of who or what wrote it.
 
-## The three approved tools
+## Common tool patterns
 
-Most agencies should approve and configure these three. A team can use one, two, or all three depending on workflow.
+The agency does not need to approve every popular tool. Pick one or more tools that fit these patterns and can meet procurement, data-use, identity, and audit expectations.
 
-| Tool               | Strength                                                                | Fit                                                                       |
-| ------------------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Claude Code**    | Agentic, multi-file edits, deep codebase understanding, terminal-native | Larger refactors, exploratory work, agentic tasks, long-context reasoning |
-| **GitHub Copilot** | Inline completion, IDE-integrated, mature in the IDEs                   | Steady-state coding inside an open file; team familiarity                 |
-| **Cursor**         | IDE that is itself AI-augmented; strong agent + completion combo        | Teams that want a single tool for both inline and chat-style assistance   |
+| Pattern | Example tools | Fit |
+| --- | --- | --- |
+| Inline assistant | GitHub Copilot, JetBrains AI Assistant, Tabnine | Steady-state coding inside an open file; low-friction adoption |
+| Agentic CLI/editor | Claude Code, OpenAI Codex, Aider | Bounded multi-file edits, exploratory work, refactors, long-context reasoning |
+| AI-native IDE | Cursor, Windsurf, JetBrains IDEs with agents | Teams that want a single tool for completion, chat, and agentic edits |
 
-Other tools (Cody, Tabnine, Codeium, Aider) are not prohibited but are not on the agency-supported list. Teams using them are on their own for support and integration.
+Claude Code, GitHub Copilot, and Cursor are used below as concrete examples because they are common in 2026. They are not a universal approved list. If the agency has already procured a different tool, apply the same baseline controls to that tool.
+
+## Minimum path when procurement is not ready
+
+If there is no approved tenant, do not put agency code, secrets, confidential data, or production infrastructure into personal AI accounts. Developers can still learn with public samples, synthetic code, the Track 4 labs, or the reference implementation stripped of agency data. Move agency-code use into the approved tenant once procurement, data terms, and admin controls are ready.
 
 ## Configuration baseline (all tools)
 
-Every approved tool is configured to:
+Every approved tool should be configured to:
 
 1. **Use the agency's tenant.** Tools that support enterprise/government tenants are configured against that tenant, not personal accounts. This puts admin controls and audit logs in the agency's hands.
-2. **Disable telemetry on agency code where the tool supports it.** Most tools have an "improve the model with my code" toggle; turn it off.
-3. **Use the agency's network.** No tool is allowed to make calls bypassing the agency's egress proxy.
-4. **Authenticate via SSO.** Personal Anthropic / OpenAI / GitHub accounts are not authorized for agency code.
+2. **Disable model-training or product-improvement use of agency code where the tool supports it.** Verify the current admin setting and contract language.
+3. **Use the agency's network where feasible.** Larger agencies may require egress proxy controls; smaller agencies may start with approved tenants, MFA, and admin review.
+4. **Authenticate via SSO where available.** Personal Anthropic / OpenAI / GitHub accounts should not be used for agency code.
 5. **Carry a deny-list** for sensitive paths (e.g., `secrets/`, `infra/production/`) where agentic tools should refuse to write without explicit per-action approval.
 
 ## Per-tool configuration
 
 ### Claude Code
 
-- **Tenant.** Use Claude for Work or the API tier procured by the agency. Personal API keys are not authorized.
-- **Settings.** Project-level `.claude/settings.json` checked into each repo with the agency's standard configuration. Permissions tier set to require approval for shell commands and file writes outside the project root by default.
-- **Hooks.** Optional but recommended: a `PreToolUse` hook that logs every tool call to the agency's central log; a `PostToolUse` hook that runs the formatter on edited files.
-- **Skills.** The agency can publish a shared skill set (e.g., `/freview`, `/scaffold-module`, `/run-evals`) to encode common workflows.
-- **MCP servers.** Read-only MCP servers (Sentry, Linear, internal docs) are encouraged. Write-capable MCP servers go through the same governance as any tool that mutates state. They need an authorization scope and an audit log.
-- **Code review.** AI-suggested commit messages are fine; AI-authored PR descriptions need a human review pass. Output of `/freview` (Anthropic's own review skill) is advisory, not authoritative.
+- **Tenant.** Use the agency-procured Claude plan or API tier. Personal API keys should not be used for agency code.
+- **Settings.** Project-level `.claude/settings.json` can be checked into each repo with shared configuration. Enterprise managed policies, where available, should override user/project settings for required controls. See Anthropic's [Claude Code settings](https://docs.anthropic.com/en/docs/claude-code/settings).
+- **Permissions.** Deny reads of `.env`, credential files, and secret directories. Require approval for shell commands, file writes outside the project root, and sensitive paths by default.
+- **Hooks.** Optional but recommended: a `PreToolUse` hook that logs approved metadata about tool calls and a `PostToolUse` hook that runs the formatter on edited files. Avoid logging secrets, raw protected code, or prompt content unless approved. See Anthropic's [hooks reference](https://docs.anthropic.com/en/docs/claude-code/hooks).
+- **Skills / commands.** The agency can publish shared commands or skills (e.g., review, scaffold module, run evals) to encode common workflows. Treat named commands as local examples, not universal product features.
+- **MCP servers.** Read-only MCP servers (monitoring, issue tracker, internal docs) can be useful. Write-capable MCP servers go through the same governance as any tool that mutates state. They need an authorization scope and an audit path. See Anthropic's [MCP documentation](https://docs.anthropic.com/en/docs/claude-code/mcp).
+- **Code review.** AI-suggested commit messages are fine; AI-authored PR descriptions need a human review pass. Any automated review output is advisory, not authoritative.
 
 ### GitHub Copilot
 
-- **Tier.** Copilot Business or Copilot Enterprise (the latter for >100 developers). Both exclude agency code from training; document this in the procurement package.
-- **Public code matching.** Enable "block suggestions matching public code." This reduces (does not eliminate) the risk of a license-incompatible suggestion.
-- **Content exclusions.** Configure path-level exclusions so Copilot does not see `secrets/`, `infra/production/secrets/`, etc.
-- **Audit log.** Forward Copilot audit log to the agency's SIEM.
+- **Tier.** Copilot Business or Copilot Enterprise are common agency choices. GitHub currently states that Business and Enterprise data is not used to train GitHub's models; document the current statement and contract terms in the procurement package.
+- **Public code matching.** Enable blocking or code referencing for suggestions matching public code where supported. This reduces, but does not eliminate, license and provenance risk.
+- **Content exclusions.** Configure path-level exclusions so Copilot avoids `secrets/`, `infra/production/secrets/`, etc. Verify current [content exclusion](https://docs.github.com/en/copilot/concepts/content-exclusion-for-github-copilot) coverage before relying on it; GitHub documents limitations across some modes, symlinks, and remote filesystems.
+- **Audit log.** Review Copilot audit logs. Small agencies can start with quarterly admin review of seats, settings, and policy changes. Standard/large agencies can stream logs to SIEM. GitHub's [audit log documentation](https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/review-audit-logs) notes that local client prompt/session data is not included.
 - **Chat mode.** Authorized in IDE; not authorized for non-coding use (the chatbot is not the agency's general-purpose AI).
 
 ### Cursor
 
-- **Tenant.** Cursor for Business or Enterprise. Agency-procured workspace; SSO via the agency IdP.
-- **Privacy mode.** Enabled by default for all users. This disables retention of agency code on Cursor servers.
-- **Indexing.** Cursor's repo indexing is opt-in per repo. Tier-2/3 repos may opt out depending on data classification; coordinate with security.
+- **Tenant.** Cursor for Business or Enterprise where approved. Agency-procured workspace; SSO via the agency IdP where available.
+- **Privacy mode.** Enabled by default for all users. Verify current [Cursor privacy and security](https://docs.cursor.com/account/privacy) documentation and contract terms, including code retention, prompts, telemetry, embeddings, metadata, and model-training use.
+- **Indexing.** Cursor's repo indexing is opt-in per repo. Tier-2/3 repos should default to no indexing unless security approves the current indexing/data-handling model.
 - **Extensions.** Cursor inherits VS Code extensions; the agency's allowlist (signed publishers, approved categories) applies.
 
 ### Foundation model used
 
-All three tools rely on a foundation model. The agency should know which:
+AI coding tools rely on one or more foundation models. The agency should know which models are enabled and how they are selected.
 
-- Claude Code uses Anthropic models (Claude 4.x family).
-- Copilot defaults to GPT-class models with Claude as an alternative; configure per the agency's preferred model.
-- Cursor offers a model picker; the agency's allowed model list is configured at the workspace level.
+- A **model ID** is the provider-maintained slug used in API calls or tool configuration, such as `<provider-model-id>`.
+- Providers and tool vendors maintain current model lists; do not freeze model IDs in agency standards.
+- Configure an allowed model list where the tool supports it.
+- Review enabled models at renewal, when the vendor announces a model change, or when the agency's risk tier/data rules change.
 
-When a model is procured for tool use, the [procurement addendum](/phase-1-governance/procurement-guardrails/) applies. Vendor terms must include the data non-use clause.
+When a model is procured for tool use, the [procurement addendum](/phase-1-governance/procurement-guardrails/) applies. Vendor terms should include the data non-use clause or the agency's approved equivalent.
 
 ## Reviewer expectations
 
@@ -111,7 +117,7 @@ The agency draws three lines.
 - Run agentic loops over a bounded task (developer sets the scope).
 - Use MCP tools that mutate external state (Linear ticket creation, Sentry issue closure). Each external write capability is reviewed individually.
 
-### What AI tools must not do
+### What AI tools should not do
 
 - Commit code without a developer reading the diff.
 - Push to remote branches that have any external visibility (e.g., a published PR branch on github.com) without a developer reviewing.
@@ -120,7 +126,7 @@ The agency draws three lines.
 - Authorize their own elevation (e.g., bypass the deny-list).
 - Use long-lived API keys belonging to a developer's account in CI or any shared pipeline.
 
-The boundary is enforceable in the tool configurations and in CI. Trust at higher boundaries is built one ADR at a time as the agency's confidence grows.
+Some boundaries are enforceable in tool configuration and CI; others depend on training, review, and audit. Trust at higher boundaries is built one ADR at a time as the agency's confidence grows.
 
 ## Pre-commit and pre-push hooks
 
@@ -148,13 +154,14 @@ The `aup-check` script (agency-supplied) flags any commit touching paths in the 
 
 ## Logging and audit
 
-Each tool's audit log goes to the agency's central log:
+Each tool's audit trail should be reviewed in a way that matches agency size:
 
-- **Claude Code:** server-side audit log via the API tier; per-session telemetry to the agency's chosen backend.
-- **GitHub Copilot:** Copilot audit log forwarded via webhook or pull.
-- **Cursor:** Enterprise audit log forwarded similarly.
+- **Minimum:** Quarterly admin review of seats, enabled models, settings, and policy exceptions.
+- **Standard:** Export or retain vendor/admin audit events where available.
+- **Large/regulated:** Stream supported audit logs to the agency SIEM and monitor policy changes.
+- **Local hooks:** For agentic tools, approved hooks can log tool-call metadata with redaction. Do not log secrets or protected content unless the use case has approved capture rules.
 
-These logs answer questions like "in the past month, who used AI tools on the eligibility module" and "did any tool see paths outside its scope." Run a quarterly review with security.
+These records help answer questions like "who has access to the tool," "which models were enabled," and "were sensitive paths excluded." Product audit logs may not show every prompt, local edit, or client-side context, so do not rely on them as the only control.
 
 ## Cost and quota
 
@@ -168,20 +175,20 @@ AI tools are cheap per developer-hour but the costs add up.
 
 Track 4 Lab 4 introduces AI-assisted development to the developer cohort. Topics:
 
-- The three approved tools, configured.
+- Approved tool patterns and any agency-procured tools.
 - Reviewer expectations (this page).
 - A worked example: take a small task, do it three ways (no AI, with Copilot inline, with Claude Code agentically). Compare quality and time.
 - The boundaries above.
 
-After Lab 4, every developer who is shipping code is expected to use at least one approved tool for at least some of their work and to understand the reviewer expectations from both sides.
+After Lab 4, every developer who is shipping code should understand the approved tool rules and reviewer expectations. Use of an AI tool is encouraged where approved and useful, not required for every developer or task.
 
 ## Common AI-assisted-development failures
 
-- **No tenant.** Developers use personal accounts because the agency hasn't procured a tier. Procure on day one of Phase 4; the per-seat cost is small.
+- **No tenant.** Developers use personal accounts because the agency hasn't procured a tier. Procure early, or restrict use to synthetic/sample code until approval catches up.
 - **Permissive defaults.** A tool installed with full file-write and shell access by default leads to a "the AI deleted my branch" incident within months. Default to ask-for-approval; relax explicitly.
 - **No reviewer training.** Reviewers approve plausible-looking AI code at a higher rate than they approve human code. Train them.
 - **Banning the tools.** Drives usage underground and loses audit and policy. Configure and train instead.
-- **One tool, no choice.** Different developers benefit from different tools. Approve all three; let teams pick.
+- **One tool, no rationale.** Different developers benefit from different tools, but procurement and security matter. Approve the smallest set of tools the agency can support well.
 - **AI-generated code with no tests.** The tool will write code without tests if asked. The agency standard is the same as for human code: tests required. Hold the line.
 
 ## Related

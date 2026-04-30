@@ -5,7 +5,7 @@ sidebar:
   order: 3
 ---
 
-The maturity model is the agency's shared "where are we?" vocabulary across six domains: governance, education, infrastructure, development practices, platform, and applications. Use it to confirm a phase's prerequisites are met before starting, and to confirm its outcomes are met before declaring it done. Each level maps to specific milestone gates from the Gantt (G-01 through G-14) so a self-assessment is traceable to the same checkpoints used elsewhere in the guide.
+The maturity model is the agency's shared "where are we?" vocabulary across six domains: governance, education, infrastructure, development practices, platform, and applications. Use it to check whether a phase is ready to start, what risks need a variance, and whether its outcomes are strong enough to call done. Each level maps to specific milestone gates from the Gantt (G-01 through G-14) so a self-assessment is traceable to the same checkpoints used elsewhere in the guide.
 
 ## Four levels
 
@@ -60,7 +60,7 @@ The maturity model is the agency's shared "where are we?" vocabulary across six 
 | ----- | ------------------------------------------------------------------------------ |
 | Crawl | Module taxonomy drafted; interface contracts under review                      |
 | Walk  | First 3 core modules in testing (Auth, Data Grid, API Framework — G-09 met)    |
-| Run   | All 7 core modules complete; module catalog published (G-12 met)               |
+| Run   | Core modules complete for the chosen path; module catalog or registry published (G-12 met) |
 | Fly   | Second-generation modules; IDP operational; modules consumed by other agencies |
 
 ### Applications
@@ -74,4 +74,4 @@ The maturity model is the agency's shared "where are we?" vocabulary across six 
 
 ## How to use this model
 
-Self-assess once at the start of each phase to confirm the prerequisite levels in upstream domains are met (e.g., Phase 3 expects Walk in governance; Phase 6 expects Walk in platform). Self-assess again at the end of the phase to confirm the outcomes have moved the relevant domain forward. The [Readiness Assessment](/getting-started/readiness-assessment/) scorecard maps directly onto these six domains, so its score is the input to a maturity self-assessment rather than a separate exercise.
+Self-assess once at the start of each phase to check upstream readiness (e.g., Phase 3 expects Walk in governance; Phase 6 expects enough platform capability for the selected starter). Self-assess again at the end of the phase to confirm the outcomes have moved the relevant domain forward. The [Readiness Assessment](/getting-started/readiness-assessment/) scorecard maps directly onto these six domains, so its score is the input to a maturity self-assessment rather than a separate exercise.

@@ -9,18 +9,26 @@ The most important conversation in your AI rollout is the one staff are having w
 
 This page is the straight answer kit.
 
-## The non-negotiable: a leadership commitment letter
+## Strongly recommended: a leadership commitment letter
 
-Before any Phase 2 session runs, the executive sponsor (Director, City Manager, CIO, or equivalent) signs a written letter committing to:
+Before broad Phase 2 training runs, the executive sponsor (Director, City Manager, CIO, or equivalent) should sign a written letter committing to:
 
 1. **No AI-driven layoffs** during the 12-month program.
 2. **Time freed by AI augmentation goes to higher-value work, not headcount reduction.**
 3. **Staff displaced by automation will be retrained and reassigned**, not separated, for the duration of the program.
 4. **Annual review.** The commitment is reviewed at Month 13 with the executive team and the union (if applicable). Any change to the commitment is announced with at least 60 days' notice.
 
-If you cannot get this letter signed, **stop**. Do not run Phase 2 training. Without it, every session is received as cover for layoffs and you destroy the trust the program needs to function.
+If you cannot get this letter signed, do not launch broad staff training as if job-impact concerns are resolved. Scope down, run a listening session, or start with a department-level pilot where the sponsor can make a clear commitment. Without some visible commitment, training is easy for staff to read as cover for layoffs.
 
 The letter is not a press release. It is a one-page memo, on agency letterhead, distributed in Track 1 Session 1.1, posted on the agency intranet, and emailed by the executive sponsor (not Comms, not HR — the executive sponsor personally) to all staff in the program scope.
+
+## How this page scales for your agency
+
+| Path | Minimum useful version | Add when capacity exists |
+| ---- | ---------------------- | ------------------------ |
+| Small / no dedicated IT | Signed note from the department head, short FAQ, one manager talking-points card | Role maps for the two or three largest job families |
+| Medium | Executive letter, role maps for major job families, manager talking points, labor briefing if applicable | Pulse survey and quarterly update from the sponsor |
+| Large / federated | Executive letter plus department-level supplements, labor and HR coordination, full role-map library | Bargaining-cycle language, formal change network, recurring public updates |
 
 ### Template
 
@@ -65,14 +73,14 @@ Copy the template below to agency letterhead, fill the fields, route for executi
 
 ## Role evolution maps
 
-For each major job family in your agency, prepare a one-page "before and after" showing how AI changes the role. Use the format below. Keep it specific to the role. Generic maps don't work — staff need to see _their_ job.
+For each major job family in scope, prepare a one-page "before and after" showing how AI changes the role. Use the format below. Keep it specific to the role. Generic maps don't work — staff need to see _their_ job.
 
 ### Format
 
 Each map has four sections:
 
 1. **What stays the same.** The judgment, the relationships, the accountability — these don't move.
-2. **What gets faster.** The 30–60% of work that's repetitive drafting, summarization, lookup, or extraction.
+2. **What gets faster.** The repetitive drafting, summarization, lookup, or extraction work that staff already recognize as paperwork-around-the-work.
 3. **What becomes possible.** The work staff didn't have time to do well. This is where the time savings go.
 4. **New skills required.** What staff will learn during the program. Pair with the relevant Track 1, 6, or 7 content.
 
@@ -80,7 +88,7 @@ Each map has four sections:
 
 **What stays the same.** You still own the case. You still meet with families. You still make eligibility determinations and handle appeals. AI has no role in deciding who is eligible — that is your job, and it is bound by statute, training, and your professional judgment.
 
-**What gets faster.** Drafting routine correspondence. Summarizing case files at intake. Translating documents for non-English-speaking clients (with human review). Extracting structured information from intake forms and uploaded documents. The tedious 25–40% of caseload time that is paperwork-around-the-work, not the work.
+**What gets faster.** Drafting routine correspondence. Summarizing case files at intake. Translating documents for non-English-speaking clients (with human review). Extracting structured information from intake forms and uploaded documents. The tedious caseload time that is paperwork-around-the-work, not the work.
 
 **What becomes possible.** More time with families per case. Earlier follow-up on at-risk cases. Catching patterns across your caseload (recurring service gaps) that you couldn't see when buried in paperwork. The kind of preventive, relational work that case management was supposed to be when the agency was founded.
 
@@ -164,13 +172,13 @@ Track 7 (Middle Managers) trains supervisors on these conversations. The talking
 
 ## Union and labor engagement
 
-If your agency is unionized, do not start Phase 2 until you have done these three things:
+If your agency is unionized, coordinate with labor leadership before broad Phase 2 rollout. At minimum:
 
 1. **Brief the union leadership** on the AI program scope, timeline, and the leadership commitment letter — _before_ the all-staff kickoff. They should not first hear about it the same time the membership does.
-2. **Invite a union representative onto the AI Review Committee.** Voting member, not observer. Their perspective is necessary for Tier-3 reviews and procurement.
+2. **Consider union representation in governance** where appropriate and consistent with labor rules. For many agencies, a labor seat, advisory role, or structured consultation step improves Tier-3 review and procurement legitimacy.
 3. **Include AI-related labor protections in the next bargaining cycle.** Don't promise these in 1:1 conversations; ratify them in the contract. Topics to address: training time as paid work, displaced-staff retraining rights, opt-out for staff in roles where AI is being piloted, grievance process for AI-related concerns.
 
-A unionized rollout that skips these steps will face — correctly — a grievance, an impasse, or a public statement that wipes out the trust you spent six months building.
+A unionized rollout that skips labor engagement risks grievance, impasse, or public opposition that can erase the trust the program needs.
 
 ## What to do if you cannot get the commitment letter
 
@@ -178,9 +186,9 @@ This is the bind some agency program leads find themselves in: the Director will
 
 1. **Reframe and renegotiate.** The Director may be worried about future budget constraints they can't predict. Offer a 12-month commitment with an explicit Year-2 review trigger. This often resolves it.
 2. **Scope down.** If a full agency-wide commitment is not possible, get a department-level commitment for the specific units the program will train. Smaller, signable commitments are better than agency-wide vague ones.
-3. **Defer Phase 2.** If neither works, pause the training program. Run only Phase 1 (governance) and the Track 5 Champions Network as a Year-1 program. Revisit Phase 2 when leadership is ready to commit.
+3. **Defer broad Phase 2 training.** If neither works, pause the broad training program. Run only Phase 1 (governance), leadership briefings, and a small Champions cohort as a Year-1 program. Revisit staff training when leadership is ready to commit.
 
-It is much cheaper to defer training than to run training that loses staff trust.
+It is much cheaper to defer broad training than to run training that loses staff trust.
 
 ## Plain-English Guide to Job-Impact Terms
 
@@ -192,10 +200,10 @@ It is much cheaper to defer training than to run training that loses staff trust
 ## Research basis
 
 - Prosci — _Best Practices in Change Management_, 11th Edition (employee resistance is the #1 cited cause of failed change initiatives).
-- McKinsey — _The State of AI_ report (managers cited as the strongest predictor of team AI adoption).
+- McKinsey — _The State of AI_ report and related adoption research on manager influence in AI rollouts.
 - AFSCME / NEA / NAGE — public-sector labor positions on AI in collective bargaining (2025).
 - City of San Jose — AI deployment communications playbook (cited in GovEx materials).
-- U.S. Office of Personnel Management — Reskilling and Reassignment Frameworks for Federal Workforce.
+- U.S. Office of Personnel Management — federal workforce reskilling and reassignment guidance.
 
 ## Related
 

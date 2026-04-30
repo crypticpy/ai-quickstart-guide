@@ -153,16 +153,18 @@ Re-evaluate in 2028 if cloud strategy changes substantially.
 
 ## ADR storage
 
-ADRs live in code repositories.
+ADRs should live close to the code when possible.
 
 - **Agency-wide ADRs** (e.g., stack selection, observability standard): in `agency/architecture-decisions` — a dedicated repo whose only job is to host ADRs. Numbered sequentially; never renumbered.
 - **Repo-local ADRs**: in each repo's `ADRs/` directory; numbered locally. Cover decisions specific to that repo (e.g., "this service uses Postgres because of X").
+- **Small-agency starter:** a single `ADRs.md` or `architecture-decisions/` folder in the first repo is enough until the program grows.
+- **Records-system mirror:** if official records must live in SharePoint, Teams, Confluence, or a document-management system, keep the Markdown ADR in source control and mirror/export it to the official records location.
 
-ADRs are markdown, lived alongside code, with version control and PR review. Don't put ADRs in Confluence, Google Docs, or SharePoint. They become unfindable.
+ADRs are most useful as Markdown, versioned alongside code, with PR review where available. A document system can be the official record, but engineers still need a stable link from the code to the decision.
 
 ## The workflow
 
-ADRs go through PR like any other change:
+ADRs go through PR like any other change when the agency has a repo workflow:
 
 1. **Author drafts the ADR** as `ADR-NNNN-short-title.md`. Status: `Proposed`.
 2. **PR is opened** with the ADR file. The PR description summarizes the decision in 2 sentences and lists the deciders.
@@ -171,7 +173,7 @@ ADRs go through PR like any other change:
 5. **Status changes to `Accepted`** in the merge commit.
 6. **CI/CD picks it up** if the ADR triggers any tooling change (e.g., a new linter rule).
 
-The full cycle should take days, not weeks. ADRs that languish are signals that the decision isn't ready or the deciders aren't engaged. Either fix the ADR or kill it.
+The full cycle should take days, not weeks. ADRs that languish are signals that the decision isn't ready or the deciders aren't engaged. Either fix the ADR or close it. For a small agency, the same workflow can be a short draft, one review meeting, and a dated accepted entry in the ADR log.
 
 ## Superseding and deprecating
 
@@ -192,7 +194,7 @@ The first 5–8 ADRs every agency writes during Phase 4. The seed list:
 | 0002 | Observability instrumentation      | OTel-first decision                                              |
 | 0003 | LLM provider strategy              | Single vendor, multi-vendor, or adapter-only                     |
 | 0004 | Vector store choice                | pgvector vs. dedicated DB                                        |
-| 0005 | API specification format           | OpenAPI 3.1; code-first or spec-first                            |
+| 0005 | API specification format           | OpenAPI version and code-first or spec-first strategy             |
 | 0006 | Authentication scheme              | OIDC + workload identity                                         |
 | 0007 | Modular monolith vs. microservices | Default for new platform code                                    |
 | 0008 | Eval gate threshold                | What blocks merge                                                |
@@ -233,7 +235,7 @@ ADRs are the narrow durable record of decisions. Everything else has its own hom
 
 - **Too few.** The team makes major decisions in slack messages or hallway conversations and the institutional memory is gone within a year. Write them.
 - **Too many.** Every PR generates an ADR; reviewers stop reading. Apply the bar above.
-- **Stored where nobody finds them.** Confluence pages buried under three folders. Put them in the repo.
+- **Stored where nobody finds them.** Confluence or SharePoint pages buried under three folders. Link them from the repo, or keep Markdown in the repo and mirror to the records system.
 - **Decision-by-committee phrasing.** "We considered both X and Y and may use either depending on circumstances." That's not a decision. Decide.
 - **No deciders named.** A decision belongs to specific people. Name them.
 - **Never updated.** Reality changes; the ADR doesn't. At least mark it superseded or deprecated when the world has moved.

@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-Government work runs on meetings. Most agencies have several hundred staff sitting in meetings at any given moment of the workday, and a substantial fraction of those meetings end with the same problem: someone needs to write up what happened, who agreed to what, and what the action items are. Often it doesn't happen, or it happens late, or it captures only what the note-taker remembers.
+Government work runs on meetings. Many agencies spend substantial staff time in meetings that end with the same problem: someone needs to write up what happened, who agreed to what, and what the action items are. Often it doesn't happen, or it happens late, or it captures only what the note-taker remembers.
 
 A meeting-transcription-and-summarization starter is a tractable, visible win. Recordings already exist (Teams, Zoom, Google Meet); the AI work is well-trodden; the time saved is measurable; the failure modes are mostly recoverable (a wrong action item is corrected by anyone in the room). It exercises a different slice of the platform than the chatbot — heavier on document rendering, less heavy on conversational AI — and gives the team a different practice surface.
 
@@ -30,7 +30,7 @@ Plus the operator-facing surface:
 
 - **Universal pain point.** Almost every staff member sits through too many meetings; almost every staff member has felt the friction of writing up minutes. Adoption motivation is high.
 - **Clear baseline.** "How long did the human note-taker spend?" is a measurable counterfactual. Time-savings are demonstrable.
-- **Recordings already exist.** Teams, Zoom, and Google Meet routinely record. The data is in shape; no ETL.
+- **Recordings may already exist.** Teams, Zoom, Google Meet, and other platforms can record when policy allows it. The data path is usually simpler than a warehouse or document migration.
 - **Heavy module exercise on a different axis.** Document rendering, structured-output prompts, async job pipeline, retention policy. Things the RAG chatbot doesn't touch.
 - **Failure mode is recoverable.** A wrong action item is corrected by anyone in the room. A missed nuance is added back. A bad summary is re-generated.
 
@@ -117,7 +117,7 @@ The async pipeline:
 
 1. User uploads recording. API framework validates, RBAC-checks, writes to object storage.
 2. Job queued for transcription.
-3. Worker fetches recording, calls speech-to-text adapter (Whisper-class or cloud-native).
+3. Worker fetches recording, calls the selected speech-to-text adapter.
 4. Diarization assigns speakers to segments (vendor-specific or a separate diarization pass).
 5. Transcript is stored alongside the recording.
 6. Summarization job kicks off — LLM with a structured-output prompt produces summary + action items.
@@ -128,20 +128,18 @@ The async pipeline:
 
 ## Speech-to-text choice
 
-The platform's [AI orchestration](/phase-5-platform/ai-orchestration-module/) supports vendor-neutral speech-to-text via an adapter. Realistic options:
+The platform's [AI orchestration](/phase-5-platform/ai-orchestration-module/) supports speech-to-text via an adapter. Provider names, features, and pricing change, so evaluate current documentation before selecting one. Realistic categories:
 
-| Provider                            | Notes                                                       |
-| ----------------------------------- | ----------------------------------------------------------- |
-| OpenAI Whisper (API or self-hosted) | Open weights; high quality; multi-language; can run on-prem |
-| Azure AI Speech                     | Strong real-time and batch; speaker diarization             |
-| AWS Transcribe                      | Batch + streaming; speaker labels; PII redaction            |
-| GCP Speech-to-Text                  | Strong on rare-word recall; speaker diarization             |
-| Deepgram, AssemblyAI                | Specialty providers; competitive quality                    |
-| Self-hosted Whisper.cpp             | Cost-effective; data stays on-prem; harder to operate       |
+| Option | Notes |
+| --- | --- |
+| Cloud speech service | Managed batch/streaming transcription, diarization, language support, and enterprise controls vary by provider |
+| Direct model API | Useful when already approved for AI workloads and data handling |
+| Specialty transcription provider | May offer strong diarization, domain vocabulary, or meeting integrations |
+| Self-hosted open model | Better data control; higher operations burden |
 
-For a starter, **the cloud-native option matching Phase 3's primary cloud is the easiest path**. Self-hosted Whisper is a reasonable fit for agencies with on-prem requirements.
+For a starter, **the managed option that already fits Phase 3 networking, procurement, and data-handling controls is usually the easiest path**. Self-hosted models are a reasonable fit for agencies with on-prem or data-isolation requirements and the staff to operate them.
 
-Speech-to-text costs are usually 5–10x the LLM summarization cost for an hour of audio. Track this in the cost dashboard from day one.
+Speech-to-text may dominate the cost for an hour of audio, depending on provider and summarization model. Track transcription and summarization separately in the cost dashboard from day one.
 
 ## The summarization prompt
 
@@ -197,7 +195,7 @@ Mitigations:
 
 - **Cite the timestamp.** Each action item carries the timestamp range from the transcript where it was discussed. The user can jump to that segment.
 - **Quote, don't paraphrase.** The prompt instructs verbatim quoting for the originating utterance.
-- **Human approval is mandatory.** No action item leaves the system without a human approving. The system suggests; the human ratifies.
+- **Human approval is the starter default.** No action item should leave the system without a human approving. The system suggests; the human ratifies.
 - **Eval cases.** Run summarization against a curated set of meeting transcripts where action items are known. Track recall (action items found) and precision (action items that aren't phantom).
 
 ## Eval suite
@@ -218,11 +216,11 @@ Metrics:
 - **Owner accuracy:** when an owner is named, is it the right person?
 - **Date accuracy:** when a date is extracted, is it the right one?
 
-Threshold for the starter: ≥ 85% recall + 90% precision on action items. Below these and the system suggests too many false positives or misses too many real ones; either way, users lose trust.
+Starter target: at least 85% recall and 90% precision on action items. Tune by meeting type and risk; below the local threshold, the system suggests too many false positives or misses too many real ones.
 
 ## Speaker diarization
 
-Diarization (assigning utterances to specific speakers) is harder than transcription. Realistic accuracy: 85–95% on clean recordings; lower on noisy ones, on overlapping speech, on phone-call audio.
+Diarization (assigning utterances to specific speakers) is harder than transcription. Accuracy varies by provider, audio quality, overlapping speech, accents, microphones, and whether an attendee list is available.
 
 The platform's stance:
 
@@ -257,13 +255,13 @@ For a starter — upload mode — the uploader has implicitly consented to share
 
 ## Cost ceiling
 
-A typical meeting (45 min audio):
+Example budget shape for a typical meeting:
 
-- **Transcription:** ~$0.30–$0.60 (cloud-native rates; lower with self-hosted Whisper).
-- **Summarization:** ~$0.05–$0.20 (mid-tier model with structured output).
-- **Total:** ~$0.50/meeting at the high end.
+- **Transcription:** usually priced by audio minute or hour.
+- **Summarization:** usually priced by input/output tokens or model call.
+- **Storage/retention:** object storage, transcript storage, and records holds can matter at scale.
 
-At 100 meetings/day across a pilot agency: $50/day, ~$15K/year. Manageable. The cost dashboard surfaces per-team and per-user totals; per-team budgets prevent runaway usage.
+Use current provider pricing and expected meeting volume to estimate monthly cost. The cost dashboard surfaces per-team and per-user totals; per-team budgets prevent runaway usage.
 
 ## Build sprints (Months 7–10)
 

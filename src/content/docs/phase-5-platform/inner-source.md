@@ -5,7 +5,7 @@ sidebar:
   order: 10
 ---
 
-A platform with 5 maintainers and 50 consumers will fail. The 50 consumers will hit edge cases the 5 maintainers can't predict, and the maintainer team will become a queue of feature requests they can't service. Inner source — running internal repositories with the norms of an open-source project — is how the platform scales beyond its founding team.
+A platform with a small maintainer team and many consumers can become a bottleneck. The consumers will hit edge cases the maintainers cannot predict, and the maintainer team can become a queue of feature requests they cannot service. Inner source — running internal repositories with the norms of an open-source project — is one way the platform scales beyond its founding team.
 
 The principle: any developer in the agency can fix, improve, or extend a platform module. They submit a PR; the module owners review it; if accepted, it merges. The module owners remain accountable for direction and quality, but contribution is not gated by org chart or staffing pipeline.
 
@@ -17,11 +17,11 @@ Three concrete reasons.
 2. **The maintainer team stays small.** Inner source lets the platform team punch above its weight. Fixes accumulate from across the agency without requiring corresponding headcount on the platform team.
 3. **Consumers feel ownership.** A team that has shipped code into the platform treats it differently than a team that consumes a black box. They report bugs more carefully, propose features more thoughtfully, and tolerate change more graciously.
 
-The pattern was originated at PayPal in the early 2010s and has been adopted across most large engineering organizations. The federal precedent — CMS established the first agency OSPO (Open Source Program Office) in 2024 — gives government adopters a documented model.
+The pattern was popularized by PayPal in the early 2010s and has been adopted across many large engineering organizations. Government teams can also borrow practices from agency Open Source Program Offices and internal contribution programs. Smaller agencies do not need a formal OSPO to start; a named maintainer and a simple contribution guide are enough for the first few modules.
 
 ## What "inner source" requires
 
-Inner source is not "make the repo readable." It is a small set of practices that, applied consistently, change how the platform develops.
+Inner source is not just "make the repo readable." It is a small set of practices that, applied consistently, change how the platform develops.
 
 | Practice                   | What it means                                                             |
 | -------------------------- | ------------------------------------------------------------------------- |
@@ -59,7 +59,7 @@ Every non-trivial change starts as an issue. The issue describes:
 - The desired outcome.
 - Optional: rough proposal.
 
-Issues stay open while design is discussed. Maintainers triage within 5 working days — accept, reject with rationale, or request more info. Issues that linger for weeks are a signal that the maintainer queue is backed up; either staff up or push back on scope.
+Issues stay open while design is discussed. A useful target is maintainer triage within 5 working days — accept, reject with rationale, or request more info. Smaller teams can publish a slower SLA, but unanswered issues should be treated as a signal that the maintainer queue is backed up.
 
 ### Design discussion
 
@@ -113,7 +113,7 @@ Every module has one. The agency's standard structure:
 
 - Branch naming: <username>/<short-description>.
 - Commit message conventions: see Coding Standards.
-- The CI must pass; coverage and eval thresholds apply.
+- The CI should pass; coverage and eval thresholds apply where the module has those gates.
 - One reviewer approval to merge; some changes need two.
 
 ## Review expectations
@@ -149,7 +149,7 @@ Many agencies establish an Open Source Program Office to run inner source (and a
 - **Outreach.** New developers learn about inner source through OSPO programming.
 - **External open source** (where allowed). The agency may contribute back to upstream OSS projects — OSPO is the path.
 
-CMS's OSPO (established 2024) is the federal reference; HHS, GSA, and 18F are following. Smaller agencies don't need a full OSPO — a designated point person on the platform team is often enough.
+Agencies with an OSPO can use it as the home for inner-source policy, templates, and escalation. Smaller agencies do not need a full OSPO — a designated point person on the platform team is often enough.
 
 ## Visibility and discoverability
 
@@ -187,7 +187,7 @@ Maintainers commit to:
 ## Common inner-source failures
 
 - **Inner source as a label, not a practice.** "We're inner source!" with no CONTRIBUTING, no public roadmap, no review responsiveness. Contributions don't materialize because the practice isn't real.
-- **Maintainer queue blocks contribution.** Maintainers are too busy to review; PRs sit for weeks; contributors give up. Either staff up review or scale back what's accepted.
+- **Maintainer queue blocks contribution.** Maintainers are too busy to review; PRs sit for weeks; contributors give up. Either staff up review, promote trusted committers, or scale back what's accepted.
 - **Hostile reviews.** A senior engineer's tone in a PR scares away a contributor. Norms above must be enforced; the OSPO escalates persistent issues.
 - **Style-only rejection.** "I would have written this differently" is not a rejection reason. Match the codebase, but don't impose personal preference.
 - **Forking instead of contributing.** A team facing a slow contribution path forks the module and maintains its own version. Worst outcome — fragmentation. Inner source has to be faster than the fork.
@@ -198,8 +198,8 @@ Maintainers commit to:
 
 - **Time-to-first-review** for first-time contributors.
 - **Time-to-merge** by tier (trivial, standard, architectural).
-- **Number of unique contributors per quarter** (target: growing).
-- **Number of repos with >3 distinct contributors** (target: most of them).
+- **Number of unique contributors per quarter** (target: growing once the platform has consumers).
+- **Number of repos with more than one active contributor** (target grows with agency size).
 - **Maintainer satisfaction** (separate survey; sustained low scores predict collapse).
 - **Contribution funnel** (issue → draft → ready → merged) — drop-off points are diagnostic.
 

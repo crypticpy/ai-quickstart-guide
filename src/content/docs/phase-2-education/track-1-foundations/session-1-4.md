@@ -31,7 +31,7 @@ Same as Sessions 1.1–1.3. Pre-requisite: Sessions 1.1 and 1.3 (1.2 strongly re
 
 1. **Recap of the three-tier model** (5 min). Tier 1, 2, 3 — what each means in plain language. Show the matrix from the [Risk Classification](/phase-1-governance/risk-classification/) page on screen. Don't go through every dimension; emphasize the "rule of thumb" line: if a real person can lose a benefit, job, custody, housing, freedom, or money because of the AI's output, it's High.
 2. **Live demo of the intake form** (10 min). Walk through the form with a real example — ideally a use case that came up during Session 1.3 group discussion. Show how filling in the audience, decision impact, and data fields produces a provisional tier. Show the export and what the markdown looks like.
-3. **What happens after you submit** (5 min). Email the file to the intake mailbox. Initial tier proposed by the AI program lead. Review Committee confirms or escalates at the next standing meeting. You'll hear back within 15 business days.
+3. **What happens after you submit** (5 min). Email the file to the intake mailbox. Initial tier proposed by the AI program lead. Review Committee confirms or escalates at the next standing meeting. You'll hear back according to the agency's published response target; 15 business days is a useful example, not a universal rule.
 4. **Common intake mistakes** (5 min). Five quick examples from the [intake page](/phase-2-education/use-case-intake/) — too broad, no measurable outcome, solution looking for a problem, vendor as sponsor, data sensitivity left blank. Reading these aloud beats hearing them in the rejection email.
 5. **The committee is on your side** (5 min). The committee's job is not to say no. Most submissions get approved, often with adjustments. The committee's job is to make the path from idea to deployment safe. Frame this clearly — staff who think the committee is a gate submit fewer ideas.
 
@@ -60,7 +60,7 @@ After the quiz, run the closing share-out:
 
 ## 10-minute closing
 
-Wrap-up: the committee meets every other week. Submissions made today are on the next agenda. Each attendee will hear back within 15 business days. The Champions Network onboards next quarter; nominations are open.
+Wrap-up: the committee meets on the agency's standing cadence. Submissions made today go into the next review cycle. Each attendee will hear back according to the local response target. The Champions Network onboards next quarter; nominations are open.
 
 Thank the room. Track 1 is complete for this cohort.
 
@@ -69,7 +69,7 @@ Thank the room. Track 1 is complete for this cohort.
 - **"What if I'm wrong about the tier?"** "The provisional tier is a starting point. The committee makes the final call, and they may adjust based on context only they have. Wrong-but-submitted is much better than right-but-not-submitted. Submit the form."
 - **"Can I submit more than one?"** "Yes. We'd rather have three rough ideas than one polished one. The committee can triage."
 - **"What if my idea overlaps with someone else's?"** "Submit anyway. Overlap is signal that the committee should consolidate or pick a single sponsor. They'll handle the merging."
-- **"Will I be told if my idea is rejected?"** "You'll be told the decision either way, with the rationale, within 15 business days. Rejections are rare; 'hold for later' is more common, and that's not a no — that's 'we need additional controls before we can deploy this safely.'"
+- **"Will I be told if my idea is rejected?"** "You'll be told the decision either way, with the rationale, according to the local response target. Rejections are rare; 'hold for later' is more common, and that's not a no — that's 'we need additional controls before we can deploy this safely.'"
 - **"Can I take this idea outside the program?"** "If you mean: 'can I just go use a consumer AI tool with our data?' — no. That's an AUP violation. If you mean: 'can I keep working on it informally' — yes, but the committee has resources you don't, and you'll move faster through them. Submit it."
 
 ## Async fallback

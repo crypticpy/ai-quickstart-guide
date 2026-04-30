@@ -5,17 +5,31 @@ sidebar:
   order: 4
 ---
 
-The job of coding standards is not to make every file look the same. It is to remove the categories of disagreement that consume PR review time and make code review about the things that actually matter — design, behavior, edge cases — rather than spaces vs. tabs. Every standard on this page is enforced in CI. If a rule cannot be enforced, do not write it as a rule; write it as guidance.
+The job of coding standards is not to make every file look the same. It is to remove the categories of disagreement that consume PR review time and make code review about the things that actually matter — design, behavior, edge cases — rather than spaces vs. tabs. Mature teams enforce these standards in CI. Smaller teams can start with a local command and PR checklist, then move repeated checks into CI as the pipeline matures. If a rule cannot be enforced, write it as guidance.
 
-## What is enforced (the bar)
+## Minimum enforcement set
 
-Every repository in the agency platform meets the following bar. Phase 3's CI/CD pipeline enforces it; the agency's reference implementation models it.
+For the first Tier-1 pilot or a small agency without a mature CI/CD setup, start here:
+
+| Surface | Minimum standard |
+| --- | --- |
+| Format / lint | One command runs locally and in CI where available |
+| Tests | At least unit tests for changed behavior; a documented test command |
+| Secret scan | Pre-commit or CI scan; any real secret blocks merge |
+| Dependency scan | Critical vulnerabilities reviewed before production-bound deploys |
+| PR checklist | What changed, why, how tested, data handled, risk |
+| Logging | No secrets, tokens, or full PII in logs |
+| AI-generated code | Human reads the diff and tests before commit/merge |
+
+## Standard enforcement bar
+
+Every repository in the agency platform should work toward the following bar. Phase 3's CI/CD pipeline enforces it when available; the agency's reference implementation models it.
 
 | Surface         | Standard                                                                                   |
 | --------------- | ------------------------------------------------------------------------------------------ |
 | Lint            | Stack-appropriate linter passes with zero warnings (no warnings-as-errors-with-exceptions) |
 | Format          | Stack-appropriate formatter has been run; CI blocks unformatted commits                    |
-| Type check      | Strict type checking passes (TS strict, mypy strict, .NET nullable enabled, etc.)          |
+| Type check      | Strict type checking for new repos; migration plan or baseline for legacy repos             |
 | Test coverage   | ≥75% line coverage on new code; module owners can raise the bar                            |
 | Secret scan     | Pre-commit hook + CI scan; any match blocks merge                                          |
 | Dependency scan | License compliance + critical CVE block in CI                                              |
@@ -23,8 +37,8 @@ Every repository in the agency platform meets the following bar. Phase 3's CI/CD
 | PR title        | Same Conventional Commits format                                                           |
 | PR size         | Soft cap at ~400 lines changed; large PRs require justification in description             |
 | PR description  | Filled-in template — what / why / how to test / risk                                       |
-| Branch lifetime | ≤2 days; auto-close branches inactive for 14 days                                          |
-| Squash on merge | Required. The merge commit message is the PR title.                                        |
+| Branch lifetime | Short-lived branches preferred; branch aging bot is a maturity add                         |
+| Squash on merge | Recommended default. The merge commit message is the PR title.                             |
 
 ## Per-language tool choices
 
@@ -51,7 +65,7 @@ The point is not which tool but to pick one and run it everywhere.
 - **Lint + format:** Roslyn analyzers + `dotnet format`. `<TreatWarningsAsErrors>true` in shared `Directory.Build.props`.
 - **Style:** `.editorconfig` published from the agency's shared config repo.
 - **Test runner:** `xUnit` (recommended) or `NUnit`. `FluentAssertions` for readable assertions.
-- **Nullability:** `<Nullable>enable</Nullable>` everywhere.
+- **Nullability:** `<Nullable>enable</Nullable>` for new projects; legacy projects adopt via a baseline and migration plan.
 
 ### Java
 
@@ -105,12 +119,13 @@ The reason: changelog generation, semantic versioning automation, and PR triage 
 
 The standard agency PR review:
 
-- **Two reviewers** for production code; **one** for documentation, infra, and tests-only changes.
-- **One reviewer must be from the module's CODEOWNERS** for that path.
-- **No author self-merge.** A reviewer merges or the PR sits.
+- **Minimum:** one qualified reviewer for production-bound code. In a one-developer agency, this may be a contractor, shared-service engineer, manager sponsor for low-risk changes, or after-the-fact review for urgent fixes.
+- **Standard:** two reviewers for production code; one for documentation, infra, and tests-only changes.
+- **Large/regulated:** one reviewer from the module's CODEOWNERS or equivalent ownership map for that path.
+- **No routine author self-merge.** If emergency self-merge is allowed, document the exception and require follow-up review.
 - **Required checks** all green: lint, type, unit, contract, eval (if AI), security scan, license scan.
 - **Required PR description fields:** what, why, how to test, risk. Empty descriptions block merge.
-- **Stale PRs** (no activity for 7 days) get a nudge bot ping; abandoned (14 days) get auto-closed with a "reopen if still relevant" comment.
+- **Stale PRs** (no activity for 7 days) get a nudge; abandoned PRs are closed or marked stale on a cadence the team can sustain.
 
 What reviewers actually look for, in order:
 
@@ -145,7 +160,7 @@ Every dependency is a long-term commitment. Standards:
 
 ## Logging
 
-- **Structured logs only** (JSON) in production. Free-text `print()` and `console.log()` are forbidden in committed code.
+- **Structured logs** (JSON or the platform's structured format) in production. Free-text `print()` and `console.log()` should not remain in production code.
 - Use the stack's idiomatic structured logger (`structlog` Python; `pino` Node; Serilog .NET; `logback` + `logstash-logback-encoder` Java; `zap` or `slog` Go).
 - Every log carries `trace_id` and `span_id` from the active OTel context (the [observability foundation](/phase-3-infrastructure/observability/) injects these automatically).
 - **Never log secrets, tokens, or full PII.** Use a redaction filter at the logger or rely on the logger's drop-key configuration.
@@ -168,11 +183,11 @@ Every dependency is a long-term commitment. Standards:
 
 For frontend code:
 
-- **All user-visible strings** go through the i18n layer; no hard-coded English in components.
+- **User-visible strings** go through the i18n layer when the agency has multilingual requirements or a design system that requires it. For internal-only tools, document whether English-only is acceptable.
 - **Semantic HTML.** Buttons are buttons, links are links. ARIA only where semantics fall short.
 - **Color contrast** WCAG AA minimum; AAA for primary text.
 - **Keyboard reachability** for every interactive element. Tab order makes sense.
-- **CI accessibility check** with `axe-core` or `pa11y`. Block merge on regressions.
+- **Accessibility check** with `axe-core`, `pa11y`, manual review, or the agency's design-system process. CI blocking is the standard/large maturity target.
 
 ## Comments and documentation
 

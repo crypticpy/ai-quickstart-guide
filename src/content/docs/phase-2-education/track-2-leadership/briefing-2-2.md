@@ -42,7 +42,7 @@ A single slide. The dimensions and the tier definitions. The "rule of thumb" lin
 The committee is not a gate. It is a clearinghouse. Walk through the actual rhythm:
 
 - **Bi-weekly standing meetings**, 60 minutes. Average agenda: 1–2 Tier-2 reviews, batch consent for Tier-1, vendor questionnaire reviews, occasional incident debrief.
-- **Tier-3 deep-dives**, ad-hoc, 60–90 minutes when an item is queued. Includes legal and equity officer.
+- **Tier-3 deep-dives**, ad-hoc, 60–90 minutes when an item is queued. Includes counsel and any privacy, equity, civil-rights, labor, community, or program advisors the use case calls for.
 - **Annual policy review**, once per fiscal year, with the [Approving Body](/phase-1-governance/review-committee/) for AUP and matrix amendments.
 
 Cite the [Review Committee Charter](/phase-1-governance/review-committee/) page for composition and decision rules. Note that the committee is a **standing body**, not a project. It needs a named chair, a recurring meeting on the calendar, and a budget for staff time, not a heroic side project.
@@ -51,15 +51,15 @@ Cite the [Review Committee Charter](/phase-1-governance/review-committee/) page 
 
 The two cross-cutting items leadership needs to understand:
 
-- **OMB M-25-21 / M-25-22.** April 2025 memoranda that supersede M-24-10 and M-24-18. Federal agencies must inventory and report AI use cases, including high-impact ones, with a designated Agency AI Official. State and local agencies are not bound by OMB but increasingly adopt the framework as a model.
-- **State law.** Colorado AI Act (effective 2026), Texas TRAIGA, California SB 942, similar legislation in 8+ other states. Most have disclosure, impact assessment, and contestation requirements for high-risk AI. The committee is the agency's mechanism for tracking and responding to these.
+- **Federal AI governance memos.** Current OMB AI governance and acquisition memos directly bind covered federal agencies. State and local agencies are not bound unless a grant, contract, state rule, or local policy incorporates them, but many use the framework as reference material.
+- **State and local law.** Colorado, Texas, California, Utah, New York City, and other jurisdictions have enacted or proposed AI, automated-decision, disclosure, privacy, procurement, or surveillance rules. Effective dates and scope change, so counsel should verify the current requirements before the committee relies on them.
 
-The implication: chartering the committee is not optional in any state where AI legislation has passed. The question is whether to charter it deliberately now or reactively after the agency draws scrutiny.
+The implication: a standing review path is the practical way to keep up with changing obligations. The question is whether to set it up deliberately now or reactively after the agency draws scrutiny.
 
 ## 20-minute structured discussion
 
 1. **Who chairs?** This is the critical decision. The chair must have authority across IT, legal, and program departments: typically a CIO designee, a deputy city manager, or a named AI Program Lead. The chair is not a vendor or a consultant.
-2. **Who serves?** The room confirms or adjusts the recommended composition (CIO/CISO, legal, HR, equity, rotating program owner, community advisor for Tier-3). Naming people changes the dynamic from "we should set this up" to "this is the body, by name."
+2. **Who serves?** The room confirms or adjusts the recommended composition: technology/security, legal or procurement, HR or records, privacy, equity or civil-rights where applicable, rotating program owner, and outside advisors for Tier-3 when needed. Naming people changes the dynamic from "we should set this up" to "this is the body, by name."
 3. **What's the first agenda?** The committee's first meeting typically reviews the AUP draft, ratifies the tier matrix, and triages the first wave of intake submissions. Setting expectations for the first meeting reduces anxiety about the standing rhythm.
 
 ## 10-minute decision close
@@ -72,7 +72,7 @@ The decision is captured in the takeaway memo and transmitted to the [Approving 
 
 - **"Can we just have the CIO sign off and skip the committee?"** No. Single-owner governance fails three ways (centralized risk, missed domain context, doesn't scale). The committee distributes both the work and the legitimacy.
 - **"Will this slow down our existing IT projects?"** Tier-1 work is faster, not slower. Tier-2 work takes 2–4 weeks for committee approval; that's typically less than the procurement and legal review timeline anyway. Tier-3 work takes longer, appropriately.
-- **"Do we really need an equity officer on it?"** Yes, especially for Tier-3. Disparate-impact assessment and public trust are the core competencies of the role. If the agency does not have a designated equity officer, name a senior staff member who carries that perspective.
+- **"Do we really need an equity officer on it?"** You need access to equity, civil-rights, or disparate-impact expertise for Tier-3 use cases. If the agency does not have a designated equity officer, name the role or outside advisor that carries that perspective.
 - **"What if we charter it and it doesn't meet?"** The most common failure mode. The chair needs to be senior enough to enforce attendance and the committee needs a recurring slot with executive backing. If you cannot guarantee that, defer.
 
 ## Materials

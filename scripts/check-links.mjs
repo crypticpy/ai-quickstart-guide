@@ -5,6 +5,7 @@ const root = process.cwd();
 const docsDir = path.join(root, "src/content/docs");
 const files = walk(docsDir).filter((file) => /\.(md|mdx)$/.test(file));
 const routes = new Set(["/"]);
+const publicDir = path.join(root, "public");
 
 for (const file of files) {
   const rel = path.relative(docsDir, file).replaceAll(path.sep, "/");
@@ -14,6 +15,13 @@ for (const file of files) {
       ? `/${parsed.dir ? `${parsed.dir}/` : ""}`
       : `/${parsed.dir ? `${parsed.dir}/` : ""}${parsed.name}/`;
   routes.add(route);
+}
+
+if (fs.existsSync(publicDir)) {
+  for (const file of walk(publicDir).filter((entry) => fs.statSync(entry).isFile())) {
+    const publicPath = `/${path.relative(publicDir, file).replaceAll(path.sep, "/")}`;
+    routes.add(publicPath);
+  }
 }
 
 const failures = [];
@@ -71,6 +79,7 @@ function normalizeInternal(raw) {
   }
   const withoutHash = raw.split("#")[0].split("?")[0];
   if (!withoutHash || withoutHash === "/") return "/";
+  if (path.extname(withoutHash)) return withoutHash;
   const withSlash = withoutHash.endsWith("/") ? withoutHash : `${withoutHash}/`;
   return withSlash;
 }

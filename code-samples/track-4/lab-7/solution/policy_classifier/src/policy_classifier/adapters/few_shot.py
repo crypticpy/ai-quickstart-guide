@@ -30,7 +30,7 @@ def _format_examples(examples: list[dict]) -> str:
 class FewShotClaudeAdapter(Classifier):
     def __init__(
         self,
-        model: str = "claude-sonnet-4-5",
+        model: str = "claude-sonnet-4-20250514",
         api_key: str | None = None,
         examples: list[dict] | None = None,
     ):

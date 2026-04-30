@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-Almost every credential leak that becomes a public incident has the same root cause: a long-lived secret stored in a place it shouldn't be — a CI variable, an env file, a wiki page, a Slack message. The Phase 3 secrets discipline removes the temptation by making the right path easier than the wrong path: every secret lives in one well-known store, every retrieval is identity-bound, and every rotation is automatic.
+Almost every credential leak that becomes a public incident has the same root cause: a long-lived secret stored in a place it shouldn't be — a CI variable, an env file, a wiki page, a Slack message. The Phase 3 secrets discipline removes the temptation by making the right path easier than the wrong path: every secret lives in one well-known store, every retrieval is identity-bound, and every rotation has an owner and a tested path.
 
 ## Decision: cloud-native vs. HashiCorp Vault
 
@@ -23,7 +23,7 @@ Most agencies should start with the cloud-native option. It is simpler, fully ma
 ### AWS — Secrets Manager + Parameter Store
 
 - **AWS Secrets Manager** for API keys, database credentials, third-party OAuth tokens. Built-in rotation for RDS, Aurora, DocumentDB, Redshift; custom rotation via Lambda for everything else.
-- **AWS Systems Manager Parameter Store (SecureString)** for configuration that is sensitive but not rotated (e.g., long-lived Anthropic API key). Cheaper for high-volume reads.
+- **AWS Systems Manager Parameter Store** for configuration values and lower-sensitivity parameters, including SecureString when appropriate. Use Secrets Manager for API keys that need rotation, audit focus, or vendor integration.
 - **Authorization.** IAM role grants `secretsmanager:GetSecretValue` scoped to specific secret ARNs. No wildcards in production.
 - **Encryption.** All secrets encrypted with a customer-managed KMS key (CMK), not the AWS-managed default. Tier-3 workloads use a CMK with key policy restricting decrypt to specific roles.
 - **Rotation.** Enable automatic rotation; default 30 days for credentials that support rotation, 90 days for static API keys (with manual replacement).
@@ -53,24 +53,24 @@ When the agency decides Vault is justified:
 - **PKI engine** for internal certificate authority — issues short-lived service certificates for mTLS.
 - **Transit engine** for application-level encryption (encryption-as-a-service) without exposing keys to applications.
 
-Operating Vault is non-trivial: HA storage backend, unsealing strategy, audit log handling, upgrade discipline. Plan for a 0.5–1.0 FTE platform engineer dedicated to it. If that capacity does not exist, stay with cloud-native.
+Operating Vault is non-trivial: HA storage backend, unsealing strategy, audit log handling, upgrade discipline. It requires meaningful platform operations capacity. If that capacity does not exist, stay with cloud-native.
 
 ## Secret-zero handling
 
 "Secret zero" is the credential a workload uses to retrieve other secrets. The whole architecture stands or falls on it.
 
-The right answer: **the secret zero is the cloud's workload identity itself**. The workload doesn't have a starting password — it has a cloud-issued, identity-bound credential it gets at startup automatically. From there it can authorize to the secrets store.
+The preferred answer: **the secret zero is the cloud's workload identity itself**. The workload doesn't have a starting password — it has a cloud-issued, identity-bound credential it gets at startup automatically. From there it can authorize to the secrets store.
 
 - **AWS:** IAM role attached to the compute resource. EC2 instance profile, ECS task role, EKS IRSA, Lambda execution role. The metadata service hands the workload credentials at startup; the workload uses them to call Secrets Manager.
 - **Azure:** Managed identity assigned to the resource. Container Apps, AKS, App Service, VMs. The IMDS endpoint hands a token; the workload uses it to call Key Vault.
 - **Google:** Attached service account. Cloud Run, GKE, GCE. The metadata service issues tokens; the workload uses them to call Secret Manager.
 - **External (CI runners, on-prem):** OIDC federation back to the cloud, exchanging the runner's OIDC token for a cloud-issued credential. No starting secret in the runner.
 
-If the architecture requires a literal "starting secret" stored in a workload's environment, that is a Phase 3 design failure to fix, not a constraint to work around.
+If the architecture requires a literal "starting secret" stored in a workload's environment, treat it as a temporary exception: document the owner, scope, rotation path, expiry date, and migration plan to workload identity.
 
 ## Rotation discipline
 
-Rotation matters more than length or complexity. Every secret needs:
+Rotation matters more than length or complexity. The table below gives starter defaults to confirm against agency security policy, contract language, and vendor capability. Every secret needs:
 
 - A defined rotation period (30 / 60 / 90 / 365 days).
 - An automated rotation path (or, if manual, a calendar reminder and an explicit owner).
@@ -89,16 +89,17 @@ Common rotations:
 
 Calendar a quarterly "rotation drill": pick one rotated secret at random, verify the rotation path executes, and confirm the workload survives. The drills find rotation paths that were configured once and quietly broke.
 
-## Application access pattern
+## Application access patterns
 
-The application code should never see the secret store. The recommended layered pattern:
+Pick the simplest pattern that the runtime supports and the security team can audit:
 
-1. The cloud injects an identity into the workload (managed identity / IAM role / service account).
-2. A sidecar or init container retrieves the needed secrets at startup using that identity (e.g., `secrets-store-csi-driver` on Kubernetes, Container Apps secret references, Cloud Run secret mounts).
-3. Secrets are projected as environment variables or mounted files in the workload's filesystem with restrictive permissions.
-4. The workload reads them as ordinary config and never re-fetches.
+| Pattern | When to use | Notes |
+| --- | --- | --- |
+| Runtime secret reference or mount | Managed services such as Container Apps, App Runner/ECS, Cloud Run, or Kubernetes with a secrets driver | Keeps app code simple; watch environment-variable exposure in crash dumps and debug tooling |
+| Sidecar or init container | Kubernetes or container platforms with strong sidecar support | Useful when the app should not call the secret API directly |
+| SDK retrieval with workload identity | Apps that need refresh without restart or dynamic secret selection | Acceptable when access is least-privilege, audited, cached carefully, and never logged |
 
-For AI workloads specifically: the Anthropic / OpenAI API key is mounted at startup, the workload constructs the SDK client with it, and the rest of the code uses the client object. No code path takes a "secret" string in its function signature.
+For AI workloads specifically: if a direct provider API key is unavoidable, the workload retrieves or receives the per-environment key through one of these patterns, constructs the SDK client, and keeps the raw key out of logs, traces, function signatures, and error messages.
 
 ## Key management
 
@@ -125,7 +126,7 @@ Constituent personal data sometimes ends up in places that are not application s
 - TLS certificates for public endpoints. Use the cloud's load-balancer-integrated certificate manager.
 - Code or schema. Source control owns code; the secrets store should be small and high-value.
 
-A bloated secrets store is a sign of misuse. Phase 3 baseline: under ~200 secrets per environment for most agencies.
+A bloated secrets store is a sign to review ownership and duplication. Watch for orphaned secrets, environment copies that drift, unclear owners, and configuration values that do not belong in the secrets store.
 
 ## Common secrets failures
 

@@ -9,20 +9,22 @@ import {
 const NEXT_30: Record<AgencySize, string[]> = {
   Small: [
     "Book a 2-day governance sprint with counsel.",
-    "Run the readiness assessment with IT, legal, and one department sponsor.",
+    "Run the readiness assessment with the closest technical owner, legal, and one department sponsor.",
     "Adopt the AUP and risk-tier matrix with minimal edits.",
     "Schedule Track 1 for all staff in small cohorts.",
     "Name 4-6 champions and one manager sponsor.",
     "Create the intake mailbox or SharePoint folder.",
-    "Pick one managed AI service to evaluate under procurement guardrails.",
+    "Create one starter repo template with format, test, and secret-scan commands.",
+    "Pick one approved AI SaaS or managed AI service to evaluate with synthetic data.",
   ],
   Standard: [
-    "Convene the Review Committee and confirm membership.",
+    "Convene the Review Committee or review group and confirm membership.",
     "Run readiness assessment and baseline maturity scoring.",
     "Start Track 1, Track 2, Track 3, and Track 7 planning.",
     "Draft AUP, risk tiers, and procurement addendum.",
     "Open the intake form and seed 10 candidate use cases.",
-    "Start cloud sandbox request with security review.",
+    "Start a cloud sandbox or approved SaaS sandbox request with security review.",
+    "Confirm the primary dev stack and starter repo template.",
     "Set milestone reporting cadence for the executive sponsor.",
   ],
   Large: [

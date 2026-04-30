@@ -1,4 +1,4 @@
-"""Lab 4.1 starter: three classifiers for constituent intake messages.
+"""Lab 4.2 starter: three classifiers for constituent intake messages.
 
 Fill in each TODO. The tests in test_classifier.py drive the work.
 
