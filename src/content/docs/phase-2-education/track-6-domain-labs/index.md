@@ -2,7 +2,8 @@
 title: Track 6 — Domain Expert Labs
 description: Role-specific applied workshops where domain experts learn to evaluate AI outputs in their actual work — not generic AI literacy.
 sidebar:
-  order: 13
+  label: Overview
+  order: 0
 ---
 
 Track 6 is where AI literacy becomes _domain_ literacy. Generic AI training tells a case worker what a hallucination is; the Domain Lab teaches the same case worker how to spot a hallucinated SNAP eligibility cut-off using their own professional judgment. The lab format puts domain experts in the seat where the work actually happens — reviewing AI outputs against their own caseload, their own statutes, their own templates — and trains the evaluation reflex that no horizontal training can produce.

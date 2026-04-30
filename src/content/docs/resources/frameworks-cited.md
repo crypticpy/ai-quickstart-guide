@@ -2,7 +2,7 @@
 title: Frameworks Cited
 description: Versioned references for the frameworks the playbook draws from (NIST AI RMF, OMB M-25-21, OMB M-25-22, SLSA, SPACE) with notes on where each is load-bearing.
 sidebar:
-  order: 9
+  order: 6
 ---
 
 > **Why this page exists.** Each phase of the playbook cites at least one external framework as research basis. This page consolidates those citations in one place, with version numbers, and explains specifically where each framework is load-bearing in the guide. The goal is twofold: make the citations auditable for an agency that needs to defend its choices to a board or legislature, and make it obvious where the playbook will need an update when a framework version changes.

@@ -2,7 +2,8 @@
 title: Track 7 — Middle Manager Enablement
 description: Three 75-minute sessions equipping supervisors and team leads to coach their staff through the AI transition.
 sidebar:
-  order: 14
+  label: Overview
+  order: 0
 ---
 
 Most AI curricula treat middle managers as either "leadership" or "all staff." Track 7 treats them as the audience they actually are: the people whose teams will adopt or quietly refuse the new tools, and whose answers to "is the AI going to take my job" will be louder than any official statement from leadership.

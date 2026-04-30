@@ -2,7 +2,7 @@
 title: Upgrading the Guide
 description: How an agency that forked the guide on an earlier version brings in fixes, new content, and structural changes from a later release without losing local edits.
 sidebar:
-  order: 6
+  order: 16
 ---
 
 The AI Quickstart Guide ships as a GitHub template repository. When you click "Use this template," your fork is a snapshot of the guide at that moment — not a live link back to upstream. Versions move forward; your fork stays where you forked it unless you pull updates in. This page is the upgrade procedure.

@@ -2,7 +2,7 @@
 title: Template Library
 description: Copy-ready AI program artifacts for launch, governance, procurement, manager coaching, budget approval, and production sign-off.
 sidebar:
-  order: 2
+  order: 3
 ---
 
 Use these templates when you need a practical starting point faster than a blank page. Replace every bracketed placeholder, delete anything that does not apply, and route the final version through your agency's normal legal, HR, procurement, or communications review.
@@ -42,10 +42,10 @@ Owner: [AI Review Committee]
 Last updated: [date]
 Next review: [date]
 
-| Tool | Approved use | Max data allowed | Risk tier | Conditions | Owner |
-| ---- | ------------ | ---------------- | --------- | ---------- | ----- |
+| Tool        | Approved use                                             | Max data allowed                               | Risk tier    | Conditions                                             | Owner  |
+| ----------- | -------------------------------------------------------- | ---------------------------------------------- | ------------ | ------------------------------------------------------ | ------ |
 | [Tool name] | [Drafting, summarization, code assistance, search, etc.] | [Public / internal / confidential / regulated] | [Tier 1/2/3] | [No PII, human review required, logging enabled, etc.] | [Name] |
-| [Tool name] | [Approved use] | [Max data class] | [Tier] | [Conditions] | [Name] |
+| [Tool name] | [Approved use]                                           | [Max data class]                               | [Tier]       | [Conditions]                                           | [Name] |
 
 ## Rules
 
@@ -67,10 +67,10 @@ Department/team: [name]
 Manager: [name]
 Date: [date]
 
-| Workflow | Who does it? | Volume | Time spent | Pain point | Data used | Public impact | AI fit |
-| -------- | ------------ | ------ | ---------- | ---------- | --------- | ------------- | ------ |
-| [Task] | [Role] | [per week/month] | [hours] | [repetitive, slow, error-prone, backlog, etc.] | [public/internal/confidential/regulated] | [none/internal/public/rights/safety] | [low/medium/high] |
-| [Task] | [Role] | [per week/month] | [hours] | [pain point] | [data class] | [impact] | [fit] |
+| Workflow | Who does it? | Volume           | Time spent | Pain point                                     | Data used                                | Public impact                        | AI fit            |
+| -------- | ------------ | ---------------- | ---------- | ---------------------------------------------- | ---------------------------------------- | ------------------------------------ | ----------------- |
+| [Task]   | [Role]       | [per week/month] | [hours]    | [repetitive, slow, error-prone, backlog, etc.] | [public/internal/confidential/regulated] | [none/internal/public/rights/safety] | [low/medium/high] |
+| [Task]   | [Role]       | [per week/month] | [hours]    | [pain point]                                   | [data class]                             | [impact]                             | [fit]             |
 
 ## Best candidate
 
@@ -275,16 +275,16 @@ Business owner: [name]
 Technical owner: [name]
 Target launch date: [date]
 
-| Criterion | Status | Evidence | Owner |
-| --------- | ------ | -------- | ----- |
-| Real users are named and ready | [green/yellow/red] | [link or note] | [name] |
-| Eval suite runs and thresholds are enforced | [green/yellow/red] | [link or note] | [name] |
-| On-call coverage is published and tested | [green/yellow/red] | [link or note] | [name] |
+| Criterion                                         | Status             | Evidence       | Owner  |
+| ------------------------------------------------- | ------------------ | -------------- | ------ |
+| Real users are named and ready                    | [green/yellow/red] | [link or note] | [name] |
+| Eval suite runs and thresholds are enforced       | [green/yellow/red] | [link or note] | [name] |
+| On-call coverage is published and tested          | [green/yellow/red] | [link or note] | [name] |
 | Cost per query/user is measured and within budget | [green/yellow/red] | [link or note] | [name] |
-| Audit logging meets records/privacy requirements | [green/yellow/red] | [link or note] | [name] |
-| Rollback plan exists and was rehearsed | [green/yellow/red] | [link or note] | [name] |
-| User feedback channel is live and monitored | [green/yellow/red] | [link or note] | [name] |
-| Retirement condition is documented | [green/yellow/red] | [link or note] | [name] |
+| Audit logging meets records/privacy requirements  | [green/yellow/red] | [link or note] | [name] |
+| Rollback plan exists and was rehearsed            | [green/yellow/red] | [link or note] | [name] |
+| User feedback channel is live and monitored       | [green/yellow/red] | [link or note] | [name] |
+| Retirement condition is documented                | [green/yellow/red] | [link or note] | [name] |
 
 Decision: [go / conditional go / no-go]
 Conditions, if any: [specific actions, owners, due dates]

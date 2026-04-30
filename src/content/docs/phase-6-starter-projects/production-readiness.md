@@ -2,7 +2,7 @@
 title: Production Readiness Checklist
 description: Eight criteria a starter project must meet before launch — what separates a pilot from a production AI deployment.
 sidebar:
-  order: 3
+  order: 8
 ---
 
 The production readiness checklist is the gate between "we tried it with a small group" (pilot) and "real users are using it for real work, on call is real, and we can't quietly turn it off" (launch). Most starter projects fail not at build but at this gate — the system works, the users like the demo, but one of the eight criteria below has been quietly skipped. The checklist exists to surface that gap before launch day rather than during the first incident.

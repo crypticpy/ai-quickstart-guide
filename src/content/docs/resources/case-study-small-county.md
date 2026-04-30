@@ -2,7 +2,7 @@
 title: "Case Study: Small County Clerk"
 description: A rural county clerk's office (~28K residents, 2 IT staff) ran the playbook's governance phase, then off-ramped at Phase 2 with a complete standalone outcome.
 sidebar:
-  order: 4
+  order: 9
 ---
 
 > **Composite case study.** This narrative is built from interviews with three small-county engagements; the agency name is fictional, the numbers are representative.

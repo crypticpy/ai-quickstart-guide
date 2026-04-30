@@ -2,7 +2,8 @@
 title: Track 1 — AI Foundations
 description: Four sessions for all staff to build shared language and realistic expectations about AI in their agency.
 sidebar:
-  order: 11
+  label: Overview
+  order: 0
 ---
 
 Track 1 is the only track that runs for **every staff member**, technical or not. It moves the organization from "I've heard of AI" to "I see how this helps my work" — the ADKAR Awareness-to-Desire transition.

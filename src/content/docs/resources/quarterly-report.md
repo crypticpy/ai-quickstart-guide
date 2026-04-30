@@ -2,7 +2,7 @@
 title: Quarterly Milestone Report Template
 description: A fill-in template for executive sponsors. Reports progress vs the 14 milestone gates, ROI vs plan, risks, and asks. One page per quarter; legible in eight minutes.
 sidebar:
-  order: 7
+  order: 13
 ---
 
 > **What this is.** A pre-formatted quarterly report your sponsor can read in eight minutes. It maps to the 14 milestone gates from the [Gantt and Dependencies page](/resources/gantt-and-dependencies/) and follows the structure that the medium-city and large-state [case studies](/resources/case-studies/) used for sponsor reporting. Copy the markdown below into your reporting cadence and edit in place.

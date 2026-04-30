@@ -2,7 +2,7 @@
 title: "Case Study: Mid-Size City Public Health"
 description: A mid-size city public health department (~280K residents, 8 IT staff) shipped a Tier-2 RAG chatbot in 11 months and a full platform foundation in Year 2.
 sidebar:
-  order: 5
+  order: 10
 ---
 
 > **Composite case study.** This narrative is built from interviews with two mid-size public health engagements; the agency name is fictional, the numbers are representative.

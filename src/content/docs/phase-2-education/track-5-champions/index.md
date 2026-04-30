@@ -2,7 +2,8 @@
 title: Track 5 — AI Champions Network
 description: Distributed network of staff volunteers who model good AI use, support peers, and surface intake candidates from inside their teams.
 sidebar:
-  order: 12
+  label: Overview
+  order: 0
 ---
 
 The Champions Network is the agency's distributed change capacity. Champions are staff who volunteer (or are nominated) to be the first to try new tools, the people peers ask informally for help, and the early-warning system that catches what the AI program lead would otherwise miss. They are not trainers and not enforcers — they are the trusted neighbor in each team who has already tried the thing.

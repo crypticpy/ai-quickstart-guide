@@ -2,7 +2,7 @@
 title: Completed Examples
 description: Filled examples for common AI governance, intake, ROI, reporting, and production readiness artifacts.
 sidebar:
-  order: 3
+  order: 12
 ---
 
 These examples show the level of specificity reviewers should expect. They are intentionally short. Use them as models, not as legal or procurement approval.
@@ -154,14 +154,14 @@ The program cleared G-03: Governance Framework Adopted. Training reached 214 sta
 
 ## Headline numbers
 
-| Metric | This quarter | Plan |
-| ------ | ------------ | ---- |
-| Use cases in production | 0 | 0 |
-| Use cases in pilot | 2 | 2 |
-| Net annual benefit estimated | $118,000 | $100,000 |
-| Cumulative spend | $76,000 | $85,000 |
-| Staff trained | 214 / 400 | 200 / 400 |
-| Policy incidents | 0 | 0 |
+| Metric                       | This quarter | Plan      |
+| ---------------------------- | ------------ | --------- |
+| Use cases in production      | 0            | 0         |
+| Use cases in pilot           | 2            | 2         |
+| Net annual benefit estimated | $118,000     | $100,000  |
+| Cumulative spend             | $76,000      | $85,000   |
+| Staff trained                | 214 / 400    | 200 / 400 |
+| Policy incidents             | 0            | 0         |
 
 ## What shipped
 
@@ -172,10 +172,10 @@ The program cleared G-03: Governance Framework Adopted. Training reached 214 sta
 
 ## Risks
 
-| Risk | Probability | Impact | Owner | Mitigation |
-| ---- | ----------- | ------ | ----- | ---------- |
-| Procurement delay for drafting tool | Medium | Medium | Procurement Manager | Use existing approved tool for pilot while contract terms are finalized. |
-| Manager capacity for coaching | High | Medium | HR Director | Add two Track 7 sessions in October. |
+| Risk                                | Probability | Impact | Owner               | Mitigation                                                               |
+| ----------------------------------- | ----------- | ------ | ------------------- | ------------------------------------------------------------------------ |
+| Procurement delay for drafting tool | Medium      | Medium | Procurement Manager | Use existing approved tool for pilot while contract terms are finalized. |
+| Manager capacity for coaching       | High        | Medium | HR Director         | Add two Track 7 sessions in October.                                     |
 
 ## Asks
 
@@ -195,16 +195,16 @@ Technical owner: Platform Lead
 Review date: March 18, 2027
 Target launch: April 7, 2027
 
-| Criterion | Status | Evidence |
-| --------- | ------ | -------- |
-| Real users named | Green | 18 permit counter staff listed in launch memo. |
-| Eval thresholds enforced | Green | CI blocks deploy below 85% grounded-answer score. |
-| On-call tested | Green | Test page acknowledged in 4 minutes on March 12. |
-| Cost measured | Yellow | Expected monthly cost is $1,900 against $2,500 budget; alert not yet configured. |
-| Audit log reviewed | Green | Records officer approved schema and 1-year retention. |
-| Rollback rehearsed | Green | Staging rollback completed in 9 minutes. |
-| Feedback monitored | Green | Feedback routes to ServiceNow queue with 2-day SLA. |
-| Retirement condition documented | Green | Retire if usage is below 50 weekly searches for two quarters. |
+| Criterion                       | Status | Evidence                                                                         |
+| ------------------------------- | ------ | -------------------------------------------------------------------------------- |
+| Real users named                | Green  | 18 permit counter staff listed in launch memo.                                   |
+| Eval thresholds enforced        | Green  | CI blocks deploy below 85% grounded-answer score.                                |
+| On-call tested                  | Green  | Test page acknowledged in 4 minutes on March 12.                                 |
+| Cost measured                   | Yellow | Expected monthly cost is $1,900 against $2,500 budget; alert not yet configured. |
+| Audit log reviewed              | Green  | Records officer approved schema and 1-year retention.                            |
+| Rollback rehearsed              | Green  | Staging rollback completed in 9 minutes.                                         |
+| Feedback monitored              | Green  | Feedback routes to ServiceNow queue with 2-day SLA.                              |
+| Retirement condition documented | Green  | Retire if usage is below 50 weekly searches for two quarters.                    |
 
 Decision: Conditional go.
 

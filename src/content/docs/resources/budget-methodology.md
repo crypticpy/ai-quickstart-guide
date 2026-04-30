@@ -2,7 +2,7 @@
 title: Budget Methodology
 description: How to estimate Year 1 cost for an agency AI program with sourced inputs and a downloadable spreadsheet.
 sidebar:
-  order: 80
+  order: 4
 ---
 
 ## What this page replaces

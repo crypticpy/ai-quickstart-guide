@@ -2,7 +2,8 @@
 title: Track 4 — Developer Upskilling
 description: Hands-on technical track for developers, data engineers, and platform staff who will build, deploy, and maintain AI-augmented systems.
 sidebar:
-  order: 11
+  label: Overview
+  order: 0
 ---
 
 Track 4 is the only Phase 2 track that produces working code. Its audience is the developers, data engineers, and platform staff who will integrate Claude (or whichever foundation model the agency procures) into agency systems — the people building the eval harnesses, retrieval pipelines, agent loops, and observability that the rest of the program relies on. Without Track 4, the platform is a vendor product. With Track 4, the agency owns the integration competence and can sustain the platform past Year 1.

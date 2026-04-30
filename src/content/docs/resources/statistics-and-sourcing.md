@@ -2,7 +2,7 @@
 title: Statistics and Sourcing
 description: Every numerical claim made in this guide, with a link back to the underlying source.
 sidebar:
-  order: 90
+  order: 5
 ---
 
 ## Why this page exists

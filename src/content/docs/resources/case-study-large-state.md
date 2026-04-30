@@ -2,7 +2,7 @@
 title: "Case Study: State Revenue Department"
 description: A state revenue / tax department (~6M residents served, 60+ IT staff) shipped two Tier-2 production apps and four platform modules in Year 1, with inner-source kicked off in Year 2.
 sidebar:
-  order: 6
+  order: 11
 ---
 
 > **Composite case study.** This narrative is built from interviews with two state revenue / tax engagements and one large state benefits-administration engagement; the agency name is fictional, the numbers are representative.

@@ -2,7 +2,7 @@
 title: Gantt & Dependency Map
 description: The 12-month timeline, the 14 milestone gates that mark measurable progress, and the hard dependencies between phases.
 sidebar:
-  order: 10
+  order: 14
 ---
 
 > **What this page is.** A consolidated view of the timeline, the gates that prove progress, and the hard dependencies you cannot skip. The Gantt at the bottom of this page renders directly from Mermaid source — copy it into any Mermaid renderer (e.g., [mermaid.live](https://mermaid.live)) for slide decks or printed playbooks.

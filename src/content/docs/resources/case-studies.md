@@ -2,7 +2,7 @@
 title: Comparable Agency Case Studies
 description: Three composite case studies — small, medium, and large agencies — showing how the playbook plays out at different sizes and budgets.
 sidebar:
-  order: 3
+  order: 8
 ---
 
 > **A note on sourcing.** These three case studies are composites — built from interviews and published reports across multiple agencies, then anonymized. The numbers, timelines, and decision points are realistic for agencies of the stated size; the specific agency names are not real. We chose the composite format because most agencies that successfully run a 12-month adoption can't or won't publish the full internal narrative, and a half-told story is less useful than a fully-told composite.

@@ -2,7 +2,7 @@
 title: Offline Pack
 description: How to use release PDF, DOCX, and Markdown artifacts when staff cannot access the live site.
 sidebar:
-  order: 4
+  order: 15
 ---
 
 Some agencies cannot rely on GitHub Pages during training, council briefings, or field work. The release workflow publishes an offline pack containing:

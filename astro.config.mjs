@@ -99,8 +99,49 @@ export default defineConfig({
         },
         {
           label: 'Phase 2 — Culture & Education',
-          autogenerate: { directory: 'phase-2-education' },
           collapsed: true,
+          items: [
+            { label: 'Phase 2 — Culture & Education', link: '/phase-2-education/' },
+            { label: 'Change Management Playbook (ADKAR)', link: '/phase-2-education/change-management/' },
+            { label: 'Job-Impact Messaging Kit', link: '/phase-2-education/job-impact-messaging/' },
+            { label: 'Sustainability Playbook (Months 7–12+)', link: '/phase-2-education/sustainability/' },
+            { label: 'AI Use Case Intake Form', link: '/phase-2-education/use-case-intake/' },
+            {
+              label: 'Track 1 — AI Foundations',
+              collapsed: true,
+              autogenerate: { directory: 'phase-2-education/track-1-foundations' },
+            },
+            {
+              label: 'Track 2 — Leadership & Strategy',
+              collapsed: true,
+              autogenerate: { directory: 'phase-2-education/track-2-leadership' },
+            },
+            {
+              label: 'Track 3 — Governance & Compliance',
+              collapsed: true,
+              autogenerate: { directory: 'phase-2-education/track-3-governance' },
+            },
+            {
+              label: 'Track 4 — Developer Upskilling',
+              collapsed: true,
+              autogenerate: { directory: 'phase-2-education/track-4-developers' },
+            },
+            {
+              label: 'Track 5 — AI Champions Network',
+              collapsed: true,
+              autogenerate: { directory: 'phase-2-education/track-5-champions' },
+            },
+            {
+              label: 'Track 6 — Domain Expert Labs',
+              collapsed: true,
+              autogenerate: { directory: 'phase-2-education/track-6-domain-labs' },
+            },
+            {
+              label: 'Track 7 — Middle Manager Enablement',
+              collapsed: true,
+              autogenerate: { directory: 'phase-2-education/track-7-middle-managers' },
+            },
+          ],
         },
         {
           label: 'Phase 3 — Infrastructure',

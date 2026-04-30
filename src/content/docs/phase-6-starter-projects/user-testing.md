@@ -2,7 +2,7 @@
 title: User Testing Protocol
 description: How to run user acceptance testing (UAT) for an AI starter project — recruit, structure sessions, capture feedback, decide go/no-go.
 sidebar:
-  order: 4
+  order: 9
 ---
 
 User acceptance testing for an AI system is not the same exercise as UAT for a traditional application. Traditional UAT validates the workflow — does the form submit, does the report run, can the user complete the task. AI UAT validates the workflow _plus_ the AI's behavior on edge cases the eval suite missed. Recruiting, scenarios, and signal capture all need adjustment, because users react to model outputs in ways an automated eval suite cannot.

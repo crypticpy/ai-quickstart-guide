@@ -2,7 +2,7 @@
 title: Deployment Runbook Template
 description: The launch-day script for a starter project — pre-launch tasks, the go/no-go gate, the launch-day timeline, and the first 30 days of operation.
 sidebar:
-  order: 8
+  order: 10
 ---
 
 A deployment runbook is the script the team follows to take the starter project from "ready in staging" to "real users using it on Monday morning." Without a runbook, launches are improvised; improvised launches surface issues that should have been caught a week earlier and stress the on-call team unnecessarily. The runbook is the agency's promise to itself that launch day is boring.

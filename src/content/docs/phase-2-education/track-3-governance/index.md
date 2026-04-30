@@ -2,7 +2,8 @@
 title: Track 3 — Governance & Compliance
 description: Five 90-minute working sessions that produce the Phase 1 governance artifacts — not lecture, applied work.
 sidebar:
-  order: 13
+  label: Overview
+  order: 0
 ---
 
 Track 3 is unusual in two ways. First, every session produces a real artifact — not a quiz, a deliverable that goes into the agency's AI governance package. Second, the audience is small and specific: policy analysts, privacy officers, legal counsel, CISOs, and compliance staff who own this work day-to-day.

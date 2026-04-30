@@ -2,7 +2,7 @@
 title: Legislative Tracker
 description: Where to look for current AI legislation, plus an agency-side compliance checklist that maps a small set of laws to the controls already in this playbook.
 sidebar:
-  order: 8
+  order: 7
 ---
 
 > **What this is, and is not.** This is not a maintained tracker. State AI legislation moves faster than a documentation site can keep up; 45 states introduced AI bills in 2025 and one in three states had something material on the table going into 2026. Trying to maintain a per-state list here would mean shipping outdated information within months. Instead, this page does two things: (1) point you to the maintained external trackers that _are_ kept current, and (2) give you a one-pass compliance checklist that maps the laws most likely to apply to a US public agency to the controls already documented in this playbook. The checklist is the durable part; the underlying laws will change, but the questions you have to answer about your agency rarely change.

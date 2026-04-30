@@ -2,7 +2,8 @@
 title: Track 2 — Leadership & Strategy
 description: Four 60-minute executive briefings for directors, CIOs, and elected officials' staff. High-signal, low-jargon, decision-driven.
 sidebar:
-  order: 12
+  label: Overview
+  order: 0
 ---
 
 Track 2 is for the people who control budget, hiring, and political risk. Their time is measured in 15-minute blocks, their patience for vendor pitches is exhausted, and their AI exposure is mostly headlines and the occasional polished demo. Track 2 corrects for this.

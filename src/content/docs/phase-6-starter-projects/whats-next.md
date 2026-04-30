@@ -2,7 +2,7 @@
 title: What's Next — After the Starter Project
 description: Sustainability practices and the decision tree for project number two.
 sidebar:
-  order: 7
+  order: 11
 ---
 
 Launching the starter project is not the end of Phase 6. The first two weeks after launch are not "done" — on-call is real, the eval suite is catching regressions, the user feedback mechanism is filling up, and the cost dashboard is showing whether the projection matched reality. This is the time the team learns what running an AI product feels like. Do not start the next project. Finish this one's first incident response and first cost reconciliation before turning attention elsewhere.
