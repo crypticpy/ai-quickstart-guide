@@ -1,13 +1,13 @@
 ---
-title: 90-Day Quickstart Checklist
-description: Week-by-week tasks for the first 90 days. Designed so a small IT team can show tangible progress without getting lost in research.
+title: Quickstart Checklist
+description: Week-by-week tasks for the first quarter of AI adoption. Designed so a small IT team can show tangible progress without getting lost in research.
 sidebar:
   order: 2
 ---
 
-This checklist turns the guide into a first-90-days operating plan. It assumes the agency starts with scattered interest in AI, no formal governance process, and limited staff time. The goal is not to deploy a major AI system in 90 days. The goal is to create the minimum durable structure: policy, intake, training, sandbox planning, and a small backlog of reviewed use cases.
+This checklist turns the guide into a first-quarter operating plan. It is organized as 13 weekly steps: roughly one calendar quarter, or about 65 business days. It assumes the agency starts with scattered interest in AI, no formal governance process, and limited staff time. The goal is not to deploy a major AI system in the quickstart window. The goal is to create the minimum durable structure: policy, intake, training, sandbox planning, and a small backlog of reviewed use cases.
 
-Use the week-by-week plan as written if you need a default. Compress only when the same people own multiple workstreams and can actually meet; extend when legal, procurement, or security review has fixed calendar constraints.
+Use the week-by-week plan as written if you need a default. Treat the sequence as a starting cadence, not a deadline. Compress only when the same people own multiple workstreams and can actually meet; extend when legal, procurement, security, budget, or council review has fixed calendar constraints.
 
 ## At a glance
 
@@ -25,7 +25,7 @@ Use the week-by-week plan as written if you need a default. Compress only when t
 | 10 | Start infrastructure planning | IT/cloud lead | Sandbox target design and procurement path |
 | 11 | Set security baseline | Security + cloud lead | Data, identity, logging, and egress controls |
 | 12 | Pick starter candidates | Review Committee | Shortlist of reviewed starter projects |
-| 13 | Publish the 90-day readout | Program lead + sponsor | Report, next-quarter plan, and decision requests |
+| 13 | Publish the quarterly readout | Program lead + sponsor | Report, next-quarter plan, and decision requests |
 
 ## Week 1: Name the mandate
 
@@ -34,9 +34,9 @@ Use the week-by-week plan as written if you need a default. Compress only when t
 | Owners | Executive sponsor, CIO/IT director, AI program lead |
 | Time estimate | 3-5 hours total |
 | Use | [Pick Your Path](/getting-started/pick-your-path/), [Pre-Funding Checklist](/getting-started/pre-funding-checklist/) |
-| Done when | A named executive sponsor has assigned an AI program lead, approved a 90-day scope, and identified a small working group with IT, legal, HR/training, security, data, and one operational department. |
+| Done when | A named executive sponsor has assigned an AI program lead, approved a quickstart scope, and identified a small working group with IT, legal, HR/training, security, data, and one operational department. |
 
-Write a one-page sponsor memo: why the agency is starting, what is in scope for 90 days, what is out of scope, and who can make decisions. Do not start with a large committee. Start with a working group small enough to meet weekly.
+Write a one-page sponsor memo: why the agency is starting, what is in scope for the first quarter, what is out of scope, and who can make decisions. Do not start with a large committee. Start with a working group small enough to meet weekly.
 
 **Small:** One sponsor, one program lead, one IT/security lead, one department manager, and legal consulted as needed.
 
@@ -57,7 +57,7 @@ Run the readiness assessment as a group, not as a solo survey. The value is in t
 
 **Small:** Score quickly and focus on the two gaps that block safe experimentation.
 
-**Standard:** Convert gaps into a 90-day action register with owner, date, and decision needed.
+**Standard:** Convert gaps into a first-quarter action register with owner, date, and decision needed.
 
 **Large:** Score by major department or bureau, then compare patterns before setting priorities.
 
@@ -106,7 +106,7 @@ Keep the first version practical. The tier model should help a manager decide wh
 
 The committee should be able to say "yes, with conditions" as often as it says "no." Its job is to make AI use legible, reviewed, and supportable, not to turn every idea into a legal proceeding.
 
-**Small:** Combine committee and working group for the first 90 days, with legal/security sign-off on higher-risk items.
+**Small:** Combine committee and working group for the quickstart window, with legal/security sign-off on higher-risk items.
 
 **Standard:** Establish a monthly committee plus weekly staff triage by the program lead.
 
@@ -231,7 +231,7 @@ Choose for learning and feasibility, not headlines. The best first starter usual
 
 **Large:** Build a portfolio mix: one low-risk internal tool, one operational workflow, and one longer-range high-value candidate that needs more governance work.
 
-## Week 13: Publish the 90-day readout
+## Week 13: Publish the quarterly readout
 
 | Item | Details |
 | ---- | ------- |
@@ -240,7 +240,7 @@ Choose for learning and feasibility, not headlines. The best first starter usual
 | Use | [Quarterly Report](/resources/quarterly-report/), [Gantt and Dependencies](/resources/gantt-and-dependencies/), [Upgrading the Program](/resources/upgrading/) |
 | Done when | Leadership receives a short report covering decisions made, training progress, intake pipeline, risks, blockers, starter candidates, and the next-quarter ask. |
 
-The readout should make the next decision easy. State what changed in 90 days, what remains blocked, what funding or authority is needed, and which workstream owns the next quarter.
+The readout should make the next decision easy. State what changed during the quickstart window, what remains blocked, what funding or authority is needed, and which workstream owns the next quarter.
 
 **Small:** Ask for continued program-lead time, limited tool budget, and authority to run one starter discovery.
 
@@ -248,7 +248,7 @@ The readout should make the next decision easy. State what changed in 90 days, w
 
 **Large:** Ask for a funded program increment covering platform team staffing, enterprise controls, procurement vehicles, and department adoption support.
 
-## Minimum 90-day evidence pack
+## Minimum quickstart evidence pack
 
 Keep these artifacts in one shared location:
 
@@ -262,4 +262,4 @@ Keep these artifacts in one shared location:
 - Champions roster and office-hour schedule.
 - Sandbox/security baseline decisions.
 - Starter-project shortlist.
-- 90-day readout and next-quarter plan.
+- Quarterly readout and next-quarter plan.

@@ -54,7 +54,7 @@ export default defineConfig({
             { label: 'Welcome', link: '/' },
             { label: 'Readiness Assessment', link: '/getting-started/readiness-assessment/' },
             { label: 'Pick Your Path', link: '/getting-started/pick-your-path/' },
-            { label: '90-Day Quickstart', link: '/getting-started/quickstart-checklist/' },
+            { label: 'Quickstart Checklist', link: '/getting-started/quickstart-checklist/' },
             { label: 'Maturity Model', link: '/getting-started/maturity-model/' },
             { label: 'Glossary', link: '/getting-started/glossary/' },
           ],

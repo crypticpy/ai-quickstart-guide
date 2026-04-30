@@ -9,7 +9,7 @@ This glossary favors plain language over vendor jargon. The definitions are inte
 
 ## 0-9
 
-**90-day quickstart.** The first operating cycle in this guide: set policy, launch intake, start training, plan infrastructure, and choose starter candidates before attempting a major deployment.
+**Quickstart checklist.** The first-quarter operating cycle in this guide: set policy, launch intake, start training, plan infrastructure, and choose starter candidates before attempting a major deployment.
 
 ## A
 
