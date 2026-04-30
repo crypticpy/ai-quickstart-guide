@@ -24,7 +24,7 @@ Same Track 3 audience plus the agency's compliance officer or designee. General 
 ## Materials
 
 - The Phase 1 [Legislative Compliance](/phase-1-governance/legislative-compliance/) matrix.
-- Federal framework summaries: NIST AI RMF 1.0, OMB M-24-10, OMB M-25-22.
+- Federal framework summaries: NIST AI RMF 1.0, OMB M-25-21 (April 2025; supersedes M-24-10), OMB M-25-22 (April 2025; supersedes M-24-18).
 - State law summaries: Colorado AI Act, Texas TRAIGA, California SB 942, similar legislation in any other operating jurisdictions.
 - The agency's existing compliance calendar (records, FOIA, breach notification, etc.) for cross-reference.
 
@@ -32,8 +32,8 @@ Same Track 3 audience plus the agency's compliance officer or designee. General 
 
 The facilitator walks through the regulatory landscape:
 
-1. **Federal frameworks.** NIST AI RMF (voluntary but referenced by procurement); OMB M-24-10 and M-25-22 (binding on federal agencies; widely adopted as model by state/local).
-2. **State laws.** Comprehensive AI laws in 8+ states with disclosure, impact assessment, and contestation requirements; sector-specific laws (employment, healthcare, education) in many more.
+1. **Federal frameworks.** NIST AI RMF (voluntary but referenced by procurement); OMB M-25-21 and M-25-22 (April 2025, supersede M-24-10 and M-24-18; binding on federal agencies; widely adopted as model by state/local).
+2. **State laws.** Broad AI laws in 8+ states with disclosure, impact assessment, and contestation requirements; sector-specific laws (employment, healthcare, education) in many more.
 3. **Local laws.** TRUST Act (Oakland), CCOPS (San Francisco, Seattle, others), surveillance ordinances. Apply when the agency is in scope.
 
 The scope filter: **what laws apply to your agency, in your jurisdictions, for your AI use cases?** Not every state law applies to every agency. The session narrows the scope.
@@ -67,14 +67,14 @@ The output is a use-case-by-law cross-tab that the Review Committee uses when re
 The compliance matrix usually surfaces 5–15 named action items. Examples:
 
 - "Colorado AI Act effective 2026-02-01: file impact assessment for [use case X] by Q1."
-- "OMB M-24-10 inventory due quarterly; AI program lead owns submission."
+- "OMB M-25-21 inventory due quarterly; AI program lead owns submission."
 - "TRUST Act applies to surveillance technology procurement; Review Committee adds CCOPS impact statement to Tier-3 review checklist."
 
 The room prioritizes:
 
-- **Tier 1 — must-do this quarter.** Hard deadlines, statutory penalties, or active litigation risk.
-- **Tier 2 — must-do this year.** Soft deadlines, ongoing disclosure obligations, audit-readiness.
-- **Tier 3 — track.** Pending or proposed legislation that may apply but isn't yet enacted.
+- **Tier 1, must-do this quarter.** Hard deadlines, statutory penalties, or active litigation risk.
+- **Tier 2, must-do this year.** Soft deadlines, ongoing disclosure obligations, audit-readiness.
+- **Tier 3, track.** Pending or proposed legislation that may apply but isn't yet enacted.
 
 ### Block D — Monitoring rhythm (5 min)
 
@@ -82,7 +82,7 @@ Decide how the matrix gets updated. Recommended rhythm:
 
 - **Quarterly review** by the AI program lead and compliance officer. Update statuses, add new laws.
 - **Annual deep review** by the Review Committee with General Counsel. Confirm scope and priorities.
-- **Real-time updates** when new legislation passes — the AI program lead and compliance officer monitor the trade press and counsel sources (NCSL, NACo, ICMA legal updates).
+- **Real-time updates** when new legislation passes; the AI program lead and compliance officer monitor the trade press and counsel sources (NCSL, NACo, ICMA legal updates).
 
 Name the owner of the quarterly update and the annual review chair.
 
@@ -97,9 +97,9 @@ The facilitator reads back the matrix and the prioritized action items. The outp
 
 ## Common questions and how to handle them
 
-- **"What if a law is ambiguous?"** Document the ambiguity, get a written legal interpretation from counsel, and act on the interpretation. Keep the documentation — if the interpretation is wrong, the audit trail shows good-faith effort.
+- **"What if a law is ambiguous?"** Document the ambiguity, get a written legal interpretation from counsel, and act on the interpretation. Keep the documentation; if the interpretation is wrong, the audit trail shows good-faith effort.
 - **"What if we operate in 50 states?"** Most agencies don't. For those that do (federal, multi-state nonprofits, large school districts), the matrix becomes a substantial document. Prioritize the laws with binding deadlines and impact assessments first.
-- **"Do federal frameworks apply to local agencies?"** OMB memos directly bind federal agencies. State and local agencies are not bound but are increasingly adopting the framework as a model — and federal grant compliance often references it.
+- **"Do federal frameworks apply to local agencies?"** OMB memos directly bind federal agencies. State and local agencies are not bound but are increasingly adopting the framework as a model, and federal grant compliance often references it.
 - **"What about the EU AI Act?"** Generally does not apply to U.S. domestic agencies. Applies if the agency provides services to or processes data of EU residents, which is rare for state and local agencies. Document the analysis if there's any doubt.
 
 ## Closing — Track 3 wrap
@@ -116,7 +116,7 @@ Together these constitute the **complete Phase 1 governance package**, customize
 
 ## Related
 
-- [Legislative Compliance](/phase-1-governance/legislative-compliance/) — source page and full matrix
-- [Phase 1 — Governance](/phase-1-governance/) — the package this track produces
-- [Track 2 — Leadership](/phase-2-education/track-2-leadership/) — the executive context
-- [Sustainability Playbook](/phase-2-education/sustainability/) — how the committee sustains the work past Year 1
+- [Legislative Compliance](/phase-1-governance/legislative-compliance/): source page and full matrix
+- [Phase 1 — Governance](/phase-1-governance/): the package this track produces
+- [Track 2 — Leadership](/phase-2-education/track-2-leadership/): the executive context
+- [Sustainability Playbook](/phase-2-education/sustainability/): how the committee sustains the work past Year 1

@@ -1,19 +1,19 @@
 ---
 title: Phase 5 — Modular Platform Build
-description: Build the reusable module library — the "70% already solved" that makes future apps take weeks instead of months. Months 5–10.
+description: Build the reusable module library, the "70% already solved" that makes future apps take weeks instead of months. Months 5–10.
 sidebar:
   order: 1
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Phase 5 is where the agency stops paying integration tax. The platform is not a product; it is a small library of well-bounded modules that every future application will compose. When the next intake submission becomes a project, 70% of the answer should already exist as code in the platform — auth, RBAC, data access, API plumbing, document rendering, AI orchestration. The team building the new application writes the 30% that is genuinely about the use case.
+Phase 5 is where the agency stops paying integration tax. The platform is not a product; it is a small library of well-bounded modules that every future application will compose. When the next intake submission becomes a project, 70% of the answer should already exist as code in the platform: auth, RBAC, data access, API plumbing, document rendering, AI orchestration. The team building the new application writes the 30% that is genuinely about the use case.
 
 This is the longest phase (six months) and the most consequential. A platform that ships works for a decade. A platform that doesn't gets quietly abandoned and each team rebuilds the same things forever.
 
 ## Objective
 
-Build seven core modules — independently testable, documented, versioned — with a coherent module taxonomy, an inner-source contribution model, a registry for discoverability, and an Internal Developer Platform (IDP) that exposes the platform's capabilities through self-service paths.
+Build seven core modules (independently testable, documented, versioned) with a coherent module taxonomy, an inner-source contribution model, a registry for discoverability, and an Internal Developer Platform (IDP) that exposes the platform's capabilities through self-service paths.
 
 ## How this phase scales for your agency
 
@@ -22,7 +22,7 @@ Build seven core modules — independently testable, documented, versioned — w
 
 **1–3 lightweight modules on managed infrastructure.** Don't try to build seven modules from scratch with two engineers. Pick the three that give the most leverage on your starter project, and lean heavily on pre-built frameworks (LangChain, Semantic Kernel, FastAPI extensions, off-the-shelf admin dashboards).
 
-- **Build only:** Auth (a thin wrapper around your IdP), API Framework (conventions on top of your web framework), AI Orchestration (the highest-leverage module, even small — wrap one LLM adapter and one retrieval path).
+- **Build only:** Auth (a thin wrapper around your IdP), API Framework (conventions on top of your web framework), AI Orchestration (the highest-leverage module, even small; wrap one LLM adapter and one retrieval path).
 - **Skip / use pre-built:** Data Grid (use a library), Admin Dashboard (use a hosted solution or skip), Document Rendering (call a service), RBAC (start with role-based JWT claims, defer attribute-based until needed).
 - **Skip:** Inner-source contribution model, IDP / module registry, full hexagonal architecture for non-AI modules.
 - **Budget:** $20K–$50K Year 1 (engineering time on three light modules).
@@ -87,8 +87,8 @@ The agency adopts this pattern explicitly. Microservices are reserved for the ra
 
 Plus two cross-cutting deliverables:
 
-- [Inner-Source Contribution Guide](/phase-5-platform/inner-source/) — how teams contribute back.
-- [Module Registry & Internal Developer Platform](/phase-5-platform/idp-and-registry/) — how teams discover and consume modules.
+- [Inner-Source Contribution Guide](/phase-5-platform/inner-source/): how teams contribute back.
+- [Module Registry & Internal Developer Platform](/phase-5-platform/idp-and-registry/): how teams discover and consume modules.
 
 ## Sequencing within Phase 5
 
@@ -132,11 +132,11 @@ Agencies that complete Phase 5 have a working platform with reusable modules, es
 
 ## Research basis
 
-Modular monolith pattern (Shopify's documented architecture; Amazon Prime Video's 2023 migration), hexagonal architecture (Cockburn 2005), Spring Modulith and similar implementations, Backstage IDP (CNCF), inner source (PayPal originated; CMS first federal OSPO 2024), Austin APH RAD platform (145+ reusable modules in production), and the SPACE framework for measuring the developer experience the platform produces.
+Modular monolith pattern (Shopify's documented architecture; Amazon Prime Video's 2023 migration), hexagonal architecture (Cockburn 2005), Spring Modulith and similar implementations, Backstage IDP (CNCF), inner source (PayPal originated; CMS first federal OSPO 2024), and the SPACE framework for measuring the developer experience the platform produces.
 
 ## Related
 
-- [Phase 4 — Dev Stack](/phase-4-dev-stack/) — the standards modules embody
-- [Phase 6 — Starter Project](/phase-6-starter-projects/) — the first thing built _on_ the platform
-- [Track 4 — Developer Upskilling](/phase-2-education/track-4-developers/) — the engineers who build the platform
-- [Track 5 — Champions Network](/phase-2-education/track-5-champions/) — the staff who source intake ideas the platform serves
+- [Phase 4 — Dev Stack](/phase-4-dev-stack/): the standards modules embody
+- [Phase 6 — Starter Project](/phase-6-starter-projects/): the first thing built _on_ the platform
+- [Track 4 — Developer Upskilling](/phase-2-education/track-4-developers/): the engineers who build the platform
+- [Track 5 — Champions Network](/phase-2-education/track-5-champions/): the staff who source intake ideas the platform serves

@@ -1,6 +1,6 @@
 ---
 title: AI Procurement Guardrails
-description: Contract clauses, vendor questionnaires, and red flags aligned with OMB M-25-22 — adapted for state and local procurement.
+description: Contract clauses, vendor questionnaires, and red flags aligned with OMB M-25-22, adapted for state and local procurement.
 sidebar:
   order: 5
 ---
@@ -59,7 +59,7 @@ Send this questionnaire before you write the RFP. Answers expose vendors that ar
 
 1. **Model identity.** What base models do you use (provider, version)? Do you fine-tune? On what data?
 2. **Data residency.** Where (region, country) is agency data processed and stored? Who are your sub-processors?
-3. **Training-data status.** Is agency data ever used, in any form, to train, evaluate, fine-tune, or improve any model — yours or a third party's? If so, can it be opted out?
+3. **Training-data status.** Is agency data ever used, in any form, to train, evaluate, fine-tune, or improve any model, yours or a third party's? If so, can it be opted out?
 4. **Logs and exports.** Are decision logs available to the agency? In what format? Can they be exported on demand and on termination?
 5. **Hallucination rate.** What is the documented error rate of this system on tasks similar to ours? How was it measured?
 6. **Bias testing.** Have you tested for disparate impact on protected classes for this use case? On what dataset? Will you share the methodology and results?
@@ -91,13 +91,13 @@ A vendor that cannot answer 1–3 in writing should not be in the procurement.
 5. **Vendor responses reviewed** for Addendum acceptance. Refusals or material edits are themselves a scoring criterion.
 6. **Contract drafted** with the Addendum incorporated as Schedule {{Schedule Letter}}; conflicts in vendor terms resolved in favor of the Addendum.
 7. **Legal and Review Committee sign-off** before procurement signature.
-8. **Renewal review** — Addendum is re-reviewed at every renewal; pricing changes alone do not extend a non-compliant contract.
+8. **Renewal review.** Addendum is re-reviewed at every renewal; pricing changes alone do not extend a non-compliant contract.
 
 ## Special cases
 
 ### No-cost pilots and free trials
 
-Vendors will sometimes offer a no-cost pilot to bypass procurement review. Treat any pilot that touches agency data as a contract — the addendum applies. A pilot with no addendum becomes a precedent that is harder to undo than the original purchase.
+Vendors will sometimes offer a no-cost pilot to bypass procurement review. Treat any pilot that touches agency data as a contract; the addendum applies. A pilot with no addendum becomes a precedent that is harder to undo than the original purchase.
 
 ### Click-through SaaS
 
@@ -120,15 +120,15 @@ A traditional SaaS suite that adds AI features mid-contract still triggers the a
 
 ## Related
 
-- [Risk Classification Matrix](/phase-1-governance/risk-classification/) — drives which addendum sections apply
-- [AI Acceptable Use Policy](/phase-1-governance/acceptable-use-policy/) — Section 8 references this addendum
-- [Review Committee Charter](/phase-1-governance/review-committee/) — committee reviews vendor offerings before procurement signs
+- [Risk Classification Matrix](/phase-1-governance/risk-classification/): drives which addendum sections apply
+- [AI Acceptable Use Policy](/phase-1-governance/acceptable-use-policy/): Section 8 references this addendum
+- [Review Committee Charter](/phase-1-governance/review-committee/): committee reviews vendor offerings before procurement signs
 
 ## References
 
-- OMB M-25-22 — Driving Efficient Acquisition of Artificial Intelligence in Government (controlling federal reference)
-- OMB M-24-10 — Advancing Governance, Innovation, and Risk Management for Agency Use of AI
-- NIST AI RMF — Acquire / Procure subcategories
+- OMB M-25-22, Driving Efficient Acquisition of Artificial Intelligence in Government (April 2025; supersedes M-24-18; controlling federal reference)
+- OMB M-25-21, Accelerating Federal Use of AI through Innovation, Governance, and Public Trust (April 2025; supersedes M-24-10)
+- NIST AI RMF, Acquire / Procure subcategories
 - Texas TRAIGA, Colorado SB24-205, California SB 942
 - StateRAMP and FedRAMP authorization registries
 - GSA AI Acquisition Resource Hub

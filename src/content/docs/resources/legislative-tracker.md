@@ -5,7 +5,7 @@ sidebar:
   order: 8
 ---
 
-> **What this is — and is not.** This is not a maintained tracker. State AI legislation moves faster than a documentation site can keep up; 45 states introduced AI bills in 2025 and one in three states had something material on the table going into 2026. Trying to maintain a per-state list here would mean shipping outdated information within months. Instead, this page does two things: (1) point you to the maintained external trackers that _are_ kept current, and (2) give you a one-pass compliance checklist that maps the laws most likely to apply to a US public agency to the controls already documented in this playbook. The checklist is the durable part — the underlying laws will change, but the questions you have to answer about your agency rarely change.
+> **What this is, and is not.** This is not a maintained tracker. State AI legislation moves faster than a documentation site can keep up; 45 states introduced AI bills in 2025 and one in three states had something material on the table going into 2026. Trying to maintain a per-state list here would mean shipping outdated information within months. Instead, this page does two things: (1) point you to the maintained external trackers that _are_ kept current, and (2) give you a one-pass compliance checklist that maps the laws most likely to apply to a US public agency to the controls already documented in this playbook. The checklist is the durable part; the underlying laws will change, but the questions you have to answer about your agency rarely change.
 
 ## Maintained external trackers
 
@@ -39,7 +39,7 @@ Five jurisdictions have material AI laws on the books or imminent as of late 202
 | Texas         | TRAIGA (HB 149)             | 2026                                               | Yes, government use carve-outs apply                                              | Disclosure to constituents, prohibited uses, attorney-general enforcement        |
 | California    | SB 942 (AI transparency)    | 2026                                               | Limited (large generative AI providers); indirect impact on agencies that procure | Watermarking and transparency disclosures from covered AI providers              |
 | New York City | Local Law 144               | 2023 (in force)                                    | Yes, for hiring tools                                                             | Bias audit + notice for automated employment decision tools                      |
-| Federal       | OMB M-24-10 + OMB M-25-22   | 2024–2025 (federal); often adopted by states       | Federal directly; many states adopt by reference                                  | Designate a Chief AI Officer, public AI use case inventory, risk management plan |
+| Federal       | OMB M-25-21 + OMB M-25-22   | April 2025 (federal); often adopted by states      | Federal directly; many states adopt by reference                                  | Designate a Chief AI Officer, public AI use case inventory, risk management plan |
 
 **Action for your agency:**
 
@@ -55,12 +55,12 @@ Most modern AI laws apply only when AI affects employment, housing, credit, educ
 **Action:**
 
 - [ ] Run the [Risk Tier Determination](/phase-1-governance/risk-classification/) on every AI use case in your inventory
-- [ ] For any use case classified Tier 3, double-check whether the use also fits the statutory definition of "high-risk" or "consequential decision" in your jurisdiction (the statutory language is usually narrower than Tier 3 — but where the statute is broader, the statute wins)
+- [ ] For any use case classified Tier 3, double-check whether the use also fits the statutory definition of "high-risk" or "consequential decision" in your jurisdiction (the statutory language is usually narrower than Tier 3, but where the statute is broader, the statute wins)
 - [ ] Document the classification and the statutory match in the use case's row of your AI inventory
 
-### 3. Have we adopted the M-24-10 / M-25-22 controls (or our state's equivalent)?
+### 3. Have we adopted the M-25-21 / M-25-22 controls (or our state's equivalent)?
 
-Even if your agency is not federal, OMB M-24-10 has become the _de facto_ template that many state laws now reference by name. The four headline obligations:
+M-25-21 (April 2025) supersedes M-24-10 from the prior administration. M-25-22 supersedes M-24-18. The substantive control set carried over. Even if your agency is not federal, the M-24-10 / M-25-21 lineage has become the _de facto_ template that many state laws now reference by name (often still citing "M-24-10" because the statute predates the supersession). The four headline obligations:
 
 | Control                                                 | Where in the playbook                                                                                                                             |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -89,13 +89,13 @@ A growing share of public records requests now ask specifically about AI use, ve
 
 **Action:**
 
-- [ ] Confirm AI decision logs are retained per the schedule in the [AUP](/phase-1-governance/acceptable-use-policy/) (30 days Tier 1 / 1 year Tier 2 / 7 years Tier 3 by default — adjust to your records schedule)
+- [ ] Confirm AI decision logs are retained per the schedule in the [AUP](/phase-1-governance/acceptable-use-policy/) (30 days Tier 1 / 1 year Tier 2 / 7 years Tier 3 by default; adjust to your records schedule)
 - [ ] Confirm vendor contracts and addenda are retained as standard contract records
-- [ ] Confirm bias audit reports (where required) are retained as agency reports — these are _especially_ prone to being kept only by the vendor, which creates a public-records gap
+- [ ] Confirm bias audit reports (where required) are retained as agency reports; these are _especially_ prone to being kept only by the vendor, which creates a public-records gap
 
 ### 6. Who tells us when the law changes?
 
-The single most common compliance failure is not the law being missed — it's the law being missed _six months after it was already on the books_. Decide, in writing, who in your agency owns this.
+The single most common compliance failure is not the law being missed; it's the law being missed _six months after it was already on the books_. Decide, in writing, who in your agency owns this.
 
 **Action:**
 
@@ -116,6 +116,6 @@ Use this short list at the start of every Review Committee meeting that includes
 
 ## See also
 
-- [Frameworks Cited](/resources/frameworks-cited/) — versioned references for NIST AI RMF, OMB M-24-10, OMB M-25-22, SLSA, SPACE
-- [Legislative compliance (Phase 1)](/phase-1-governance/legislative-compliance/) — the per-state compliance matrix that lives next to the Phase 1 governance content
-- [Procurement guardrails](/phase-1-governance/procurement-guardrails/) — the contract addendum referenced above
+- [Frameworks Cited](/resources/frameworks-cited/): versioned references for NIST AI RMF, OMB M-25-21 (formerly M-24-10), OMB M-25-22 (formerly M-24-18), SLSA, SPACE
+- [Legislative compliance (Phase 1)](/phase-1-governance/legislative-compliance/): the per-state compliance matrix that lives next to the Phase 1 governance content
+- [Procurement guardrails](/phase-1-governance/procurement-guardrails/): the contract addendum referenced above

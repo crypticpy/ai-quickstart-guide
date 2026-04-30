@@ -7,7 +7,7 @@ sidebar:
 
 import AUPWizard from '../../../components/AUPWizard.tsx';
 
-The AI Acceptable Use Policy (AUP) is the single document every staff member is expected to read, sign, and follow. Without it, you have no defensible answer to "who said it was okay to put resident data into ChatGPT?" — and that question will be asked.
+The AI Acceptable Use Policy (AUP) is the single document every staff member is expected to read, sign, and follow. Without it, you have no defensible answer to "who said it was okay to put resident data into ChatGPT?" That question will be asked.
 
 This page provides:
 
@@ -17,7 +17,7 @@ This page provides:
 
 ## AUP wizard
 
-Answer the prompts on each step and the wizard produces a filled markdown AUP you can export, circulate for legal review, and present for adoption. Your answers persist in your browser only — nothing is sent to a server.
+Answer the prompts on each step and the wizard produces a filled markdown AUP you can export, circulate for legal review, and present for adoption. Your answers persist in your browser only; nothing is sent to a server.
 
 <AUPWizard client:load />
 
@@ -33,7 +33,7 @@ An AUP also gives you something legislative compliance bodies, the public, and y
 A government AUP, at minimum, must:
 
 - **Define what counts as AI** for the agency's purposes (broad enough to capture chatbots, code assistants, and RAG, narrow enough to not capture spell-check)
-- **Establish tier-based rules** that map to your [risk classification](/phase-1-governance/risk-classification/) — what staff can do under each tier
+- **Establish tier-based rules** that map to your [risk classification](/phase-1-governance/risk-classification/), defining what staff can do under each tier
 - **Prohibit specific high-risk practices** (entering PII into public consumer chatbots, using AI to make uncontested rights determinations, deploying foreign-adversary models on government data)
 - **Require disclosure** when AI materially shapes a public-facing communication, decision, or service
 - **Name the enforcement body** (the AI Review Committee) and the consequences of policy violation
@@ -50,16 +50,16 @@ A government AUP, at minimum, must:
 
 The wizard asks 11 questions across four steps:
 
-1. **Agency identity** — name, AI program lead, owning office, effective date
-2. **Approval** — approving body and approval date
-3. **Scope and applicable law** — onboarding window for training, controlling state AI statute(s)
-4. **Enforcement and references** — review committee name, federal entity-list reference, personnel policy reference
+1. **Agency identity:** name, AI program lead, owning office, effective date
+2. **Approval:** approving body and approval date
+3. **Scope and applicable law:** onboarding window for training, controlling state AI statute(s)
+4. **Enforcement and references:** review committee name, federal entity-list reference, personnel policy reference
 
 Required fields are marked. The "Review draft" button on the last step opens a preview of the filled markdown. Export, circulate for legal review, and present to your approving body for adoption.
 
 ## Reference AUP text
 
-The text below is the canonical reference, derived from the Mississippi State AI AUP, ISACA's AI policy guidance, and adapted for U.S. local and state government context. Replace the bracketed placeholders. Keep the structure unless you have a specific reason to change it — the section order is what makes the policy auditable.
+The text below is the canonical reference, derived from the Mississippi State AI AUP, ISACA's AI policy guidance, and adapted for U.S. local and state government context. Replace the bracketed placeholders. Keep the structure unless you have a specific reason to change it; the section order is what makes the policy auditable.
 
 ---
 
@@ -85,10 +85,10 @@ This policy applies to:
 
 #### 3. Definitions
 
-- **AI system** — any software that uses machine learning, large language models, generative models, or similar techniques to produce outputs (text, classifications, predictions, recommendations, decisions, images, code) from inputs.
-- **Agency data** — any data created, received, maintained, or transmitted by `{{Agency Name}}` in the conduct of agency business, whether or not classified as a public record.
-- **Sensitive data** — personally identifiable information (PII), protected health information (PHI), criminal-justice information (CJI), financial account information, immigration status, child-welfare records, attorney-client communications, and any data classified as confidential or restricted under federal, state, or agency policy.
-- **Risk tier** — the Low / Medium / High classification assigned to a use case under the agency's [Risk Classification Matrix](/phase-1-governance/risk-classification/).
+- **AI system:** any software that uses machine learning, large language models, generative models, or similar techniques to produce outputs (text, classifications, predictions, recommendations, decisions, images, code) from inputs.
+- **Agency data:** any data created, received, maintained, or transmitted by `{{Agency Name}}` in the conduct of agency business, whether or not classified as a public record.
+- **Sensitive data:** personally identifiable information (PII), protected health information (PHI), criminal-justice information (CJI), financial account information, immigration status, child-welfare records, attorney-client communications, and any data classified as confidential or restricted under federal, state, or agency policy.
+- **Risk tier:** the Low / Medium / High classification assigned to a use case under the agency's [Risk Classification Matrix](/phase-1-governance/risk-classification/).
 
 #### 4. General Principles
 
@@ -104,9 +104,9 @@ All staff using AI on behalf of the agency must:
 
 The `{{AI Review Committee}}` maintains the **Approved AI Tools List**, classified by data sensitivity and risk tier. Staff may use:
 
-- **Tier-1 (Low) tools** — for non-sensitive, internal productivity tasks (e.g., drafting agendas, summarizing public documents). Public consumer AI services may be permitted in this tier with explicit guardrails on what may be entered.
-- **Tier-2 (Medium) tools** — only with internal sensitive data, on agency-approved tenants with data non-use clauses in place. Staff must complete the AI Foundations training before use.
-- **Tier-3 (High) tools** — only after a use case has been approved by the `{{AI Review Committee}}`, with all required impact assessments and disclosures in place.
+- **Tier-1 (Low) tools:** for non-sensitive, internal productivity tasks (e.g., drafting agendas, summarizing public documents). Public consumer AI services may be permitted in this tier with explicit guardrails on what may be entered.
+- **Tier-2 (Medium) tools:** only with internal sensitive data, on agency-approved tenants with data non-use clauses in place. Staff must complete the AI Foundations training before use.
+- **Tier-3 (High) tools:** only after a use case has been approved by the `{{AI Review Committee}}`, with all required impact assessments and disclosures in place.
 
 **Prohibited unless explicitly approved:**
 
@@ -122,13 +122,13 @@ Staff must disclose AI involvement when:
 
 - An AI system materially shaped a recommendation, decision, or rationale provided to the public, a council, a court, or a regulator
 - A public-facing communication (web content, press release, formal correspondence) was substantially generated by AI
-- A high-tier (Tier-3) use case is deployed in production — with public notice in plain language as required by the use case's impact assessment
+- A high-tier (Tier-3) use case is deployed in production, with public notice in plain language as required by the use case's impact assessment
 
 Disclosure formats are maintained by the `{{AI Review Committee}}` and updated as state law evolves.
 
 #### 8. Procurement and Contracts
 
-All contracts under which a vendor will provide AI services to `{{Agency Name}}` must include the **AI Procurement Addendum** (see [Procurement Guardrails](/phase-1-governance/procurement-guardrails/)). Staff may not enter into AI service agreements — including no-cost trials and click-through terms — without procurement and legal review for any tool that will touch agency or sensitive data.
+All contracts under which a vendor will provide AI services to `{{Agency Name}}` must include the **AI Procurement Addendum** (see [Procurement Guardrails](/phase-1-governance/procurement-guardrails/)). Staff may not enter into AI service agreements (including no-cost trials and click-through terms) without procurement and legal review for any tool that will touch agency or sensitive data.
 
 #### 9. Training
 
@@ -174,15 +174,15 @@ Date: ****************\_\_\_****************
 
 ## Related
 
-- [Risk Classification Matrix](/phase-1-governance/risk-classification/) — the tiers this AUP enforces
-- [Review Committee Charter](/phase-1-governance/review-committee/) — the body that maintains and enforces the AUP
-- [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — the contract clauses Section 8 references
-- [Legislative Compliance Matrix](/phase-1-governance/legislative-compliance/) — which laws Section 4(5) maps to in your jurisdiction
+- [Risk Classification Matrix](/phase-1-governance/risk-classification/): the tiers this AUP enforces
+- [Review Committee Charter](/phase-1-governance/review-committee/): the body that maintains and enforces the AUP
+- [Procurement Guardrails](/phase-1-governance/procurement-guardrails/): the contract clauses Section 8 references
+- [Legislative Compliance Matrix](/phase-1-governance/legislative-compliance/): which laws Section 4(5) maps to in your jurisdiction
 
 ## References
 
 - Mississippi State University AI Acceptable Use Policy (reference template)
 - ISACA AI Policy Toolkit
 - NIST AI RMF 1.0 and NIST-AI-600-1 (Generative AI Profile)
-- OMB M-24-10, OMB M-25-22
+- OMB M-25-21 (April 2025; supersedes M-24-10), OMB M-25-22 (April 2025; supersedes M-24-18)
 - Texas TRAIGA, Colorado SB24-205, California SB 942 (jurisdiction-specific clauses)

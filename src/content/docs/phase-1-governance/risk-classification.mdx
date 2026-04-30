@@ -13,20 +13,20 @@ This page defines the three tiers, gives you 15 government-specific examples, an
 
 ## Classify a use case
 
-Answer the five dimension questions below to receive a recommended tier and the governance that applies. The picker is a starting point — your Review Committee makes the final call and may adjust based on local context.
+Answer the five dimension questions below to receive a recommended tier and the governance that applies. The picker is a starting point; your Review Committee makes the final call and may adjust based on local context.
 
 <RiskTierPicker client:load />
 
 
 ## Why three tiers (not five, not seven)
 
-Federal frameworks (NIST AI RMF, OMB M-24-10) and state laws (Colorado AI Act, Texas TRAIGA) converge on a small number of risk levels — typically 2–4. Three is the minimum that distinguishes:
+Federal frameworks (NIST AI RMF, OMB M-25-21, formerly M-24-10) and state laws (Colorado AI Act, Texas TRAIGA) converge on a small number of risk levels, typically 2–4. Three is the minimum that distinguishes:
 
-- **Low** — internal productivity, decisions reversible, no public-facing impact
-- **Medium** — staff-facing decision support, partial automation, public visibility but no rights determinations
-- **High** — automates or materially shapes a decision affecting a person's rights, benefits, employment, safety, or liberty
+- **Low:** internal productivity, decisions reversible, no public-facing impact
+- **Medium:** staff-facing decision support, partial automation, public visibility but no rights determinations
+- **High:** automates or materially shapes a decision affecting a person's rights, benefits, employment, safety, or liberty
 
-Five-tier and seven-tier matrices look more rigorous but tend to collapse in practice — reviewers debate which sub-tier applies instead of approving the work. Three is enough to drive different governance, and few enough that tier assignment is rarely contested.
+Five-tier and seven-tier matrices look more rigorous but tend to collapse in practice; reviewers debate which sub-tier applies instead of approving the work. Three is enough to drive different governance, and few enough that tier assignment is rarely contested.
 
 ## The matrix
 
@@ -42,9 +42,9 @@ Five-tier and seven-tier matrices look more rigorous but tend to collapse in pra
 | Required evaluation               | Spot-check before launch         | Pre-launch evaluation + quarterly review | Pre-launch + bias/impact assessment + ongoing monitoring + annual audit      |
 | Vendor / model constraints        | Any approved vendor              | Approved vendor with data non-use clause | Approved vendor + explainability + audit access; no foreign-adversary models |
 | Procurement clauses (Phase 1)     | Standard                         | AI Addendum (data non-use, exit)         | AI Addendum + bias testing + decision logs + government data sovereignty     |
-| OMB M-24-10 reporting             | Track in inventory               | Track + impact summary                   | Track + impact summary + designated agency AI official sign-off              |
+| OMB M-25-21 reporting             | Track in inventory               | Track + impact summary                   | Track + impact summary + designated agency AI official sign-off              |
 
-> **Rule of thumb.** If a real person can lose a benefit, a job, custody, housing, freedom, or money because of the AI's output — or even because a staff member followed an AI recommendation without independent verification — it's High. When in doubt, it's High.
+> **Rule of thumb.** If a real person can lose a benefit, a job, custody, housing, freedom, or money because of the AI's output (or even because a staff member followed an AI recommendation without independent verification), it's High. When in doubt, it's High.
 
 ## Example use cases (15 across tiers)
 
@@ -90,7 +90,7 @@ The classification flow is the same whether the request comes from IT, a departm
 3. **Review Committee confirms or escalates** at the next standing meeting. Tier-1 use cases can be batch-approved on consent; Tier-2 require discussion; Tier-3 require a full impact assessment before approval.
 4. **Tier is recorded in the AI use case inventory** along with the classifying meeting minutes. Any future change in scope (new data, new audience, new decision automated) re-triggers classification.
 
-> **Tip — write down dissent.** If two committee members disagree on the tier, record both views and the reason for the final call. This is your audit trail when a use case later draws scrutiny.
+> **Tip: write down dissent.** If two committee members disagree on the tier, record both views and the reason for the final call. This is your audit trail when a use case later draws scrutiny.
 
 ## What changes by tier
 
@@ -111,7 +111,7 @@ The classification flow is the same whether the request comes from IT, a departm
 
 - **"It's just decision support" is not a tier-1 argument.** Studies consistently show that staff anchor on AI scores. If the AI's output reliably shifts the human decision, the use case is at least Medium.
 - **A Tier-1 chatbot becomes Tier-3 when scope expands.** A FAQ chatbot that someone wires to "answer benefits eligibility questions" is now driving a benefits decision. Re-classify when scope changes.
-- **Tier is per use case, not per tool.** The same vendor LLM can host a Tier-1 meeting summarizer and a Tier-3 eligibility tool — they are governed differently because the _use_ differs.
+- **Tier is per use case, not per tool.** The same vendor LLM can host a Tier-1 meeting summarizer and a Tier-3 eligibility tool; they are governed differently because the _use_ differs.
 - **Don't let a vendor classify their own product.** Vendors will frame any AI as "decision support." Classification is your committee's job, not theirs.
 
 ## What you ship from this page
@@ -121,19 +121,19 @@ The classification flow is the same whether the request comes from IT, a departm
 - Documented classification workflow (intake → propose → committee → record)
 - Tier-by-tier governance requirements (the table above, ratified)
 
-The AUP, Review Committee charter, procurement guardrails, and intake form all reference these tiers — adopting this matrix first unblocks the rest of Phase 1.
+The AUP, Review Committee charter, procurement guardrails, and intake form all reference these tiers; adopting this matrix first unblocks the rest of Phase 1.
 
 ## Related
 
-- [AI Acceptable Use Policy](/phase-1-governance/acceptable-use-policy/) — references these tiers
-- [Review Committee Charter](/phase-1-governance/review-committee/) — sets approval authority by tier
-- [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — clauses by tier
-- [Legislative Compliance](/phase-1-governance/legislative-compliance/) — which laws map to which tier
+- [AI Acceptable Use Policy](/phase-1-governance/acceptable-use-policy/): references these tiers
+- [Review Committee Charter](/phase-1-governance/review-committee/): sets approval authority by tier
+- [Procurement Guardrails](/phase-1-governance/procurement-guardrails/): clauses by tier
+- [Legislative Compliance](/phase-1-governance/legislative-compliance/): which laws map to which tier
 
 ## References
 
 - NIST AI Risk Management Framework (AI RMF 1.0), Generative AI Profile (NIST-AI-600-1)
-- OMB M-24-10: Advancing Governance, Innovation, and Risk Management for Agency Use of Artificial Intelligence
-- OMB M-25-22: Driving Efficient Acquisition of Artificial Intelligence
+- OMB M-25-21: Accelerating Federal Use of AI through Innovation, Governance, and Public Trust (April 2025; supersedes M-24-10)
+- OMB M-25-22: Driving Efficient Acquisition of Artificial Intelligence in Government (April 2025; supersedes M-24-18)
 - Colorado AI Act (SB24-205), Texas TRAIGA, California SB 942
 - ISACA AI Audit Toolkit, Mississippi State AI Acceptable Use Policy (reference templates)

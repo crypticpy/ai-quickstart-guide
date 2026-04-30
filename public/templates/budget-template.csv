@@ -1,0 +1,33 @@
+Category,Item,Your Input,Default (Standard),Source / URL,Notes
+People,Software Developer base salary,,133080,https://www.bls.gov/oes/current/oes151252.htm,BLS 15-1252 median 2024
+People,Computer and Information Systems Manager base salary,,171200,https://www.bls.gov/oes/current/oes113021.htm,BLS 11-3021 median
+People,Information Security Analyst base salary,,124910,https://www.bls.gov/oes/current/oes151212.htm,BLS 15-1212 median
+People,Loaded-cost multiplier (state and local government),,1.61,https://www.bls.gov/news.release/ecec.toc.htm,BLS Employer Costs for Employee Compensation
+People,Developer FTE allocation,,1.0,,Standard variant default
+People,Manager FTE allocation,,0.5,,Standard variant default
+People,Security analyst FTE allocation,,0.25,,Standard variant default
+People,GS-12 step 1 base (Rest of US),,74441,https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/2025/general-schedule/,OPM 2025 GS table
+People,GS-13 step 1 base (Rest of US),,88520,https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/2025/general-schedule/,OPM 2025 GS table
+People,GS-14 step 1 base (Rest of US),,104604,https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/2025/general-schedule/,OPM 2025 GS table
+Cloud and AI services,Inference tokens per month (millions),,5,,Light workload anchor; heavy is 100M
+Cloud and AI services,Anthropic API rate reference,,Check page,https://www.anthropic.com/pricing,Pull current per-token rate
+Cloud and AI services,Amazon Bedrock rate reference,,Check page,https://aws.amazon.com/bedrock/pricing/,Pull current per-token rate
+Cloud and AI services,Azure OpenAI rate reference,,Check page,https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/,Pull current per-token rate
+Cloud and AI services,Google Vertex AI rate reference,,Check page,https://cloud.google.com/vertex-ai/pricing,Pull current per-token rate
+Cloud and AI services,Storage and compute monthly,,500,https://calculator.aws/,Range $200-$2000; use AWS or Azure calculator
+Cloud and AI services,Vector DB / retrieval monthly,,200,,Range $100-$500 managed
+Tooling and licenses,GitHub Copilot Business per user per month,,Check page,https://github.com/features/copilot#pricing,Multiply by FTE count
+Tooling and licenses,IDE licenses (JetBrains All Products) per user per month,,25,https://www.jetbrains.com/store/,VS Code is free; skip if team uses VS Code
+Tooling and licenses,Observability (Datadog/Honeycomb) annual,,5000,https://www.datadoghq.com/pricing/,Varies by ingest volume
+Tooling and licenses,SSO (Okta or Entra ID) per user per month,,Check page,https://www.okta.com/pricing/,Multiply by total org users
+Tooling and licenses,Secrets manager monthly,,200,,Range $50-$500 monthly
+Tooling and licenses,Source control (GitHub Enterprise / GitLab Premium) per user per month,,Check page,https://github.com/pricing,Per-user-per-month
+External services,Legal counsel for governance sprint,,15000,https://www.bls.gov/oes/current/oes231011.htm,Anchor: BLS 23-1011 lawyers x 2-4x outside counsel multiplier
+External services,Training facilitation,,15000,,Range $5K (internal small) to $50K (Large external)
+External services,Annual audit / penetration test,,25000,https://www.gsa.gov/buy-through-us/products-and-services/professional-services,Range $15K-$50K; check GSA schedule
+External services,Procurement officer time,,5000,,Adds 12-18 months lead time; budget separately
+Totals,People subtotal,,402000,,Sum of FTE x base x 1.61
+Totals,Cloud and AI services subtotal,,30000,,Standard variant midpoint
+Totals,Tooling subtotal,,17500,,Standard variant midpoint
+Totals,External services subtotal,,50000,,Standard variant midpoint
+Totals,Year 1 total,,499500,,Replace with sum of overrides above

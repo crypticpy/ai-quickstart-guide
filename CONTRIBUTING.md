@@ -1,6 +1,6 @@
 # Contributing
 
-This guide is built to be improved by the agencies that use it. PRs from anyone — government, civic tech, academia — are welcome.
+This guide is built to be improved by the agencies that use it. PRs from anyone (government, civic tech, academia) are welcome.
 
 ## What we accept
 
@@ -13,7 +13,7 @@ This guide is built to be improved by the agencies that use it. PRs from anyone 
 ## What we redirect
 
 - Agency-specific customization (your fork is the right place for that)
-- Vendor recommendations (the guide is stack-agnostic by design — the RAD reference implementation is the canonical concrete example)
+- Vendor recommendations (the guide is stack-agnostic by design).
 - Anything that turns the guide into legal advice (we describe frameworks, agencies retain counsel)
 
 ## How

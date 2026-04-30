@@ -77,13 +77,16 @@ export default function AgencySetupWizard() {
           <input
             type="text"
             value={state}
-            placeholder="e.g. Texas, Colorado, Austin"
+            placeholder="e.g. Texas, Colorado, California"
             onInput={(e) => setState(e.currentTarget.value)}
           />
         </label>
         <label>
           Cloud
-          <select value={cloud} onInput={(e) => setCloud(e.currentTarget.value)}>
+          <select
+            value={cloud}
+            onInput={(e) => setCloud(e.currentTarget.value)}
+          >
             <option>Existing primary cloud</option>
             <option>Azure</option>
             <option>AWS</option>

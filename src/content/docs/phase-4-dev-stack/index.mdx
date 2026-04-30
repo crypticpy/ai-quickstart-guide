@@ -18,10 +18,10 @@ Select (or validate) the agency's development stack and establish the coding sta
 <Tabs syncKey="agency-size">
 <TabItem label="Small">
 
-**Pick one stack, adopt the templates, get out of the way.** Small teams should not invent their own coding standards — adopt the reference standards from this guide, ratify them in a single ADR, and move on. The biggest leverage in Phase 4 for small agencies is configuring AI-assisted development tools well so each engineer ships like a small team.
+**Pick one stack, adopt the templates, get out of the way.** Small teams should not invent their own coding standards. Adopt the reference standards from this guide, ratify them in a single ADR, and move on. The biggest gain in Phase 4 for small agencies is configuring AI-assisted development tools well so each engineer ships like a small team.
 
 - **Adopt as-is:** Coding standards, testing pyramid, API-first design, ADR template.
-- **Configure carefully:** Claude Code / Copilot / Cursor with the AI-assisted dev guardrails. This is where small teams gain the most leverage.
+- **Configure carefully:** Claude Code / Copilot / Cursor with the AI-assisted dev guardrails. This is where small teams gain the most.
 - **Skip for now:** Deep contract-testing infrastructure, formal OpenAPI registry, multi-stack debate. One stack only.
 - **Budget:** $5K–$15K (tooling licenses; staff time absorbed into existing roles).
 
@@ -31,7 +31,7 @@ Select (or validate) the agency's development stack and establish the coding sta
 **Full deliverable list across Months 4–7.** Run the stack selection workshop, draft and adopt all standards, stand up the OpenAPI registry, and seed the ADR backlog. Sequence Track 4 (Developer Upskilling) to start mid-phase using the standards as they ratify.
 
 - **Cadence:** Follow the 12-week sequencing schedule below.
-- **Reviewer training:** Pair Track 4 cohorts with the AI-assisted dev policy rollout — reviewers need explicit calibration.
+- **Reviewer training:** Pair Track 4 cohorts with the AI-assisted dev policy rollout. Reviewers need explicit calibration.
 - **Budget:** $15K–$40K (tooling licenses + facilitator time + cohort training).
 
 </TabItem>
@@ -58,17 +58,17 @@ Select (or validate) the agency's development stack and establish the coding sta
 
 Most agencies under-invest in this phase. The pull is to skip from "we have infrastructure" to "build the thing." Skipping produces predictable pathology: each team picks a different stack, each PR review is litigated from scratch, AI tooling is configured ad hoc with policy drift between teams, and the platform ends up unmaintainable because nothing is shared. Phase 4 is two months of writing things down to save twelve months of cleanup.
 
-The phase is also the first place AI-assisted development gets serious agency-wide attention. With Claude Code, GitHub Copilot, and Cursor in mainstream developer use (≥90% of developers in 2025 use at least one), the question is no longer "do we allow this?" but "how do we configure it safely, and what do we expect from a reviewer?"
+The phase is also the first place AI-assisted development gets serious agency-wide attention. The [2025 JetBrains State of Developer Ecosystem](https://blog.jetbrains.com/research/2025/10/state-of-developer-ecosystem-2025/) reports 85% of developers regularly use AI tools and 62% rely on at least one AI coding assistant. With Claude Code, GitHub Copilot, and Cursor in mainstream developer use, the question is no longer "do we allow this?" but "how do we configure it safely, and what do we expect from a reviewer?"
 
 ## Deliverables
 
-- **[Stack Selection Decision Tree](/phase-4-dev-stack/stack-selection/)** — criteria-based evaluation across Python/FastAPI/React, .NET, Java/Spring, Node/Next.js, Go, and the rare cases where multiple stacks are warranted.
-- **[Reference Implementation Walkthrough](/phase-4-dev-stack/reference-implementation/)** — annotated architecture for the agency's chosen stack, with a sample AI feature that exercises retrieval, prompts, evals, and observability.
-- **[Coding Standards](/phase-4-dev-stack/coding-standards/)** — linting, formatting, naming, commit messages, PR review policy, dependency hygiene.
-- **[AI-Assisted Development](/phase-4-dev-stack/ai-assisted-development/)** — Claude Code, GitHub Copilot, Cursor configured for government work; reviewer expectations; AI-generated code disclosure norms.
-- **[Testing Strategy](/phase-4-dev-stack/testing-strategy/)** — the testing pyramid, contract testing, AI-output evaluation, performance testing, and how the pipeline enforces it.
-- **[API-First Design](/phase-4-dev-stack/api-first-design/)** — OpenAPI specs, versioning, contract testing, registry, agency-wide style guide.
-- **[Architecture Decision Records](/phase-4-dev-stack/adr-template/)** — when and how to write ADRs, the template, the review/ratification workflow.
+- **[Stack Selection Decision Tree](/phase-4-dev-stack/stack-selection/):** criteria-based evaluation across Python/FastAPI/React, .NET, Java/Spring, Node/Next.js, Go, and the rare cases where multiple stacks are warranted.
+- **[Reference Implementation Walkthrough](/phase-4-dev-stack/reference-implementation/):** annotated architecture for the agency's chosen stack, with a sample AI feature that exercises retrieval, prompts, evals, and observability.
+- **[Coding Standards](/phase-4-dev-stack/coding-standards/):** linting, formatting, naming, commit messages, PR review policy, dependency hygiene.
+- **[AI-Assisted Development](/phase-4-dev-stack/ai-assisted-development/):** Claude Code, GitHub Copilot, Cursor configured for government work; reviewer expectations; AI-generated code disclosure norms.
+- **[Testing Strategy](/phase-4-dev-stack/testing-strategy/):** the testing pyramid, contract testing, AI-output evaluation, performance testing, and how the pipeline enforces it.
+- **[API-First Design](/phase-4-dev-stack/api-first-design/):** OpenAPI specs, versioning, contract testing, registry, agency-wide style guide.
+- **[Architecture Decision Records](/phase-4-dev-stack/adr-template/):** when and how to write ADRs, the template, the review/ratification workflow.
 
 ## Sequencing within Phase 4
 
@@ -84,34 +84,40 @@ The phase is also the first place AI-assisted development gets serious agency-wi
 ## Hard dependencies
 
 - **Phase 3 must be operational.** Coding standards rely on a CI/CD pipeline that can enforce them; testing strategy needs the staging environment; AI-assisted dev policy assumes the secrets and identity layers exist.
-- **Track 4 (Developer Upskilling) cohorts.** Phase 4 outputs feed Track 4 directly — the labs use the agency's reference repo, the agency's coding standards, and the agency's AI-assisted dev configuration. Sequence Track 4 to start mid-Phase-4.
+- **Track 4 (Developer Upskilling) cohorts.** Phase 4 outputs feed Track 4 directly. The labs use the agency's reference repo, the agency's coding standards, and the agency's AI-assisted dev configuration. Sequence Track 4 to start mid-Phase-4.
 
 ## What Phase 4 does NOT cover
 
-- The AI orchestration layer's internal architecture — that's Phase 5.
-- Specific module designs (Auth, Data Grid, etc.) — Phase 5 again.
-- Operational runbooks — those emerge during Phase 5–6 from the platform's actual operations.
-- Choosing a foundation model — happens against the platform's adapter, not the dev stack.
+- The AI orchestration layer's internal architecture (that's Phase 5).
+- Specific module designs (Auth, Data Grid, etc.); Phase 5 again.
+- Operational runbooks. Those emerge during Phase 5–6 from the platform's actual operations.
+- Choosing a foundation model. Happens against the platform's adapter, not the dev stack.
 
 ## Off-Ramp — Stack-Conformant Pilots
 
-Agencies that complete Phase 4 — even without Phase 5's full platform — have everything they need to ship Tier-1 pilots safely. Coding standards, testing pyramid, AI-assisted dev configured, ADR discipline. A two-person team can build and deploy a useful internal AI feature against the agency's reference implementation in 2–4 weeks, with the same governance and quality posture as the eventual platform. Many agencies should pause here for a quarter, ship 2–3 pilots, and let the lessons inform Phase 5 module design.
+Agencies that complete Phase 4, even without Phase 5's full platform, have everything they need to ship Tier-1 pilots safely. Coding standards, testing pyramid, AI-assisted dev configured, ADR discipline. A two-person team can build and deploy a useful internal AI feature against the agency's reference implementation in 2–4 weeks, with the same governance and quality posture as the eventual platform. Many agencies should pause here for a quarter, ship 2–3 pilots, and let the lessons inform Phase 5 module design.
 
 ## Plain-English Guide to Phase 4 Terms
 
 - **Stack.** The set of programming languages, frameworks, and runtimes the agency commits to maintaining. Picking one (or two) means every team can read each other's code and share modules.
 - **Linting and formatting.** Automated tools that check code for common bugs (linting) and reformat it consistently (formatting). The bar should be "the tool runs on save and in CI; nobody hand-formats."
-- **Contract testing.** Tests that verify two services agree on the shape of the messages they pass — without running both services in the same test. Catches integration breakage before deploy.
+- **Contract testing.** Tests that verify two services agree on the shape of the messages they pass, without running both services in the same test. Catches integration breakage before deploy.
 - **OpenAPI specification.** A machine-readable description of an API's endpoints, request shapes, and response shapes. Becomes the source of truth that client SDKs, server stubs, documentation, and tests all generate from.
-- **ADR (Architecture Decision Record).** A short document that captures _what_ was decided, _why_, _when_, and what alternatives were rejected. Future engineers find ADRs when they ask "why did we do this?" — without them, the answer is folklore.
+- **ADR (Architecture Decision Record).** A short document that captures _what_ was decided, _why_, _when_, and what alternatives were rejected. Future engineers find ADRs when they ask "why did we do this?" Without them, the answer is folklore.
 - **AI-assisted development.** A developer working with an AI tool (Claude Code, Copilot, Cursor) that reads the codebase and proposes changes. The output is code, not prose; the discipline is the same code review.
 
 ## Research basis
 
-API-first design adoption (>80% of new APIs since 2023), the modular monolith pattern (Amazon Prime Video and Shopify's documented migrations), AI-assisted development surveys (Stack Overflow 2025 — 92% of developers using AI tools daily), Trunk-Based Development from State of DevOps reports, the SPACE framework for developer experience, and the ADR pattern as documented by Michael Nygard.
+API-first design adoption (>80% of new APIs since 2023), the modular monolith pattern (Amazon Prime Video and Shopify's documented migrations), AI-assisted development surveys, Trunk-Based Development from State of DevOps reports, the SPACE framework for developer experience, and the ADR pattern as documented by Michael Nygard.
+
+Key sources:
+
+- [2026 JetBrains AI Pulse](https://blog.jetbrains.com/research/2026/04/which-ai-coding-tools-do-developers-actually-use-at-work/): 90% of developers regularly use AI coding tools at work (Jan 2026 wave).
+- [GitHub Octoverse 2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/): 80% of new GitHub developers use Copilot in their first week.
+- [Microsoft RCT (2025)](https://arxiv.org/html/2509.20353v2): 26% increase in completed tasks for developers using Copilot (two-year longitudinal study).
 
 ## Related
 
-- [Phase 3 — Infrastructure](/phase-3-infrastructure/) — the substrate Phase 4's standards run on
-- [Phase 5 — Modular Platform](/phase-5-platform/) — what is built using Phase 4's standards
-- [Track 4 — Developer Upskilling](/phase-2-education/track-4-developers/) — the training that puts Phase 4 standards into practice
+- [Phase 3 — Infrastructure](/phase-3-infrastructure/): the substrate Phase 4's standards run on
+- [Phase 5 — Modular Platform](/phase-5-platform/): what is built using Phase 4's standards
+- [Track 4 — Developer Upskilling](/phase-2-education/track-4-developers/): the training that puts Phase 4 standards into practice

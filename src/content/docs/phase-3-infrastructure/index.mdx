@@ -7,11 +7,11 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Phase 3 is where the agency builds the infrastructure that lets developers ship AI features without becoming a security incident. The hard part is not standing up servers — it is doing so on whichever cloud the agency is already on, with the same level of safety, observability, and reproducibility, while preserving the option to move later. This phase is deliberately cloud-agnostic. The reference patterns work on AWS, Azure, and Google Cloud; the decision pages call out what to pick on each.
+Phase 3 is where the agency builds the infrastructure that lets developers ship AI features without becoming a security incident. The hard part is not standing up servers; it is doing so on whichever cloud the agency is already on, with the same level of safety, observability, and reproducibility, while preserving the option to move later. This phase is deliberately cloud-agnostic. The reference patterns work on AWS, Azure, and Google Cloud; the decision pages call out what to pick on each.
 
 ## Objective
 
-Stand up a secure, isolated development environment — sandbox, staging, and production tiers — where teams can experiment with AI workloads without risking production systems or exposing sensitive data, and where the platform that gets built in Phase 5 has somewhere to live.
+Stand up a secure, isolated development environment (sandbox, staging, and production tiers) where teams can experiment with AI workloads without risking production systems or exposing sensitive data, and where the platform that gets built in Phase 5 has somewhere to live.
 
 ## How this phase scales for your agency
 
@@ -23,7 +23,7 @@ Stand up a secure, isolated development environment — sandbox, staging, and pr
 - **Use:** Azure AI Services / AWS Bedrock / Google Vertex AI directly behind your AUP. SSO through the identity provider you already have. A single managed container service (Container Apps, App Runner, or Cloud Run). Native key vault.
 - **Skip for now:** SLSA Level 2 attestations, OpenTelemetry pipeline, multi-environment promotion, custom landing zone. These are maturity adds, not prerequisites.
 - **Budget:** $10K–$30K Year 1 (managed-services consumption + minimal licensing).
-- **Off-ramp:** Sandbox-only is real — many small agencies pause here for 6–12 months while Phase 2 catches up. Document deferred items so they re-enter the roadmap when appropriate.
+- **Off-ramp:** Sandbox-only is real; many small agencies pause here for 6–12 months while Phase 2 catches up. Document deferred items so they re-enter the roadmap when appropriate.
 - **Where deferred items re-enter:** SLSA Level 2 attestations and the OpenTelemetry pipeline come back when Phase 5 starts (modules need build provenance and the AI orchestration layer needs prompt/response capture). Multi-environment promotion comes back when the Phase 6 starter project hits the production-readiness gate. The custom landing zone is a Year-2 hardening item, not a Year-1 prerequisite.
 
 </TabItem>
@@ -41,7 +41,7 @@ Stand up a secure, isolated development environment — sandbox, staging, and pr
 **Multi-environment with full staging/prod separation.** Same architecture as Standard, but with environment-per-team or environment-per-archetype, dedicated production tooling (WAF, DDoS protection, dedicated egress controls), and a platform-engineering function that owns the substrate.
 
 - **Add:** Multi-tenant landing zones, dedicated SRE/platform team, advanced confidential computing for Tier-3 workloads, internal developer portal (Backstage or equivalent).
-- **Sequencing:** Run two parallel tracks — one builds sandbox/staging, the other hardens production-grade controls.
+- **Sequencing:** Run two parallel tracks: one builds sandbox/staging, the other hardens production-grade controls.
 - **Budget:** Skews well past $100K and into the $250K+ range with dedicated platform staffing.
 
 </TabItem>
@@ -59,9 +59,13 @@ Stand up a secure, isolated development environment — sandbox, staging, and pr
 
 For a small agency, Phase 3 can mean: staff sign in with the identity system they already use; secrets live in the cloud vault; one managed container service runs the first app; logs and costs are visible in the cloud console; and sensitive data cannot be pasted into unapproved AI tools. The full standards stack comes later when the agency has more than one production AI workload.
 
+## Federal procurement update (April 2026)
+
+GitHub Copilot achieved [FedRAMP Moderate authorization with US/EU data residency](https://github.blog/changelog/2026-04-13-copilot-data-residency-in-us-eu-and-fedramp-compliance-now-available/), removing a long-standing procurement blocker for federal agencies. Copilot is also available via Microsoft GCC High (FedRAMP High) for agencies that need that posture. State and local agencies generally accept FedRAMP Moderate as the floor for cloud AI services. This shifts the buy-vs-build math for any agency that was waiting on this authorization, and it lets Track 4 developer labs use Copilot on agency-issued accounts rather than personal ones.
+
 ## Cloud-agnostic posture
 
-Most agencies already have a primary cloud — typically the one with their existing identity tenant, data warehouse, or contact-center stack. The default of this guide is to **build on whichever cloud you are already on**, not to migrate. The architecture should treat the cloud as a substrate (compute, storage, identity, network) and isolate cloud-specific surfaces behind narrow adapters. The result is an agency that can pick the best AI service for the workload — AWS Bedrock, Azure OpenAI, Vertex AI, or a third-party API — without rebuilding the platform.
+Most agencies already have a primary cloud, typically the one with their existing identity tenant, data warehouse, or contact-center stack. The default of this guide is to **build on whichever cloud you are already on**, not to migrate. The architecture should treat the cloud as a substrate (compute, storage, identity, network) and isolate cloud-specific surfaces behind narrow adapters. The result is an agency that can pick the best AI service for the workload (AWS Bedrock, Azure OpenAI, Vertex AI, or a third-party API) without rebuilding the platform.
 
 Three principles for staying cloud-agnostic:
 
@@ -73,13 +77,13 @@ The guidance throughout Phase 3 is structured: pick the principle, then the per-
 
 ## Deliverables
 
-- **[Cloud sandbox provisioning guide](/phase-3-infrastructure/cloud-sandbox/)** — sandbox / staging / production tier definitions and the per-cloud landing zone pattern.
-- **[Identity & access](/phase-3-infrastructure/identity-access/)** — SSO via Entra ID, Okta, or Auth0; workload identity (managed identity / IAM roles / workload identity); RBAC scope design.
-- **[CI/CD pipeline](/phase-3-infrastructure/cicd-pipeline/)** — trunk-based development, automated tests, SBOM generation, artifact signing, SLSA Level 2 attestations.
-- **[Secrets management](/phase-3-infrastructure/secrets-management/)** — Key Vault / Secrets Manager / Secret Manager patterns; HashiCorp Vault as cross-cloud option; secret-zero handling.
-- **[Container orchestration](/phase-3-infrastructure/container-orchestration/)** — Container Apps / App Runner / Cloud Run for managed; AKS / EKS / GKE for full Kubernetes; staging vs. production separation.
-- **[Security baseline](/phase-3-infrastructure/security-baseline/)** — DLP for AI workloads, data classification labels, network segmentation, egress control, encryption-in-use options.
-- **[Observability foundation](/phase-3-infrastructure/observability/)** — OpenTelemetry instrumentation, centralized logging, prompt/response capture, SLO definitions, AI-specific metrics.
+- **[Cloud sandbox provisioning guide](/phase-3-infrastructure/cloud-sandbox/):** sandbox / staging / production tier definitions and the per-cloud landing zone pattern.
+- **[Identity & access](/phase-3-infrastructure/identity-access/):** SSO via Entra ID, Okta, or Auth0; workload identity (managed identity / IAM roles / workload identity); RBAC scope design.
+- **[CI/CD pipeline](/phase-3-infrastructure/cicd-pipeline/):** trunk-based development, automated tests, SBOM generation, artifact signing, SLSA Level 2 attestations.
+- **[Secrets management](/phase-3-infrastructure/secrets-management/):** Key Vault / Secrets Manager / Secret Manager patterns; HashiCorp Vault as cross-cloud option; secret-zero handling.
+- **[Container orchestration](/phase-3-infrastructure/container-orchestration/):** Container Apps / App Runner / Cloud Run for managed; AKS / EKS / GKE for full Kubernetes; staging vs. production separation.
+- **[Security baseline](/phase-3-infrastructure/security-baseline/):** DLP for AI workloads, data classification labels, network segmentation, egress control, encryption-in-use options.
+- **[Observability foundation](/phase-3-infrastructure/observability/):** OpenTelemetry instrumentation, centralized logging, prompt/response capture, SLO definitions, AI-specific metrics.
 
 ## Sequencing within Phase 3
 
@@ -101,13 +105,13 @@ The guidance throughout Phase 3 is structured: pick the principle, then the per-
 ## What Phase 3 does NOT cover
 
 - Application code or architecture (that's Phase 4–5).
-- Specific model selection (Claude, GPT, Gemini, open weights) — that decision happens in Phase 5 against the platform's AI orchestration adapter.
-- Data warehouse and analytics infrastructure — these are upstream of AI workloads, but agencies typically already have them; integration patterns are referenced where relevant rather than rebuilt.
-- Production deployment of starter projects — Phase 6 handles that against the infrastructure Phase 3 produces.
+- Specific model selection (Claude, GPT, Gemini, open weights). That decision happens in Phase 5 against the platform's AI orchestration adapter.
+- Data warehouse and analytics infrastructure. These are upstream of AI workloads, but agencies typically already have them; integration patterns are referenced where relevant rather than rebuilt.
+- Production deployment of starter projects. Phase 6 handles that against the infrastructure Phase 3 produces.
 
 ## Off-Ramp — Sandbox-only
 
-Agencies that complete the sandbox tier (cloud account + SSO + minimal CI/CD + secrets + a single sandbox environment) have enough to run Track 4 developer labs and Tier-1 pilots. The full staging/production stack can be deferred to Year 2 if budget or staffing requires. This is a real off-ramp — many agencies will pause at sandbox-only for 6–12 months while culture work catches up. Document the deferred items so they re-enter the roadmap when appropriate.
+Agencies that complete the sandbox tier (cloud account + SSO + minimal CI/CD + secrets + a single sandbox environment) have enough to run Track 4 developer labs and Tier-1 pilots. The full staging/production stack can be deferred to Year 2 if budget or staffing requires. This is a real off-ramp; many agencies will pause at sandbox-only for 6–12 months while culture work catches up. Document the deferred items so they re-enter the roadmap when appropriate.
 
 ## Plain-English Guide to Phase 3 Terms
 
@@ -122,8 +126,10 @@ Agencies that complete the sandbox tier (cloud account + SSO + minimal CI/CD + s
 
 NIST SP 800-204D (software supply chain security), CNCF OpenTelemetry, SLSA v1.1, NIST SP 800-207 (zero trust), CISA Secure Cloud Business Applications (SCuBA) baselines, Cloud Native Computing Foundation reference architectures.
 
+- [GitHub Copilot FedRAMP Moderate authorization with US/EU data residency, GitHub Changelog, April 2026](https://github.blog/changelog/2026-04-13-copilot-data-residency-in-us-eu-and-fedramp-compliance-now-available/): current authorization status for the AI coding assistant most likely to land in agency procurement queues this year.
+
 ## Related
 
-- [Phase 1 — Governance](/phase-1-governance/) — the policy substrate Phase 3 enforces in code
-- [Phase 4 — Developer Stack](/phase-4-dev-stack/) — the development practices that run on this infrastructure
-- [Phase 5 — Modular Platform](/phase-5-platform/) — the platform built on top of Phase 3
+- [Phase 1 — Governance](/phase-1-governance/): the policy substrate Phase 3 enforces in code
+- [Phase 4 — Developer Stack](/phase-4-dev-stack/): the development practices that run on this infrastructure
+- [Phase 5 — Modular Platform](/phase-5-platform/): the platform built on top of Phase 3
