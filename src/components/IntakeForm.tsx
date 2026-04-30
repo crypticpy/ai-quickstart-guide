@@ -235,6 +235,7 @@ function exportMarkdown(s: FormState, tier: Tier | null): string {
 export default function IntakeForm() {
   const [state, setState] = useState<FormState>({ ...EMPTY });
   const [showErrors, setShowErrors] = useState(false);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     setState(loadState());
@@ -285,6 +286,9 @@ export default function IntakeForm() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    setStatus(
+      "Intake record downloaded. Send it to the AI program lead or intake mailbox for triage.",
+    );
   };
 
   const onPrint = () => {
@@ -374,6 +378,9 @@ export default function IntakeForm() {
       ],
       blocks,
     });
+    setStatus(
+      "Print view opened. Save the PDF if your intake process runs through email or a shared folder.",
+    );
   };
 
   const errorClass = (filled: boolean) =>
@@ -390,9 +397,10 @@ export default function IntakeForm() {
           <label class="aqg-tier__label" for="aqg-intake-name">
             Use case name
           </label>
-          <input
-            id="aqg-intake-name"
-            type="text"
+            <input
+              id="aqg-intake-name"
+              name="aqg-intake-name"
+              type="text"
             placeholder="e.g., 311 request triage assistant"
             value={state.useCaseName}
             onInput={(e) =>
@@ -412,6 +420,7 @@ export default function IntakeForm() {
             </label>
             <input
               id="aqg-intake-sponsor"
+              name="aqg-intake-sponsor"
               type="text"
               placeholder="e.g., Sarah Chen"
               value={state.sponsorName}
@@ -433,6 +442,7 @@ export default function IntakeForm() {
             </label>
             <input
               id="aqg-intake-role"
+              name="aqg-intake-role"
               type="text"
               placeholder="e.g., Senior Analyst"
               value={state.sponsorRole}
@@ -454,6 +464,7 @@ export default function IntakeForm() {
             </label>
             <input
               id="aqg-intake-dept"
+              name="aqg-intake-dept"
               type="text"
               placeholder="e.g., Public Health"
               value={state.department}
@@ -479,6 +490,8 @@ export default function IntakeForm() {
             class={"aqg-tier__field" + errorClass(state.problem.trim() !== "")}
           >
             <textarea
+              id="aqg-intake-problem"
+              name="aqg-intake-problem"
               rows={4}
               placeholder="In plain language, describe the work you do today and where AI might help. Two or three sentences is fine."
               value={state.problem}
@@ -503,6 +516,7 @@ export default function IntakeForm() {
             {AUDIENCE_OPTIONS.map((o) => (
               <label key={o.tier}>
                 <input
+                  id={`aqg-intake-audience-${o.tier}`}
                   type="radio"
                   name="aqg-intake-audience"
                   checked={state.audience === o.tier}
@@ -525,6 +539,7 @@ export default function IntakeForm() {
             {DECISION_OPTIONS.map((o) => (
               <label key={o.tier}>
                 <input
+                  id={`aqg-intake-decision-${o.tier}`}
                   type="radio"
                   name="aqg-intake-decision"
                   checked={state.decision === o.tier}
@@ -550,6 +565,8 @@ export default function IntakeForm() {
             {DATA_OPTIONS.map((o) => (
               <label key={o.id}>
                 <input
+                  id={`aqg-intake-data-${o.id}`}
+                  name={`aqg-intake-data-${o.id}`}
                   type="checkbox"
                   checked={!!state.data[o.id]}
                   onChange={() => toggleData(o.id)}
@@ -597,12 +614,18 @@ export default function IntakeForm() {
           Export as Markdown
         </button>
         <button type="button" onClick={onPrint} disabled={!complete}>
-          Print / save as PDF
+          Print / Save as PDF
         </button>
         <button type="button" class="aqg-tier__reset" onClick={reset}>
           Reset
         </button>
       </div>
+
+      {status ? (
+        <p class="aqg-tier__privacy aqg-tool-status no-print" aria-live="polite">
+          {status}
+        </p>
+      ) : null}
 
       <p class="aqg-tier__privacy no-print">
         Your inputs stay in your browser (localStorage). Nothing is sent to a

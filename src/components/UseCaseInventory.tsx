@@ -42,6 +42,7 @@ function loadItems(): Item[] {
 export default function UseCaseInventory() {
   const [items, setItems] = useState<Item[]>([]);
   const [draft, setDraft] = useState<Item>(EMPTY);
+  const [status, setStatus] = useState("");
 
   useEffect(() => setItems(loadItems()), []);
   useEffect(() => {
@@ -54,6 +55,7 @@ export default function UseCaseInventory() {
     if (!draft.name.trim()) return;
     setItems((current) => [...current, draft]);
     setDraft(EMPTY);
+    setStatus("Use case added. Export the inventory before a review meeting or quarterly update.");
   };
 
   const remove = (index: number) =>
@@ -96,6 +98,7 @@ export default function UseCaseInventory() {
     a.download = `ai-use-case-inventory-${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
+    setStatus("CSV inventory downloaded. Use it for spreadsheets, dashboards, or bulk review.");
   };
 
   const exportMarkdown = () => {
@@ -119,6 +122,7 @@ export default function UseCaseInventory() {
     a.download = `ai-use-case-inventory-${new Date().toISOString().slice(0, 10)}.md`;
     a.click();
     URL.revokeObjectURL(url);
+    setStatus("Markdown inventory downloaded. Use it for committee packets or versioned records.");
   };
 
   const update = (key: keyof Item, value: string) =>
@@ -130,6 +134,8 @@ export default function UseCaseInventory() {
         <label>
           Use case
           <input
+            id="aqg-inventory-name"
+            name="aqg-inventory-name"
             type="text"
             value={draft.name}
             onInput={(e) => update("name", e.currentTarget.value)}
@@ -139,6 +145,8 @@ export default function UseCaseInventory() {
         <label>
           Sponsor
           <input
+            id="aqg-inventory-sponsor"
+            name="aqg-inventory-sponsor"
             type="text"
             value={draft.sponsor}
             onInput={(e) => update("sponsor", e.currentTarget.value)}
@@ -148,6 +156,8 @@ export default function UseCaseInventory() {
         <label>
           Department
           <input
+            id="aqg-inventory-department"
+            name="aqg-inventory-department"
             type="text"
             value={draft.department}
             onInput={(e) => update("department", e.currentTarget.value)}
@@ -156,7 +166,12 @@ export default function UseCaseInventory() {
         </label>
         <label>
           Tier
-          <select value={draft.tier} onInput={(e) => update("tier", e.currentTarget.value)}>
+          <select
+            id="aqg-inventory-tier"
+            name="aqg-inventory-tier"
+            value={draft.tier}
+            onInput={(e) => update("tier", e.currentTarget.value)}
+          >
             <option>Tier 1</option>
             <option>Tier 2</option>
             <option>Tier 3</option>
@@ -165,6 +180,8 @@ export default function UseCaseInventory() {
         <label>
           Status
           <select
+            id="aqg-inventory-status"
+            name="aqg-inventory-status"
             value={draft.status}
             onInput={(e) => update("status", e.currentTarget.value)}
           >
@@ -178,6 +195,8 @@ export default function UseCaseInventory() {
         <label>
           Vendor / system
           <input
+            id="aqg-inventory-vendor-system"
+            name="aqg-inventory-vendor-system"
             type="text"
             value={draft.vendorSystem}
             onInput={(e) => update("vendorSystem", e.currentTarget.value)}
@@ -187,6 +206,8 @@ export default function UseCaseInventory() {
         <label>
           Data category
           <select
+            id="aqg-inventory-data-category"
+            name="aqg-inventory-data-category"
             value={draft.dataCategory}
             onInput={(e) => update("dataCategory", e.currentTarget.value)}
           >
@@ -200,6 +221,8 @@ export default function UseCaseInventory() {
         <label>
           Decision support
           <select
+            id="aqg-inventory-decision-support"
+            name="aqg-inventory-decision-support"
             value={draft.decisionSupport}
             onInput={(e) => update("decisionSupport", e.currentTarget.value)}
           >
@@ -212,6 +235,8 @@ export default function UseCaseInventory() {
         <label>
           Impact assessment
           <select
+            id="aqg-inventory-impact-assessment"
+            name="aqg-inventory-impact-assessment"
             value={draft.impactAssessment}
             onInput={(e) => update("impactAssessment", e.currentTarget.value)}
           >
@@ -225,6 +250,8 @@ export default function UseCaseInventory() {
         <label>
           Next review
           <input
+            id="aqg-inventory-next-review"
+            name="aqg-inventory-next-review"
             type="date"
             value={draft.nextReview}
             onInput={(e) => update("nextReview", e.currentTarget.value)}
@@ -243,9 +270,14 @@ export default function UseCaseInventory() {
           onClick={exportMarkdown}
           disabled={items.length === 0}
         >
-          Export Markdown
+          Export as Markdown
         </button>
       </p>
+      {status ? (
+        <p class="aqg-tier__privacy aqg-tool-status" aria-live="polite">
+          {status}
+        </p>
+      ) : null}
       <div class="sl-table-wrapper">
         <table>
           <thead>

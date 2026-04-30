@@ -9,6 +9,8 @@ sidebar:
 
 The [Pick Your Path](/getting-started/pick-your-path/) comparison table shows Year 1 ranges of $50K to $150K for Small, $150K to $400K for Standard, and $400K to $1M+ for Large. Those numbers are planning anchors, not promises. This page shows how they were built so a finance team can rebuild them with their own pay bands, locality, procurement vehicle, and accounting treatment for existing staff time.
 
+> **Last reviewed: April 30, 2026.** Rebuild salary, cloud, model, and licensing assumptions against current pay tables, contracts, and provider pricing before using these ranges in a budget request.
+
 Read this when you need to defend the totals in a budget memo, when your CFO wants to see the inputs, or when you want to swap a default for a number you trust more.
 
 ## The four cost categories

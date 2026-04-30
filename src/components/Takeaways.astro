@@ -1,0 +1,19 @@
+---
+type Props = {
+  copy: string;
+  avoid: string;
+};
+
+const { copy, avoid } = Astro.props;
+---
+
+<aside class="aqg-takeaways" aria-label="Case study takeaways">
+  <div>
+    <span class="aqg-takeaways__label">What to copy</span>
+    <p class="aqg-takeaways__body">{copy}</p>
+  </div>
+  <div>
+    <span class="aqg-takeaways__label">What to avoid</span>
+    <p class="aqg-takeaways__body">{avoid}</p>
+  </div>
+</aside>

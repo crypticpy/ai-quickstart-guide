@@ -6,6 +6,13 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import AtAGlance from '../../../components/AtAGlance.astro';
+import FreshnessNote from '../../../components/FreshnessNote.astro';
+import PhaseBanner from '../../../components/PhaseBanner.astro';
+
+<PhaseBanner phase="Phase 4" title="Repeatable development practice" months="Months 4-7" focus="Choose the stack, standards, testing, API, ADR, and AI-assisted development rules teams will actually use." />
+
+<AtAGlance audience="IT leads, developers, reviewers, security, architects, and vendor/partner teams" effort="One lightweight ADR and repo template for small teams; 12-week standard practice rollout for larger teams" output="Stack decision, coding standards, testing strategy, AI-assisted development rules, API-first practice, and ADR workflow" prerequisites="Phase 3 sandbox path and Phase 2 developer track kickoff" nextAction="Confirm the primary stack, adopt the starter repo baseline, and record the decision in an ADR." />
 
 Phase 4 is where the agency decides _how_ it builds software. Phase 3 stood up the substrate; Phase 5 will produce the platform. In between, the agency picks a stack (or confirms the one it already has), writes down the standards that teams will follow, and establishes AI-assisted workflows that are already part of modern development. The goal is not to chase fashion. The goal is to make a small number of durable choices that the agency can defend in five years.
 
@@ -18,7 +25,7 @@ Select (or validate) the agency's development stack and establish the coding sta
 <Tabs syncKey="agency-size">
 <TabItem label="Small">
 
-**Pick one stack, adopt the starter baseline, get moving.** Small teams should not invent a full standards program from scratch. Confirm the stack they already operate, adopt the minimum repo template from this guide, write one lightweight ADR, and move on. The biggest gain in Phase 4 for small agencies is giving each developer or contractor a clear, safe path to use repeatable tooling.
+**Pick one stack, adopt the starter baseline, get moving.** Small teams do not need a full standards program on day one. Confirm the stack they already operate, adopt the minimum repo template from this guide, write one lightweight ADR, and move on. The biggest gain in Phase 4 for small agencies is giving each developer or contractor a clear, safe path to use repeatable tooling.
 
 - **Adopt now:** One primary stack, one repo template, formatter/linter/test command, secret scan, simple PR checklist, lightweight ADR template.
 - **Configure carefully:** An approved AI coding assistant tenant, or a synthetic-code-only rule until procurement catches up.
@@ -61,6 +68,8 @@ Most agencies under-invest in this phase. The pull is to skip from "we have infr
 The phase is also the first place AI-assisted development gets serious agency-wide attention. The [2025 JetBrains State of Developer Ecosystem](https://blog.jetbrains.com/research/2025/10/state-of-developer-ecosystem-2025/) reports 85% of developers regularly use AI tools and 62% rely on at least one AI coding assistant. With Claude Code, GitHub Copilot, and Cursor in mainstream developer use, the question is no longer "do we allow this?" but "how do we configure it safely, and what do we expect from a reviewer?"
 
 The 2026 [JetBrains AI Pulse](https://blog.jetbrains.com/research/2026/04/which-ai-coding-tools-do-developers-actually-use-at-work/) makes the trend clearer: a January 2026 wave of more than 10,000 professional developers found 90% regularly used at least one AI tool at work for coding and development tasks. Treat that as a market signal, not a guaranteed agency outcome. Measure local value through PR cycle time, defect rate, reviewer load, developer feedback, and whether more work ships without lowering quality.
+
+<FreshnessNote reviewed="April 30, 2026" note="AI coding tool adoption, product names, and enterprise controls change quickly. Use this section as context, then verify current provider capabilities and contract terms before adoption." />
 
 ## Minimum useful Phase 4
 

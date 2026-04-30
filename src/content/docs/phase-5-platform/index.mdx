@@ -6,10 +6,16 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import AtAGlance from '../../../components/AtAGlance.astro';
+import PhaseBanner from '../../../components/PhaseBanner.astro';
+
+<PhaseBanner phase="Phase 5" title="Reusable platform pieces" months="Months 5-10" focus="Reduce repeated plumbing by turning common app needs into maintained modules and golden paths." />
+
+<AtAGlance audience="Platform team, IT leads, architects, developers, DevEx, and application teams" effort="1-3 lightweight modules for small teams; six-month module build for the standard path" output="Module taxonomy, core modules, contribution model, registry, and optional internal developer platform" prerequisites="Phase 3 production controls and Phase 4 standards for shared modules" nextAction="Start with auth, RBAC, API conventions, and the smallest AI orchestration wrapper your first app needs." />
 
 Phase 5 is where the agency starts reducing integration tax. The platform is not a product mandate; it is a practical library of well-bounded modules, conventions, and templates that future applications can compose. When the next intake submission becomes a project, the common pieces should already have a recommended path: auth, RBAC, data access, API plumbing, document rendering, AI orchestration. The team building the new application can spend more time on the use case and less time rebuilding plumbing.
 
-This is the longest phase in the standard path (about six months) and it is where scope discipline matters most. A useful platform lasts because teams can adopt it gradually, understand its seams, and still make exceptions when the business case is real. A platform that tries to solve every future problem on day one usually stalls.
+This is the longest phase in the standard path (about six months) and it is where scope discipline matters most. A useful platform lasts because teams can adopt it gradually, understand its boundaries, and still make exceptions when the business case is real. A platform that tries to solve every future problem on day one usually stalls.
 
 ## Objective
 
@@ -30,7 +36,7 @@ Build the reusable pieces your next applications need: independently testable, d
 </TabItem>
 <TabItem label="Standard">
 
-**Build the core modules across six months per the standard sequencing.** Run the modular monolith pattern with hexagonal seams, ship the contribution guide, and stand up at least a lightweight registry. The full IDP is valuable when a 3–6 engineer platform team can maintain it.
+**Build the core modules across six months per the standard sequencing.** Run the modular monolith pattern with hexagonal boundaries, ship the contribution guide, and stand up at least a lightweight registry. The full IDP is valuable when a 3–6 engineer platform team can maintain it.
 
 - **Cadence:** Follow the month-by-month schedule. Auth + RBAC first; AI Orchestration v1 in Month 4 so Phase 6 can start using it.
 - **Pattern:** Modular monolith, hexagonal architecture, OpenAPI everywhere.
@@ -60,7 +66,7 @@ Build the reusable pieces your next applications need: independently testable, d
 
 For a small agency, "platform" does not mean a separate product team and seven custom frameworks. It can mean three reusable pieces that keep the first AI app from being a one-off: one sign-in wrapper, one API pattern, and one AI orchestration wrapper that handles prompts, cost, retrieval, and guardrails consistently. Build the rest only when the second and third apps prove the need.
 
-## The pattern: modular monolith with hexagonal seams
+## The pattern: modular monolith with hexagonal boundaries
 
 The recommended default is a **modular monolith**, not a microservice constellation. Modules live in one repo or a small number of repos and usually ship as one deployable unit. Inside, each module is internally coherent and externally minimal: it exposes a small interface and depends on a small set of others. The seams use [hexagonal architecture / ports-and-adapters](/phase-5-platform/module-taxonomy/) so a module's domain logic is less coupled to a specific cloud, database, or vendor.
 

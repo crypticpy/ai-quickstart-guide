@@ -77,6 +77,8 @@ export default function AgencySetupWizard() {
         <label>
           State or local jurisdiction
           <input
+            id="aqg-setup-jurisdiction"
+            name="aqg-setup-jurisdiction"
             type="text"
             value={state}
             placeholder="e.g. Texas, Colorado, California"
@@ -86,6 +88,8 @@ export default function AgencySetupWizard() {
         <label>
           Cloud
           <select
+            id="aqg-setup-cloud"
+            name="aqg-setup-cloud"
             value={cloud}
             onInput={(e) => setCloud(e.currentTarget.value)}
           >
@@ -98,7 +102,12 @@ export default function AgencySetupWizard() {
         </label>
         <label>
           Identity provider
-          <select value={idp} onInput={(e) => setIdp(e.currentTarget.value)}>
+          <select
+            id="aqg-setup-idp"
+            name="aqg-setup-idp"
+            value={idp}
+            onInput={(e) => setIdp(e.currentTarget.value)}
+          >
             <option>Existing SSO / identity provider</option>
             <option>Microsoft Entra ID</option>
             <option>Okta</option>
@@ -109,6 +118,8 @@ export default function AgencySetupWizard() {
         <label>
           Preferred starter archetype
           <select
+            id="aqg-setup-archetype"
+            name="aqg-setup-archetype"
             value={archetype}
             onInput={(e) => setArchetype(e.currentTarget.value)}
           >

@@ -7,6 +7,8 @@ sidebar:
 
 > **Why this page exists.** Each phase of the playbook cites at least one external framework as research basis. This page consolidates those citations in one place, with version numbers, and explains specifically where each framework is load-bearing in the guide. The goal is twofold: make the citations auditable for an agency that needs to defend its choices to a board or legislature, and make it obvious where the playbook will need an update when a framework version changes. Verify policy memoranda and standards against the publisher's current page before relying on them in an official memo.
 
+> **Last reviewed: April 30, 2026.** Re-check publisher pages before citing these frameworks in a formal policy, procurement package, grant response, or legislative report.
+
 ## NIST AI RMF 1.0
 
 - **Full title:** Artificial Intelligence Risk Management Framework (AI RMF 1.0)

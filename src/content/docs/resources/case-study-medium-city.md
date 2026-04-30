@@ -7,6 +7,10 @@ sidebar:
 
 > **Composite case study.** This narrative is built from interviews with two mid-size public health engagements; the agency name is fictional, the numbers are representative.
 
+> **What to copy.** Start with a named business owner, a real document corpus, and evaluation cases reviewed by domain staff before public launch.
+>
+> **What to avoid.** Do not assume an existing procurement vehicle is "done" until your procurement office has confirmed the exact AI use and contract terms.
+
 ## Agency profile
 
 - **Archetype:** City public health department, mid-size Pacific Northwest city

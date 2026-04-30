@@ -304,6 +304,7 @@ export default function CharterWizard() {
   const [step, setStep] = useState(0);
   const [showErrors, setShowErrors] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     setState(loadState());
@@ -369,6 +370,9 @@ export default function CharterWizard() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    setStatus(
+      "Draft charter downloaded. Next step: confirm membership, cadence, and the approving body.",
+    );
   };
 
   const printPdf = () => {
@@ -419,6 +423,7 @@ export default function CharterWizard() {
         },
       ],
     });
+    setStatus("Print view opened. Use the PDF for the committee approval packet.");
   };
 
   const previewMd = useMemo(() => renderCharterMarkdown(state), [state]);
@@ -475,6 +480,8 @@ export default function CharterWizard() {
                   {f.required ? <span aria-hidden="true"> *</span> : null}
                 </span>
                 <input
+                  id={`aqg-charter-${f.key}`}
+                  name={`aqg-charter-${f.key}`}
                   type={f.type ?? "text"}
                   value={v}
                   placeholder={f.placeholder}
@@ -543,6 +550,11 @@ export default function CharterWizard() {
               Edit answers
             </button>
           </div>
+          {status ? (
+            <p class="aqg-wizard__privacy aqg-tool-status no-print" aria-live="polite">
+              {status}
+            </p>
+          ) : null}
         </div>
       ) : null}
 

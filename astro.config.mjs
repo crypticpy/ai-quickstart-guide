@@ -2,7 +2,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import preact from '@astrojs/preact';
-import mermaid from 'astro-mermaid';
 import remarkBaseLinks from './src/plugins/remark-base-links.mjs';
 
 const SITE = process.env.SITE_URL ?? 'https://crypticpy.github.io';
@@ -15,38 +14,6 @@ export default defineConfig({
     remarkPlugins: [[remarkBaseLinks, { base: BASE }]],
   },
   integrations: [
-    // astro-mermaid must come BEFORE starlight so its remark plugin runs
-    // before starlight processes the markdown. Renders client-side; auto
-    // theme follows the site's `data-theme` attribute (light/dark).
-    mermaid({
-      theme: 'default',
-      autoTheme: true,
-      enableLog: false,
-      mermaidConfig: {
-        fontFamily:
-          'Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
-        gantt: {
-          titleTopMargin: 28,
-          barHeight: 24,
-          barGap: 6,
-          topPadding: 60,
-          leftPadding: 170,
-          rightPadding: 30,
-          gridLineStartPadding: 12,
-          fontSize: 14,
-          sectionFontSize: 15,
-          numberSectionStyles: 4,
-        },
-        flowchart: {
-          curve: 'basis',
-          padding: 16,
-        },
-        sequence: {
-          actorMargin: 60,
-          messageFontSize: 14,
-        },
-      },
-    }),
     preact(),
     starlight({
       components: {

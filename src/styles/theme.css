@@ -39,78 +39,237 @@
   color: var(--sl-color-text);
 }
 
-/* -------------------------------------------------------------------------
- * Mermaid diagrams (rendered client-side by astro-mermaid).
- *
- * astro-mermaid emits an inline <svg> inside `.mermaid`. Mermaid's default
- * font sizes are tuned for slide decks, not docs — they render too small
- * and too low-contrast inside Starlight's content column. These rules
- * lift text size + use Starlight's semantic tokens so the diagrams pick
- * up correct colors in both light and dark mode.
- * ------------------------------------------------------------------------- */
+/* Content polish primitives ------------------------------------------------ */
 
-.mermaid {
-  /* Center diagrams in the content column and give them breathing room. */
+.aqg-at-glance,
+.aqg-freshness,
+.aqg-takeaways,
+.aqg-phase-banner {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-gray-6);
+  color: var(--sl-color-text);
+}
+
+.aqg-at-glance {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+  margin: 1.25rem 0 1.5rem;
+  padding: 1rem;
+}
+
+.aqg-at-glance__item {
+  min-width: 0;
+}
+
+.aqg-at-glance__label,
+.aqg-freshness__label,
+.aqg-takeaways__label {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--sl-color-text-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.aqg-at-glance__value,
+.aqg-freshness__body,
+.aqg-takeaways__body {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.aqg-phase-banner {
+  margin: 1rem 0 1.25rem;
+  padding: 0.85rem 1rem;
+  border-left: 4px solid var(--sl-color-accent);
+}
+
+.aqg-phase-banner__eyebrow {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--sl-color-text-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.aqg-phase-banner__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.aqg-phase-banner__meta {
+  margin: 0.25rem 0 0;
+  color: var(--sl-color-gray-3);
+  line-height: 1.45;
+}
+
+.aqg-freshness,
+.aqg-takeaways {
+  margin: 1rem 0 1.25rem;
+  padding: 0.85rem 1rem;
+  border-left: 4px solid #3aa66e;
+}
+
+.aqg-takeaways {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.85rem;
+}
+
+.sl-markdown-content .sl-table-wrapper {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.45rem;
+  background: var(--sl-color-bg);
+}
+
+.sl-markdown-content .sl-table-wrapper table {
+  margin: 0;
+}
+
+@media (max-width: 50rem) {
+  .sl-markdown-content .sl-table-wrapper {
+    position: relative;
+    margin-top: 1.8rem;
+  }
+
+  .sl-markdown-content .sl-table-wrapper::before {
+    content: "Scroll sideways to see all columns";
+    position: absolute;
+    top: -1.45rem;
+    left: 0;
+    color: var(--sl-color-gray-3);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+}
+
+/* Static Gantt timeline ---------------------------------------------------- */
+
+.aqg-gantt {
   margin: 1.25rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-gray-6);
+}
+
+.aqg-gantt__title {
+  margin-bottom: 0.85rem;
+  font-weight: 800;
+  color: var(--sl-color-text);
+}
+
+.aqg-gantt__months,
+.aqg-gantt__rows {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(4.75rem, 1fr));
+  gap: 0.35rem;
+  min-width: 62rem;
+}
+
+.aqg-gantt__months {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin-bottom: 0.55rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--sl-color-gray-5);
+  background: var(--sl-color-gray-6);
+}
+
+.aqg-gantt__months span {
+  color: var(--sl-color-gray-3);
+  font-size: 0.78rem;
+  font-weight: 700;
   text-align: center;
+  text-transform: uppercase;
 }
 
-.mermaid svg {
-  max-width: 100%;
-  height: auto;
+.aqg-gantt__rows {
+  align-items: center;
 }
 
-/* Diagram title (gantt and most other types). */
-.mermaid svg .titleText,
-.mermaid svg text.titleText {
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  fill: var(--sl-color-text-accent) !important;
+.aqg-gantt__section {
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--sl-color-gray-5);
+  color: var(--sl-color-text-accent);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-/* Section labels on the left side of a gantt. */
-.mermaid svg .sectionTitle,
-.mermaid svg text.sectionTitle,
-.mermaid svg text.sectionTitle0,
-.mermaid svg text.sectionTitle1,
-.mermaid svg text.sectionTitle2,
-.mermaid svg text.sectionTitle3 {
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  fill: var(--sl-color-white) !important;  /* "white" inverts to dark in light mode */
+.aqg-gantt__section:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 
-/* Task bar labels (inside or beside the bars on a gantt). */
-.mermaid svg .taskText,
-.mermaid svg .taskTextOutsideRight,
-.mermaid svg .taskTextOutsideLeft,
-.mermaid svg text.taskText,
-.mermaid svg text.taskTextOutsideRight,
-.mermaid svg text.taskTextOutsideLeft {
-  font-size: 13px !important;
-  fill: var(--sl-color-white) !important;
+.aqg-gantt__bar {
+  grid-column: var(--start) / span var(--span);
+  min-height: 2rem;
+  padding: 0.35rem 0.55rem;
+  overflow: hidden;
+  border-radius: 0.35rem;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* X-axis date ticks on a gantt. */
-.mermaid svg .grid .tick text {
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  fill: var(--sl-color-text) !important;
+.aqg-gantt__bar--phase1 {
+  background: #2f4a8c;
 }
 
-/* Grid lines — keep visible but not visually heavy. */
-.mermaid svg .grid path,
-.mermaid svg .grid line {
-  stroke: var(--sl-color-gray-4) !important;
-  stroke-opacity: 0.5;
+.aqg-gantt__bar--phase2 {
+  background: #5b5e9a;
 }
 
-/* Flowchart / sequence node labels. */
-.mermaid svg .nodeLabel,
-.mermaid svg .edgeLabel,
-.mermaid svg .messageText,
-.mermaid svg .actor text,
-.mermaid svg .label foreignObject div {
-  fill: var(--sl-color-text) !important;
-  color: var(--sl-color-text) !important;
+.aqg-gantt__bar--phase3 {
+  background: #0f766e;
+}
+
+.aqg-gantt__bar--phase4 {
+  background: #7c3aed;
+}
+
+.aqg-gantt__bar--phase5 {
+  background: #9a5a14;
+}
+
+.aqg-gantt__bar--phase6 {
+  background: #b42318;
+}
+
+.aqg-gantt__bar--human {
+  background: #386641;
+}
+
+@media (max-width: 50rem) {
+  .aqg-gantt {
+    position: relative;
+    margin-top: 1.8rem;
+  }
+
+  .aqg-gantt::before {
+    content: "Scroll sideways to see the full timeline";
+    position: absolute;
+    top: -1.45rem;
+    left: 0;
+    color: var(--sl-color-gray-3);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
 }

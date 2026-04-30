@@ -204,3 +204,37 @@
     border: 1px solid #999;
   }
 }
+
+@media (max-width: 50rem) {
+  .aqg-wizard {
+    padding: 1rem;
+  }
+
+  .aqg-wizard__steps {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .aqg-wizard__step {
+    width: 100%;
+  }
+
+  .aqg-wizard__panel,
+  .aqg-wizard__preview {
+    padding: 1rem;
+  }
+
+  .aqg-wizard__nav,
+  .aqg-wizard__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .aqg-wizard__nav button,
+  .aqg-wizard__actions button,
+  .aqg-wizard__nav .aqg-wizard__reset,
+  .aqg-wizard__actions .aqg-wizard__reset {
+    width: 100%;
+    margin-left: 0;
+  }
+}

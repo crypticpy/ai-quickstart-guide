@@ -218,6 +218,15 @@
   color: var(--aqg-text-muted) !important;
 }
 
+.aqg-tool-status {
+  margin-top: 0.65rem !important;
+  padding: 0.55rem 0.75rem;
+  border-left: 3px solid var(--aqg-success);
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--aqg-success) 10%, transparent);
+  color: var(--aqg-text) !important;
+}
+
 /* -------------------------------------------------------------------------
  * Focus indicators — applied last so it wins over Starlight defaults.
  * Visible at 3:1 contrast against any of our backgrounds. Skipped for

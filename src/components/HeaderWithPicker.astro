@@ -12,3 +12,20 @@ import AgencyPathDropdown from './AgencyPathDropdown.astro';
   <AgencyPathDropdown />
   <Default {...Astro.props}><slot /></Default>
 </div>
+
+<script>
+  function labelThemeSelects() {
+    const selects = [...document.querySelectorAll('select')].filter((select) =>
+      select.closest('label')?.textContent?.includes('Select theme')
+    );
+    selects.forEach((select, index) => {
+      if (!select.id) select.id = `aqg-theme-select-${index + 1}`;
+      if (!select.getAttribute('name')) {
+        select.setAttribute('name', `aqg-theme-select-${index + 1}`);
+      }
+    });
+  }
+
+  labelThemeSelects();
+  document.addEventListener('astro:after-swap', labelThemeSelects);
+</script>

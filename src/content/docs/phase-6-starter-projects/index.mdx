@@ -6,6 +6,13 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import AtAGlance from '../../../components/AtAGlance.astro';
+import PhaseBanner from '../../../components/PhaseBanner.astro';
+import Takeaways from '../../../components/Takeaways.astro';
+
+<PhaseBanner phase="Phase 6" title="First real AI application" months="Months 7-12" focus="Pick one starter project that delivers user value and stress-tests the platform under production discipline." />
+
+<AtAGlance audience="Executive sponsor, product owner, IT/platform team, user cohort, governance reviewers, and help desk" effort="One bounded internal project for small teams; full discovery-build-UAT-launch sequence for standard teams" output="Chosen archetype, UAT evidence, production readiness decision, launch runbook, first-month operating metrics, and retrospective" prerequisites="Governance approved, infrastructure ready, dev stack adopted, and enough platform pieces available for the chosen archetype" nextAction="Run the selection guide and pick the lowest-risk project with a real owner and ready users." />
 
 Phase 6 is where the platform meets reality. After five phases of governance, training, infrastructure, dev stack, and modular platform work, the agency picks one application and ships it to real users. The standard goal is a controlled production launch, but a limited internal launch or extended pilot can be the right off-ramp when readiness gaps are real.
 
@@ -76,6 +83,8 @@ The agency picks one. (Larger agencies may pick two in parallel.) Each archetype
 | [NL Data Dashboard](/phase-6-starter-projects/archetype-data-dashboard/)            | Natural-language queries over operational data, with charts and exports | Tests SQL guardrails; broadest set of stakeholder questions                |
 
 Selection criteria, the readiness checks, and a decision tree are in the [selection guide](/phase-6-starter-projects/selection-guide/).
+
+<Takeaways copy="Choose the archetype with a real owner, ready users, usable data, and a clear operating path after launch." avoid="Do not choose by demo appeal or vendor pitch alone; the first project needs sustained use, not just an impressive walkthrough." />
 
 ## What the agency commits to in Phase 6
 

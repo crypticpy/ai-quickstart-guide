@@ -298,6 +298,7 @@ function exportMarkdown(state: FormState, tier: Tier): string {
 
 export default function RiskTierPicker() {
   const [state, setState] = useState<FormState>({ ...EMPTY });
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     setState(loadState());
@@ -342,6 +343,9 @@ export default function RiskTierPicker() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    setStatus(
+      "Risk classification downloaded. Send it with the intake record so reviewers can confirm or adjust the tier.",
+    );
   };
 
   const onPrint = () => {
@@ -401,6 +405,9 @@ export default function RiskTierPicker() {
       ],
       blocks,
     });
+    setStatus(
+      "Print view opened. Use the PDF as review evidence, not as the final committee decision.",
+    );
   };
 
   const meta = tier ? TIER_META[tier] : null;
@@ -411,6 +418,8 @@ export default function RiskTierPicker() {
         <label class="aqg-tier__field">
           <span class="aqg-tier__label">Use case name</span>
           <input
+            id="aqg-risk-use-case-name"
+            name="aqg-risk-use-case-name"
             type="text"
             value={state.useCaseName}
             placeholder="e.g. 311 service request triage"
@@ -422,6 +431,8 @@ export default function RiskTierPicker() {
         <label class="aqg-tier__field">
           <span class="aqg-tier__label">Description (optional)</span>
           <textarea
+            id="aqg-risk-description"
+            name="aqg-risk-description"
             rows={2}
             value={state.description}
             placeholder="One or two sentences describing what the AI will do, who it serves, and what data it touches."
@@ -446,6 +457,7 @@ export default function RiskTierPicker() {
               {d.options.map((o) => (
                 <label key={o.tier}>
                   <input
+                    id={`aqg-risk-${d.id}-${o.tier}`}
                     type="radio"
                     name={d.id}
                     value={o.tier}
@@ -517,7 +529,7 @@ export default function RiskTierPicker() {
 
       <div class="aqg-tier__actions no-print">
         <button type="button" onClick={onExport} disabled={!tier}>
-          Export classification as Markdown
+          Export as Markdown
         </button>
         <button type="button" onClick={onPrint} disabled={!tier}>
           Print / Save as PDF
@@ -526,6 +538,12 @@ export default function RiskTierPicker() {
           Reset
         </button>
       </div>
+
+      {status ? (
+        <p class="aqg-tier__privacy aqg-tool-status no-print" aria-live="polite">
+          {status}
+        </p>
+      ) : null}
 
       <p class="aqg-tier__privacy no-print">
         Tier is computed as the highest of the five dimension answers — any

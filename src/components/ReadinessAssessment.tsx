@@ -263,6 +263,7 @@ function saveState(state: SavedState) {
 export default function ReadinessAssessment() {
   const [agencyName, setAgencyName] = useState("");
   const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const s = loadState();
@@ -350,6 +351,9 @@ export default function ReadinessAssessment() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    setStatus(
+      "Readiness summary downloaded. Save or share it with the sponsor before choosing the next 90-day focus.",
+    );
   };
 
   const printPdf = () => {
@@ -430,6 +434,9 @@ export default function ReadinessAssessment() {
       meta,
       blocks,
     });
+    setStatus(
+      "Print view opened. Use the saved PDF as the baseline for your next quarterly check-in.",
+    );
   };
 
   return (
@@ -438,6 +445,8 @@ export default function ReadinessAssessment() {
         <label>
           <span>Agency name (optional)</span>
           <input
+            id="aqg-readiness-agency"
+            name="aqg-readiness-agency"
             type="text"
             value={agencyName}
             onInput={(e) => setAgencyName((e.target as HTMLInputElement).value)}
@@ -458,6 +467,7 @@ export default function ReadinessAssessment() {
               {q.options.map((o) => (
                 <label key={o.score}>
                   <input
+                    id={`aqg-readiness-${q.id}-${o.score}`}
                     type="radio"
                     name={q.id}
                     value={o.score}
@@ -512,6 +522,12 @@ export default function ReadinessAssessment() {
           Reset
         </button>
       </div>
+
+      {status ? (
+        <p class="aqg-readiness__privacy aqg-tool-status no-print" aria-live="polite">
+          {status}
+        </p>
+      ) : null}
 
       <p class="aqg-readiness__privacy no-print">
         Your answers are saved only in this browser. Nothing is sent to a

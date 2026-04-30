@@ -7,6 +7,10 @@ sidebar:
 
 > **Composite case study.** This narrative is built from interviews with two state revenue / tax engagements and one large state benefits-administration engagement; the agency name is fictional, the numbers are representative.
 
+> **What to copy.** Use quarterly reporting, module ownership, and a visible AI official to turn a political deadline into an operating system.
+>
+> **What to avoid.** Do not let scale become permission to skip sequencing; this case worked because governance, education, infrastructure, and platform work moved in parallel with explicit owners.
+
 ## Agency profile
 
 - **Archetype:** State department of revenue / tax

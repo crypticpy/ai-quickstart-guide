@@ -86,6 +86,8 @@ export default function StarterProjectSelector() {
         ].map(([key, label]) => (
           <label>
             <input
+              id={`aqg-starter-signal-${key}`}
+              name={`aqg-starter-signal-${key}`}
               type="checkbox"
               checked={scores[key as keyof Scores]}
               onChange={() => toggle(key as keyof Scores)}

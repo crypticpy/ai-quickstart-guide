@@ -1,0 +1,28 @@
+---
+type Props = {
+  audience: string;
+  effort: string;
+  output: string;
+  prerequisites?: string;
+  nextAction: string;
+};
+
+const { audience, effort, output, prerequisites = "None", nextAction } = Astro.props;
+
+const items = [
+  ["Audience", audience],
+  ["Effort", effort],
+  ["Output", output],
+  ["Prerequisites", prerequisites],
+  ["Next action", nextAction],
+];
+---
+
+<aside class="aqg-at-glance" aria-label="At a glance">
+  {items.map(([label, value]) => (
+    <div class="aqg-at-glance__item">
+      <span class="aqg-at-glance__label">{label}</span>
+      <p class="aqg-at-glance__value">{value}</p>
+    </div>
+  ))}
+</aside>

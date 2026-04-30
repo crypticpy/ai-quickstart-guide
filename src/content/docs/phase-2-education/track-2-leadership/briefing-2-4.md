@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-The fourth briefing is the one where the agency commits in writing to a 12-month plan. Earlier briefings produced budget, governance, and the build/buy/partner mix. This one binds them into a calendar with milestones and explicit ROI commitments.
+The fourth briefing is where the agency turns earlier decisions into a written 12-month plan. Earlier briefings produced budget, governance, and the build/buy/partner mix. This one binds them into a calendar with milestones and explicit ROI commitments.
 
 ## Audience and prerequisites
 
@@ -53,12 +53,13 @@ Each milestone is a check-in, not just a status report. If a milestone slips, th
 
 The five archetypes from [Phase 6](/phase-6-starter-projects/):
 
-1. **Document Intelligence.** RAG-style search across an agency corpus, plus document rendering and extraction. High ROI, well-understood pattern, broadly applicable.
-2. **Conversational AI.** Role-based chatbot or assistant with tool use. Higher Tier risk; appropriate for some agencies, premature for most.
-3. **Workflow Automation.** Document routing, classification, approval chains. Strong ROI in agencies with high-volume forms processing.
-4. **Data Dashboard.** NL-to-SQL with visualization. Useful for agencies with mature data warehouses and weak self-service analytics; otherwise premature.
+1. **RAG Chatbot.** Staff or public Q&A over a curated agency knowledge base. Often approachable when the audience is internal and the corpus is narrow.
+2. **Meeting Transcriber.** Transcription, summarization, and action-item extraction for staff meetings. Useful when meeting volume is high and records rules are understood.
+3. **Document Intelligence.** RAG-style search across an agency corpus, plus document rendering and extraction. High ROI, well-understood pattern, broadly applicable.
+4. **Workflow Automation.** Document routing, classification, approval chains. Strong ROI in agencies with high-volume forms processing.
+5. **Data Dashboard.** NL-to-SQL with visualization. Useful for agencies with mature data warehouses and weak self-service analytics; otherwise premature.
 
-Most agencies should pick **Document Intelligence** as the first starter project. It compounds across departments, ships faster than the alternatives, and the failure mode (a wrong search result) is less consequential than the alternatives.
+For many agencies, **Document Intelligence**, a narrow internal **RAG Chatbot**, or a **Meeting Transcriber** will be the safest first pick because the scope can be bounded and the review process is easier to explain. Workflow Automation and Data Dashboard projects can still be excellent choices when the intake queue, data quality, and governance controls are ready.
 
 The decision is informed by the intake submissions: pick the archetype that addresses the largest cluster of submitted use cases. Don't pick by vendor pitch; pick by demonstrated demand.
 
@@ -97,7 +98,7 @@ The takeaway memo is distributed within 48 hours and becomes the agency's AI pro
 
 - 12-minute recorded video covering Topics 1–3.
 - 1-page brief.
-- The four-archetype comparison sheet.
+- The five-archetype comparison sheet.
 - 30-minute office hour with the AI program lead to make the starter-project decision.
 
 ## Related

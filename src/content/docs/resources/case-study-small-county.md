@@ -7,6 +7,10 @@ sidebar:
 
 > **Composite case study.** This narrative is built from interviews with three small-county engagements; the agency name is fictional, the numbers are representative.
 
+> **What to copy.** Treat Phase 1 + core staff training as a complete Year-1 outcome when production AI is not yet worth the operating burden.
+>
+> **What to avoid.** Do not let a request for "a chatbot" override the readiness, staffing, and ROI evidence.
+
 ## Agency profile
 
 - **Archetype:** County clerk's office, rural Midwest

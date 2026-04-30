@@ -7,6 +7,8 @@ sidebar:
 
 > **What this is, and is not.** This is not a maintained legal tracker and it is not legal advice. State AI legislation moves faster than a documentation site can keep up. Instead, this page does two things: (1) point you to maintained external trackers that are updated more frequently, and (2) give you a one-pass compliance checklist that maps common AI-law obligations to controls already documented in this playbook. The checklist is the durable part; the underlying laws will change, but the questions you have to answer about your agency rarely change.
 
+> **Last reviewed: April 30, 2026.** Verify bill status, effective dates, and public-agency scope against counsel, your legislature, and at least one maintained external tracker before relying on a specific law in an official memo.
+
 ## Maintained external trackers
 
 These are useful sources to bookmark. Cross-check them against your legislature, attorney general, procurement office, or counsel before citing a law in an official memo.

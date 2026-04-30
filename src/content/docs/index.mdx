@@ -6,11 +6,11 @@ hero:
   tagline: Paint-by-numbers AI adoption for any agency, any size.
   actions:
     - text: Start with the Readiness Assessment
-      link: /getting-started/readiness-assessment/
+      link: getting-started/readiness-assessment/
       icon: right-arrow
       variant: primary
     - text: View the 90-day quickstart
-      link: /getting-started/quickstart-checklist/
+      link: getting-started/quickstart-checklist/
       icon: external
       variant: secondary
 ---
@@ -23,6 +23,12 @@ import AgencyRouteChooser from '../../components/AgencyRouteChooser.tsx';
 A complete, sequenced 12-month roadmap that any government agency can follow, from "we want to do AI" to "we have a modular platform running our first production AI application." The guide is open source, stack-agnostic, and includes the governance, education, and infrastructure required to sustain AI work past the first pilot.
 
 It is built from working government agencies' delivery experience.
+
+Start here if you are:
+
+- **Trying to get oriented:** run the readiness assessment, then choose a path and role below.
+- **Looking for a specific artifact:** use the phase navigation or template links; interactive tools export locally.
+- **Adapting this for your agency:** treat the recommendations as a starting system, then localize policy, procurement, staffing, and legal review.
 
 ## Six phases over 12 months
 
@@ -49,13 +55,13 @@ It is built from working government agencies' delivery experience.
 
 <AgencyRouteChooser client:load basePath={import.meta.env.BASE_URL} />
 
-See the [Pick Your Path](/getting-started/pick-your-path/) page for the full variant comparison and the month-by-month Small-Agency walkthrough. Your selected path is saved in your browser and shown in the **Path** dropdown at the top of every page.
+See the [Pick Your Path](/getting-started/pick-your-path/) page for the full variant comparison and the month-by-month Small-Agency walkthrough. Your selected path is saved in your browser. On desktop, it appears in the **Path** dropdown at the top of every page; on phones, reopen this guided route or the Pick Your Path page to adjust it.
 
 > **Off-ramps are real.** Agencies can stop after Phase 1 (governance only), Phase 2 (governance + education), or Phase 5 (platform without starter project) and still have a complete, valuable deliverable. The roadmap is designed so partial completion still beats no completion.
 
 ## How to use this site
 
-- **Working through the guide:** start with the [Readiness Assessment](/getting-started/readiness-assessment/), then follow the [90-Day Quickstart](/getting-started/quickstart-checklist/).
+- **Working through the guide:** [run the readiness assessment](/getting-started/readiness-assessment/), then [follow the 90-day quickstart](/getting-started/quickstart-checklist/).
 - **Just looking up a template:** every interactive template (AUP wizard, risk-tier matrix, ROI calculator) lives inside its phase and exports to your local machine; nothing is sent anywhere.
-- **Deploying your own copy:** click "Use this template" on the [GitHub repo](https://github.com/crypticpy/ai-quickstart-guide) → your agency owns its copy, online or offline.
-- **Downloading the PDF:** every release ships a combined PDF and DOCX. See the latest on the [Releases page](https://github.com/crypticpy/ai-quickstart-guide/releases).
+- **Deploying your own copy:** [open the GitHub repo](https://github.com/crypticpy/ai-quickstart-guide), click "Use this template," and your agency owns its copy, online or offline.
+- **Downloading the PDF:** every release ships a combined PDF and DOCX. [Download the latest release](https://github.com/crypticpy/ai-quickstart-guide/releases).

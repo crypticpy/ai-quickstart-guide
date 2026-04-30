@@ -9,6 +9,8 @@ The AI Orchestration module is one of the highest-leverage pieces of the platfor
 
 This module is what lets the agency say _yes_ to "let's add a summarization feature" in days instead of months. It is also what lets the agency say _no_ confidently to features that don't pass eval or budget gates. Both capabilities matter equally.
 
+> **Last reviewed: April 30, 2026.** Provider model lists, SDK methods, pricing, rate limits, and government-cloud availability change quickly. Treat model IDs, provider names, and code snippets here as examples of the adapter pattern; verify current provider documentation and agency approval before deployment.
+
 ## What this module owns
 
 - **Model adapters.** Provider-neutral access to approved foundation models, whether through direct model APIs, cloud model platforms, managed gateways, or self-hosted endpoints.

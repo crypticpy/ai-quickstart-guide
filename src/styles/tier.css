@@ -333,3 +333,39 @@
   font-size: 0.8rem;
   color: var(--aqg-text-muted);
 }
+
+@media (max-width: 50rem) {
+  .aqg-tier {
+    padding: 1rem;
+  }
+
+  .aqg-tier__row,
+  .aqg-tier__grid,
+  .aqg-roi__grid,
+  .aqg-roi__headlines {
+    grid-template-columns: 1fr;
+  }
+
+  .aqg-tier__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .aqg-tier__actions button,
+  .aqg-tier__actions .aqg-tier__reset {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 32rem) {
+  .aqg-roi__inputrow {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.3rem;
+  }
+
+  .aqg-roi__affix {
+    padding: 0 0.25rem;
+  }
+}

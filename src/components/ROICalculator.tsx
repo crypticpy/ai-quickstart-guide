@@ -221,6 +221,7 @@ const SAVINGS_FIELDS: Field[] = [
 
 export default function ROICalculator() {
   const [state, setState] = useState<FormState>({ ...EMPTY });
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     setState(loadState());
@@ -319,6 +320,9 @@ export default function ROICalculator() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    setStatus(
+      "ROI estimate downloaded. Attach the markdown to the budget request and rerun it with actuals after launch.",
+    );
   };
 
   const onPrint = () => {
@@ -393,6 +397,9 @@ export default function ROICalculator() {
       ],
       blocks,
     });
+    setStatus(
+      "Print view opened. Save the PDF as the finance-friendly version of this estimate.",
+    );
   };
 
   const renderField = (f: Field) => (
@@ -404,6 +411,8 @@ export default function ROICalculator() {
       <span class="aqg-roi__inputrow">
         {f.prefix ? <span class="aqg-roi__affix">{f.prefix}</span> : null}
         <input
+          id={`aqg-roi-${f.key}`}
+          name={`aqg-roi-${f.key}`}
           type="number"
           inputMode="decimal"
           min="0"
@@ -426,6 +435,8 @@ export default function ROICalculator() {
           <label class="aqg-tier__field">
             <span class="aqg-tier__label">Agency</span>
             <input
+              id="aqg-roi-agency"
+              name="aqg-roi-agency"
               type="text"
               value={state.agency}
               placeholder="e.g., Springfield Public Health"
@@ -437,6 +448,8 @@ export default function ROICalculator() {
           <label class="aqg-tier__field">
             <span class="aqg-tier__label">Use case</span>
             <input
+              id="aqg-roi-use-case"
+              name="aqg-roi-use-case"
               type="text"
               value={state.useCase}
               placeholder="e.g., 311 service request triage"
@@ -448,6 +461,8 @@ export default function ROICalculator() {
           <label class="aqg-tier__field">
             <span class="aqg-tier__label">Prepared by</span>
             <input
+              id="aqg-roi-prepared-by"
+              name="aqg-roi-prepared-by"
               type="text"
               value={state.preparedBy}
               placeholder="e.g., M. Rivera, Budget"
@@ -477,6 +492,8 @@ export default function ROICalculator() {
         <label class="aqg-tier__field">
           <span class="aqg-tier__label">Years to evaluate</span>
           <select
+            id="aqg-roi-horizon-years"
+            name="aqg-roi-horizon-years"
             value={state.horizonYears}
             onChange={(e) =>
               update(
@@ -523,7 +540,7 @@ export default function ROICalculator() {
 
       <div class="aqg-tier__actions no-print">
         <button type="button" onClick={onExport}>
-          Export estimate as Markdown
+          Export as Markdown
         </button>
         <button type="button" onClick={onPrint}>
           Print / Save as PDF
@@ -532,6 +549,12 @@ export default function ROICalculator() {
           Reset
         </button>
       </div>
+
+      {status ? (
+        <p class="aqg-tier__privacy aqg-tool-status no-print" aria-live="polite">
+          {status}
+        </p>
+      ) : null}
 
       <p class="aqg-tier__privacy no-print">
         Inputs are saved only in this browser. Nothing is sent to a server.

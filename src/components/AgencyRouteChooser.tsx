@@ -123,17 +123,17 @@ export default function AgencyRouteChooser({
   return (
     <section class="aqg-routechooser" aria-labelledby="routechooser-heading">
       <div class="aqg-routechooser__intro">
-        <h2 id="routechooser-heading">Start With a Guided Route</h2>
+        <h2 id="routechooser-heading">Choose Your Starting Route</h2>
         <p>
-          Pick your agency scale, then pick the role closest to your job. The
-          guide will send you to the right first page and keep the selected path
-          active across the site.
+          Pick your agency scale and the role closest to your work. The guide
+          will send you to the first page that is most useful for that starting
+          point.
         </p>
       </div>
 
       <div class="aqg-routechooser__step">
         <div class="aqg-routechooser__stepheader">
-          <h3>Step 1: Select your agency path</h3>
+          <h3>1. Agency scale</h3>
           <p>This sets the scope, pace, and implementation depth.</p>
         </div>
         <div
@@ -162,7 +162,7 @@ export default function AgencyRouteChooser({
                   {HOMEPAGE_PATH_BLURBS[size]}
                 </span>
                 <span class="aqg-optioncard__cta" aria-hidden="true">
-                  {isActive ? "Selected path" : "Choose this path"}
+                  {isActive ? "Selected" : "Set path"}
                 </span>
               </button>
             );
@@ -172,8 +172,8 @@ export default function AgencyRouteChooser({
 
       <div class="aqg-routechooser__step">
         <div class="aqg-routechooser__stepheader">
-          <h3>Step 2: Select your role</h3>
-          <p>This chooses the best starting page for your responsibilities.</p>
+          <h3>2. Your role</h3>
+          <p>This chooses the best first page for your responsibilities.</p>
         </div>
         <div
           class="aqg-optiongrid aqg-optiongrid--roles"
@@ -197,7 +197,7 @@ export default function AgencyRouteChooser({
                 </span>
                 <span class="aqg-optioncard__blurb">{option.blurb}</span>
                 <span class="aqg-optioncard__cta" aria-hidden="true">
-                  {isActive ? "Selected role" : "Choose this role"}
+                  {isActive ? "Selected" : "Set role"}
                 </span>
               </button>
             );

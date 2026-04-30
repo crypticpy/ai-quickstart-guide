@@ -1,0 +1,16 @@
+---
+type Props = {
+  phase: string;
+  title: string;
+  months: string;
+  focus: string;
+};
+
+const { phase, title, months, focus } = Astro.props;
+---
+
+<aside class="aqg-phase-banner" aria-label={`${phase} overview`}>
+  <span class="aqg-phase-banner__eyebrow">{phase} · {months}</span>
+  <p class="aqg-phase-banner__title">{title}</p>
+  <p class="aqg-phase-banner__meta">{focus}</p>
+</aside>

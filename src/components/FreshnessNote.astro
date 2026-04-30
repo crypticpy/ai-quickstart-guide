@@ -1,0 +1,16 @@
+---
+type Props = {
+  reviewed: string;
+  owner?: string;
+  note: string;
+};
+
+const { reviewed, owner = "Guide maintainers", note } = Astro.props;
+---
+
+<aside class="aqg-freshness" aria-label="Freshness note">
+  <span class="aqg-freshness__label">Last reviewed: {reviewed}</span>
+  <p class="aqg-freshness__body">
+    <strong>Owner:</strong> {owner}. {note}
+  </p>
+</aside>

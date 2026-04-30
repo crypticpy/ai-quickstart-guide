@@ -313,6 +313,7 @@ export default function AUPWizard() {
   const [step, setStep] = useState(0);
   const [showErrors, setShowErrors] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     setState(loadState());
@@ -378,6 +379,9 @@ export default function AUPWizard() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    setStatus(
+      "Draft AUP downloaded. Next step: route it for counsel and policy-owner review before adoption.",
+    );
   };
 
   const printPdf = () => {
@@ -436,6 +440,7 @@ export default function AUPWizard() {
         },
       ],
     });
+    setStatus("Print view opened. Use the PDF for review packets or signature routing.");
   };
 
   const previewMd = useMemo(() => renderAUPMarkdown(state), [state]);
@@ -493,6 +498,8 @@ export default function AUPWizard() {
                 </span>
                 {f.type === "textarea" ? (
                   <textarea
+                    id={`aqg-aup-${f.key}`}
+                    name={`aqg-aup-${f.key}`}
                     rows={3}
                     value={v}
                     placeholder={f.placeholder}
@@ -502,6 +509,8 @@ export default function AUPWizard() {
                   />
                 ) : (
                   <input
+                    id={`aqg-aup-${f.key}`}
+                    name={`aqg-aup-${f.key}`}
                     type={f.type ?? "text"}
                     value={v}
                     placeholder={f.placeholder}
@@ -571,6 +580,11 @@ export default function AUPWizard() {
               Edit answers
             </button>
           </div>
+          {status ? (
+            <p class="aqg-wizard__privacy aqg-tool-status no-print" aria-live="polite">
+              {status}
+            </p>
+          ) : null}
         </div>
       ) : null}
 

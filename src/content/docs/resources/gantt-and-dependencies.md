@@ -5,7 +5,7 @@ sidebar:
   order: 14
 ---
 
-> **What this page is.** A consolidated view of the timeline, the gates that prove progress, and the hard dependencies you cannot skip. The Gantt at the bottom of this page renders directly from Mermaid source — copy it into any Mermaid renderer (e.g., [mermaid.live](https://mermaid.live)) for slide decks or printed playbooks.
+> **What this page is.** A consolidated view of the timeline, the gates that prove progress, and the hard dependencies you cannot skip. The timeline at the bottom of this page is a static, responsive guide-site view; a Mermaid source version is included for agencies that want to paste it into a diagramming tool for slide decks or printed playbooks.
 
 ## The 12-month picture
 
@@ -96,9 +96,54 @@ Empirically — across all three [case studies](/resources/case-studies/) and th
 
 ## 12-month timeline
 
-The diagram below is rendered from Mermaid source at page load and follows the site's light/dark theme. The same source can be pasted into [mermaid.live](https://mermaid.live) or any Mermaid-aware tool for slide decks or printed playbooks.
+The timeline below is rendered as HTML so the guide does not ship a large client-side diagram library for one chart. The source version remains available underneath it for teams that prefer Mermaid.
 
-```mermaid
+<div class="aqg-gantt" role="img" aria-label="AI Quickstart 12-month timeline for a medium agency">
+  <div class="aqg-gantt__title">AI Quickstart 12-Month Timeline (Medium Agency)</div>
+  <div class="aqg-gantt__months" aria-hidden="true">
+    <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+  </div>
+  <div class="aqg-gantt__rows">
+    <span class="aqg-gantt__section">Phase 1 - Governance</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase1" style="--start: 1; --span: 1;">Readiness assessment</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase1" style="--start: 1; --span: 1;">Foundations training launch</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase1" style="--start: 2; --span: 2;">AUP + risk tiers + committee</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase1" style="--start: 2; --span: 1;">Sandbox request</span>
+    <span class="aqg-gantt__section">Phase 2 - Education</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase2" style="--start: 1; --span: 3;">Track 1 Foundations</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase2" style="--start: 2; --span: 2;">Track 2 Leadership briefings</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase2" style="--start: 2; --span: 3;">Track 3 Governance training</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase2" style="--start: 3; --span: 2;">Track 7 Middle managers</span>
+    <span class="aqg-gantt__section">Phase 3 - Infrastructure</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase3" style="--start: 4; --span: 2;">Cloud sandbox build</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase3" style="--start: 4; --span: 3;">CI/CD + observability</span>
+    <span class="aqg-gantt__section">Phase 4 - Dev Stack</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase4" style="--start: 4; --span: 1;">Stack selection</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase4" style="--start: 5; --span: 2;">Coding standards</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase4" style="--start: 5; --span: 2;">AI-assisted dev workflow</span>
+    <span class="aqg-gantt__section">Phase 5 - Platform Modules</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase5" style="--start: 7; --span: 1;">Auth + Data Grid + API</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase5" style="--start: 8; --span: 2;">Admin + Doc Render + RBAC</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase5" style="--start: 8; --span: 2;">AI Orchestration</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase5" style="--start: 10; --span: 1;">All modules in catalog</span>
+    <span class="aqg-gantt__section">Phase 6 - Starter Project</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase6" style="--start: 8; --span: 1;">Archetype selected</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase6" style="--start: 8; --span: 3;">Build sprints 1-8</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase6" style="--start: 11; --span: 1;">Staging deployment</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--phase6" style="--start: 12; --span: 1;">Production deployment</span>
+    <span class="aqg-gantt__section">Adoption gates</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--human" style="--start: 3; --span: 1;">Anxiety addressed</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--human" style="--start: 4; --span: 1;">Middle managers engaged</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--human" style="--start: 6; --span: 1;">Voluntary adoption</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--human" style="--start: 9; --span: 1;">Sustained engagement</span>
+    <span class="aqg-gantt__bar aqg-gantt__bar--human" style="--start: 12; --span: 1;">Year 2 readiness</span>
+  </div>
+</div>
+
+<details>
+<summary>Mermaid source for external diagram tools</summary>
+
+```text
 gantt
   title AI Quickstart 12-Month Timeline (Medium Agency)
   dateFormat  YYYY-MM-DD
@@ -146,6 +191,8 @@ gantt
   Sustained engagement           :h04, 2026-09-15, 14d
   Year 2 readiness               :h05, 2026-12-15, 14d
 ```
+
+</details>
 
 ## See also
 

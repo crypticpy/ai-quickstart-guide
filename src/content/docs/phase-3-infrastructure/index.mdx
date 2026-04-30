@@ -6,6 +6,12 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import AtAGlance from '../../../components/AtAGlance.astro';
+import PhaseBanner from '../../../components/PhaseBanner.astro';
+
+<PhaseBanner phase="Phase 3" title="Secure build environment" months="Months 2-5" focus="Give teams an approved place to experiment and deploy without exposing production systems or sensitive data." />
+
+<AtAGlance audience="IT leads, security, cloud administrators, procurement, and platform engineers" effort="Sandbox-only for small teams; 12-week standard infrastructure sequence for full rollout" output="Approved sandbox, identity/access controls, CI/CD, secrets, container runtime, security baseline, and observability" prerequisites="Phase 1 data-use rules and procurement path" nextAction="Provision the sandbox first, then add identity, secrets, CI/CD, and observability in order." />
 
 Phase 3 is where the agency builds the infrastructure that lets developers ship AI features without becoming a security incident. The hard part is not standing up servers; it is doing so on whichever cloud, SaaS tenant, or approved managed platform the agency already uses, with enough safety, visibility, and repeatability for the risk tier. This phase is deliberately cloud-portable: the concepts apply across AWS, Azure, Google Cloud, and approved AI SaaS, but each implementation still has provider-specific identity, network, logging, and procurement details.
 
