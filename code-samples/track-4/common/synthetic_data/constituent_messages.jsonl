@@ -1,0 +1,61 @@
+{"_comment": "SYNTHETIC DATA. Every message below is fabricated for AI Quickstart Track 4 labs. No real names, addresses, phone numbers, case IDs, or constituent records appear in this file. Generated 2026 for educational use under CC BY-SA 4.0. Departments are generic public-sector buckets, not tied to any specific agency."}
+{"id": "msg-001", "text": "There is a large pothole on Maple Street near the school crosswalk. A bike rider almost crashed yesterday.", "label": "public_works"}
+{"id": "msg-002", "text": "A stray dog has been wandering my block for three days. It looks scared but not aggressive.", "label": "animal_services"}
+{"id": "msg-003", "text": "My neighbor has not mowed in months. Grass is over two feet high and there is junk in the yard.", "label": "code_enforcement"}
+{"id": "msg-004", "text": "The streetlight at the corner of 4th and Oak has been out for at least a week. It is very dark at night.", "label": "public_works"}
+{"id": "msg-005", "text": "I would like to know how to apply for a building permit for a backyard shed.", "label": "permits_and_licensing"}
+{"id": "msg-006", "text": "My recycling bin was not picked up this morning. Trash was, recycling was not.", "label": "sanitation"}
+{"id": "msg-007", "text": "There is a raccoon in my attic. It has been there for two nights. I can hear it scratching.", "label": "animal_services"}
+{"id": "msg-008", "text": "The sidewalk in front of my house is cracked and a section is lifted by tree roots. An older neighbor tripped last week.", "label": "public_works"}
+{"id": "msg-009", "text": "I want to report a noise issue with construction starting at 5am every weekday.", "label": "code_enforcement"}
+{"id": "msg-010", "text": "My water bill jumped from $40 to $310 this month with no change in usage. I think there is an error.", "label": "utilities_billing"}
+{"id": "msg-011", "text": "What are the hours for the public library on holidays this year?", "label": "general_info"}
+{"id": "msg-012", "text": "I need help understanding the rental assistance program. My hours got cut and I am behind.", "label": "human_services"}
+{"id": "msg-013", "text": "There is a dead deer on the side of the highway near mile marker 12.", "label": "public_works"}
+{"id": "msg-014", "text": "Someone is running a daycare out of their home with too many kids. The street is packed every morning.", "label": "code_enforcement"}
+{"id": "msg-015", "text": "How do I renew my pet license? I think it expired last year.", "label": "animal_services"}
+{"id": "msg-016", "text": "My block has not had trash pickup for two weeks. We are all stacking bags in the driveway.", "label": "sanitation"}
+{"id": "msg-017", "text": "I want to apply for a food assistance program for my family. We had a hospital bill that wiped us out.", "label": "human_services"}
+{"id": "msg-018", "text": "The traffic signal at Pine and 7th is stuck on red in all four directions. People are running it.", "label": "public_works"}
+{"id": "msg-019", "text": "Can someone tell me where to vote? I just moved and I am not sure which precinct I am in.", "label": "general_info"}
+{"id": "msg-020", "text": "There are coyotes coming into my backyard at dusk. I have small kids and a small dog.", "label": "animal_services"}
+{"id": "msg-021", "text": "I need to schedule a building inspection for the new electrical panel I had installed.", "label": "permits_and_licensing"}
+{"id": "msg-022", "text": "I saw rats around the dumpster behind the corner grocery store. It has been ongoing for months.", "label": "code_enforcement"}
+{"id": "msg-023", "text": "Why was my water shut off without warning? I paid the bill last week.", "label": "utilities_billing"}
+{"id": "msg-024", "text": "Can I get a copy of the city council minutes from last month's meeting?", "label": "general_info"}
+{"id": "msg-025", "text": "My elderly mother needs the meal delivery program. She had a stroke and cannot cook.", "label": "human_services"}
+{"id": "msg-026", "text": "There is graffiti on the playground equipment at Lincoln Park. Kids saw it this morning.", "label": "public_works"}
+{"id": "msg-027", "text": "My neighbor's barking dog goes off every night from 11pm to 2am. I have not slept properly in weeks.", "label": "animal_services"}
+{"id": "msg-028", "text": "The yard waste bin I requested two months ago never showed up. I called twice.", "label": "sanitation"}
+{"id": "msg-029", "text": "Is there a homestead exemption I can apply for now that I am over 65?", "label": "general_info"}
+{"id": "msg-030", "text": "An abandoned car has been parked in front of my house for over 30 days. Tags are expired.", "label": "code_enforcement"}
+{"id": "msg-031", "text": "My storm drain is clogged and water is backing up onto the street when it rains.", "label": "public_works"}
+{"id": "msg-032", "text": "I want to start a small food truck business. What permits do I need?", "label": "permits_and_licensing"}
+{"id": "msg-033", "text": "There is a swarm of bees that built a hive on my back porch. I do not want to harm them.", "label": "animal_services"}
+{"id": "msg-034", "text": "I have not had hot water for four days and my landlord will not respond. What can I do?", "label": "human_services"}
+{"id": "msg-035", "text": "Can I dispute the late fee on my water bill? I was in the hospital and missed the due date.", "label": "utilities_billing"}
+{"id": "msg-036", "text": "When does the leaf collection program start this fall?", "label": "sanitation"}
+{"id": "msg-037", "text": "There are loose construction materials and nails in the road by the new development.", "label": "public_works"}
+{"id": "msg-038", "text": "I need a copy of my own birth certificate for a passport application.", "label": "general_info"}
+{"id": "msg-039", "text": "Someone is selling cars out of a residential driveway. There are five for sale right now.", "label": "code_enforcement"}
+{"id": "msg-040", "text": "A duck is sitting on a nest in the parking lot at the community center. People keep almost stepping on her.", "label": "animal_services"}
+{"id": "msg-041", "text": "My family qualifies for low-income utility assistance. How do I apply?", "label": "human_services"}
+{"id": "msg-042", "text": "The new sign permit fees seem high. Can someone explain the fee schedule?", "label": "permits_and_licensing"}
+{"id": "msg-043", "text": "Hydrant on our street is leaking. There is a steady stream of water running into the gutter.", "label": "public_works"}
+{"id": "msg-044", "text": "Garbage truck broke a piece of my fence last week. Who do I file a damage claim with?", "label": "sanitation"}
+{"id": "msg-045", "text": "I want to volunteer at the senior center. Where do I sign up?", "label": "general_info"}
+{"id": "msg-046", "text": "Can the city remove a fallen tree that is blocking the sidewalk after the storm?", "label": "public_works"}
+{"id": "msg-047", "text": "My ex turned off the utilities in my name without telling me. I think it is identity theft.", "label": "utilities_billing"}
+{"id": "msg-048", "text": "There is a possum in the storm drain on my street. It has been there since this morning.", "label": "animal_services"}
+{"id": "msg-049", "text": "Where can I get rental deposit assistance? I have a new lease but cannot cover the deposit.", "label": "human_services"}
+{"id": "msg-050", "text": "Construction next door is dumping debris on my property line. Pictures attached.", "label": "code_enforcement"}
+{"id": "msg-051", "text": "I want to know the speed limit on residential streets in this district.", "label": "general_info"}
+{"id": "msg-052", "text": "My business license renewal portal is showing an error code 500. I cannot complete it online.", "label": "permits_and_licensing"}
+{"id": "msg-053", "text": "Snow plow ripped up a chunk of my lawn last winter. I never got a response to my form.", "label": "public_works"}
+{"id": "msg-054", "text": "I lost my recycling cart. I think someone took it from the curb after pickup.", "label": "sanitation"}
+{"id": "msg-055", "text": "I am a veteran and I heard there is a property tax discount. How do I apply?", "label": "general_info"}
+{"id": "msg-056", "text": "A cat in my neighborhood has been having kittens twice a year. Is there a free spay program?", "label": "animal_services"}
+{"id": "msg-057", "text": "My household lost income and we are at risk of eviction. Is there emergency rental help?", "label": "human_services"}
+{"id": "msg-058", "text": "Can someone explain the new short-term rental rules for residential property owners?", "label": "permits_and_licensing"}
+{"id": "msg-059", "text": "Sewer backed up into my basement after the heavy rain. Standing water and smell are bad.", "label": "utilities_billing"}
+{"id": "msg-060", "text": "Does the agency have a community garden program that residents can join?", "label": "general_info"}

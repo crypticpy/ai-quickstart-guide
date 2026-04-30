@@ -1,0 +1,13 @@
+[project]
+name = "lab-3-starter"
+version = "0.1.0"
+description = "Starter for AI Quickstart Track 4 Lab 4.3 (RAG)"
+requires-python = ">=3.12"
+dependencies = [
+    "track4-common",
+    "chromadb>=0.5.5",
+    "sentence-transformers>=3.0.0",
+]
+
+[tool.setuptools]
+py-modules = ["ingest", "retrieve", "rag", "main"]

@@ -1,0 +1,25 @@
+[project]
+name = "policy-classifier"
+version = "0.1.0"
+description = "Reusable constituent message classifier built on hexagonal architecture."
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.39.0",
+    "pydantic>=2.9.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.3.0",
+]
+
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

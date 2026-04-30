@@ -1,0 +1,245 @@
+{
+  "_comment": "Synthetic permit records for AI Quickstart Guide lab 4.4. Fictional only. No real persons, addresses, or applications.",
+  "permits": [
+    {
+      "permit_id": "P-2026-00101",
+      "address": "123 Maple St",
+      "type": "residential_remodel",
+      "status": "approved",
+      "submitted_date": "2026-04-12",
+      "expected_decision_date": "2026-04-22"
+    },
+    {
+      "permit_id": "P-2026-00102",
+      "address": "123 Maple St",
+      "type": "fence",
+      "status": "in_review",
+      "submitted_date": "2026-04-20",
+      "expected_decision_date": "2026-05-04"
+    },
+    {
+      "permit_id": "P-2026-00103",
+      "address": "456 Oak Ave",
+      "type": "roof_replacement",
+      "status": "needs_more_info",
+      "submitted_date": "2026-03-30",
+      "expected_decision_date": "2026-04-13"
+    },
+    {
+      "permit_id": "P-2026-00104",
+      "address": "456 Oak Ave",
+      "type": "solar_panel",
+      "status": "approved",
+      "submitted_date": "2026-02-14",
+      "expected_decision_date": "2026-02-28"
+    },
+    {
+      "permit_id": "P-2026-00105",
+      "address": "789 Pine Rd",
+      "type": "pool",
+      "status": "denied",
+      "submitted_date": "2026-03-01",
+      "expected_decision_date": "2026-03-22"
+    },
+    {
+      "permit_id": "P-2026-00106",
+      "address": "789 Pine Rd",
+      "type": "deck",
+      "status": "in_review",
+      "submitted_date": "2026-04-18",
+      "expected_decision_date": "2026-05-02"
+    },
+    {
+      "permit_id": "P-2026-00107",
+      "address": "12 Cedar Ln",
+      "type": "kitchen_remodel",
+      "status": "approved",
+      "submitted_date": "2026-01-15",
+      "expected_decision_date": "2026-01-29"
+    },
+    {
+      "permit_id": "P-2026-00108",
+      "address": "34 Birch Way",
+      "type": "garage_addition",
+      "status": "in_review",
+      "submitted_date": "2026-04-10",
+      "expected_decision_date": "2026-04-24"
+    },
+    {
+      "permit_id": "P-2026-00109",
+      "address": "56 Spruce Ct",
+      "type": "fence",
+      "status": "approved",
+      "submitted_date": "2026-04-01",
+      "expected_decision_date": "2026-04-15"
+    },
+    {
+      "permit_id": "P-2026-00110",
+      "address": "78 Walnut Pl",
+      "type": "commercial_buildout",
+      "status": "in_review",
+      "submitted_date": "2026-03-15",
+      "expected_decision_date": "2026-04-29"
+    },
+    {
+      "permit_id": "P-2026-00111",
+      "address": "78 Walnut Pl",
+      "type": "sign_permit",
+      "status": "approved",
+      "submitted_date": "2026-02-20",
+      "expected_decision_date": "2026-03-06"
+    },
+    {
+      "permit_id": "P-2026-00112",
+      "address": "910 Elm St",
+      "type": "demolition",
+      "status": "needs_more_info",
+      "submitted_date": "2026-04-05",
+      "expected_decision_date": "2026-04-19"
+    },
+    {
+      "permit_id": "P-2026-00113",
+      "address": "111 Hickory Dr",
+      "type": "residential_remodel",
+      "status": "withdrawn",
+      "submitted_date": "2026-02-01",
+      "expected_decision_date": "2026-02-15"
+    },
+    {
+      "permit_id": "P-2026-00114",
+      "address": "222 Sycamore Blvd",
+      "type": "solar_panel",
+      "status": "in_review",
+      "submitted_date": "2026-04-22",
+      "expected_decision_date": "2026-05-06"
+    },
+    {
+      "permit_id": "P-2026-00115",
+      "address": "333 Magnolia Ter",
+      "type": "roof_replacement",
+      "status": "approved",
+      "submitted_date": "2026-03-10",
+      "expected_decision_date": "2026-03-24"
+    },
+    {
+      "permit_id": "P-2026-00116",
+      "address": "444 Dogwood Ave",
+      "type": "pool",
+      "status": "in_review",
+      "submitted_date": "2026-04-15",
+      "expected_decision_date": "2026-05-06"
+    },
+    {
+      "permit_id": "P-2026-00117",
+      "address": "555 Aspen Cir",
+      "type": "deck",
+      "status": "approved",
+      "submitted_date": "2026-03-25",
+      "expected_decision_date": "2026-04-08"
+    },
+    {
+      "permit_id": "P-2026-00118",
+      "address": "666 Willow Knoll",
+      "type": "fence",
+      "status": "denied",
+      "submitted_date": "2026-03-05",
+      "expected_decision_date": "2026-03-19"
+    },
+    {
+      "permit_id": "P-2026-00119",
+      "address": "777 Poplar Run",
+      "type": "garage_addition",
+      "status": "in_review",
+      "submitted_date": "2026-04-08",
+      "expected_decision_date": "2026-04-22"
+    },
+    {
+      "permit_id": "P-2026-00120",
+      "address": "888 Chestnut Ridge",
+      "type": "kitchen_remodel",
+      "status": "needs_more_info",
+      "submitted_date": "2026-03-28",
+      "expected_decision_date": "2026-04-11"
+    },
+    {
+      "permit_id": "P-2026-00121",
+      "address": "999 Beech Hollow",
+      "type": "commercial_buildout",
+      "status": "approved",
+      "submitted_date": "2026-01-20",
+      "expected_decision_date": "2026-03-06"
+    },
+    {
+      "permit_id": "P-2026-00122",
+      "address": "121 Ash Park",
+      "type": "sign_permit",
+      "status": "in_review",
+      "submitted_date": "2026-04-19",
+      "expected_decision_date": "2026-05-03"
+    },
+    {
+      "permit_id": "P-2026-00123",
+      "address": "212 Holly Vw",
+      "type": "demolition",
+      "status": "approved",
+      "submitted_date": "2026-02-10",
+      "expected_decision_date": "2026-02-24"
+    },
+    {
+      "permit_id": "P-2026-00124",
+      "address": "313 Cypress Mews",
+      "type": "residential_remodel",
+      "status": "in_review",
+      "submitted_date": "2026-04-14",
+      "expected_decision_date": "2026-04-28"
+    },
+    {
+      "permit_id": "P-2026-00125",
+      "address": "414 Juniper Glen",
+      "type": "solar_panel",
+      "status": "approved",
+      "submitted_date": "2026-03-18",
+      "expected_decision_date": "2026-04-01"
+    },
+    {
+      "permit_id": "P-2026-00126",
+      "address": "515 Redwood Path",
+      "type": "deck",
+      "status": "needs_more_info",
+      "submitted_date": "2026-04-02",
+      "expected_decision_date": "2026-04-16"
+    },
+    {
+      "permit_id": "P-2026-00127",
+      "address": "616 Sequoia Walk",
+      "type": "pool",
+      "status": "in_review",
+      "submitted_date": "2026-04-25",
+      "expected_decision_date": "2026-05-16"
+    },
+    {
+      "permit_id": "P-2026-00128",
+      "address": "717 Hemlock Trce",
+      "type": "fence",
+      "status": "approved",
+      "submitted_date": "2026-04-03",
+      "expected_decision_date": "2026-04-17"
+    },
+    {
+      "permit_id": "P-2026-00129",
+      "address": "818 Fir Bend",
+      "type": "roof_replacement",
+      "status": "in_review",
+      "submitted_date": "2026-04-21",
+      "expected_decision_date": "2026-05-05"
+    },
+    {
+      "permit_id": "P-2026-00130",
+      "address": "919 Locust Crest",
+      "type": "kitchen_remodel",
+      "status": "approved",
+      "submitted_date": "2026-02-25",
+      "expected_decision_date": "2026-03-11"
+    }
+  ]
+}

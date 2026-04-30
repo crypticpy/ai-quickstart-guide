@@ -1,0 +1,21 @@
+[project]
+name = "lab-4-6-solution"
+version = "0.1.0"
+description = "Lab 4.6 solution: tests for non-deterministic AI outputs."
+requires-python = ">=3.12"
+dependencies = [
+  "anthropic>=0.40.0",
+  "pytest>=8.3.0",
+  "hypothesis>=6.112.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+  "golden: golden-set accuracy tests",
+  "judge: LLM-as-judge tests",
+  "regression: prompt-version regression tests",
+  "property: property-based tests",
+  "performance: latency and cost budget tests",
+]

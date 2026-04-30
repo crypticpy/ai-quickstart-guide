@@ -1,0 +1,18 @@
+[project]
+name = "track4-lab4-starter"
+version = "0.1.0"
+description = "Starter project for AI Quickstart Guide Track 4 Lab 4.4 (orchestration and tool-using agents)."
+requires-python = ">=3.12"
+dependencies = [
+    "track4-common",
+]
+
+[tool.uv.sources]
+track4-common = { path = "../../common" }
+
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["agent", "tools", "main"]

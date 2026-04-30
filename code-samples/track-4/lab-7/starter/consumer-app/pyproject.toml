@@ -1,0 +1,18 @@
+[project]
+name = "consumer-app"
+version = "0.1.0"
+description = "FastAPI service that consumes the policy_classifier module."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
+    "pydantic>=2.9.0",
+    # policy_classifier is installed via `pip install -e ../policy_classifier`
+    # in the lab Setup step, so it does not appear here as a versioned
+    # dependency. In a real agency it would be pinned to a published
+    # inner-source version.
+]
+
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"

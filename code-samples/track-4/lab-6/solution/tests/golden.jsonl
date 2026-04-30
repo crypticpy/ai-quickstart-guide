@@ -1,0 +1,31 @@
+{"_comment": "Golden test set for Lab 4.6. 30 fabricated input/output pairs drawn from the Track 4 synthetic dataset. Add 5 more in the lab exercise."}
+{"id": "gold-001", "text": "There is a large pothole on Maple Street near the school crosswalk.", "label": "public_works"}
+{"id": "gold-002", "text": "A stray dog has been wandering my block for three days.", "label": "animal_services"}
+{"id": "gold-003", "text": "My neighbor has not mowed in months. Grass is over two feet high.", "label": "code_enforcement"}
+{"id": "gold-004", "text": "The streetlight at 4th and Oak has been out for a week.", "label": "public_works"}
+{"id": "gold-005", "text": "How do I apply for a building permit for a backyard shed?", "label": "permits_and_licensing"}
+{"id": "gold-006", "text": "My recycling bin was not picked up this morning.", "label": "sanitation"}
+{"id": "gold-007", "text": "There is a raccoon in my attic. I can hear it scratching.", "label": "animal_services"}
+{"id": "gold-008", "text": "The sidewalk in front of my house is cracked and lifted by tree roots.", "label": "public_works"}
+{"id": "gold-009", "text": "Construction is starting at 5am every weekday on my block.", "label": "code_enforcement"}
+{"id": "gold-010", "text": "My water bill jumped from $40 to $310 with no change in usage.", "label": "utilities_billing"}
+{"id": "gold-011", "text": "What are the public library hours on holidays this year?", "label": "general_info"}
+{"id": "gold-012", "text": "I need help understanding the rental assistance program.", "label": "human_services"}
+{"id": "gold-013", "text": "There is a dead deer on the side of the highway near mile marker 12.", "label": "public_works"}
+{"id": "gold-014", "text": "Someone is running a daycare out of their home with too many kids.", "label": "code_enforcement"}
+{"id": "gold-015", "text": "How do I renew my pet license?", "label": "animal_services"}
+{"id": "gold-016", "text": "My block has not had trash pickup for two weeks.", "label": "sanitation"}
+{"id": "gold-017", "text": "I want to apply for a food assistance program for my family.", "label": "human_services"}
+{"id": "gold-018", "text": "The traffic signal at Pine and 7th is stuck on red in all directions.", "label": "public_works"}
+{"id": "gold-019", "text": "Can someone tell me where to vote? I just moved.", "label": "general_info"}
+{"id": "gold-020", "text": "Coyotes are coming into my backyard at dusk.", "label": "animal_services"}
+{"id": "gold-021", "text": "I need to schedule a building inspection for the new electrical panel.", "label": "permits_and_licensing"}
+{"id": "gold-022", "text": "Why was my water shut off without warning? I paid the bill last week.", "label": "utilities_billing"}
+{"id": "gold-023", "text": "Can I get a copy of the city council minutes from last month?", "label": "general_info"}
+{"id": "gold-024", "text": "My elderly mother needs the meal delivery program.", "label": "human_services"}
+{"id": "gold-025", "text": "There is graffiti on the playground equipment at the park.", "label": "public_works"}
+{"id": "gold-026", "text": "My neighbor's barking dog goes off every night from 11pm to 2am.", "label": "animal_services"}
+{"id": "gold-027", "text": "An abandoned car has been parked in front of my house for over 30 days.", "label": "code_enforcement"}
+{"id": "gold-028", "text": "I want to start a small food truck business. What permits do I need?", "label": "permits_and_licensing"}
+{"id": "gold-029", "text": "My family qualifies for low-income utility assistance. How do I apply?", "label": "human_services"}
+{"id": "gold-030", "text": "When does the leaf collection program start this fall?", "label": "sanitation"}
