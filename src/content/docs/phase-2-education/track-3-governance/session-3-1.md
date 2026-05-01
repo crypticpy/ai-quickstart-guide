@@ -19,6 +19,7 @@ A draft 3-tier risk classification matrix, customized with the agency's name and
 
 ## Materials
 
+- AI deck source markdown: [Download the context deck source](/deck-sources/phase-2/track-3-governance/session-3-1-risk-tiering-context.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated mini-deck before use.
 - The Phase 1 risk classification matrix as a printable / editable doc.
 - The interactive [Risk Tier Picker](/phase-1-governance/risk-classification/) projected for live use.
 - Each attendee's candidate use cases, written down ahead of time.

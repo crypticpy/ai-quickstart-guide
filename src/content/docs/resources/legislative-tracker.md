@@ -9,6 +9,8 @@ sidebar:
 
 > **Last reviewed: April 30, 2026.** Verify bill status, effective dates, and public-agency scope against counsel, your legislature, and at least one maintained external tracker before relying on a specific law in an official memo.
 
+Need to brief a council, legislative committee, or oversight body? Use the [Legislative or Oversight Briefing deck source](/deck-sources/program/legislative-oversight-briefing.md) as a starting point, then verify every legal reference against current official sources and local counsel.
+
 ## Maintained external trackers
 
 These are useful sources to bookmark. Cross-check them against your legislature, attorney general, procurement office, or counsel before citing a law in an official memo.

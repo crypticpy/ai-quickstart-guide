@@ -105,7 +105,7 @@ For each "build" pick, a sponsor is named. For each "buy" pick, a procurement le
 ## Materials
 
 - 1-page pre-read.
-- Slide outline (10–12 slides).
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-2-leadership/briefing-2-3-build-buy-partner.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - A printable build / buy / partner decision matrix template.
 - Decision capture template.
 

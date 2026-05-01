@@ -21,7 +21,7 @@ All staff. No prerequisites. Mixed technical and non-technical groups.
 
 ## Materials
 
-- Slide deck (provided as `track-1-foundations/decks/1-1-what-ai-is.md` outline).
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-1-foundations/session-1-1-what-ai-actually-is.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - Three working AI tools accessible during the session: a chatbot, a summarization tool, an image generator (or OCR/document-reader if image generation is restricted by AUP).
 - Three printed example outputs (one good, one mediocre, one wrong) for the comparison activity.
 - Sample text for the live demo: a one-page public document (board minutes, public report, or policy excerpt). **No staff PII or case files.**

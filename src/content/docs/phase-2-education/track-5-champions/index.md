@@ -46,6 +46,8 @@ What champions do NOT do: train, audit, evaluate other staff's work, or report o
 
 ## The 4-hour onboarding workshop
 
+Need onboarding support materials? Use the [Champions Onboarding Workshop deck source](/deck-sources/phase-2/track-5-champions/champions-onboarding-workshop.md) as a starting point. Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
+
 Run at the start of each champion cohort. Structure:
 
 - **Hour 1.** Why this network exists and what the role is (and isn't). Read of the leadership commitment letter, walk through the AUP and Tier matrix, discussion of the boundary between champion and HR/compliance roles.
@@ -54,6 +56,8 @@ Run at the start of each champion cohort. Structure:
 - **Hour 4.** Logistics, the monthly meetup format, the Slack/Teams channel norms, the intake form, and how to escalate. Each champion leaves with a concrete commitment: which team they cover, who their peer-champion partner is, what tool they will pilot first.
 
 ## Monthly meetups (90 minutes)
+
+For a reusable meeting shell, use the [Monthly Champions Meetup deck source](/deck-sources/phase-2/track-5-champions/monthly-meetup-template.md) as a starting point. Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 
 The recurring rhythm is what makes the network durable. Suggested agenda:
 

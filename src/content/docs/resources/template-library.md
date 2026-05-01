@@ -153,6 +153,8 @@ Reviewer notes: [summary]
 
 Use when requesting funding, authority to procure, or approval to proceed.
 
+Need a supporting presentation? Use the [Council or Board Budget Request deck source](/deck-sources/program/council-board-budget-request.md) as a starting point. Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
+
 ```markdown
 # Budget Memo: AI Program Funding Request
 
@@ -195,6 +197,8 @@ Approve [amount/action] and authorize [role] to proceed with procurement and imp
 ## Launch announcement
 
 Use when the program is ready for staff awareness, not before governance has an owner.
+
+Need a supporting staff launch presentation? Use the [Leadership Commitment and Staff Launch deck source](/deck-sources/program/leadership-commitment-staff-launch.md) as a starting point. Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 
 ```markdown
 Subject: Launching [Agency]'s AI Quickstart Program

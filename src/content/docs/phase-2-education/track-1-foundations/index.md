@@ -64,7 +64,7 @@ Most agencies use a mix: the AI program lead facilitates the first cohort, then 
 For each session, the facilitator needs:
 
 - The session guide (linked in the table above) printed or open in a tab.
-- Slide deck (provided as a markdown outline; rendered in PowerPoint, Keynote, Gamma, or Google Slides per agency preference).
+- AI deck source markdown for each session; paste or upload it into the agency's preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - Three example AI tools accessible to attendees during the hands-on portion. For Session 1.1: a chatbot (ChatGPT, Claude, or Copilot Chat — whichever is on the Approved AI Tools List), a summarization tool, and one image generator (or OCR tool, if image gen is restricted by AUP).
 - Activity worksheets (one per session, provided as printable PDFs and editable markdown).
 - Whiteboard or large flip-chart for the closing share-out.

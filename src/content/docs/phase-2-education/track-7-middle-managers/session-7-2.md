@@ -21,6 +21,7 @@ Same Track 7 audience. Session 7.1 should be complete.
 
 ## Materials
 
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-7-middle-managers/session-7-2-coaching-ai-adoption.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - Resistance pattern card set: skeptic, anxious, overenthusiast, passive (one card per pattern, with the recognition cues, the coaching response, and the miss-to-avoid).
 - The Desire-stage table from the [Change Management Playbook](/phase-2-education/change-management/).
 - The [Job-Impact Messaging Kit](/phase-2-education/job-impact-messaging/) talking-point cards.

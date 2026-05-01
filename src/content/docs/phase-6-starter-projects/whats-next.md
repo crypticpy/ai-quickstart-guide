@@ -7,6 +7,8 @@ sidebar:
 
 Launching the starter project is not the end of Phase 6. The first two weeks after launch are not "done" — on-call is real, the eval suite is catching regressions, the user feedback mechanism is filling up, and the cost dashboard is showing whether the projection matched reality. This is the time the team learns what running an AI product feels like. Avoid starting the next project until this one has completed its first stability review, incident-response check, and cost reconciliation.
 
+For the first post-launch operating review, use the [Post-Launch and What Next Review deck source](/deck-sources/phase-6/post-launch-whats-next-review.md), then update usage, quality, incident, cost, and readiness data from the live project.
+
 ## Two-week stability watch
 
 The two-week post-launch window is a deliberate cooling period. The team is not adding features. They are watching, responding, and writing down what they see. The discipline of staying focused on one launched system — instead of jumping to the next idea — is itself a skill the agency is building.

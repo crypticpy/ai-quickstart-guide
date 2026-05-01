@@ -27,6 +27,8 @@ Each role family gets two 3-hour applied labs and a recurring monthly clinic.
 
 ### Lab 1 — "Is This Output Correct?"
 
+Deck support: [Download the Lab 1 deck source](/deck-sources/phase-2/track-6-domain-labs/lab-1-is-this-output-correct.md) as a starting point. Paste or upload it into your preferred AI presentation tool, then localize, verify, secure governance approval for the outputs, and brand the generated deck before use.
+
 Domain experts review 8–12 real AI outputs from agency-relevant tasks (sanitized, with governance approval). For each output, they answer:
 
 - Is this factually correct?
@@ -39,6 +41,8 @@ The instructor (a senior domain expert + an AI program lead) facilitates discuss
 
 ### Lab 2 — "Where Does This Fit in My Workflow?"
 
+Deck support: [Download the Lab 2 deck source](/deck-sources/phase-2/track-6-domain-labs/lab-2-workflow-integration.md) as a starting point. Paste or upload it into your preferred AI presentation tool, then localize, verify approved-tool status and workflow facts, and brand the generated deck before use.
+
 The same cohort returns 2–3 weeks later, having tried at least one approved tool on real low-stakes work. They report:
 
 - What did the tool actually do well?
@@ -50,6 +54,8 @@ The same cohort returns 2–3 weeks later, having tried at least one approved to
 The output is a **role-specific integration map** — a written description of how AI fits into the domain expert's work — that feeds the [role evolution maps](/phase-2-education/job-impact-messaging/) and Phase 6 starter project scoping.
 
 ### Monthly clinic
+
+Reusable shell: [Download the Monthly Clinic deck source](/deck-sources/phase-2/track-6-domain-labs/monthly-clinic-template.md) as a starting point. Paste or upload it into your preferred AI presentation tool, then localize, verify that the outputs and case walkthrough are approved for discussion, and brand the generated deck before use.
 
 After both labs, the role family meets monthly for 90 minutes. Format:
 

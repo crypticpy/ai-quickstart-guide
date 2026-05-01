@@ -78,7 +78,7 @@ The decision is captured in the takeaway memo and transmitted to the [Approving 
 ## Materials
 
 - Pre-read: charter draft + tier matrix summary + peer-agency timeline.
-- Slide outline (10 slides max).
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-2-leadership/briefing-2-2-governance-as-enabler.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - Decision capture template.
 
 ## Async fallback

@@ -9,6 +9,8 @@ This checklist turns the guide into a first-quarter operating plan. It is organi
 
 Use the week-by-week plan as written if you need a default. Treat the sequence as a starting cadence, not a deadline. Compress only when the same people own multiple workstreams and can actually meet; extend when legal, procurement, security, budget, or council review has fixed calendar constraints.
 
+Need a kickoff presentation? Use the [AI Quickstart Program Kickoff deck source](/deck-sources/program/ai-quickstart-program-kickoff.md) as a starting point. Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
+
 ## At a glance
 
 | Week | Focus | Primary owner | Main output |

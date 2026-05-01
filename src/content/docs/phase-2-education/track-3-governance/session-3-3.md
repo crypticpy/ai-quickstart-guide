@@ -23,6 +23,7 @@ Same Track 3 audience. Sessions 3.1 and 3.2 should be complete. The intended cha
 
 ## Materials
 
+- AI deck source markdown: [Download the context deck source](/deck-sources/phase-2/track-3-governance/session-3-3-review-committee-charter-context.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated mini-deck before use.
 - The Phase 1 charter wizard, projected for live editing.
 - The exported wizard draft, distributed to attendees.
 - The ratified risk matrix from Session 3.1 and the AUP draft from Session 3.2 (both inform the charter language).

@@ -23,6 +23,7 @@ Same Track 3 audience. Session 3.1 must be complete (the AUP references the tier
 
 ## Materials
 
+- AI deck source markdown: [Download the context deck source](/deck-sources/phase-2/track-3-governance/session-3-2-aup-drafting-context.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated mini-deck before use.
 - The Phase 1 AUP wizard, projected for live editing.
 - The exported wizard draft, distributed to attendees.
 - The agency's existing technology AUP, for cross-reference.

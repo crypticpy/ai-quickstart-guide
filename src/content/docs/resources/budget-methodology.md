@@ -13,6 +13,8 @@ The [Pick Your Path](/getting-started/pick-your-path/) comparison table shows Ye
 
 Read this when you need to defend the totals in a budget memo, when your CFO wants to see the inputs, or when you want to swap a default for a number you trust more.
 
+If you need to present the request to a council, board, or budget committee, start from the [Council or Board Budget Request deck source](/deck-sources/program/council-board-budget-request.md) after rebuilding the numbers with your current local assumptions.
+
 ## The four cost categories
 
 1. **People.** The largest cost in every variant.

@@ -21,6 +21,7 @@ Same Track 7 audience. Sessions 7.1 and 7.2 should be complete. Each manager com
 
 ## Materials
 
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-7-middle-managers/session-7-3-workflow-audit.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - The workflow audit template (one page).
 - The [AI Use Case Intake Form](/phase-2-education/use-case-intake/), open and projected.
 - The risk classification matrix from [Phase 1](/phase-1-governance/risk-classification/).

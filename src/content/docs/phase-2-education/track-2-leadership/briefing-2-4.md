@@ -90,7 +90,7 @@ The takeaway memo is distributed within 48 hours and becomes the agency's AI pro
 ## Materials
 
 - Pre-read: prior decision memos + intake queue + Phase 6 archetypes.
-- Slide outline (12–15 slides).
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-2-leadership/briefing-2-4-roadmap-milestones-roi.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - Decision capture template.
 - The 12-month milestone calendar template.
 

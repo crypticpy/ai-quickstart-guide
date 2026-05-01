@@ -23,6 +23,7 @@ Same Track 3 audience plus the agency's compliance officer or designee. General 
 
 ## Materials
 
+- AI deck source markdown: [Download the context deck source](/deck-sources/phase-2/track-3-governance/session-3-5-legislative-compliance-context.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated mini-deck before use.
 - The Phase 1 [Legislative Compliance](/phase-1-governance/legislative-compliance/) matrix.
 - Federal framework summaries: NIST AI RMF 1.0 and current OMB AI governance memos for covered federal agencies.
 - State and local law summaries for the agency's actual jurisdictions, including any AI, automated decision, surveillance, privacy, employment, education, healthcare, or procurement rules that apply.
@@ -65,6 +66,8 @@ The output is a use-case-by-law cross-tab that the Review Committee uses when re
 ### Block C — Prioritize action items (15 min)
 
 The compliance matrix usually surfaces 5–15 named action items. Examples:
+
+Examples only; verify current official sources and counsel interpretation before use.
 
 - "Colorado AI Act or successor requirements: confirm effective date and impact-assessment obligations for [use case X] with counsel."
 - "Covered federal agency inventory requirement: AI program lead owns submission cadence under the current OMB memo."

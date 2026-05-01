@@ -21,6 +21,7 @@ Same as Sessions 1.1–1.3. Pre-requisite: Sessions 1.1 and 1.3 (1.2 strongly re
 
 ## Materials
 
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-1-foundations/session-1-4-from-idea-to-intake.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - Live access to the [AI Use Case Intake Form](/phase-2-education/use-case-intake/) — every attendee on a laptop or with a partner who has one.
 - Live access to the [Risk Tier Picker](/phase-1-governance/risk-classification/) — for the classification activity.
 - Each attendee's "My Job + AI" worksheet from Session 1.3.

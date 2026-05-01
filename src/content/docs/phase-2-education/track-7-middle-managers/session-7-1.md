@@ -21,6 +21,7 @@ Division managers, team leads, branch chiefs, supervisors. Track 1 Session 1.1 O
 
 ## Materials
 
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-7-middle-managers/session-7-1-ai-and-your-team.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - The signed leadership commitment letter — every manager has a copy.
 - Role evolution maps from the [Job-Impact Messaging Kit](/phase-2-education/job-impact-messaging/), grouped by role family.
 - The talking-point card set (printable, 4 cards): "Will AI take my job?", "I tried it once and it was wrong", "I don't want to", "I'm worried about [bias / privacy]".

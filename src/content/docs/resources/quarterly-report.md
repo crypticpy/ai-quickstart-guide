@@ -11,6 +11,8 @@ sidebar:
 
 ## How to use
 
+Need a supporting sponsor presentation? Use the [Quarterly Sponsor Report deck source](/deck-sources/program/quarterly-sponsor-report.md) as a starting point. If reporting to a legislative committee, council, or oversight body, use the [Legislative or Oversight Briefing deck source](/deck-sources/program/legislative-oversight-briefing.md) instead.
+
 1. Copy the markdown block below into a fresh document at the start of each quarter.
 2. Fill in the **Headline numbers** first — those drive whether the rest of the report gets read.
 3. Update the **Gate progress** table with the most recent gate you cleared and the next one you're working toward.

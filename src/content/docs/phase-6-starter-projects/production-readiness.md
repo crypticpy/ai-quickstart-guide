@@ -9,6 +9,8 @@ The production readiness checklist is the gate between "we tried it with a small
 
 The Month-10 production readiness gate is when the team walks the checklist with the business owner, security reviewer, and platform lead. Each criterion is green, yellow (documented variance), or red. Multiple reds usually mean no-go or a narrower launch; leadership can approve a variance only with owner, mitigation, and date.
 
+For the go/no-go meeting, use the [Production Readiness Sign-Off deck source](/deck-sources/phase-6/production-readiness-signoff.md) as a starting point, then replace every criterion, owner, and decision with project-specific evidence.
+
 ## The eight criteria
 
 ### 1. Real users (not pilots) using it for real work

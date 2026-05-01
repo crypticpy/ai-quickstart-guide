@@ -21,6 +21,7 @@ All staff. Pre-requisite: Session 1.1 (and ideally 1.2).
 
 ## Materials
 
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-1-foundations/session-1-3-your-job-and-ai.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - "My Job + AI" worksheet, one per attendee. Two columns: tasks I do (left), AI applicability rating + notes (right).
 - Role evolution maps from the [Job-Impact Messaging Kit](/phase-2-education/job-impact-messaging/), printed and grouped by role family.
 - Leadership commitment letter, in printed form. Read aloud at the start.

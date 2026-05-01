@@ -109,7 +109,7 @@ The takeaway memo is drafted by the AI program lead within 48 hours, signed by t
 ## Materials
 
 - 1-page pre-read.
-- Slide outline (10–12 slides).
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-2-leadership/briefing-2-1-ai-landscape-hype-vs-reality.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - One-page representative cost breakdown.
 - Decision capture template (the takeaway memo format).
 

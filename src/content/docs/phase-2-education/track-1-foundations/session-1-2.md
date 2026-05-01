@@ -21,6 +21,7 @@ Same as Session 1.1: all staff. Pre-requisite: Session 1.1.
 
 ## Materials
 
+- AI deck source markdown: [Download the deck source](/deck-sources/phase-2/track-1-foundations/session-1-2-ai-in-government-real-examples.md). Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 - Eight printed case stations, one per real-world deployment. Each is a single page: the agency, the use case, what happened, and the cited reporting source. Stations are posted around the room before the session starts.
 - Gallery-walk worksheet for each attendee: rate each station on a 1–3 scale across (a) potential benefit and (b) risk to public trust, plus a short "what would you do differently" line.
 - Discussion guide for the facilitator with a recommended order through the stations.

@@ -22,6 +22,8 @@ If you cannot get this letter signed, do not launch broad staff training as if j
 
 The letter is not a press release. It is a one-page memo, on agency letterhead, distributed in Track 1 Session 1.1, posted on the agency intranet, and emailed by the executive sponsor (not Comms, not HR — the executive sponsor personally) to all staff in the program scope.
 
+For an all-staff launch conversation, use the [Leadership Commitment and Staff Launch deck source](/deck-sources/program/leadership-commitment-staff-launch.md) as a starting point, then replace the placeholders with approved local commitment language.
+
 ## How this page scales for your agency
 
 | Path | Minimum useful version | Add when capacity exists |
