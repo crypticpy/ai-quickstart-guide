@@ -39,7 +39,7 @@
   "dependencies": {
     "@astrojs/preact": "^5.0.0",
     "@astrojs/starlight": "^0.38.0",
-    "astro": "^6.1.0",
+    "astro": "^6.2.1",
     "preact": "^10.25.0",
     "sharp": "^0.33.5"
   },
