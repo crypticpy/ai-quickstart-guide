@@ -11,8 +11,9 @@ This section collects the cross-cutting tools and references that don't belong i
 
 | Resource                                                            | When to reach for it                                                                                                                                                          |
 | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Template Library](/resources/template-library/)                    | Copy-ready artifacts for leadership commitment, approved tools, workflow audit, manager coaching, vendor review, budget approval, launch, and readiness sign-off              |
+| [Template Library](/resources/template-library/)                    | Copy-ready artifacts for leadership commitment, approved tools, workflow audit, manager coaching, vendor review, budget approval, environment operations, and readiness sign-off |
 | [Completed Examples](/resources/completed-examples/)                | Filled examples for AUP, risk tiering, intake, ROI, quarterly reporting, and production readiness gates                                                                       |
+| [AI Deck Sources](/resources/deck-sources/)                         | Markdown source files that can be imported into AI presentation tools to create kickoff decks, training decks, briefings, and sponsor reports                                 |
 | [Offline Pack](/resources/offline-pack/)                            | How to use release PDF/DOCX/Markdown artifacts when staff work on locked-down networks or cannot access GitHub Pages                                                          |
 | [ROI Calculator](/resources/roi-calculator/)                        | Building a defensible cost / savings / payback case for a single AI use case (interactive form, exports filled markdown or PDF)                                               |
 | [Comparable Agency Case Studies](/resources/case-studies/)          | Wanting to see how the playbook actually plays out at small / medium / large agency scale, including failure modes and off-ramps                                              |
@@ -35,6 +36,6 @@ These live elsewhere in the guide but are referenced often from the Resources pa
 
 When citing this guide in your own agency's documentation, the recommended attribution is:
 
-> _AI Quickstart Strategy Guide, Version 1.1 (Expert Panel Revisions). Used under CC BY-SA 4.0; code samples under MIT._
+> _AI Quickstart Guide, Version 0.1.0 (Public Preview). Used under CC BY-SA 4.0; code samples under MIT._
 
 Citations to the underlying frameworks (NIST, OMB, SLSA, SPACE) should point to the frameworks themselves, not to the [Frameworks Cited](/resources/frameworks-cited/) page; that page is a roll-up reference, not a primary source.

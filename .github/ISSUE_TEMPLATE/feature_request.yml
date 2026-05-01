@@ -1,0 +1,32 @@
+name: Feature or resource request
+description: Suggest a new page, template, tool, deck source, example, or workflow.
+title: "Request: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What need does this address?
+      description: Describe the agency role, phase, or workflow this would help.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested approach
+      description: Describe the page, template, code sample, deck source, or feature.
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Main audience
+      options:
+        - Small agencies
+        - Medium agencies
+        - Large agencies
+        - All agency sizes
+        - Contributors or maintainers
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources or examples
+      description: Include public references if this depends on a framework, standard, law, or real example.

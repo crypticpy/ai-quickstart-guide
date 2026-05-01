@@ -88,20 +88,23 @@ The guidance throughout Phase 3 is structured: pick the principle, then the per-
 ## Deliverables
 
 - **[Cloud sandbox provisioning guide](/phase-3-infrastructure/cloud-sandbox/):** sandbox / staging / production tier definitions and the per-cloud landing zone pattern.
+- **[Environment strategy & promotion path](/phase-3-infrastructure/environment-strategy/):** practical sandbox, development, staging, and production operating model; promotion gates; routine maintenance; vendor questions.
 - **[Identity & access](/phase-3-infrastructure/identity-access/):** SSO via the agency's existing SAML/OIDC provider; workload identity (managed identity / IAM roles / workload identity); RBAC scope design.
 - **[CI/CD pipeline](/phase-3-infrastructure/cicd-pipeline/):** protected-branch development, automated tests, SBOM generation, artifact signing, and SLSA Level 2 as a maturity target.
 - **[Secrets management](/phase-3-infrastructure/secrets-management/):** Key Vault / Secrets Manager / Secret Manager patterns; HashiCorp Vault as cross-cloud option; secret-zero handling.
 - **[Container orchestration](/phase-3-infrastructure/container-orchestration/):** Container Apps / App Runner / Cloud Run for managed; AKS / EKS / GKE for full Kubernetes; staging vs. production separation.
 - **[Security baseline](/phase-3-infrastructure/security-baseline/):** DLP for AI workloads, data classification labels, network segmentation, egress control, encryption-in-use options.
 - **[Observability foundation](/phase-3-infrastructure/observability/):** OpenTelemetry instrumentation, centralized logging, AI invocation telemetry, governed prompt/response capture, SLO definitions, AI-specific metrics.
+- **[Operations lifecycle & resilience](/phase-3-infrastructure/operations-lifecycle/):** post-launch maintenance, access recertification, backup/restore, records, cost runaway controls, provider change, exceptions, and decommissioning.
+- **[Environment setup courseware](/phase-3-infrastructure/environment-setup-courseware/):** facilitator plan and AI deck sources for teaching environment setup, design, and architecture basics.
 
 ## Sequencing within Phase 3
 
 | Weeks | Focus                                                               | Gate                                                   |
 | ----- | ------------------------------------------------------------------- | ------------------------------------------------------ |
 | 1–2   | Sandbox request submitted; landing zone pattern decided             | Cloud account provisioned; baseline IAM in place       |
-| 3–4   | SSO and workload identity configured; secrets management stood up   | Devs can sign in to non-prod with SSO                  |
-| 5–6   | CI/CD pipeline operational with tests, SBOM, signing                | First end-to-end build/deploy of a sample app          |
+| 3–4   | Environment strategy documented; SSO and workload identity configured; secrets management stood up | Devs can sign in to non-prod with SSO; environment rules documented |
+| 5–6   | CI/CD pipeline operational with tests, SBOM, signing, and promotion gates | First end-to-end build/deploy of a sample app          |
 | 7–8   | Container orchestration + staging environment ready                 | Sample app running in staging behind WAF               |
 | 9–10  | Security baseline (DLP, segmentation, data classification) enforced | Tier-1/2 workloads deployable with auto-applied policy |
 | 11–12 | Observability foundation deployed; first SLOs                       | AI telemetry, redaction policy, and cost dashboards live |

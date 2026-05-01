@@ -9,11 +9,11 @@ The AI Quickstart Guide ships as a GitHub template repository. When you click "U
 
 ## What versions mean here
 
-Each release of the guide is tagged in the upstream repo (`v1.0`, `v1.1`, `v2.0`). Releases follow [semantic versioning](https://semver.org/) with these conventions:
+Each release of the guide is tagged in the upstream repo (`v0.1.0`, `v0.2.0`, `v1.0.0`). Releases follow [semantic versioning](https://semver.org/) with these conventions:
 
-- **Major (v1 → v2):** Breaking changes — directory restructure, removed pages, renamed phases, changed content collection schema. Manual review required.
-- **Minor (v1.1 → v1.2):** New content (additional pages, expanded variants, new templates). Generally additive; fork can pull most changes cleanly.
-- **Patch (v1.1.0 → v1.1.1):** Bug fixes, link corrections, typo fixes, dependency bumps. Should pull cleanly.
+- **Major (v1.0.0 → v2.0.0):** Breaking changes - directory restructure, removed pages, renamed phases, changed content collection schema. Manual review required.
+- **Minor (v0.1.0 → v0.2.0):** New content (additional pages, expanded variants, new templates). Generally additive; fork can pull most changes cleanly.
+- **Patch (v0.1.0 → v0.1.1):** Bug fixes, link corrections, typo fixes, dependency bumps. Should pull cleanly.
 
 Each release ships with a `CHANGELOG.md` entry describing what changed and what fork maintainers should review.
 
@@ -33,7 +33,7 @@ The light-fork pattern is the recommendation for most agencies. If you find your
 ```bash
 git fetch upstream
 git checkout main
-git merge upstream/v1.1.1
+git merge upstream/v0.1.1
 # resolve conflicts (rare for patch releases)
 pnpm install
 pnpm build
@@ -46,22 +46,22 @@ If `pnpm build` passes with no broken-link warnings, push and redeploy. Patch up
 ```bash
 git fetch upstream --tags
 git checkout main
-git checkout -b upgrade/v1.2
-git merge upstream/v1.2
+git checkout -b upgrade/v0.2.0
+git merge upstream/v0.2.0
 ```
 
 Conflicts are most likely in `astro.config.mjs` (sidebar order may have changed), `package.json` (dependency bumps), and `src/content/docs/index.mdx` (home page may have new sections). Resolve them by taking upstream's structure and re-applying your agency-specific values.
 
 After merging:
 
-1. Read the upstream `CHANGELOG.md` entry for v1.2.
+1. Read the upstream `CHANGELOG.md` entry for v0.2.0.
 2. Run `pnpm build` and check the link-check output.
 3. Check the [pick-your-path](/getting-started/pick-your-path/) page — variant content is the area most likely to have substantive changes.
 4. Open a PR for internal review before merging to your fork's main.
 
 ## Major upgrades (breaking)
 
-Major version upgrades (v1 → v2) require a real review session, not a same-afternoon merge. The upstream `CHANGELOG.md` will name what broke. Common cases:
+Major version upgrades (v1.0.0 → v2.0.0) require a real review session, not a same-afternoon merge. The upstream `CHANGELOG.md` will name what broke. Common cases:
 
 - **Directory rename.** A phase folder may move (e.g., `phase-2-education/` → `phase-2-culture/`). Internal links, sidebar config, and any agency-added pages inside the renamed folder need updating.
 - **Schema change.** Content frontmatter requirements may have changed (a new required field). The build will fail loudly until every page conforms.
@@ -82,7 +82,7 @@ Add a one-line note to your fork's `CHANGELOG.md` each time you pull upstream:
 
 ```
 ## [Internal] 2026-09-15
-Pulled upstream v1.2.0. Conflicts: agency name in index.mdx (kept ours).
+Pulled upstream v0.2.0. Conflicts: agency name in index.mdx (kept ours).
 Reviewed: pick-your-path variant table; legislative-compliance jurisdiction column.
 ```
 

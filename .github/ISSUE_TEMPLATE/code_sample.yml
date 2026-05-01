@@ -1,0 +1,41 @@
+name: Code-sample issue
+description: Report a problem with Track 4 labs, starter code, solution code, or test instructions.
+title: "Code sample: "
+labels: ["code-samples"]
+body:
+  - type: input
+    id: path
+    attributes:
+      label: Code path
+      description: Example: code-samples/track-4/lab-3/starter
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include the command run and relevant output.
+    validations:
+      required: true
+  - type: dropdown
+    id: credentials
+    attributes:
+      label: Did the command use live model credentials?
+      options:
+        - "No"
+        - "Yes"
+        - "Not sure"
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Python version, OS, package manager, and installed dependencies.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed API keys, tokens, private URLs, and private data from the report.
+          required: true

@@ -132,6 +132,7 @@ Optional adds, when available: SSO through the existing IdP, an approved image r
 
 ## Related
 
+- [Environment Strategy & Promotion Path](/phase-3-infrastructure/environment-strategy/) — how sandbox, development, staging, and production fit together operationally
 - [Identity & Access](/phase-3-infrastructure/identity-access/) — the SSO and workload identity that lives inside the landing zone
 - [Container Orchestration](/phase-3-infrastructure/container-orchestration/) — what runs inside the workload subnets
 - [Security Baseline](/phase-3-infrastructure/security-baseline/) — the policies the landing zone enforces

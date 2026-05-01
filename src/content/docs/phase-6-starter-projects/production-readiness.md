@@ -11,6 +11,8 @@ The Month-10 production readiness gate is when the team walks the checklist with
 
 For the go/no-go meeting, use the [Production Readiness Sign-Off deck source](/deck-sources/phase-6/production-readiness-signoff.md) as a starting point, then replace every criterion, owner, and decision with project-specific evidence.
 
+For the recurring operating practices that continue after launch — access review, backups, CVE triage, drift review, records retention, provider change, cost anomalies, exceptions, and decommissioning — use [Operations Lifecycle & Resilience](/phase-3-infrastructure/operations-lifecycle/) as the companion checklist.
+
 ## The eight criteria
 
 ### 1. Real users (not pilots) using it for real work
@@ -116,5 +118,6 @@ A signed gate document is the agency's record of decision. It travels with the p
 - [User Testing Protocol](/phase-6-starter-projects/user-testing/) — UAT feeds the readiness criteria.
 - [Deployment Runbook Template](/phase-6-starter-projects/deployment-runbook/) — the launch-day script the gate authorizes.
 - [What's Next](/phase-6-starter-projects/whats-next/) — sustainability practices after the gate is passed.
+- [Operations Lifecycle & Resilience](/phase-3-infrastructure/operations-lifecycle/) — recurring maintenance and resilience checks after production launch.
 - [Observability (Phase 3)](/phase-3-infrastructure/observability/) — the dashboards behind criteria 2, 3, 4.
 - [Risk Classification (Phase 1)](/phase-1-governance/risk-classification/) — the tier framework the governance sign-off references.

@@ -4,7 +4,23 @@
   "version": "0.1.0",
   "description": "AI Quickstart Strategy Guide — a 12-month playbook for government agencies adopting AI",
   "private": false,
-  "license": "SEE LICENSE.md (dual: MIT for code, CC BY-SA 4.0 for content)",
+  "license": "SEE LICENSE (MIT for code, CC-BY-SA-4.0 for content)",
+  "homepage": "https://crypticpy.github.io/ai-quickstart-guide/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crypticpy/ai-quickstart-guide.git"
+  },
+  "bugs": {
+    "url": "https://github.com/crypticpy/ai-quickstart-guide/issues"
+  },
+  "keywords": [
+    "ai",
+    "government",
+    "public-sector",
+    "playbook",
+    "astro",
+    "starlight"
+  ],
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -13,7 +29,9 @@
     "astro": "astro",
     "check": "tsc --noEmit --strict --skipLibCheck --jsx react-jsx --jsxImportSource preact --moduleResolution bundler --module ESNext --target ES2022 --allowImportingTsExtensions src/components/*.tsx src/lib/*.ts",
     "lint:links": "node scripts/check-links.mjs",
-    "export:playbook": "node scripts/build-playbook.mjs"
+    "export:playbook": "node scripts/build-playbook.mjs",
+    "check:export": "node scripts/check-export.mjs",
+    "check:deck-sources": "node scripts/check-deck-sources.mjs"
   },
   "engines": {
     "node": ">=22.12.0"

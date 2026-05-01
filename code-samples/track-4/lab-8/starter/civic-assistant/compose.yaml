@@ -8,7 +8,7 @@ services:
       # Sourced from the host shell. NEVER hardcode the key here.
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:?set ANTHROPIC_API_KEY in your shell}
       LLM_PROVIDER: ${LLM_PROVIDER:-anthropic}
-      LLM_MODEL: ${LLM_MODEL:-claude-sonnet-4-20250514}
+      LLM_MODEL: ${LLM_MODEL:-provider-model-slug}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       FEATURE_FLAGS: ${FEATURE_FLAGS:-triage_enabled,answer_enabled,classify_enabled}
       CORS_ALLOW_ORIGINS: ${CORS_ALLOW_ORIGINS:-}

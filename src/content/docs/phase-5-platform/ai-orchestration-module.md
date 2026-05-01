@@ -161,6 +161,26 @@ When an app calls `ai.call("case-summary", inputs={...})`:
 
 Prompt changes go through code review like any other change. Major version bumps (incompatible schema, materially different behavior) require an eval-pass-rate floor before deployment.
 
+### Registry fields that matter in operations
+
+The registry is not only a developer convenience. It is the agency's operational record for what AI behavior is approved to run.
+
+At minimum, every production prompt or model route should record:
+
+| Field | Why it matters |
+| --- | --- |
+| Prompt id and version | Lets teams reproduce, audit, and roll back behavior. |
+| Owner | Names who approves changes and reviews drift. |
+| Risk tier and data classification | Selects guardrails, logging, retention, and approval path. |
+| Provider route and model tier | Keeps model selection visible without hard-coding provider-specific IDs everywhere. |
+| Current provider model ID, deployment name, region, or route | Records the actual runtime binding used in API calls or managed deployments. |
+| Fallback route | Defines what happens when the preferred model is unavailable or retired. |
+| Eval suite and threshold | Ties behavior change to measurable evidence. |
+| Logging and retention setting | Prevents prompt/response capture from becoming an accidental records repository. |
+| Last reviewed date | Makes stale prompts visible before they surprise operations. |
+
+Small teams can maintain this as metadata files in the repository. Larger teams may expose it through the admin dashboard or an internal developer portal. Either way, a production incident review should be able to answer: which prompt, which model route, which retrieval index, which tool permissions, which eval result, and which rollback path were active at the time?
+
 ## Retrieval-augmented generation (RAG)
 
 Most government AI features are retrieval-grounded — the LLM works against agency policy, prior cases, regulations, FAQ. The module's RAG pipeline:
@@ -441,5 +461,6 @@ Tier-3 features should wait until v2-level evaluation, logging, DLP, approval, a
 - [Procurement Guardrails (Phase 1)](/phase-1-governance/procurement-guardrails/) — the contract terms that make this module's vendor-neutrality real
 - [Risk Classification Policy (Phase 1)](/phase-1-governance/risk-classification/) — informs which prompts get which guardrails
 - [Reference Implementation (Phase 4)](/phase-4-dev-stack/reference-implementation/) — first concrete consumer of this module
+- [Operations Lifecycle & Resilience (Phase 3)](/phase-3-infrastructure/operations-lifecycle/) — provider change, drift review, cost controls, and decommissioning practices that use this module's records
 - [Module Taxonomy](/phase-5-platform/module-taxonomy/) — the hexagonal pattern this module exemplifies most fully
 - [API Framework](/phase-5-platform/api-framework-module/) — exposes streaming endpoints over the orchestration module

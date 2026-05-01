@@ -1,5 +1,5 @@
-This repository uses a dual-license model. See LICENSE.md for the full
-explanation.
+This repository uses a dual-license model. This file explains which license
+applies by path and purpose.
 
 - Code (anything under code-samples/, src/components/, src/styles/, scripts/,
   and configuration files like package.json, astro.config.mjs, *.ts, *.tsx,

@@ -1,0 +1,31 @@
+name: Content correction
+description: Report unclear wording, stale guidance, or a factual issue.
+title: "Content: "
+labels: ["content"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page or file
+      description: Link to the page or path to the file.
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What should be corrected?
+      description: Explain the issue and why it matters.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source or evidence
+      description: Provide an official source, versioned document, or other evidence when possible.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This does not include private data or confidential agency material.
+          required: true

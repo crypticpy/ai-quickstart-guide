@@ -16,8 +16,8 @@ The provider key is read from the matching environment variable.
 
 Model IDs are provider-specific slugs used in API calls. Providers change model
 lists and aliases over time. These examples read model IDs from environment
-variables first, then fall back to illustrative defaults that should be checked
-against current provider docs before live teaching or deployment.
+variables first, then fall back to illustrative placeholder slugs. Set a real
+model ID from current provider docs before live teaching or deployment.
 """
 
 from __future__ import annotations
@@ -25,8 +25,8 @@ from __future__ import annotations
 import os
 from typing import Any, Callable, Optional
 
-DEFAULT_ANTHROPIC_MODEL = "claude-sonnet-4-20250514"
-DEFAULT_OPENAI_MODEL = "gpt-4o-mini"
+DEFAULT_ANTHROPIC_MODEL = "provider-model-slug"
+DEFAULT_OPENAI_MODEL = "provider-model-slug"
 
 
 def get_client(

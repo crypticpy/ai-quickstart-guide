@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a site, build, workflow, or interactive-component problem.
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include secrets, private records, or non-public agency data."
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the bug and what you expected instead.
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Page or file
+      description: Link to the page or path to the file.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: Commands, browser steps, or inputs that reproduce the issue.
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, Node version, OS, or hosting environment if relevant.

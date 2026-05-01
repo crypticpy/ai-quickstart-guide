@@ -2,7 +2,7 @@
 title: Security Baseline
 description: DLP for AI workloads, data classification labels, network segmentation, egress control, and per-tier policy enforcement across AWS, Azure, and GCP.
 sidebar:
-  order: 7
+  order: 8
 ---
 
 The security baseline is the set of controls that apply to every workload by default. Mature teams enforce these controls automatically, in code, at provisioning time. Smaller teams can start with a checklist and naming/tagging convention, then automate as they repeat the pattern. The principle is **secure-by-default, opt-in to relax**, not the other way around. A developer who does nothing special should land in a posture that is safe for Tier-1 workloads. Moving to Tier-2 or Tier-3 should require explicit, reviewed configuration changes that are themselves auditable.
@@ -156,6 +156,8 @@ Manual audits don't keep up. Run continuous compliance:
 
 ## Related
 
+- [Environment Strategy & Promotion Path](/phase-3-infrastructure/environment-strategy/) — how baseline controls differ across sandbox, development, staging, and production
+- [Operations Lifecycle & Resilience](/phase-3-infrastructure/operations-lifecycle/) — CVE triage, exceptions, records, and decommissioning controls
 - [Cloud Sandbox](/phase-3-infrastructure/cloud-sandbox/) — landing zone where these controls are baked in
 - [Identity & Access](/phase-3-infrastructure/identity-access/) — the identity layer this baseline relies on
 - [Risk Classification](/phase-1-governance/risk-classification/) — the tier model the policy enforces

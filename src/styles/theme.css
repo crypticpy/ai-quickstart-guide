@@ -150,6 +150,203 @@
   }
 }
 
+/* Lightweight diagrams ----------------------------------------------------- */
+
+.aqg-diagram {
+  margin: 1.35rem 0 1.65rem;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-gray-6);
+  color: var(--sl-color-text);
+}
+
+.aqg-diagram__title {
+  margin: 0 0 0.35rem;
+  color: var(--sl-color-text);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.aqg-diagram__caption {
+  margin: 0.55rem 0 0;
+  color: var(--sl-color-gray-3);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.aqg-flow {
+  display: grid;
+  grid-template-columns: repeat(var(--steps, 4), minmax(6.5rem, 1fr));
+  gap: 0.65rem;
+  min-width: calc(var(--steps, 4) * 7rem);
+}
+
+.aqg-node {
+  position: relative;
+  min-width: 0;
+  min-height: 6.25rem;
+  padding: 0.8rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-top: 4px solid var(--node-accent, var(--sl-color-accent));
+  border-radius: 0.45rem;
+  background: var(--sl-color-bg);
+}
+
+.aqg-node:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -0.55rem;
+  width: 0.55rem;
+  height: 2px;
+  background: var(--sl-color-gray-4);
+}
+
+.aqg-node__eyebrow {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--sl-color-gray-3);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.aqg-node__title {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--sl-color-text);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.aqg-node__body {
+  margin: 0;
+  color: var(--sl-color-gray-2);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.aqg-node--blue {
+  --node-accent: #2f4a8c;
+}
+
+.aqg-node--green {
+  --node-accent: #0f766e;
+}
+
+.aqg-node--gold {
+  --node-accent: #9a5a14;
+}
+
+.aqg-node--red {
+  --node-accent: #b42318;
+}
+
+.aqg-node--violet {
+  --node-accent: #7c3aed;
+}
+
+.aqg-map {
+  display: grid;
+  grid-template-columns: minmax(11rem, 0.85fr) minmax(16rem, 1.3fr) minmax(11rem, 0.85fr);
+  gap: 0.75rem;
+  align-items: stretch;
+  min-width: 40rem;
+}
+
+.aqg-map__column {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.aqg-map__label {
+  display: block;
+  margin-bottom: 0.1rem;
+  color: var(--sl-color-text-accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.aqg-map__item {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-left: 4px solid var(--item-accent, var(--sl-color-accent));
+  border-radius: 0.4rem;
+  background: var(--sl-color-bg);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.aqg-map__center {
+  display: grid;
+  gap: 0.55rem;
+  align-content: center;
+  padding: 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, var(--sl-color-accent-low) 45%, transparent);
+}
+
+.aqg-cycle {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(10rem, 1fr));
+  gap: 0.65rem;
+  min-width: 36rem;
+}
+
+.aqg-cycle .aqg-node {
+  min-height: 5.5rem;
+}
+
+.aqg-cycle .aqg-node::after {
+  display: none;
+}
+
+.aqg-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.65rem;
+}
+
+.aqg-matrix__item {
+  padding: 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-top: 4px solid var(--item-accent, var(--sl-color-accent));
+  border-radius: 0.45rem;
+  background: var(--sl-color-bg);
+}
+
+.aqg-matrix__item strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.aqg-matrix__item span {
+  color: var(--sl-color-gray-2);
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 50rem) {
+  .aqg-diagram {
+    position: relative;
+    margin-top: 1.8rem;
+  }
+
+  .aqg-diagram::before {
+    content: "Scroll sideways to see the full diagram";
+    position: absolute;
+    top: -1.45rem;
+    left: 0;
+    color: var(--sl-color-gray-3);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+}
+
 /* Static Gantt timeline ---------------------------------------------------- */
 
 .aqg-gantt {

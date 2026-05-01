@@ -2,7 +2,7 @@
 title: Observability Foundation
 description: OpenTelemetry instrumentation, centralized logging, AI invocation telemetry, governed prompt/response capture, AI-specific metrics, and SLO definitions across AWS, Azure, and GCP.
 sidebar:
-  order: 8
+  order: 9
 ---
 
 You cannot operate, debug, or evaluate what you cannot see. Observability is the layer that turns "the AI is acting weird" into "request 4f3c spent 18 seconds in retrieval, generated 4,200 tokens, hit Bedrock at p99=2.1s, and the user marked the answer wrong." Phase 3's observability foundation should produce useful metadata by default for every AI workload, on every cloud, without each application team building it from scratch. Raw prompt and response capture is more sensitive and should be enabled only when the approved data rules, redaction, retention, and access controls support it.
@@ -191,6 +191,8 @@ Every Tier-2/3 incident gets a post-incident review. The observability foundatio
 
 ## Related
 
+- [Environment Strategy & Promotion Path](/phase-3-infrastructure/environment-strategy/) — the routine operations loop that uses observability, feedback, and drift review
+- [Operations Lifecycle & Resilience](/phase-3-infrastructure/operations-lifecycle/) — maintenance cadence and operational review practices that use these signals
 - [Identity & Access](/phase-3-infrastructure/identity-access/) — workloads' identity carried in trace and log context
 - [Container Orchestration](/phase-3-infrastructure/container-orchestration/) — where the OTel collectors run
 - [Security Baseline](/phase-3-infrastructure/security-baseline/) — the redaction and retention policies this page implements

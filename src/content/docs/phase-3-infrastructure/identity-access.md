@@ -2,7 +2,7 @@
 title: Identity & Access
 description: SSO via Entra ID / Okta / Auth0, workload identity (managed identity / IAM roles / workload identity federation), and RBAC scope design for AI workloads.
 sidebar:
-  order: 3
+  order: 4
 ---
 
 The identity layer decides who can do what — and "who" includes both humans and the software that calls AI services on their behalf. Agencies that get identity right have a one-day onboarding ramp, a clear audit trail, and the ability to revoke access in seconds. Agencies that get it wrong end up with shared service accounts, hard-coded API keys checked into git, and no way to answer "who used the model to generate this output?"
@@ -152,6 +152,7 @@ The litmus test of an identity setup is how fast it handles change.
 ## Related
 
 - [Cloud Sandbox](/phase-3-infrastructure/cloud-sandbox/) — where the IdP is wired into the landing zone
+- [Operations Lifecycle & Resilience](/phase-3-infrastructure/operations-lifecycle/) — access recertification and break-glass testing cadence
 - [CI/CD Pipeline](/phase-3-infrastructure/cicd-pipeline/) — the federated identity used by the build system
 - [Secrets Management](/phase-3-infrastructure/secrets-management/) — where the few unavoidable long-lived secrets live
 - [Procurement Guardrails](/phase-1-governance/procurement-guardrails/) — IdP selection happens here

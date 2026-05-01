@@ -4,13 +4,18 @@ on:
   pull_request:
     paths:
       - 'src/**'
+      - 'public/**'
+      - 'code-samples/**'
       - 'scripts/**'
       - 'astro.config.mjs'
       - 'package*.json'
       - 'tsconfig.json'
       - '.github/workflows/**'
-      - 'README.md'
-      - 'CONTRIBUTING.md'
+      - '.github/dependabot.yml'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE.md'
+      - '*.md'
+      - 'LICENSE*'
   workflow_dispatch:
 
 jobs:
@@ -26,5 +31,7 @@ jobs:
 
       - run: npm ci
       - run: npm run check
+      - run: npm run check:deck-sources
+      - run: npm run check:export
       - run: npm run build
       - run: npm run lint:links

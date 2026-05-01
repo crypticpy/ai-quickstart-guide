@@ -6,6 +6,7 @@ import remarkBaseLinks from './src/plugins/remark-base-links.mjs';
 
 const SITE = process.env.SITE_URL ?? 'https://crypticpy.github.io';
 const BASE = process.env.BASE_PATH ?? '/ai-quickstart-guide';
+const REPO_URL = process.env.REPO_URL ?? 'https://github.com/crypticpy/ai-quickstart-guide';
 
 export default defineConfig({
   site: SITE,
@@ -30,12 +31,11 @@ export default defineConfig({
         {
           icon: 'github',
           label: 'GitHub',
-          href: 'https://github.com/crypticpy/ai-quickstart-guide',
+          href: REPO_URL,
         },
       ],
       editLink: {
-        baseUrl:
-          'https://github.com/crypticpy/ai-quickstart-guide/edit/main/',
+        baseUrl: `${REPO_URL}/edit/main/`,
       },
       lastUpdated: true,
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 4 },

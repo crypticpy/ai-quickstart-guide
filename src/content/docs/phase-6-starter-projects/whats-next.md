@@ -39,6 +39,7 @@ After Month 14, the starter project is no longer "the new thing." It needs the b
 - **Eval ownership split.** The eval suite for this product is owned by the application team. The eval _framework_ — the tooling, the harness, the dashboards — is owned by the platform team.
 - **Cost dashboard reviewed monthly.** Anomalies investigated; trend lines reported to the steering group.
 - **Quarterly engagement pulse.** A short user survey covers users of the deployed app. See [sustainability practices](/phase-2-education/sustainability/) for the full cadence.
+- **Operations lifecycle review.** The owner follows the [Operations Lifecycle & Resilience](/phase-3-infrastructure/operations-lifecycle/) cadence for access recertification, CVE triage, backup/restore, provider change, records retention, exceptions, and decommissioning decisions.
 
 ## Retirement is real
 
@@ -62,6 +63,7 @@ The starter project's outputs are inputs to the Year 2 budget cycle.
 ## Related
 
 - [Sustainability practices (Phase 2)](/phase-2-education/sustainability/) — engagement and reinforcement post-launch.
+- [Operations Lifecycle & Resilience (Phase 3)](/phase-3-infrastructure/operations-lifecycle/) — the production maintenance cadence after launch.
 - [ROI Calculator](/resources/roi-calculator/) — the Year 2 budget input.
 - [Case Studies](/resources/case-studies/) — what other agencies did with their second project.
 - [Phase 5 — Modular Platform](/phase-5-platform/) — the platform that the punch list feeds back into.

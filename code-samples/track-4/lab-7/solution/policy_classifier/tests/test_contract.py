@@ -14,10 +14,9 @@ import pytest
 
 from policy_classifier import ClassificationResult, DEPARTMENTS
 
-# TODO: Once make_classifier is implemented, you can also run these
-# contract tests against the real adapters by parameterizing on
-# ("zero_shot", "few_shot", "structured"). For starter scope, the
-# FakeClassifier proves the port shape.
+# The integration suite runs the same contract expectations against real
+# adapters when a live API key is available. These tests keep the offline
+# port contract fast and deterministic.
 
 
 def test_classify_returns_classification_result(fake_classifier):

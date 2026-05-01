@@ -28,7 +28,7 @@ jobs:
       - run: npm ci
 
       - name: Build print-safe markdown source
-        run: npm run export:playbook
+        run: npm run check:export
 
       - name: Build PDF
         run: |

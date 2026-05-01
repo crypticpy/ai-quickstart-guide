@@ -202,4 +202,5 @@ This document is the agency's institutional memory for the next project.
 - [Production Readiness Checklist](/phase-6-starter-projects/production-readiness/) — the gate before launch
 - [User Testing Protocol](/phase-6-starter-projects/user-testing/) — UAT before launch
 - [What's Next](/phase-6-starter-projects/whats-next/) — sustainability after launch
+- [Operations Lifecycle & Resilience](/phase-3-infrastructure/operations-lifecycle/) — maintenance, access review, backup/restore, records, and decommissioning after launch
 - [Observability (Phase 3)](/phase-3-infrastructure/observability/) — the dashboards the runbook watches

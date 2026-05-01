@@ -2,7 +2,7 @@
 title: Container Orchestration
 description: Choosing between managed container services and full Kubernetes; staging vs. production separation; admission control; per-cloud (AWS, Azure, GCP) recommendations.
 sidebar:
-  order: 6
+  order: 7
 ---
 
 The orchestration layer is where the AI workload actually runs. The good news: every major cloud has at least two reasonable options, and the differences between them are smaller than the AI vendor marketing implies. The question for Phase 3 is not "which cloud's Kubernetes is best" but "do we need full Kubernetes at all, or does the managed container service handle this?"

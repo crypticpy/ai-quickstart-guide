@@ -11,6 +11,38 @@ Use the week-by-week plan as written if you need a default. Treat the sequence a
 
 Need a kickoff presentation? Use the [AI Quickstart Program Kickoff deck source](/deck-sources/program/ai-quickstart-program-kickoff.md) as a starting point. Paste or upload it into your preferred AI presentation tool, then localize, verify, and brand the generated deck before use.
 
+<div class="aqg-diagram" role="img" aria-label="First quarter quickstart flow from mandate to governance to training to sandbox planning to quarterly readout">
+  <p class="aqg-diagram__title">First-quarter flow</p>
+  <div class="aqg-flow" style="--steps: 5;">
+    <div class="aqg-node aqg-node--blue">
+      <span class="aqg-node__eyebrow">Weeks 1-2</span>
+      <strong class="aqg-node__title">Mandate and baseline</strong>
+      <p class="aqg-node__body">Name the sponsor, run readiness, and assign the first gaps.</p>
+    </div>
+    <div class="aqg-node aqg-node--violet">
+      <span class="aqg-node__eyebrow">Weeks 3-5</span>
+      <strong class="aqg-node__title">Governance core</strong>
+      <p class="aqg-node__body">Draft acceptable use, risk tiers, and the review committee.</p>
+    </div>
+    <div class="aqg-node aqg-node--green">
+      <span class="aqg-node__eyebrow">Weeks 6-9</span>
+      <strong class="aqg-node__title">Intake and training</strong>
+      <p class="aqg-node__body">Open the idea pipeline, start foundations, brief managers, and seed champions.</p>
+    </div>
+    <div class="aqg-node aqg-node--gold">
+      <span class="aqg-node__eyebrow">Weeks 10-11</span>
+      <strong class="aqg-node__title">Sandbox planning</strong>
+      <p class="aqg-node__body">Choose the first environment path and the minimum security baseline.</p>
+    </div>
+    <div class="aqg-node aqg-node--red">
+      <span class="aqg-node__eyebrow">Weeks 12-13</span>
+      <strong class="aqg-node__title">Readout and next quarter</strong>
+      <p class="aqg-node__body">Shortlist starter candidates and publish the next-quarter decision requests.</p>
+    </div>
+  </div>
+  <p class="aqg-diagram__caption">This is a quarter of work time, not a claim that every agency moves at the same speed. Extend review-heavy steps when local process requires it.</p>
+</div>
+
 ## At a glance
 
 | Week | Focus | Primary owner | Main output |

@@ -1,22 +1,24 @@
 # civic-assistant — Deployment Handoff
 
-**Status:** TEMPLATE. Fill in every section before handoff. Empty sections are
-the most common reason platform teams reject a deploy.
+**Status:** Reference handoff template. Fill in the local measurement fields
+from your own logs before production handoff. Empty sections are the most
+common reason platform teams reject a deploy.
 
 ## 1. Service summary
 
-One paragraph. What the service does. Who calls it. What it costs to run per
-day at expected volume.
-
-> TODO: write the summary.
+The civic-assistant service exposes three training endpoints: classify a
+constituent message, answer policy questions from a bundled synthetic policy
+corpus, and triage permit-related messages through a simple tool loop. In a
+real handoff, replace this paragraph with the owning team, expected callers,
+approved provider, expected daily volume, and measured cost per day.
 
 ## 2. Runtime contract
 
 | Endpoint    | Method | Request shape       | Expected p95 latency | Cost per call |
 | ----------- | ------ | ------------------- | -------------------- | ------------- |
-| `/classify` | POST   | `{"message": str}`  | TODO                 | TODO          |
-| `/answer`   | POST   | `{"question": str}` | TODO                 | TODO          |
-| `/triage`   | POST   | `{"message": str}`  | TODO                 | TODO          |
+| `/classify` | POST   | `{"message": str}`  | local measurement required | local measurement required |
+| `/answer`   | POST   | `{"question": str}` | local measurement required | local measurement required |
+| `/triage`   | POST   | `{"message": str}`  | local measurement required | local measurement required |
 | `/health`   | GET    | n/a                 | <50 ms               | $0            |
 
 Numbers should come from the structured log lines emitted during the
@@ -26,7 +28,7 @@ integration test pass.
 
 | Dependency                     | Type           | Fallback                         |
 | ------------------------------ | -------------- | -------------------------------- |
-| Anthropic API                  | outbound HTTPS | TODO: configure OpenAI as a swap |
+| Approved LLM provider API      | outbound HTTPS | Configure an approved alternate provider adapter before production |
 | Policy corpus (markdown files) | in-process     | bundled in image                 |
 | Permits data (JSON)            | in-process     | bundled in image                 |
 
@@ -37,7 +39,7 @@ integration test pass.
 | `ANTHROPIC_API_KEY`     | yes (when LLM_PROVIDER=anthropic) | none                | Service refuses to start.                                  |
 | `OPENAI_API_KEY`        | yes (when LLM_PROVIDER=openai)    | none                | Service refuses to start.                                  |
 | `LLM_PROVIDER`          | no                                | `anthropic`         | Picks model SDK.                                           |
-| `LLM_MODEL`             | no                                | `claude-sonnet-4-20250514` | Model id passed to the SDK.                                |
+| `LLM_MODEL`             | no                                | `provider-model-slug` | Model id passed to the SDK.                                |
 | `LOG_LEVEL`             | no                                | `INFO`              | Standard Python log levels.                                |
 | `FEATURE_FLAGS`         | no                                | all three enabled   | Comma-separated flag list.                                 |
 | `CORS_ALLOW_ORIGINS`    | no                                | empty               | Comma-separated allowlist. Empty disables CORS middleware. |

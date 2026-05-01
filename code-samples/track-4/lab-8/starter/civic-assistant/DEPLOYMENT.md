@@ -37,7 +37,7 @@ integration test pass.
 | `ANTHROPIC_API_KEY`     | yes (when LLM_PROVIDER=anthropic) | none                | Service refuses to start.                                  |
 | `OPENAI_API_KEY`        | yes (when LLM_PROVIDER=openai)    | none                | Service refuses to start.                                  |
 | `LLM_PROVIDER`          | no                                | `anthropic`         | Picks model SDK.                                           |
-| `LLM_MODEL`             | no                                | `claude-sonnet-4-20250514` | Model id passed to the SDK.                                |
+| `LLM_MODEL`             | no                                | `provider-model-slug` | Model id passed to the SDK.                                |
 | `LOG_LEVEL`             | no                                | `INFO`              | Standard Python log levels.                                |
 | `FEATURE_FLAGS`         | no                                | all three enabled   | Comma-separated flag list.                                 |
 | `CORS_ALLOW_ORIGINS`    | no                                | empty               | Comma-separated allowlist. Empty disables CORS middleware. |

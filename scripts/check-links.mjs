@@ -6,6 +6,13 @@ const docsDir = path.join(root, "src/content/docs");
 const files = walk(docsDir).filter((file) => /\.(md|mdx)$/.test(file));
 const routes = new Set(["/"]);
 const publicDir = path.join(root, "public");
+const publicMarkdown = fs.existsSync(publicDir)
+  ? walk(publicDir).filter((file) => /\.(md|mdx)$/.test(file))
+  : [];
+const rootMarkdown = fs
+  .readdirSync(root)
+  .filter((entry) => /\.(md|mdx)$/.test(entry))
+  .map((entry) => path.join(root, entry));
 
 for (const file of files) {
   const rel = path.relative(docsDir, file).replaceAll(path.sep, "/");
@@ -27,8 +34,8 @@ if (fs.existsSync(publicDir)) {
 const failures = [];
 for (const file of [
   ...files,
-  path.join(root, "README.md"),
-  path.join(root, "CONTRIBUTING.md"),
+  ...publicMarkdown,
+  ...rootMarkdown,
 ]) {
   if (!fs.existsSync(file)) continue;
   const text = fs.readFileSync(file, "utf8");

@@ -1,7 +1,7 @@
 # Lab 4.6 solution
 
 Reference implementation of the five test categories. Same layout as the
-starter; every TODO is filled in.
+starter, with completed tests for each category.
 
 Run from this directory:
 

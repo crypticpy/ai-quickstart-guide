@@ -20,21 +20,21 @@ shape locally with `pip install -e ./policy_classifier`. The module's
 tests run inside its own folder. The consumer's tests run inside its
 own folder. Neither package can reach into the other's internals.
 
-## What you will fill in
+## What the solution demonstrates
 
-- `policy_classifier/src/policy_classifier/ports.py`. The `Classifier`
-  abstract base class. Add the abstract `classify` method.
-- `policy_classifier/src/policy_classifier/adapters/zero_shot.py`.
-  Finish the Anthropic call.
-- `policy_classifier/src/policy_classifier/adapters/few_shot.py`.
-  Finish the few-shot prompt.
-- `policy_classifier/src/policy_classifier/adapters/structured.py`.
-  Finish the JSON-output adapter, including parse-failure fallback.
-- `policy_classifier/src/policy_classifier/factory.py`.
-  Finish `make_classifier`.
+- `policy_classifier/src/policy_classifier/ports.py` defines the public
+  classifier contract.
+- `policy_classifier/src/policy_classifier/adapters/zero_shot.py` implements
+  the zero-shot provider adapter.
+- `policy_classifier/src/policy_classifier/adapters/few_shot.py` implements
+  the few-shot provider adapter.
+- `policy_classifier/src/policy_classifier/adapters/structured.py` implements
+  the JSON-output adapter, including parse-failure fallback.
+- `policy_classifier/src/policy_classifier/factory.py` exposes
+  `make_classifier`.
 
-The consumer app and the test suite are already written. You make them
-pass.
+The consumer app and test suite show how an application imports the module
+without reaching into adapter internals.
 
 ## How to run
 

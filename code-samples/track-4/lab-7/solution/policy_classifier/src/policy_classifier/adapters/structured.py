@@ -18,7 +18,7 @@ STRUCTURED_SYSTEM = (
 
 
 class StructuredOutputClaudeAdapter(Classifier):
-    def __init__(self, model: str = "claude-sonnet-4-20250514", api_key: str | None = None):
+    def __init__(self, model: str = "provider-model-slug", api_key: str | None = None):
         import anthropic
 
         key = api_key or os.environ.get("ANTHROPIC_API_KEY")

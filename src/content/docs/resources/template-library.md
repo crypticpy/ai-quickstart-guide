@@ -1,6 +1,6 @@
 ---
 title: Template Library
-description: Copy-ready AI program artifacts for launch, governance, procurement, manager coaching, budget approval, and production sign-off.
+description: Copy-ready AI program artifacts for launch, governance, procurement, manager coaching, budget approval, environment operations, and production sign-off.
 sidebar:
   order: 3
 ---
@@ -263,6 +263,345 @@ Audience: [roles]
 - Questions captured in [location].
 - Follow-ups assigned within 2 business days.
 - Any use case ideas submitted through intake.
+```
+
+## Environment separation checklist
+
+Use during Phase 3 to document how sandbox, development, staging/test, and production are separated. Pair this with [Environment Strategy & Promotion Path](/phase-3-infrastructure/environment-strategy/).
+
+Need a supporting presentation? Use the [Environment Setup Basics deck source](/deck-sources/phase-3/environment-setup-basics.md) for orientation or the [Environment Design Workshop deck source](/deck-sources/phase-3/environment-design-workshop.md) for a working session.
+
+```markdown
+# Environment Separation Checklist
+
+Agency/team: [name]
+Use case or platform: [name]
+Risk tier: [Tier 1/2/3 or pending]
+Prepared by: [name]
+Date: [date]
+
+| Environment | Boundary used | Owner | Data allowed | Access rule | Cost/log view |
+| ----------- | ------------- | ----- | ------------ | ----------- | ------------- |
+| Sandbox | [tenant/workspace/account/subscription/project/resource group/namespace] | [name] | [synthetic/public/sample only] | [who can access] | [link or note] |
+| Development | [boundary] | [name] | [synthetic/sanitized/internal if approved] | [who can access] | [link or note] |
+| Staging/Test | [boundary] | [name] | [sanitized production-shape/test users] | [who can access] | [link or note] |
+| Production | [boundary] | [name] | [approved real data only] | [least privilege/audited] | [link or note] |
+
+## Minimum controls
+
+- Production is separated from sandbox and development.
+- Sandbox does not contain real sensitive data, live secrets, or production credentials.
+- Secrets are different in each environment.
+- Each environment has a named business or technical owner.
+- Logs, costs, and access lists are reviewable.
+- Retention and deletion expectations are documented.
+
+## Open decisions
+
+| Question | Owner | Due date | Status |
+| -------- | ----- | -------- | ------ |
+| [question] | [name] | [date] | [open/closed] |
+```
+
+## Promotion gate checklist
+
+Use before moving a change from development to staging or from staging to production.
+
+```markdown
+# Promotion Gate Checklist
+
+Project/service: [name]
+Change: [summary]
+From environment: [development/staging]
+To environment: [staging/production]
+Prepared by: [name]
+Target date: [date]
+
+| Gate | Required? | Status | Evidence | Owner |
+| ---- | --------- | ------ | -------- | ----- |
+| Functional tests pass | [yes/no/defer] | [green/yellow/red] | [link/note] | [name] |
+| AI eval suite passes | [yes/no/defer] | [green/yellow/red] | [link/note] | [name] |
+| Security/CVE scan reviewed | [yes/no/defer] | [green/yellow/red] | [link/note] | [name] |
+| SBOM or dependency inventory updated | [yes/no/defer] | [green/yellow/red] | [link/note] | [name] |
+| Infrastructure plan or drift review complete | [yes/no/defer] | [green/yellow/red] | [link/note] | [name] |
+| Privacy/data handling review complete | [yes/no/defer] | [green/yellow/red] | [link/note] | [name] |
+| Monitoring, alerting, and feedback path live | [yes/no/defer] | [green/yellow/red] | [link/note] | [name] |
+| Rollback or pause path documented | [yes/no/defer] | [green/yellow/red] | [link/note] | [name] |
+
+Decision: [promote / promote with conditions / hold / stop]
+Conditions: [specific actions, owners, due dates]
+Approver: [name, role, date]
+```
+
+## AI operations calendar
+
+Use after launch to make routine monitoring, maintenance, and review visible.
+
+```markdown
+# AI Operations Calendar
+
+Service/use case: [name]
+Business owner: [name]
+Technical owner: [name]
+Operations owner: [name]
+Review period: [month/quarter]
+
+| Cadence | Review item | Owner | Evidence/location | Notes |
+| ------- | ----------- | ----- | ----------------- | ----- |
+| Weekly | Alerts, failed jobs, incidents | [name] | [dashboard/link] | [note] |
+| Weekly | User feedback and negative themes | [name] | [queue/link] | [note] |
+| Weekly | Eval failures and drift signals | [name] | [dashboard/link] | [note] |
+| Weekly | Cost by use case and anomaly review | [name] | [dashboard/link] | [note] |
+| Monthly | Dependency, container, and CVE review | [name] | [scanner/link] | [note] |
+| Monthly | Prompt/model/retrieval change review | [name] | [registry/link] | [note] |
+| Monthly | Access changes and privileged activity | [name] | [audit log/link] | [note] |
+| Quarterly | Drift, disaster recovery, vendor/model, and policy exception review | [name] | [record/link] | [note] |
+| Incident-triggered | Retrospective and runbook update | [name] | [incident record/link] | [note] |
+
+Open maintenance risks:
+
+- [risk, owner, due date]
+```
+
+## Production-readiness evidence register
+
+Use to gather evidence before the production sign-off meeting.
+
+```markdown
+# Production-Readiness Evidence Register
+
+Project/service: [name]
+Risk tier: [Tier 1/2/3]
+Target launch: [date]
+Prepared by: [name]
+
+| Evidence area | Required evidence | Location | Owner | Status |
+| ------------- | ----------------- | -------- | ----- | ------ |
+| Governance | Risk tier, review decision, approved use case | [link] | [name] | [status] |
+| Data/privacy | Data classes, retention, prompt/response logging rule | [link] | [name] | [status] |
+| Security | Access model, secrets, scan results, open risks | [link] | [name] | [status] |
+| Evaluation | Eval set, thresholds, latest results, known failures | [link] | [name] | [status] |
+| Operations | On-call/support path, runbook, incident path | [link] | [name] | [status] |
+| Monitoring | Logs, metrics, traces, cost, feedback dashboard | [link] | [name] | [status] |
+| Rollback | Feature flags, prompt/model rollback, manual fallback | [link] | [name] | [status] |
+| User readiness | Training, guide, help path, launch communications | [link] | [name] | [status] |
+
+Decision meeting: [date/time]
+Recommended decision: [go / conditional go / hold / stop]
+Conditions: [specific actions, owners, due dates]
+```
+
+## Model and prompt change record
+
+Use for any production-impacting change to model ID, provider, prompt, retrieval configuration, tool access, or safety settings.
+
+```markdown
+# Model and Prompt Change Record
+
+Service/use case: [name]
+Change type: [model/provider/prompt/retrieval/tool/safety setting]
+Requested by: [name]
+Date: [date]
+
+## Current state
+
+- Provider/model slug or configuration: [current]
+- Prompt or policy version: [current]
+- Retrieval index/source version: [current]
+- Tool permissions: [current]
+
+## Proposed change
+
+- Proposed provider/model slug or configuration: [proposed]
+- Proposed prompt or policy version: [proposed]
+- Proposed retrieval index/source version: [proposed]
+- Proposed tool permissions: [proposed]
+
+## Reason
+
+[Why the change is needed.]
+
+## Evidence
+
+| Evidence | Result | Location |
+| -------- | ------ | -------- |
+| Eval score comparison | [result] | [link] |
+| Cost/latency impact | [result] | [link] |
+| Safety/DLP review | [result] | [link] |
+| User impact review | [result] | [link] |
+
+Rollback plan: [how to revert]
+Approved by: [name, role, date]
+Production release: [date/version]
+```
+
+## Drift and feedback review worksheet
+
+Use weekly for Tier-2/3 services and monthly for lower-risk services that have real users.
+
+```markdown
+# Drift and Feedback Review Worksheet
+
+Service/use case: [name]
+Review period: [dates]
+Reviewer: [name]
+
+## Signals reviewed
+
+| Signal | Current status | Action needed? | Owner |
+| ------ | -------------- | -------------- | ----- |
+| Eval score trend | [stable/down/up/unknown] | [yes/no] | [name] |
+| User feedback themes | [summary] | [yes/no] | [name] |
+| Cost per request/session | [stable/down/up/unknown] | [yes/no] | [name] |
+| Refusal/content-filter rate | [stable/down/up/unknown] | [yes/no] | [name] |
+| Retrieval quality/source freshness | [summary] | [yes/no] | [name] |
+| Provider/model notices | [summary] | [yes/no] | [name] |
+| Incidents or near misses | [summary] | [yes/no] | [name] |
+
+## Decisions
+
+- Add eval cases? [yes/no, details]
+- Change prompt/model/retrieval/tool config? [yes/no, details]
+- Open bug or training issue? [yes/no, details]
+- Escalate to Review Committee or sponsor? [yes/no, details]
+
+Next review date: [date]
+```
+
+## Access and break-glass review
+
+Use quarterly for production AI services and after any incident involving elevated access. Pair with [Identity & Access](/phase-3-infrastructure/identity-access/) and [Operations Lifecycle & Resilience](/phase-3-infrastructure/operations-lifecycle/).
+
+```markdown
+# Access and Break-Glass Review
+
+Service/use case: [name]
+Environment: [production/staging/etc.]
+Review period: [dates]
+Reviewer: [name]
+Date: [date]
+
+## Access reviewed
+
+| Role/group/account | Still needed? | Owner | Action |
+| ------------------ | ------------- | ----- | ------ |
+| [role/group/account] | [yes/no] | [name] | [keep/remove/modify] |
+| [role/group/account] | [yes/no] | [name] | [keep/remove/modify] |
+
+## Checks
+
+- Departed staff removed: [yes/no]
+- Vendor accounts reviewed: [yes/no/not applicable]
+- Privileged access reviewed: [yes/no]
+- Production admin access time-bounded or justified: [yes/no]
+- Break-glass account exists and is stored correctly: [yes/no]
+- Break-glass test completed or scheduled: [date/result]
+- Break-glass use since last review: [none/list incidents]
+
+Open actions:
+
+| Action | Owner | Due date |
+| ------ | ----- | -------- |
+| [action] | [name] | [date] |
+```
+
+## Backup and restore test record
+
+Use before production launch and on a recurring cadence for services that store prompts, configs, indexes, records, or user feedback.
+
+```markdown
+# Backup and Restore Test Record
+
+Service/use case: [name]
+Environment tested: [staging/production-like]
+Test date: [date]
+Tester: [name]
+
+## Assets covered
+
+| Asset | Backup source | Restore target | Result |
+| ----- | ------------- | -------------- | ------ |
+| Application database | [location] | [location] | [pass/fail] |
+| Prompt registry/config | [location] | [location] | [pass/fail] |
+| Retrieval index/source manifest | [location] | [location] | [pass/fail] |
+| Eval suite/results | [location] | [location] | [pass/fail] |
+| Audit logs/records export | [location] | [location] | [pass/fail/not applicable] |
+
+Recovery time observed: [duration]
+Recovery point observed: [age of restored data]
+Issues found: [summary]
+Actions required: [owner, due date]
+Next test date: [date]
+```
+
+## Policy exception record
+
+Use when the team needs to proceed with a documented variance from the normal control set. Exceptions should expire by default.
+
+```markdown
+# Policy Exception Record
+
+Exception title: [short name]
+Service/use case: [name]
+Environment: [sandbox/dev/staging/production]
+Requested by: [name]
+Date requested: [date]
+
+## Exception
+
+Rule or control being excepted: [rule/control]
+Reason exception is needed: [summary]
+Scope: [workload, environment, data class, user group]
+Risk if approved: [summary]
+Mitigation: [controls, monitoring, narrowing, manual review]
+
+Expiration or review date: [date]
+Risk owner: [name]
+Approver: [name/role/date]
+
+## Follow-up
+
+| Action | Owner | Due date | Status |
+| ------ | ----- | -------- | ------ |
+| [action] | [name] | [date] | [open/closed] |
+
+Closure decision: [closed/extended/rejected]
+Closure notes: [summary]
+```
+
+## Decommissioning checklist
+
+Use when retiring a pilot, starter project, model route, vendor integration, or production AI service.
+
+```markdown
+# AI Service Decommissioning Checklist
+
+Service/use case: [name]
+Owner: [name]
+Reason for retirement: [replacement/low usage/vendor change/cost/risk/etc.]
+Planned shutdown date: [date]
+
+## Before shutdown
+
+- Users and support teams notified: [yes/no]
+- Replacement or manual fallback documented: [yes/no/not applicable]
+- Records/export requirements reviewed: [yes/no]
+- Legal hold or public-records obligations checked: [yes/no]
+- Final cost and usage report captured: [yes/no]
+
+## Technical closure
+
+| Item | Owner | Status |
+| ---- | ----- | ------ |
+| Disable feature flags/routes/jobs | [name] | [status] |
+| Revoke API keys, service accounts, and vendor access | [name] | [status] |
+| Archive or delete prompts, indexes, logs, and generated outputs per policy | [name] | [status] |
+| Remove budget alerts, dashboards, and scheduled evals | [name] | [status] |
+| Confirm vendor data deletion or export | [name] | [status] |
+| Update approved tools list or service catalog | [name] | [status] |
+
+Lessons learned: [summary]
+Final approver: [name, role, date]
 ```
 
 ## Production readiness sign-off

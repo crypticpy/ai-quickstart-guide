@@ -78,7 +78,7 @@ def _stringify(value) -> str:
         return str(value)
 
 
-def run_triage(message: str, *, client, model: str = "claude-sonnet-4-20250514",
+def run_triage(message: str, *, client, model: str = "provider-model-slug",
                max_iterations: int = 6) -> TriageResult:
     schemas = _tool_schemas()
     messages: list[dict] = [{"role": "user", "content": message}]

@@ -48,7 +48,11 @@ function prepareMarkdown(source) {
   let text = source.replace(/\r\n/g, "\n");
   text = text.replace(/^---\n[\s\S]*?\n---\n?/, "");
   text = text.replace(/^import .*$/gm, "");
-  text = text.replace(/<([A-Z][A-Za-z0-9.]*)\s+client:[^>]*\/>/g, componentFallback);
+  text = text.replace(/<PhaseBanner\b([^>]*)\/>/g, (_, attrs) => phaseBannerFallback(attrs));
+  text = text.replace(/<AtAGlance\b([^>]*)\/>/g, (_, attrs) => atAGlanceFallback(attrs));
+  text = text.replace(/<FreshnessNote\b([^>]*)\/>/g, (_, attrs) => freshnessNoteFallback(attrs));
+  text = text.replace(/<Takeaways\b([^>]*)\/>/g, (_, attrs) => takeawaysFallback(attrs));
+  text = text.replace(/<([A-Z][A-Za-z0-9.]*)\b[^>]*client:[^>]*\/>/g, componentFallback);
   text = text.replace(/<([A-Z][A-Za-z0-9.]*)\s*\/>/g, componentFallback);
   text = text.replace(/<CardGrid[^>]*>|<\/CardGrid>|<Card[^>]*>|<\/Card>/g, "");
   text = text.replace(/<Tabs[^>]*>|<\/Tabs>|<TabItem[^>]*>|<\/TabItem>/g, "");
@@ -59,6 +63,10 @@ function prepareMarkdown(source) {
 
 function componentFallback(match, name) {
   const fallbacks = {
+    AgencyRouteChooser:
+      "> **Interactive route chooser omitted from print export.** Use the readiness assessment, path picker, and quickstart checklist to choose a route.",
+    AgencySetupWizard:
+      "> **Interactive setup wizard omitted from print export.** Use the Small, Standard, and Large path recommendations in this section.",
     ReadinessAssessment:
       "> **Interactive assessment omitted from print export.** Use the live site to score readiness and export the filled result.",
     AgencyPathPicker:
@@ -79,4 +87,52 @@ function componentFallback(match, name) {
       "> **Interactive starter selector omitted from print export.** Use the selection rubric and archetype comparison in this section.",
   };
   return fallbacks[name] ?? "";
+}
+
+function attrsToObject(attrs) {
+  const out = {};
+  for (const match of attrs.matchAll(/\s+([A-Za-z][A-Za-z0-9]*)="([^"]*)"/g)) {
+    out[match[1]] = match[2];
+  }
+  return out;
+}
+
+function phaseBannerFallback(attrs) {
+  const { phase, title, months, focus } = attrsToObject(attrs);
+  const label = [phase, title].filter(Boolean).join(": ");
+  return [
+    `> **${label || "Phase overview"}**`,
+    months ? `> Timeframe: ${months}.` : "",
+    focus ? `> Focus: ${focus}` : "",
+  ].filter(Boolean).join("\n");
+}
+
+function atAGlanceFallback(attrs) {
+  const values = attrsToObject(attrs);
+  const rows = [
+    ["Audience", values.audience],
+    ["Effort", values.effort],
+    ["Output", values.output],
+    ["Prerequisites", values.prerequisites],
+    ["Next action", values.nextAction],
+  ].filter(([, value]) => value);
+  return ["> **At a glance**", ...rows.map(([label, value]) => `> - **${label}:** ${value}`)].join("\n");
+}
+
+function freshnessNoteFallback(attrs) {
+  const { reviewed, note } = attrsToObject(attrs);
+  return [
+    "> **Freshness note**",
+    reviewed ? `> Last reviewed: ${reviewed}.` : "",
+    note ? `> ${note}` : "",
+  ].filter(Boolean).join("\n");
+}
+
+function takeawaysFallback(attrs) {
+  const { copy, avoid } = attrsToObject(attrs);
+  return [
+    "> **Takeaways**",
+    copy ? `> Do: ${copy}` : "",
+    avoid ? `> Avoid: ${avoid}` : "",
+  ].filter(Boolean).join("\n");
 }

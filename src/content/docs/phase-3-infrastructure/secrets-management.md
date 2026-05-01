@@ -2,7 +2,7 @@
 title: Secrets Management
 description: Cloud-native secrets stores (Key Vault, Secrets Manager, Secret Manager), HashiCorp Vault as cross-cloud option, rotation patterns, and secret-zero handling.
 sidebar:
-  order: 5
+  order: 6
 ---
 
 Almost every credential leak that becomes a public incident has the same root cause: a long-lived secret stored in a place it shouldn't be — a CI variable, an env file, a wiki page, a Slack message. The Phase 3 secrets discipline removes the temptation by making the right path easier than the wrong path: every secret lives in one well-known store, every retrieval is identity-bound, and every rotation has an owner and a tested path.

@@ -81,6 +81,34 @@ Adopt this pattern explicitly as the default. Use microservices when a module ha
 
 ## The seven modules
 
+<div class="aqg-diagram" role="img" aria-label="Modular platform map showing application teams consuming seven reusable modules on top of Phase 3 infrastructure and Phase 4 standards">
+  <p class="aqg-diagram__title">Reusable module map</p>
+  <div class="aqg-map">
+    <div class="aqg-map__column">
+      <span class="aqg-map__label">Consumers</span>
+      <div class="aqg-map__item" style="--item-accent: #b42318;"><strong>Starter project</strong><br />The first real application exercises the platform.</div>
+      <div class="aqg-map__item" style="--item-accent: #5b5e9a;"><strong>Future apps</strong><br />New projects reuse the same golden paths instead of rebuilding plumbing.</div>
+    </div>
+    <div class="aqg-map__center">
+      <div class="aqg-matrix">
+        <div class="aqg-matrix__item" style="--item-accent: #2f4a8c;"><strong>Auth</strong><span>SSO, sessions, identity claims.</span></div>
+        <div class="aqg-matrix__item" style="--item-accent: #2f4a8c;"><strong>RBAC</strong><span>Roles, scopes, authorization checks.</span></div>
+        <div class="aqg-matrix__item" style="--item-accent: #0f766e;"><strong>API</strong><span>Request, response, OpenAPI, errors.</span></div>
+        <div class="aqg-matrix__item" style="--item-accent: #0f766e;"><strong>Data Grid</strong><span>Lists, filters, exports, search.</span></div>
+        <div class="aqg-matrix__item" style="--item-accent: #9a5a14;"><strong>Admin</strong><span>Operations, flags, audit, health.</span></div>
+        <div class="aqg-matrix__item" style="--item-accent: #9a5a14;"><strong>Documents</strong><span>PDF, DOCX, HTML, templates.</span></div>
+        <div class="aqg-matrix__item" style="--item-accent: #7c3aed;"><strong>AI Orchestration</strong><span>Prompts, retrieval, evals, guardrails, cost.</span></div>
+      </div>
+    </div>
+    <div class="aqg-map__column">
+      <span class="aqg-map__label">Foundation</span>
+      <div class="aqg-map__item" style="--item-accent: #0f766e;"><strong>Phase 3</strong><br />Environments, CI/CD, identity, secrets, observability.</div>
+      <div class="aqg-map__item" style="--item-accent: #7c3aed;"><strong>Phase 4</strong><br />Stack standards, testing, ADRs, API-first practice.</div>
+    </div>
+  </div>
+  <p class="aqg-diagram__caption">Small teams can start with only the modules their first app needs. The map shows the target shape, not a requirement to build everything at once.</p>
+</div>
+
 | Module                                                             | What it does                                                                        | Why a module                                             |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | [Authentication & SSO](/phase-5-platform/auth-module/)             | OIDC sign-in, session management, JWT validation, MFA signals                       | Every app needs it; nobody should reimplement            |

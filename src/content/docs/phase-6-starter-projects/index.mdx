@@ -20,6 +20,43 @@ The choice of application is the agency's, not the guide's. This page describes 
 
 Need a selection meeting deck? Use the [Starter Project Selection Decision deck source](/deck-sources/phase-6/starter-project-selection-decision.md) as a starting point, then replace candidate scores, risk tiers, and recommendations with local evidence.
 
+<div class="aqg-diagram" role="img" aria-label="Starter project delivery path from project selection through build, UAT, production readiness, launch, and post-launch operations">
+  <p class="aqg-diagram__title">Starter project delivery path</p>
+  <div class="aqg-flow" style="--steps: 6;">
+    <div class="aqg-node aqg-node--blue">
+      <span class="aqg-node__eyebrow">Choose</span>
+      <strong class="aqg-node__title">Select archetype</strong>
+      <p class="aqg-node__body">Pick one bounded project with a real owner and ready users.</p>
+    </div>
+    <div class="aqg-node aqg-node--violet">
+      <span class="aqg-node__eyebrow">Design</span>
+      <strong class="aqg-node__title">Scope and architecture</strong>
+      <p class="aqg-node__body">Confirm risk tier, data, modules, environments, and success measures.</p>
+    </div>
+    <div class="aqg-node aqg-node--gold">
+      <span class="aqg-node__eyebrow">Build</span>
+      <strong class="aqg-node__title">Compose platform pieces</strong>
+      <p class="aqg-node__body">Use modules, tests, evals, guardrails, and deployment standards.</p>
+    </div>
+    <div class="aqg-node aqg-node--green">
+      <span class="aqg-node__eyebrow">Validate</span>
+      <strong class="aqg-node__title">UAT and hardening</strong>
+      <p class="aqg-node__body">Users test the workflow; the team fixes blockers and adds eval cases.</p>
+    </div>
+    <div class="aqg-node aqg-node--red">
+      <span class="aqg-node__eyebrow">Decide</span>
+      <strong class="aqg-node__title">Readiness gate</strong>
+      <p class="aqg-node__body">Go, conditional go, hold, or stop based on evidence.</p>
+    </div>
+    <div class="aqg-node aqg-node--green">
+      <span class="aqg-node__eyebrow">Operate</span>
+      <strong class="aqg-node__title">Launch and learn</strong>
+      <p class="aqg-node__body">Monitor, support, review feedback, reconcile cost, and plan Year 2.</p>
+    </div>
+  </div>
+  <p class="aqg-diagram__caption">This is the standard path. If the readiness gate is not green, the project can stay a governed pilot while the team closes the gap.</p>
+</div>
+
 ## How this phase scales for your agency
 
 <Tabs syncKey="agency-size">

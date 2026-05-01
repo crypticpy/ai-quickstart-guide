@@ -1,0 +1,28 @@
+name: Broken link or source update
+description: Report a broken URL, moved source, or changed source document.
+title: "Link/source: "
+labels: ["links", "sources"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page or file
+      description: Where did you find the link or source?
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Broken or stale URL
+    validations:
+      required: true
+  - type: input
+    id: replacement
+    attributes:
+      label: Suggested replacement URL
+      description: Prefer official, versioned, or maintained source pages.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Include status codes, archived links, or source-version notes if useful.

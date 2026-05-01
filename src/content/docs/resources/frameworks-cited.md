@@ -119,7 +119,7 @@ These appear in the playbook but the playbook's content does not structurally de
 
 When citing the playbook in your own agency's documentation, the recommended pattern is:
 
-> _AI Quickstart Strategy Guide, Version 1.1 (Expert Panel Revisions). Used under CC BY-SA 4.0; code samples under MIT. Adapted for {{Agency name}}._
+> _AI Quickstart Guide, Version 0.1.0 (Public Preview). Used under CC BY-SA 4.0; code samples under MIT. Adapted for {{Agency name}}._
 
 Citations to the underlying frameworks should be to the frameworks themselves (URLs above), not to this page; this page is a roll-up reference, not a primary source.
 

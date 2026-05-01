@@ -80,7 +80,7 @@ def cassette_complete() -> Callable[..., str]:
         real_complete = get_client(provider="anthropic")
 
     def complete(system: str, user: str, **kwargs) -> str:
-        model = kwargs.get("model", "claude-sonnet-4-20250514")
+        model = kwargs.get("model", os.environ.get("ANTHROPIC_MODEL_ID", "provider-model-slug"))
         key = _key(system, user, model, kwargs)
         if not live and key in cache:
             return cache[key]

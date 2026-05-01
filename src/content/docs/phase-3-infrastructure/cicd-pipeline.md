@@ -2,7 +2,7 @@
 title: CI/CD Pipeline
 description: Protected-branch development, automated tests, SBOM generation, artifact signing, and SLSA Level 2 maturity targets — implemented on GitHub Actions, Azure DevOps, GitLab, or cloud-native runners.
 sidebar:
-  order: 4
+  order: 5
 ---
 
 The CI/CD pipeline is what turns "we should review this before deploy" into "this cannot deploy without review." Every gate that exists in policy — eval pass, security scan, license check, signed image — should exist in the pipeline as code, or it will be applied inconsistently. The Phase 3 target is a pipeline that runs on every change, deploys to every environment, attests its outputs, and refuses to ship anything that fails a gate. Small agencies can begin with protected branches, tests, secret scanning, and a documented manual deploy approval, then add SBOMs, signing, and provenance as maturity increases.
@@ -149,6 +149,8 @@ Caching, parallelism, and selective test runs (`pytest --testmon`, `nx affected`
 
 ## Related
 
+- [Environment Strategy & Promotion Path](/phase-3-infrastructure/environment-strategy/) — the operating model this pipeline enforces between environments
+- [Operations Lifecycle & Resilience](/phase-3-infrastructure/operations-lifecycle/) — how CVE, SBOM, eval, and drift outputs are maintained after launch
 - [Identity & Access](/phase-3-infrastructure/identity-access/) — the federated identity the pipeline uses
 - [Container Orchestration](/phase-3-infrastructure/container-orchestration/) — admission control and verification
 - [Secrets Management](/phase-3-infrastructure/secrets-management/) — what the pipeline retrieves at deploy time
